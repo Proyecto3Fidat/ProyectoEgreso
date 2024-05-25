@@ -16,25 +16,21 @@ class Local {
          $this->direccionLocal["nomEsquina"] = $nomEsquina;
      }
      //Setters
-     public function setDireccionLocal($calleLocal, $numPuerta, $nomEsquina)
-     {
+     public function setDireccionLocal($calleLocal, $numPuerta, $nomEsquina){
          $this->direccionLocal["calleLocal"] = $calleLocal;
          $this->direccionLocal["numPuerta"] = $numPuerta;
          $this->direccionLocal["nomEsquina"] = $nomEsquina;
      }
      
-     public function setNombreLocal($nombreLocal)
-     {
+     public function setNombreLocal($nombreLocal){
          $this->nombreLocal = $nombreLocal;
      }
      //Getters
-     public function getNombreLocal()
-     {
+     public function getNombreLocal(){
          return $this->nombreLocal;
      }
 
-     public function getDireccionLocal()
-     {
+     public function getDireccionLocal(){
          return $this->direccionLocal;
      }
  
