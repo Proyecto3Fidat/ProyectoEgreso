@@ -19,7 +19,7 @@ class Cliente{
     private $telefono[
         "telefono1" => "";
         "telefono2" => "";
-    ];
+    ]; 
     private $email;
     private $direccion[
         "calle" => "",

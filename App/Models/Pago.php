@@ -17,7 +17,7 @@ class Pago {
     public function getIdPago() {
         return $this->idPago;
     }
-
+ 
     // Setters
     public function setUltimoMesAbonado($ultimoMesAbonado) {
         $this->ultimoMesAbonado = $ultimoMesAbonado;
@@ -27,5 +27,5 @@ class Pago {
         $this->idPago = $idPago;
     }
 }
-?>
+?> 
  

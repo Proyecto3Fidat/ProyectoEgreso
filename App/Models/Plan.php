@@ -23,7 +23,7 @@ class Plan {
     public function getTipoPlan() {
         return $this->tipoPlan;
     }
-
+ 
     // Setters
     public function setNombre($nombre) {
         $this->nombre = $nombre;
