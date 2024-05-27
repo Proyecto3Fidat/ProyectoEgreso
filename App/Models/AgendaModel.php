@@ -1,6 +1,6 @@
 <?php
 
-class Agenda {
+class AgendaModel {
     private $horaInicio;
     private $dias;
     private $fecha;
