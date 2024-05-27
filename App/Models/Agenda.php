@@ -12,7 +12,7 @@ class Agenda {
         $this->fecha = $fecha;
         $this->horaFin = $horaFin;
     }
-
+    echo "Facundo gey";
     // Getters
     public function getHoraInicio() {
         return $this->horaInicio;
