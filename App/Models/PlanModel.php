@@ -1,6 +1,6 @@
 <?php
 
-class Plan {
+class PlanModel {
     private $nombre;
     private $descripcion;
     private $tipoPlan;

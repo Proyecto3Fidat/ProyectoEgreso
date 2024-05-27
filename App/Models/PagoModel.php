@@ -1,6 +1,6 @@
 <?php
 
-class Pago {
+class PagoModel {
     private $ultimoMesAbonado;
     private $idPago;
 

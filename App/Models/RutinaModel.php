@@ -1,6 +1,6 @@
 <?php
 
-class Rutina {
+class RutinaModel {
     private $series;
     private $repeticiones;
     private $dia;

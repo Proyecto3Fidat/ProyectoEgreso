@@ -2,7 +2,7 @@
 require_once 'Models/AgendaModel.php';
 
 class AgendaController {
-    private $agendaService = new AgendaModel(null,null,null,null);
+    private $agendaService;
 
     public function __construct(AgendaService $agendaService) {
         $this->agendaService = $agendaService;
@@ -18,8 +18,6 @@ class AgendaController {
         $ciCliente = $_POST['ciCliente'];
 
         $agenda = new Agenda($horaInicio, $dias, $fecha, $horaFin, $ciCliente);
-        $this->agendaService->crearCita($agenda);
-
-        
+        $this->agendaService->crearCita($agenda);  
     }
 }

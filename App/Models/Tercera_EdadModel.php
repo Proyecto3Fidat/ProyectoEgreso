@@ -1,6 +1,6 @@
 <?php
 
-class Tercera_Edad {
+class Tercera_EdadModel {
     private $altura;
     private $peso;
     private $edad;

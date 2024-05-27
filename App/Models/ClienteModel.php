@@ -1,5 +1,5 @@
 <?php
-class Cliente{
+class ClienteModel{
     private $peso; 
     private $altura;
     private $password;

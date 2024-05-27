@@ -1,5 +1,5 @@
 <?php
-class Ejercicio {
+class EjercicioModel {
     private $nombreEjercicio;
     private $descripcionEjercicio;
     private $grupoMuscular;
