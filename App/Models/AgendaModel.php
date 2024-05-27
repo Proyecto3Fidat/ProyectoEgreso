@@ -15,7 +15,6 @@ class Agenda {
     // Getters
     public function getHoraInicio() {
         return $this->horaInicio;
-        echo "HOLAA";
     }
 
     public function getDias() {
