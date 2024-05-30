@@ -1,8 +1,10 @@
 <?php
-
+require_once 'conexionBD.php'
 class ClienteRepository {
 
     public function guardar(ClienteModel $clienteModel) {
+        $conexion = new Database(null,null,null,null);
+        $database->connect();
         $sql = "INSERT INTO Cliente (nroDocumento, tipDocumento, contraseña, altura, peso, calle, numero, esquina, email, telefono, patologias, edad, fechaNacimiento, primerNombre, segundoNombre, primerApellido, segundoApellido) 
                 VALUES (:nroDocumento, :tipoDocumento, :contraseña, :altura, :peso, :calle, :numero, :esquina, :email, :telefono, :patologias, :edad, fechaNacimiento, :primerNombre, :segundoNombre, :primerApellido, :segundoApellido)";
         $stmt = $this->clase->prepare($sql);
@@ -25,5 +27,6 @@ class ClienteRepository {
             ':primerApellido' => $agenda->getprimerApellido(),
             ':segundoApellido' => $agenda->getsegundoApellido(),
         ]);
+        $database->disconnect();
     }
 }
