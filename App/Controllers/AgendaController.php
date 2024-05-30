@@ -17,7 +17,7 @@ class AgendaController {
         $horaFin = $_POST['horaFin'];
         $ciCliente = $_POST['ciCliente'];
 
-        $agenda = new Agenda($horaInicio, $dias, $fecha, $horaFin, $ciCliente);
+        $agenda = new AgendaModel($horaInicio, $dias, $fecha, $horaFin, $ciCliente);
         $this->agendaService->crearCita($agenda);  
     }
 }
