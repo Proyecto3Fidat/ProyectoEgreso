@@ -1,5 +1,6 @@
 <?php
-require_once 'Repositories/ClienteRepositories.php';
+require_once __DIR__ . '/../Repositories/ClienteRepositories.php';
+
 class ClienteService {
     private $clienteRepository;
 

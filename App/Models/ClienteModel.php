@@ -1,52 +1,44 @@
 <?php
-class ClienteModel{
-    private $peso; 
-    private $altura;
-    private $contraseña;
-    private $nroDocumento[
-        "numeroDocumento" => "",
-        "tipoDocumento" => "",
-    ];
-    private $nombre[
-        "primerNombre" => "",
-        "segundoNombre" => "",
-        "primerApellido" => "",
-        "segundo Apellido" => "",
-    ];
-    private $fechaNacimiento;
-    private $edad;
-    private $patologias;
-    private $telefono[
-        "telefono1" => "";
-        "telefono2" => "";
-    ]; 
-    private $email;
-    private $direccion[
-        "calle" => "",
-        "numero" => "",
-        "esquina" => "",
-    ];
-
-    public function __construct($numeroDocumento, $tipoDocumento, $contraseña, $altura, $peso, $calle, $numero, $esquina, $email, $telefono, $patologias, $edad, $fechaNacimiento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido){
-        $this->peso = $peso;
-        $this->altura = $altura;
-        $this->password = $password;
-        $this->nroDocumento["numeroDocumento"] = $numeroDocumento;
-        $this->nroDocumento["tipoDocumento"] = $tipoDocumento;
-        $this->nombre["primerNombre"] = $primerNombre;
-        $this->nombre["segundoNombre"] = $segundoNombre;
-        $this->nombre["primerApellido"] = $primerApellido;
-        $this->nombre["segundoApellido"] = $segundoApellido;
-        $this->fechaNacimiento = $fechaNacimiento;
-        $this->edad = $edad;
-        $this->patologias = $patologias;
-        $this->telefono["telefono1"] = $telefono1;
-        $this->telefono["telefono2"] = $telefono2;
-        $this->email = $email;
-        $this->direccion["calle"] = $calle;
-        $this->direccion["numero"] = $numero;
-        $this->direccion["esquina"] = $esquina;
-    }
+    class ClienteModel{
+        private $peso; 
+        private $altura;
+        private $contraseña;
+        private $nroDocumento;
+        private $nombre;
+        private $fechaNacimiento;
+        private $edad;
+        private $patologias;
+        private $telefono;
+        private $email;
+        private $direccion;
+    
+        public function __construct($numeroDocumento, $tipoDocumento, $contraseña, $altura, $peso, $calle, $numero, $esquina, $email, $telefono, $patologias, $edad, $fechaNacimiento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido){
+            $this->peso = $peso;
+            $this->altura = $altura;
+            $this->contraseña = $contraseña;
+            $this->nroDocumento = [
+                "numeroDocumento" => $numeroDocumento,
+                "tipoDocumento" => $tipoDocumento,
+            ];
+            $this->nombre = [
+                "primerNombre" => $primerNombre,
+                "segundoNombre" => $segundoNombre,
+                "primerApellido" => $primerApellido,
+                "segundoApellido" => $segundoApellido,
+            ];
+            $this->fechaNacimiento = $fechaNacimiento;
+            $this->edad = $edad;
+            $this->patologias = $patologias;
+            $this->telefono = $telefono;
+            $this->email = $email;
+            $this->direccion = [
+                "calle" => $calle,
+                "numero" => $numero,
+                "esquina" => $esquina,
+            ];
+        }
+    
+    
 
     // Getters
     public function getPeso() {

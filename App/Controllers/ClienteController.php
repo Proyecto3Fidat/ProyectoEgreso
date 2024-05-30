@@ -1,6 +1,6 @@
 <?php
-require_once 'Services/ClienteServices.php';
-require_once 'Models/ClienteModel.php';
+require_once __DIR__ . '/../Services/ClienteService.php';
+require_once __DIR__ . '/../Models/ClienteModel.php';
 
 class ClienteController {
     private $clienteService;
@@ -16,6 +16,7 @@ class ClienteController {
             $_POST['tipoDocumento'],
             $_POST['contraseña'],
             $_POST['altura'],
+            $_POST['peso'],
             $_POST['calle'],
             $_POST['numero'],
             $_POST['esquina'],

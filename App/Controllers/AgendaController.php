@@ -1,6 +1,6 @@
 <?php
 require_once 'Models/AgendaModel.php';
-
+echo "AAAAAAAAAAA"
 class AgendaController {
     private $agendaService;
 
@@ -9,7 +9,7 @@ class AgendaController {
     }
 
     public function crearAgenda() {
-
+        echo "asdfs";
         // Obtener datos del formulario 
         $horaInicio = $_POST['horaInicio'];
         $dias = $_POST['dias'];
