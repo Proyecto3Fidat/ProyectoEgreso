@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Cliente</title>
+</head>
+<body>
+    <form action= "/cliente" method= "POST">
+        Numero de Documento <input type="number" placeholder="Numero de Documento" name="nroDocumento" required>
+        <br></br>
+        Tipo de Documento <input type="text" placeholder="Tipo de Documento" name="apellido" maxlength= "10" required>
+        <br></br>
+        Contraseña <input type="password" placeholder="contraseña" name="contraseña" minlength= "08" required>
+        <br></br>
+        Altura <input type="number" min="0" name="altura" placeholder="Altura" required>
+        <br></br>
+        Peso <input type="number" placeholder="peso" name="peso" required>
+        <br></br>
+        Guardar<input type="submit" value="ENVIAR">
+        <br></br>
+</form>
+</body>
+</html>

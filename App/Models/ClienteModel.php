@@ -2,7 +2,7 @@
 class ClienteModel{
     private $peso; 
     private $altura;
-    private $password;
+    private $contraseña;
     private $nroDocumento[
         "numeroDocumento" => "",
         "tipoDocumento" => "",
@@ -27,8 +27,7 @@ class ClienteModel{
         "esquina" => "",
     ];
 
-    public function __construct($peso, $altura, $password, $numeroDocumento, $tipoDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $edad, $patologias, $telefono1, $telefono2, $email, $calle, $numero, $esquina
-    ) {
+    public function __construct($numeroDocumento, $tipoDocumento, $contraseña, $altura, $peso, $calle, $numero, $esquina, $email, $telefono, $patologias, $edad, $fechaNacimiento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido){
         $this->peso = $peso;
         $this->altura = $altura;
         $this->password = $password;
