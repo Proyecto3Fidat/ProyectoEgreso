@@ -195,7 +195,27 @@ li:nth-child(3) .slide-circulo {
 .footer a:hover {
     color: #3e79a3;
 }
+.empresa h1 {
+    text-align: center;
+    color: #6f41bb;
+    font-size: 25px;
+}
+.empresa h2 {
+    font-size: 20px;
+    text-align: center;
+}
+.contacto {
+    margin-top: 50px;
+}
+.contacto h1 {
+    text-align: center;
+    font-size: 25px;
+}
 
+.contacto h2 {
+text-align: center;
+
+}
 @media (max-width:991px) {
     .menu {
         padding: 20px;
@@ -234,3 +254,4 @@ li:nth-child(3) .slide-circulo {
         justify-content: center;
     }
 }
+
