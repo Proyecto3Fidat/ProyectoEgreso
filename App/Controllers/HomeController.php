@@ -2,8 +2,8 @@
 
 namespace Ismael\ProyectoEgreso\Controllers;
 
-class ClienteController {
+class HomeController {
     public function index() {
-        echo 'Clientes Page';
+        echo 'Home Page';
     }
 }

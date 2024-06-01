@@ -1,6 +1,5 @@
 <?php
 require_once 'Models/AgendaModel.php';
-echo "AAAAAAAAAAA"
 class AgendaController {
     private $agendaService;
 
