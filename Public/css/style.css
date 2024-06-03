@@ -13,7 +13,6 @@ body {
     font-family: "Bebas Neue", sans-serif;
     color: white;
 }
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -195,20 +194,21 @@ li:nth-child(3) .slide-circulo {
 .footer a:hover {
     color: #3e79a3;
 }
+#Horarios {
+    margin-bottom: 300px;
+    margin-top: 0;
+}
 #Horarios h1 {
+    margin-top: 0;
     font-size: 25px;
     text-align: center;
-    position: relative;
-    top: -300px;
+    padding-bottom: 100px;
 }
 .horarios {
-    margin: 0;
-    padding: 20%;
+    padding-left: 350px;
+    padding-bottom: 250px;
     font-size: 20px;
     text-align: center;
-    position: relative;
-    top: -600px;
-    column-rule-style: none;
 }
 .horarios td {
     cursor: pointer;
