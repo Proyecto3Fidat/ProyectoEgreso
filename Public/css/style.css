@@ -196,22 +196,30 @@ li:nth-child(3) .slide-circulo {
     color: #3e79a3;
 }
 #Horarios h1 {
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
     position: relative;
     top: -300px;
     color: #6f41bb;
 }
 .horarios {
+    margin: 0;
     padding: 20%;
     font-size: 20px;
     text-align: center;
     position: relative;
     top: -600px;
-    
+    column-rule-style: none;
 }
 .horarios td {
     cursor: pointer;
+    color: #fff;
+}
+.horarios th {
+    font-size: 25px;
+    text-transform: uppercase;
+    background-color: #6f41bb;
+    color: #030303;
 }
 .empresa h1 {
     text-align: center;
