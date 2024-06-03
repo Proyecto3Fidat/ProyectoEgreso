@@ -195,6 +195,23 @@ li:nth-child(3) .slide-circulo {
 .footer a:hover {
     color: #3e79a3;
 }
+#Horarios h1 {
+    text-align: center;
+    position: relative;
+    top: -300px;
+    color: #6f41bb;
+}
+.horarios {
+    padding: 20%;
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    top: -600px;
+    
+}
+.horarios td {
+    cursor: pointer;
+}
 .empresa h1 {
     text-align: center;
     color: #6f41bb;
