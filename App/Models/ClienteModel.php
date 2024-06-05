@@ -3,29 +3,14 @@ class Cliente{
     private $peso; 
     private $altura;
     private $password;
-    private $nroDocumento[
-        "numeroDocumento" => "",
-        "tipoDocumento" => "",
-    ];
-    private $nombre[
-        "primerNombre" => "",
-        "segundoNombre" => "",
-        "primerApellido" => "",
-        "segundo Apellido" => "",
-    ];
+    private $nroDocumento;
+    private $nombre;
     private $fechaNacimiento;
     private $edad;
     private $patologias;
-    private $telefono[
-        "telefono1" => "";
-        "telefono2" => "";
-    ]; 
+    private $telefono; 
     private $email;
-    private $direccion[
-        "calle" => "",
-        "numero" => "",
-        "esquina" => "",
-    ];
+    private $direccion;
 
     public function __construct($peso, $altura, $password, $numeroDocumento, $tipoDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $edad, $patologias, $telefono1, $telefono2, $email, $calle, $numero, $esquina
     ) {
