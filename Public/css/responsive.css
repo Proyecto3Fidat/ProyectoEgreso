@@ -16,8 +16,12 @@
         display: none;
     }
 
-    .menu .navbar ul li {
-        width: 100%;
+    .menu{
+        display: flex;
+    } 
+    
+    .navbar ul li {
+        position: relative;
     }
 
     #menu:checked ~ .navbar {
