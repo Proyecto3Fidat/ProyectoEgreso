@@ -16,12 +16,8 @@
         display: none;
     }
 
-    .menu{
-        display: flex;
-    } 
-    
-    .navbar ul li {
-        position: relative;
+    .menu .navbar ul li {
+        width: 100%;
     }
 
     #menu:checked ~ .navbar {
