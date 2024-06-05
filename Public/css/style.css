@@ -158,4 +158,31 @@ li:nth-child(3) .slide-circulo {
 text-align: center;
 
 }
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 0;
+    margin-top: 100px;
+    border-top: 1px solid #2e359c3d;
+}
 
+.footer ul {
+    display: flex;
+}
+
+.footer h3 {
+    font-size: 30px;
+}
+
+
+.footer a {
+    color: white;
+    font-size: 20px;
+    margin-right: 20px;
+    display: block;
+}
+
+.footer a:hover {
+    color: #3e79a3;
+}
