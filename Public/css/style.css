@@ -14,9 +14,51 @@ body {
     color: white;
 }
 
+.header {
+    background-color: #030303;
+    padding: 10px 0;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.navbar ul {
+    display: inline-flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 15px;
+}   
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    transition: color 0.3s, background-color 0.3s;
+}
+.navbar li a:hover{
+    color: #4B0082;
+}
+
+.nav-menu{
+    display: none;
+    cursor: pointer;
+    float: right;
+}
+#menuimg{
+    top: -10px;
+    right: 20px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
 .slide {
     position: relative;
-    top: -500px;
     box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
     margin-top: 2px;
 }
@@ -154,7 +196,7 @@ li:nth-child(3) .slide-circulo {
 }
 
 .contacto h2 {
-text-align: center;
+    text-align: center;
 
 }
 .footer {
