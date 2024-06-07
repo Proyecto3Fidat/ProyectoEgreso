@@ -1,6 +1,6 @@
 <?php
 
-namespace Ismael\ProyectoEgreso\Controllers;
+namespace App\Controllers;
 
 class ClienteController {
     public function index() {

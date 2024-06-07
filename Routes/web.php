@@ -1,6 +1,6 @@
 <?php
 
-use Pecee\SimpleRouter\SimpleRouter as Router;
+use Pecee\SimpleRouter\SimpleRouter;
 use ProyectoEgreso\Controllers\HomeController;
 use ProyectoEgreso\Controllers\ClienteController;
 
