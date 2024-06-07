@@ -15,13 +15,13 @@
         <nav class="navbar">
             <ul>
                 <li><a href="#">Inicio</a></li>
-                <li><a href="#Horarios">Horarios</a></li>
-                <li><a href="#Planes">Planes</a></li>
-                <li><a href="#Nosotros">Nosotros</a></li>
+                <li><a href="#horarios">Horarios</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
             </ul>
         </nav>
 
-    <div class="nav-menu" aria-label="Abrir menu de navegación">
+    <div class="menu" aria-label="Abrir menu de navegación">
         <img src="images/menu.png" id="menuimg">
 
     </div>
@@ -66,7 +66,7 @@
 </section>
     
 
-<section id="Horarios">
+<section id="horarios">
     <h1>HORARIOS</h1>
     <table class="horarios">
         <tr>
@@ -137,7 +137,25 @@
 </section>
 
 
-<section id="Nosotros">
+<section id="planes">
+    <div class="plan">
+    <h2>Plan 3 Meses</h2>
+    <p>$1000</p>
+    </div>
+    <div class="plan">
+        <h2>Plan 6 Meses</h2>
+        <p>$2000</p>
+    </div>
+    <div class="plan">
+    <h2>Plan Anual</h2>
+    <p>$3200</p>
+    </div>
+</section>
+
+
+
+
+<section id="nosotros">
     <div class="empresa">
         <h1>GYM</h1>
         <h2>    En (GYM) te vamos a ayudar a completar todos tus objetivos fitness, ya sea en gimnasio convencional o en fisioterapia. 
@@ -154,4 +172,12 @@
     </div>
 </section>
 </body>
+<script>
+const menu = document.querySelector('.menu');
+const navbar = document.querySelector('.navbar');
+
+menu.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+</script>
 </html>
