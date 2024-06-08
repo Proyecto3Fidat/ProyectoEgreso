@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
-use App\Services\ClienteRepositories;
+
+use App\Repositories\ClienteRepository;
 use App\Models\ClienteModel;
 
 class ClienteService {

@@ -21,7 +21,7 @@ class Database {
     // Método para conectar a la base de datos
     public function connect() {
         // Crear conexión
-        $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        $this->conn = new \mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
         // Verificar conexión
         if ($this->conn->connect_error) {
@@ -44,4 +44,3 @@ class Database {
         return $this->conn;
     }
 }
-?>

@@ -52,7 +52,7 @@ namespace App\Models;
     }
 
     public function getPassword() {
-        return $this->password;
+        return $this->contraseña;
     }
 
     public function getNumeroDocumento() {
@@ -92,12 +92,13 @@ namespace App\Models;
     }
 
     public function getTelefono1() {
-        return $this->telefono["telefono1"];
+        return isset($this->telefono["telefono1"]) ? $this->telefono["telefono1"] : null;
     }
-
+    
     public function getTelefono2() {
-        return $this->telefono["telefono2"];
+        return isset($this->telefono["telefono2"]) ? $this->telefono["telefono2"] : null;
     }
+    
 
     public function getEmail() {
         return $this->email;
@@ -125,7 +126,7 @@ namespace App\Models;
     }
 
     public function setPassword($password) {
-        $this->password = $password;
+        $this->contraseña = $password;
     }
 
     public function setNumeroDocumento($numeroDocumento) {

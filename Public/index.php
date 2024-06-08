@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
-use Pecee\SimpleRouter\SimpleRouter as Router;
+use Pecee\SimpleRouter\SimpleRouter;
+use App\Controllers\HomeController;
+require_once '../Routes/web.php';
 
-require_once __DIR__ . '/../routes/web.php';
-
-Router::start();
+SimpleRouter::start();
