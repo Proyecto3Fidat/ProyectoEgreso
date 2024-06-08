@@ -6,10 +6,15 @@ use App\Controllers\ClienteController;
 use App\Services\ClienteService;
 use App\Repositories\ClienteRepository;
 use App\Models\ClienteModel;
+use App\Controllers\ErrorController;
 
-SimpleRouter::get('/f', [HomeController::class, 'index']);
 SimpleRouter::get('/', [HomeController::class, 'index']);
-SimpleRouter::get('/hola', [HomeController::class, 'index']);
+SimpleRouter::get('/inicio', [HomeController::class, 'index']);
+SimpleRouter::error(function() {
+    // Instancia el controlador de errores y llama a su método
+    $errorController = new ErrorController();
+    $errorController->notFound();
+});
 SimpleRouter::post('/cliente', function() {
     $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     $clienteRepository = new ClienteRepository(); // Corrigiendo el nombre a ClienteRepository
