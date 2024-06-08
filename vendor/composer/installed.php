@@ -3,7 +3,7 @@
         'name' => 'ismael/proyecto-egreso',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6948a18e8c423afa90feb0c81c9c7dd7328e3e33',
+        'reference' => '473d05ef04384503f939526f289a70ffec619513',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'ismael/proyecto-egreso' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6948a18e8c423afa90feb0c81c9c7dd7328e3e33',
+            'reference' => '473d05ef04384503f939526f289a70ffec619513',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
