@@ -13,7 +13,7 @@ SimpleRouter::get('/inicio', [HomeController::class, 'index']);
 SimpleRouter::error(function() {
     // Instancia el controlador de errores y llama a su método
     $errorController = new ErrorController();
-    $errorController->notFound();
+    $errorController->paginaInaccesible();
 });
 SimpleRouter::post('/cliente', function() {
     $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
