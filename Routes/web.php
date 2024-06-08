@@ -16,7 +16,6 @@ SimpleRouter::error(function() {
     $errorController->paginaInaccesible();
 });
 SimpleRouter::post('/cliente', function() {
-    $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     $clienteRepository = new ClienteRepository(); // Corrigiendo el nombre a ClienteRepository
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService); // Pasando el servicio al controlador
