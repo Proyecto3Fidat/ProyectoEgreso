@@ -1,6 +1,8 @@
 <?php
 
-class Plan {
+namespace App\Models;
+
+class PlanModel {
     private $nombre;
     private $descripcion;
     private $tipoPlan;

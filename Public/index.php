@@ -1,2 +1,9 @@
 <?php
-echo "<h2>Hola Mundo</h2>";
+
+require_once '../vendor/autoload.php';
+
+use Pecee\SimpleRouter\SimpleRouter;
+use App\Controllers\HomeController;
+require_once '../Routes/web.php';
+
+SimpleRouter::start();

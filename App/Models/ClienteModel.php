@@ -1,53 +1,46 @@
 <?php
-class Cliente{
-    private $peso; 
-    private $altura;
-    private $password;
-    private $nroDocumento[
-        "numeroDocumento" => "",
-        "tipoDocumento" => "",
-    ];
-    private $nombre[
-        "primerNombre" => "",
-        "segundoNombre" => "",
-        "primerApellido" => "",
-        "segundo Apellido" => "",
-    ];
-    private $fechaNacimiento;
-    private $edad;
-    private $patologias;
-    private $telefono[
-        "telefono1" => "";
-        "telefono2" => "";
-    ]; 
-    private $email;
-    private $direccion[
-        "calle" => "",
-        "numero" => "",
-        "esquina" => "",
-    ];
+namespace App\Models;
 
-    public function __construct($peso, $altura, $password, $numeroDocumento, $tipoDocumento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido, $fechaNacimiento, $edad, $patologias, $telefono1, $telefono2, $email, $calle, $numero, $esquina
-    ) {
-        $this->peso = $peso;
-        $this->altura = $altura;
-        $this->password = $password;
-        $this->nroDocumento["numeroDocumento"] = $numeroDocumento;
-        $this->nroDocumento["tipoDocumento"] = $tipoDocumento;
-        $this->nombre["primerNombre"] = $primerNombre;
-        $this->nombre["segundoNombre"] = $segundoNombre;
-        $this->nombre["primerApellido"] = $primerApellido;
-        $this->nombre["segundoApellido"] = $segundoApellido;
-        $this->fechaNacimiento = $fechaNacimiento;
-        $this->edad = $edad;
-        $this->patologias = $patologias;
-        $this->telefono["telefono1"] = $telefono1;
-        $this->telefono["telefono2"] = $telefono2;
-        $this->email = $email;
-        $this->direccion["calle"] = $calle;
-        $this->direccion["numero"] = $numero;
-        $this->direccion["esquina"] = $esquina;
-    }
+    class ClienteModel{
+        private $peso; 
+        private $altura;
+        private $contraseña;
+        private $nroDocumento;
+        private $nombre;
+        private $fechaNacimiento;
+        private $edad;
+        private $patologias;
+        private $telefono;
+        private $email;
+        private $direccion;
+    
+        public function __construct($numeroDocumento, $tipoDocumento, $contraseña, $altura, $peso, $calle, $numero, $esquina, $email, $telefono, $patologias, $edad, $fechaNacimiento, $primerNombre, $segundoNombre, $primerApellido, $segundoApellido){
+            $this->peso = $peso;
+            $this->altura = $altura;
+            $this->contraseña = $contraseña;
+            $this->nroDocumento = [
+                "numeroDocumento" => $numeroDocumento,
+                "tipoDocumento" => $tipoDocumento,
+            ];
+            $this->nombre = [
+                "primerNombre" => $primerNombre,
+                "segundoNombre" => $segundoNombre,
+                "primerApellido" => $primerApellido,
+                "segundoApellido" => $segundoApellido,
+            ];
+            $this->fechaNacimiento = $fechaNacimiento;
+            $this->edad = $edad;
+            $this->patologias = $patologias;
+            $this->telefono = $telefono;
+            $this->email = $email;
+            $this->direccion = [
+                "calle" => $calle,
+                "numero" => $numero,
+                "esquina" => $esquina,
+            ];
+        }
+    
+    
 
     // Getters
     public function getPeso() {
@@ -59,7 +52,7 @@ class Cliente{
     }
 
     public function getPassword() {
-        return $this->password;
+        return $this->contraseña;
     }
 
     public function getNumeroDocumento() {
@@ -99,12 +92,13 @@ class Cliente{
     }
 
     public function getTelefono1() {
-        return $this->telefono["telefono1"];
+        return isset($this->telefono["telefono1"]) ? $this->telefono["telefono1"] : null;
     }
-
+    
     public function getTelefono2() {
-        return $this->telefono["telefono2"];
+        return isset($this->telefono["telefono2"]) ? $this->telefono["telefono2"] : null;
     }
+    
 
     public function getEmail() {
         return $this->email;
@@ -132,7 +126,7 @@ class Cliente{
     }
 
     public function setPassword($password) {
-        $this->password = $password;
+        $this->contraseña = $password;
     }
 
     public function setNumeroDocumento($numeroDocumento) {

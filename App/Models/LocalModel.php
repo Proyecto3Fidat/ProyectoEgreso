@@ -1,6 +1,7 @@
 <?php 
+namespace App\Models;
 
-class Local {
+class LocalModel {
     private $nombreLocal;
     private  $direccionLocal = [
         "calleLocal" => "" ,

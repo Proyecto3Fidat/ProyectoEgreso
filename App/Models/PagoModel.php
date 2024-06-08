@@ -1,6 +1,7 @@
 <?php
+namespace App\Models;
 
-class Pago {
+class PagoModel {
     private $ultimoMesAbonado;
     private $idPago;
 

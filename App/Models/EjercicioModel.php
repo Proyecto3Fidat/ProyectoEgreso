@@ -1,5 +1,7 @@
 <?php
-class Ejercicio {
+namespace App\Models;
+
+class EjercicioModel {
     private $nombreEjercicio;
     private $descripcionEjercicio;
     private $grupoMuscular;

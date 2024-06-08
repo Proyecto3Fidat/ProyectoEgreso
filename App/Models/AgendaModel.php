@@ -1,10 +1,12 @@
 <?php
+namespace App\Models;
 
-class Agenda {
+class AgendaModel {
     private $horaInicio;
     private $dias;
     private $fecha;
     private $horaFin;
+    private $ciCliente;
 
     public function __construct($horaInicio, $dias, $fecha, $horaFin) {
         $this->horaInicio = $horaInicio;
@@ -15,6 +17,10 @@ class Agenda {
     // Getters
     public function getHoraInicio() {
         return $this->horaInicio;
+    }
+    
+    public function getCiCliente() {
+        return $this->ciCliente;
     }
 
     public function getDias() {
@@ -32,6 +38,10 @@ class Agenda {
     // Setters
     public function setHoraInicio($horaInicio) {
         $this->horaInicio = $horaInicio;
+    }
+    
+    public function setciCliente($ciCliente) {
+        $this->ciCliente = $ciCliente;
     }
 
     public function setDias($dias) {
