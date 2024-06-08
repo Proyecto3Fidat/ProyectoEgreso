@@ -1,7 +1,7 @@
 <?php
-require_once 'conexionBD.php';
+namespace App\Repositories;
 
-class ClienteRepository {
+class ClienteRepositories {
 
     public function guardar(ClienteModel $clienteModel) {
         $conexion = new Database(); // Instanciar la clase Database

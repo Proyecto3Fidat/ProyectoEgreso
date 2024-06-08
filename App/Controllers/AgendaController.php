@@ -1,5 +1,5 @@
 <?php
-require_once 'Models/AgendaModel.php';
+namespace App\Controllers;
 class AgendaController {
     private $agendaService;
 

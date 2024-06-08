@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class RutinaModel {
     private $series;
     private $repeticiones;

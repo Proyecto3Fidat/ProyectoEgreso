@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-class HomeController {
+class ClienteController {
     public function index() {
-        echo 'Home Page';
+        echo 'Clientes Page';
     }
 }

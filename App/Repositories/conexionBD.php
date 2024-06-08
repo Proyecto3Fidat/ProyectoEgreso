@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Repositories;
+
 class Database {
     private $servername;
     private $username;

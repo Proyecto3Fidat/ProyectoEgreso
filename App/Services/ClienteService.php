@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/../Repositories/ClienteRepositories.php';
+namespace App\Services;
+use App\Services\ClienteRepositories;
+use App\Models\ClienteModel;
 
 class ClienteService {
     private $clienteRepository;

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class Tercera_EdadModel {
     private $altura;
     private $peso;

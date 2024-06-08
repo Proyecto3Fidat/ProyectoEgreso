@@ -1,4 +1,6 @@
 <?php
+namespace App\Models;
+
     class ClienteModel{
         private $peso; 
         private $altura;
