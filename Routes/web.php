@@ -13,12 +13,14 @@ SimpleRouter::get('/inicio', [HomeController::class, 'index']);
 SimpleRouter::error(function() {
     // Instancia el controlador de errores y llama a su método
     $errorController = new ErrorController();
-    $errorController->paginaInaccesible();
+    $errorController->notFound();
 });
 SimpleRouter::post('/cliente', function() {
-    $clienteRepository = new ClienteRepository(); 
+    $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    $clienteRepository = new ClienteRepository(); // Corrigiendo el nombre a ClienteRepository
     $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService); 
+    $clienteController = new ClienteController($clienteService); // Pasando el servicio al controlador
+    $clienteController->crearCliente();
 });
 
 SimpleRouter::start();
