@@ -150,15 +150,16 @@ li:nth-child(2) .slide-circulo,
 li:nth-child(3) .slide-circulo {
     color: #428bca;
 }
-#Horarios {
+#horarios {
     margin-bottom: 0px;
     margin-top: 0;
 }
-#Horarios h1 {
+#horarios h1 {
     margin-top: 0;
     font-size: 25px;
     text-align: center;
     padding-bottom: 10px;
+    text-transform: uppercase;
 }
 .horarios {
     padding-left: 350px;
@@ -231,8 +232,11 @@ li:nth-child(3) .slide-circulo {
 
 .contacto h2 {
     text-align: center;
-    font-weight: 300;
+    font-weight: bold;
 
+}
+.contacto span {
+    font-weight: 300;
 }
 .footer {
     display: flex;
