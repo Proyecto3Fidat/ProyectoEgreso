@@ -1,30 +1,27 @@
 @media (max-width:768px) {
-   .menu{
+    .menu{
       display: flex;
    }
-      .navbar{
+    .navbar{
          display: none;
          margin: 0%;
          right: 0%;
          top: 60px;
          background-color: #030303;
          width: 100%;
-         text-align: center;
          z-index: 1000;
      }
-     .navbar ul{
+    ul{
         flex-direction: column;
      }
-     .navbar li {
+    li {
          margin: 10px 0;
-     }
- 
-     .navbar.active {
+    }
+    .navbar.active {
          display: flex;
      }
  
-     .menu {
+    .menu {
          display: flex;
      }
 }
-

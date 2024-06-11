@@ -23,12 +23,12 @@ body {
     text-align: center;
 }
 
-.navbar ul {
+ul {
     display: inline-flex;
     padding: 0;
 }
 
-.navbar li {
+li {
     margin: 0 15px;
 }   
 
