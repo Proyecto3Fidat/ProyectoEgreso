@@ -196,7 +196,7 @@ li:nth-child(3) .slide-circulo {
     transition: color 0.3s, background-color 0.3s;
 }
 .plan  h2 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     position: relative;
     bottom: 100%;
