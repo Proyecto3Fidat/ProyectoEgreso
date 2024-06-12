@@ -4,57 +4,42 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
 }
-
 body {
     background-color: #030303;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
 
-.header {
-    background-color: #030303;
-    padding: 10px 0;
+/*---------------------Nav----------------------------*/
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
-.navbar {
-    text-align: center;
+.logoprueba{
+    max-width: 6rem;
 }
 
-ul {
-    display: inline-flex;
-    padding: 0;
+.navlist{
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
 }
 
-li {
-    margin: 0 15px;
-}   
-
-.navbar a {
+.navlist li a{  
     color: white;
     text-decoration: none;
-    font-size: 18px;
-    padding: 5px 10px;
-    transition: color 0.3s, background-color 0.3s;
-}
-.navbar li a:hover{
-    color: #4B0082;
 }
 
-.menu{
+.abrirmenu, .cerrarmenu{
     display: none;
-    cursor: pointer;
-    float: right;
 }
-#menuimg{
-    top: -10px;
-    right: 20px;
-    position: relative;
-    width: 30px;
-    height: 30px;
-}
+
+/*--------------------------------------------------*/
 
 .slide {
     position: relative;
