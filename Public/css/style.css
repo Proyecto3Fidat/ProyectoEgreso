@@ -206,10 +206,9 @@ li:nth-child(3) .slide-circulo {
     text-transform: uppercase;
     background-color: #6f41bb;
     color: #030303;
-    border: 1px solid black;
+    border: 0.1rem solid black;
+    border-right: none;
 }
-
-
 #planes { 
     padding: 40px;
     display: flex;
@@ -220,7 +219,6 @@ li:nth-child(3) .slide-circulo {
     padding-bottom: 0;
     
 }
-
 .plan { 
     border: 1px solid white;
     padding: 11rem;
@@ -255,7 +253,7 @@ li:nth-child(3) .slide-circulo {
 }
 .contacto {
     margin-top: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 80px;
 }
 .contacto h1 {
     text-align: center;
@@ -271,7 +269,6 @@ li:nth-child(3) .slide-circulo {
 .contacto span {
     font-weight: 300;
 }
-
 .footer { 
     padding: 100px;
     margin: 0;
