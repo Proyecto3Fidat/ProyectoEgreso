@@ -24,7 +24,8 @@ class ClienteModel{
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
         $this->rol = $rol;
-        $this->passwd = $passwd;
+        $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
+        $this->passwd = $passwdHASH;
         $this->altura = $altura;
         $this->peso = $peso;
         $this->calle = $calle;
@@ -74,9 +75,9 @@ class ClienteModel{
         return $this->passwd;
     }
 
-    public function setPasswd($passwd)
-    {
-        $this->passwd = $passwd;
+    public function setPasswd($passwd){
+        $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
+        $this->passwd = $passwdHASH;
     }
 
     public function getAltura()

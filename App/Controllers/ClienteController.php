@@ -33,6 +33,9 @@ class ClienteController {
         $this->clienteService->crearCliente($cliente);
     }
     public function autenticar(){
-
+        if($this->clienteService->autenticar($_POST['documento'], $_POST['passwd'])){
+            echo "Sesion iniciada";
+        }else 
+            echo "algo anduvo mal";
     }
 }

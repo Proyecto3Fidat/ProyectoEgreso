@@ -58,22 +58,23 @@ class ClienteRepository {
         $stmt->close();
         $this->database->disconnect(); // Desconectar de la base de datos
     }
-    public function buscarPorNroDocumentoYContraseña($nroDocumento, $passwd) {
+    public function autenticar($nroDocumento, $passwd) {
         $this->database->connect(); // Conectar a la base de datos
 
         $sql = "SELECT passwd FROM Cliente WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $nroDocumento);
         $stmt->execute();
-        $stmt->bind_result($hashedPassword);
+        if($stmt->error){
+            echo "error";
+        }
+        $stmt->bind_result($epasswd);
         $stmt->fetch();
         $stmt->close();
         $this->database->disconnect(); // Desconectar de la base de datos
-
-        if ($hashedPassword && password_verify($passw, $hashedPassword)) {
+        if ($epasswd == $passwd){
             return true;
         }
-
         return false;
     }
 }
