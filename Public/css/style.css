@@ -154,9 +154,10 @@ li:nth-child(3) .slide-circulo {
     margin-bottom: 0px;
     margin-top: 0;
 }
-#horarios h1 {
+#horarios a {
+    color: white;
     margin-top: 0;
-    font-size: 25px;
+    font-size: 20px;
     text-align: center;
     padding-bottom: 10px;
     text-transform: uppercase;
