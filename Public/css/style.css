@@ -21,18 +21,37 @@ body {
 
 .navbar {
     text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 ul {
     display: inline-flex;
     padding: 0;
+    margin-left: 700px;
 }
 
 li {
     margin: 0 15px;
 }   
 
-.navbar a {
+.navbar .login-btn {
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    left: 180px;
+}
+.navbar .sign-in-btn {
+    font-size: 18px;
+    color: #fff;
+    transition: color 0.3s, background-color 0.3s;
+    margin-right: 20px;
+}
+.login-btn:hover , .sign-in-btn:hover {
+    color: #6f41bb;
+}
+
+.navbar li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
