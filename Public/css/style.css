@@ -32,20 +32,20 @@ ul {
 }
 
 li {
-    margin: 0 15px;
+    margin: 0 1rem;
 }   
 
 .navbar .login-btn {
     font-size: 18px;
     color: #fff;
     position: relative;
-    left: 200px;
+    left: 6%;
 }
 .navbar .sign-in-btn {
     font-size: 18px;
     color: #fff;
     transition: color 0.3s, background-color 0.3s;
-    margin-right: 20px;
+    margin-right: 1.5rem;
 }
 .login-btn:hover , .sign-in-btn:hover {
     color: #6f41bb;
@@ -55,7 +55,7 @@ li {
     color: white;
     text-decoration: none;
     font-size: 18px;
-    padding: 5px 10px;
+    padding: 0 1rem;
     transition: color 0.3s, background-color 0.3s;
 }
 .navbar li a:hover{
@@ -180,6 +180,10 @@ li:nth-child(3) .slide-circulo {
     text-align: center;
     padding-bottom: 10px;
     text-transform: uppercase;
+    transition: color 0.3s, background-color 0.3s;
+}
+#horarios a:hover {
+    color: #6f41bb;
 }
 .horarios {
     padding-left: 200px;
@@ -188,9 +192,14 @@ li:nth-child(3) .slide-circulo {
     text-align: center;
 }
 .horarios td {
-    cursor: pointer;
+    cursor: default;
     color: #fff;
     border: 1px solid white;
+    border-top: none;
+    border-right: none;
+}
+.horarios td:hover {
+    color: #6f41bb;
 }
 .horarios th {
     font-size: 25px;
@@ -214,7 +223,7 @@ li:nth-child(3) .slide-circulo {
 
 .plan { 
     border: 1px solid white;
-    padding: 200px;
+    padding: 11rem;
     border-radius: 40px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
