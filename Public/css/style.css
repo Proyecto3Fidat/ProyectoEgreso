@@ -162,21 +162,24 @@ li:nth-child(3) .slide-circulo {
     text-transform: uppercase;
 }
 .horarios {
-    padding-left: 350px;
-    padding-bottom: 250px;
+    padding-left: 200px;
+    padding-bottom: 200px;
     font-size: 20px;
     text-align: center;
 }
 .horarios td {
     cursor: pointer;
     color: #fff;
+    border: 1px solid white;
 }
 .horarios th {
     font-size: 25px;
     text-transform: uppercase;
     background-color: #6f41bb;
     color: #030303;
+    border: 1px solid black;
 }
+
 
 #planes { 
     padding: 40px;
@@ -223,6 +226,7 @@ li:nth-child(3) .slide-circulo {
 }
 .contacto {
     margin-top: 50px;
+    margin-bottom: 100px;
 }
 .contacto h1 {
     text-align: center;
@@ -238,31 +242,64 @@ li:nth-child(3) .slide-circulo {
 .contacto span {
     font-weight: 300;
 }
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 100px 0;
-    margin-top: 100px;
-    border-top: 1px solid #2e359c3d;
+
+.footer { 
+    padding: 100px;
+    margin: 0;
 }
-
-.footer ul {
-    display: flex;
-}
-
-.footer h3 {
-    font-size: 30px;
-}
-
-
-.footer a {
-    color: white;
+.footer h2 {
     font-size: 20px;
-    margin-right: 20px;
-    display: block;
+    font-weight: 400;
+    position: relative;
+    top: 30px;
+    right: 40px;
+    color: #6f41bb;
+}
+.footer h4 {
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    top: 150px;
+    font-weight: 400;
+}
+.footer .ig-logo {
+    position: relative;
+    top: 35px;
+    color: #fff;
+}
+.footer .ig-logo:hover { 
+    color: #6f41bb;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .twitter-logo { 
+    position: relative;
+    top: 60px;
+    right: 20px;
+    color: #fff;
+}
+.footer .twitter-logo:hover {
+    color: #6f41bb;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .wpp-logo { 
+    position: relative;
+    top: 10px;
+    right: 40px;
+    color: #fff;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .wpp-logo:hover {
+    color: #6f41bb;
+}
+.footer .fb-logo {
+    position: relative;
+    top: 85px;
+    right: 62px;
+    color: #fff;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .fb-logo:hover {
+    color: #6f41bb;
 }
 
-.footer a:hover {
-    color: #3e79a3;
-}
+
