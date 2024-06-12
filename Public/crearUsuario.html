@@ -6,18 +6,16 @@
     <title>Registrar Cliente</title>
 </head>
 <body>
-    <form action= "/cliente" method= "POST">
+    <form action= "/registrarcliente" method= "POST">
         Numero de Documento <input type="number" placeholder="Numero de Documento" name="nroDocumento" required>
         <br></br>
         Tipo de Documento <input type="text" placeholder="Tipo de Documento" name="tipoDocumento" maxlength= "10" required>
         <br></br>
         Contraseña <input type="password" placeholder="contraseña" name="contraseña" minlength= "08" required>
         <br></br>
-        Rol <input type="int" placeholder="rol" name="rol" minlength= "08" required>
+        Rol <input type="int" placeholder="rol" name="rol" required>
         <br></br>
-        Puntuacion Minima <input type="int" placeholder="Puntuacion" name="puntMinima" minlength= "08" required>
-        <br></br>
-        Puntuacion Maxima <input type="int" placeholder="Puntuacion" name="puntMaxima" minlength= "08" required>
+        Puntuacion<input type="int" placeholder="Puntuacion" name="puntuacion" required>
         <br></br>
         Altura <input type="number" min="0" name="altura" placeholder="Altura" required>
         <br></br>
@@ -39,13 +37,9 @@
         <br></br>
         Fecha de Nacimiento <input type="date" name="fechaNacimiento" required>
         <br></br>
-        Primer Nombre <input type="text" name="primerNombre" placeholder="Primer Nombre" required>
+        Primer Nombre <input type="text" name="nombre" placeholder="Primer Nombre" required>
         <br></br>
-        Segundo Nombre <input type="text" name="segundoNombre" placeholder="Segundo Nombre" required>
-        <br></br>
-        Primer Apellido <input type="text" name="primerApellido" placeholder="Primer Apellido" required>
-        <br></br>
-        Segundo Apellido <input type="text" name="segundoApellido" placeholder="Segundo Apellido" required>
+        Primer Apellido <input type="text" name="apellido" placeholder="Primer Apellido" required>
         <br></br>
         Guardar<input type="submit" value="ENVIAR">
         <br></br>

@@ -13,17 +13,27 @@ SimpleRouter::get('/inicio', [HomeController::class, 'index']);
 SimpleRouter::get('/cliente', function(){
     header('Location: Public/crearUsuario.html');
 });
+SimpleRouter::get('/login', function(){
+    header('Location: Public/login.html');
+});
 SimpleRouter::error(function() {
     // Instancia el controlador de errores y llama a su método
     $errorController = new ErrorController();
     $errorController->notFound();
 });
-SimpleRouter::post('/cliente', function() {
+SimpleRouter::post('/registrarcliente', function() {
     $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     $clienteRepository = new ClienteRepository(); // Corrigiendo el nombre a ClienteRepository
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService); // Pasando el servicio al controlador
     $clienteController->crearCliente();
+});
+SimpleRouter::post('/login', function() {
+    $clienteModel = new ClienteModel(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    $clienteRepository = new ClienteRepository(); // Corrigiendo el nombre a ClienteRepository
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService); // Pasando el servicio al controlador
+    $clienteController->autenticar();
 });
 
 SimpleRouter::start();

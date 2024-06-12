@@ -11,79 +11,33 @@ class ClienteRepository {
         $this->database = new Database();
     }
 
-    public function guardar(ClienteModel $clienteModel)
-    {
+    public function guardar(ClienteModel $clienteModel){
         $this->database->connect(); // Conectar a la base de datos
             
-        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento,rol, passwd, altura, peso, calle, numero, esquina, email, patologias, puntMinima, puntMaxima, fechaNacimiento, primerNombre, segundoNombre, primerApellido, segundoApellido) 
-                VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento,rol, passwd, altura, peso, calle, numero, esquina, email, patologias, puntuacion, fechaNacimiento, nombre, apellido) 
+                VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?)";
         
         // Asignar los valores de los métodos a variables
         $nroDocumento = $clienteModel->getNroDocumento();
-        echo "numero documento: ", $nroDocumento;
-
         $tipoDocumento = $clienteModel->getTipoDocumento();
-        echo "tipo documento: ", $tipoDocumento;
-
         $rol = $clienteModel->getRol(); // Asumiendo que 'getRol' es un método.
-        echo "rol: ", $rol;
-
         $passwd = $clienteModel->getPasswd();
-        echo "password: ", $passwd;
-
         $altura = $clienteModel->getAltura();
-        echo "altura: ", $altura;
-
         $peso = $clienteModel->getPeso();
-        echo "peso: ", $peso;
-
         $calle = $clienteModel->getCalle();
-        echo "calle: ", $calle;
-
         $numero = $clienteModel->getNumero();
-        echo "numero: ", $numero;
-
         $esquina = $clienteModel->getEsquina();
-        echo "esquina: ", $esquina;
-
         $email = $clienteModel->getEmail();
-        echo "email: ", $email;
-
         $patologias = $clienteModel->getPatologias();
-        echo "patologias: ", $patologias;
-
-        $puntMinima = $clienteModel->getPuntMinima();
-        echo "puntuación mínima: ", $puntMinima;
-
-        $puntMaxima = $clienteModel->getPuntMaxima();
-        echo "puntuación máxima: ", $puntMaxima;
-
+        $puntuacion = $clienteModel->getPuntuacion();
         $fechaNacimiento = $clienteModel->getFechaNacimiento();
-        echo "fecha de nacimiento: ", $fechaNacimiento;
-
-        $primerNombre = $clienteModel->getPrimerNombre();
-        echo "primer nombre: ", $primerNombre;
-
-        $segundoNombre = $clienteModel->getSegundoNombre();
-        echo "segundo nombre: ", $segundoNombre;
-
-        $primerApellido = $clienteModel->getPrimerApellido();
-        echo "primer apellido: ", $primerApellido;
-
-        $segundoApellido = $clienteModel->getSegundoApellido();
-        echo "segundo apellido: ", $segundoApellido;
+        $nombre = $clienteModel->getNombre();
+        $apellido = $clienteModel->getApellido();
 
         
         $stmt = $this->database->getConnection()->prepare($sql); // Preparar la consulta SQL
-        
-        if (!$stmt) {
-            // Manejar el error si la preparación de la consulta falla
-            echo "Error al preparar la consulta: " . $this->database->getConnection()->error;
-            return;
-        }
-        
         $stmt->bind_param(
-            "isissisisssissssss",
+            "isissisisssisss",
             $nroDocumento,
             $tipoDocumento,
             $rol,
@@ -95,17 +49,31 @@ class ClienteRepository {
             $esquina,
             $email,
             $patologias,
-            $puntMinima,
-            $puntMaxima,
+            $puntuacion,
             $fechaNacimiento,
-            $primerNombre,
-            $segundoNombre,
-            $primerApellido,
-            $segundoApellido
+            $nombre,
+            $apellido,
         );
         $stmt->execute();
         $stmt->close();
         $this->database->disconnect(); // Desconectar de la base de datos
     }
-    
+    public function buscarPorNroDocumentoYContraseña($nroDocumento, $passwd) {
+        $this->database->connect(); // Conectar a la base de datos
+
+        $sql = "SELECT passwd FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $nroDocumento);
+        $stmt->execute();
+        $stmt->bind_result($hashedPassword);
+        $stmt->fetch();
+        $stmt->close();
+        $this->database->disconnect(); // Desconectar de la base de datos
+
+        if ($hashedPassword && password_verify($passw, $hashedPassword)) {
+            return true;
+        }
+
+        return false;
+    }
 }

@@ -24,15 +24,15 @@ class ClienteController {
             $_POST['esquina'],
             $_POST['email'],
             $_POST['patologias'],
-            $_POST['puntMinima'],
-            $_POST['puntMaxima'],
+            $_POST['puntuacion'],
             $_POST['fechaNacimiento'],
-            $_POST['primerNombre'],
-            $_POST['segundoNombre'],
-            $_POST['primerApellido'],
-            $_POST['segundoApellido'],
+            $_POST['nombre'],
+            $_POST['apellido']
             );
         // 4. Llamar al servicio para crear el cliente
         $this->clienteService->crearCliente($cliente);
+    }
+    public function autenticar(){
+
     }
 }

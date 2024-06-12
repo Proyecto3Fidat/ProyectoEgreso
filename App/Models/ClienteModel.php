@@ -13,16 +13,13 @@ class ClienteModel{
     private $esquina;
     private $email;
     private $patologias;
-    private $puntMinima;
-    private $puntMaxima;
+    private $puntuacion;
     private $fechaNacimiento;
-    private $primerNombre;
-    private $segundoNombre;
-    private $primerApellido;
-    private $segundoApellido;
+    private $nombre;
+    private $apellido;
 
     // Constructor
-    public function __construct($nroDocumento, $tipoDocumento, $rol, $passwd, $altura, $peso, $calle, $numero, $esquina, $email, $patologias, $puntMinima, $puntMaxima, $fechaNacimiento, $primerNombre, $segundoNombre = null, $primerApellido, $segundoApellido = null)
+    public function __construct($nroDocumento, $tipoDocumento, $rol, $passwd, $altura, $peso, $calle, $numero, $esquina, $email, $patologias, $puntuacion, $fechaNacimiento, $nombre, $apellido)
     {
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
@@ -35,13 +32,10 @@ class ClienteModel{
         $this->esquina = $esquina;
         $this->email = $email;
         $this->patologias = $patologias;
-        $this->puntMinima = $puntMinima;
-        $this->puntMaxima = $puntMaxima;
+        $this->puntuacion = $puntuacion;
         $this->fechaNacimiento = $fechaNacimiento;
-        $this->primerNombre = $primerNombre;
-        $this->segundoNombre = $segundoNombre;
-        $this->primerApellido = $primerApellido;
-        $this->segundoApellido = $segundoApellido;
+        $this->nombre = $nombre;
+        $this->apellido = $apellido;
     }
 
     // Getters and Setters
@@ -155,24 +149,14 @@ class ClienteModel{
         $this->patologias = $patologias;
     }
 
-    public function getPuntMinima()
+    public function getPuntuacion()
     {
-        return $this->puntMinima;
+        return $this->puntuacion;
     }
 
-    public function setPuntMinima($puntMinima)
+    public function setPuntuacion($puntuacion)
     {
-        $this->puntMinima = $puntMinima;
-    }
-
-    public function getPuntMaxima()
-    {
-        return $this->puntMaxima;
-    }
-
-    public function setPuntMaxima($puntMaxima)
-    {
-        $this->puntMaxima = $puntMaxima;
+        $this->puntuacion = $puntuacion;
     }
 
     public function getFechaNacimiento()
@@ -185,45 +169,26 @@ class ClienteModel{
         $this->fechaNacimiento = $fechaNacimiento;
     }
 
-    public function getPrimerNombre()
+    public function getNombre()
     {
-        return $this->primerNombre;
+        return $this->nombre;
     }
 
-    public function setPrimerNombre($primerNombre)
+    public function setNombre($nombre)
     {
-        $this->primerNombre = $primerNombre;
+        $this->nombre = $nombre;
     }
 
-    public function getSegundoNombre()
+    public function getApellido()
     {
-        return $this->segundoNombre;
+        return $this->apellido;
     }
 
-    public function setSegundoNombre($segundoNombre)
+    public function setApellido($apellido)
     {
-        $this->segundoNombre = $segundoNombre;
+        $this->apellido = $apellido;
     }
 
-    public function getPrimerApellido()
-    {
-        return $this->primerApellido;
-    }
-
-    public function setPrimerApellido($primerApellido)
-    {
-        $this->primerApellido = $primerApellido;
-    }
-
-    public function getSegundoApellido()
-    {
-        return $this->segundoApellido;
-    }
-
-    public function setSegundoApellido($segundoApellido)
-    {
-        $this->segundoApellido = $segundoApellido;
-    }
 }
 
 ?>
