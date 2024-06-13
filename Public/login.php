@@ -16,7 +16,7 @@ if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
     <h2>Login</h2>
     <form action="/login" method="post">
         <label for="nroDocumento">Número de Documento:</label>
-        <input type="text" id="nroDocumento" name="nroDocumento" required><br><br>
+        <input type="text" id="nroDocumento" name="documento" required><br><br>
         <label for="passwd">Contraseña:</label>
         <input type="password" id="passwd" name="passwd" required><br><br>
         <input type="submit" value="Login">

@@ -16,8 +16,6 @@ class ClienteController {
         $cliente = new ClienteModel(
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],
-            $_POST['rol'],
-            $_POST['contraseña'],
             $_POST['altura'],
             $_POST['peso'],
             $_POST['calle'],
@@ -25,7 +23,6 @@ class ClienteController {
             $_POST['esquina'],
             $_POST['email'],
             $_POST['patologias'],
-            $_POST['puntuacion'],
             $_POST['fechaNacimiento'],
             $_POST['nombre'],
             $_POST['apellido']

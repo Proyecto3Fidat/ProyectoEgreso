@@ -14,14 +14,12 @@ class ClienteRepository {
     public function guardar(ClienteModel $clienteModel){
         $this->database->connect(); // Conectar a la base de datos
             
-        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento,rol, passwd, altura, peso, calle, numero, esquina, email, patologias, puntuacion, fechaNacimiento, nombre, apellido) 
-                VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
+                VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)";
         
         // Asignar los valores de los métodos a variables
         $nroDocumento = $clienteModel->getNroDocumento();
         $tipoDocumento = $clienteModel->getTipoDocumento();
-        $rol = $clienteModel->getRol(); // Asumiendo que 'getRol' es un método.
-        $passwd = $clienteModel->getPasswd();
         $altura = $clienteModel->getAltura();
         $peso = $clienteModel->getPeso();
         $calle = $clienteModel->getCalle();
@@ -29,7 +27,6 @@ class ClienteRepository {
         $esquina = $clienteModel->getEsquina();
         $email = $clienteModel->getEmail();
         $patologias = $clienteModel->getPatologias();
-        $puntuacion = $clienteModel->getPuntuacion();
         $fechaNacimiento = $clienteModel->getFechaNacimiento();
         $nombre = $clienteModel->getNombre();
         $apellido = $clienteModel->getApellido();
@@ -37,11 +34,9 @@ class ClienteRepository {
         
         $stmt = $this->database->getConnection()->prepare($sql); // Preparar la consulta SQL
         $stmt->bind_param(
-            "isissisisssisss",
+            "isiisissssss",
             $nroDocumento,
             $tipoDocumento,
-            $rol,
-            $passwd,
             $altura,
             $peso,
             $calle,
@@ -49,7 +44,6 @@ class ClienteRepository {
             $esquina,
             $email,
             $patologias,
-            $puntuacion,
             $fechaNacimiento,
             $nombre,
             $apellido,
@@ -58,23 +52,5 @@ class ClienteRepository {
         $stmt->close();
         $this->database->disconnect(); // Desconectar de la base de datos
     }
-    public function autenticar($nroDocumento, $passwd) {
-        $this->database->connect(); // Conectar a la base de datos
-
-        $sql = "SELECT passwd FROM Cliente WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("i", $nroDocumento);
-        $stmt->execute();
-        if($stmt->error){
-            echo "error";
-        }
-        $stmt->bind_result($epasswd);
-        $stmt->fetch();
-        $stmt->close();
-        $this->database->disconnect(); // Desconectar de la base de datos
-        if ($epasswd == $passwd){
-            return true;
-        }
-        return false;
-    }
+    
 }

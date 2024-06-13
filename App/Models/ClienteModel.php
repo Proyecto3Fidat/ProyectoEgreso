@@ -4,8 +4,6 @@ namespace App\Models;
 class ClienteModel{
     private $nroDocumento;
     private $tipoDocumento;
-    private $rol;
-    private $passwd;
     private $altura;
     private $peso;
     private $calle;
@@ -13,19 +11,15 @@ class ClienteModel{
     private $esquina;
     private $email;
     private $patologias;
-    private $puntuacion;
     private $fechaNacimiento;
     private $nombre;
     private $apellido;
 
     // Constructor
-    public function __construct($nroDocumento, $tipoDocumento, $rol, $passwd, $altura, $peso, $calle, $numero, $esquina, $email, $patologias, $puntuacion, $fechaNacimiento, $nombre, $apellido)
+    public function __construct($nroDocumento, $tipoDocumento, $altura, $peso, $calle, $numero, $esquina, $email, $patologias,$fechaNacimiento, $nombre, $apellido)
     {
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
-        $this->rol = $rol;
-        $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
-        $this->passwd = $passwdHASH;
         $this->altura = $altura;
         $this->peso = $peso;
         $this->calle = $calle;
@@ -33,7 +27,6 @@ class ClienteModel{
         $this->esquina = $esquina;
         $this->email = $email;
         $this->patologias = $patologias;
-        $this->puntuacion = $puntuacion;
         $this->fechaNacimiento = $fechaNacimiento;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
@@ -58,26 +51,6 @@ class ClienteModel{
     public function setTipoDocumento($tipoDocumento)
     {
         $this->tipoDocumento = $tipoDocumento;
-    }
-
-    public function getRol()
-    {
-        return $this->rol;
-    }
-
-    public function setRol($rol)
-    {
-        $this->rol = $rol;
-    }
-
-    public function getPasswd()
-    {
-        return $this->passwd;
-    }
-
-    public function setPasswd($passwd){
-        $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
-        $this->passwd = $passwdHASH;
     }
 
     public function getAltura()
@@ -148,16 +121,6 @@ class ClienteModel{
     public function setPatologias($patologias)
     {
         $this->patologias = $patologias;
-    }
-
-    public function getPuntuacion()
-    {
-        return $this->puntuacion;
-    }
-
-    public function setPuntuacion($puntuacion)
-    {
-        $this->puntuacion = $puntuacion;
     }
 
     public function getFechaNacimiento()

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,78 +67,79 @@
             </div>
         </div>
 </section>
-    
-
-<section id="horarios">
-    <h1>HORARIOS</h1>
-    <table class="horarios">
-        <tr>
-            <th>Hora</th>
-            <th>Lunes</th>
-            <th>Martes</th>
-            <th>Miércoles</th>
-            <th>Jueves</th>
-            <th>Viernes</th>
-        </tr>
-        <tr>
-            <th>7:00 - 8:00</th>
-            <td>Pilates</td>
-            <td>Gimnasio Libre</td>
-            <td>Estiramiento</td>
-            <td>Pilates</td>
-            <td>Boxeo</td>
-        </tr>
-        <tr>
-            <th>8:30 - 9:45</th>
-            <td>Gimnasio Libre</td>
-            <td>Pilates</td>
-            <td>Recuperación Muscular</td>
-            <td>Cardio</td>
-            <td>Gimnasio Libre</td>
-        </tr>
-        <tr>
-            <th>9:45 - 10:30</th>
-            <td>Caminadora</td>
-            <td>Boxeo</td>
-            <td>Masajes</td>
-            <td>Boxeo</td>
-            <td>Cardio</td>
-        </tr>
-        <tr>
-            <th>9:45 - 10:30</th>
-            <td>Boxeo</td>
-            <td>Cardio</td>
-            <td>Fortalecimiento de tendones</td>
-            <td>Tren Inferior</td>
-            <td>Tren Superior</td>
-        </tr>
-        <tr>
-            <th>11:00 - 12:00</th>
-            <td>Tren Superior</td>
-            <td>Tren Inferior</td>
-            <td>Libre</td>
-            <td>Tren Superior</td>
-            <td>Recuperación Muscular</td>
-        </tr>
-        <tr>
-            <th>12:15 - 13:45</th>
-            <td>Cardio</td>
-            <td>Caminadora</td>
-            <td>Tren Superior</td>
-            <td>Fortalecimiento de tendones</td>
-            <td>Caminadora</td>
-        </tr>
-        <tr>
-            <th>14:00 - 15:00</th>
-            <td>Tren Inferior</td>
-            <td>Tren Superior</td>
-            <td>Cardio</td>
-            <td>Estiramiento</td>
-            <td>Masajes</td>
-        </tr>
-      </table>
-</section>
-
+<?php
+if($_SESSION['loged']){
+    echo "<section id='horarios'>
+        <h1>HORARIOS</h1>
+        <table class='horarios'>
+            <tr>
+                <th>Hora</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+            </tr>
+            <tr>
+                <th>7:00 - 8:00</th>
+                <td>Pilates</td>
+                <td>Gimnasio Libre</td>
+                <td>Estiramiento</td>
+                <td>Pilates</td>
+                <td>Boxeo</td>
+            </tr>
+            <tr>
+                <th>8:30 - 9:45</th>
+                <td>Gimnasio Libre</td>
+                <td>Pilates</td>
+                <td>Recuperación Muscular</td>
+                <td>Cardio</td>
+                <td>Gimnasio Libre</td>
+            </tr>
+            <tr>
+                <th>9:45 - 10:30</th>
+                <td>Caminadora</td>
+                <td>Boxeo</td>
+                <td>Masajes</td>
+                <td>Boxeo</td>
+                <td>Cardio</td>
+            </tr>
+            <tr>
+                <th>9:45 - 10:30</th>
+                <td>Boxeo</td>
+                <td>Cardio</td>
+                <td>Fortalecimiento de tendones</td>
+                <td>Tren Inferior</td>
+                <td>Tren Superior</td>
+            </tr>
+            <tr>
+                <th>11:00 - 12:00</th>
+                <td>Tren Superior</td>
+                <td>Tren Inferior</td>
+                <td>Libre</td>
+                <td>Tren Superior</td>
+                <td>Recuperación Muscular</td>
+            </tr>
+            <tr>
+                <th>12:15 - 13:45</th>
+                <td>Cardio</td>
+                <td>Caminadora</td>
+                <td>Tren Superior</td>
+                <td>Fortalecimiento de tendones</td>
+                <td>Caminadora</td>
+            </tr>
+            <tr>
+                <th>14:00 - 15:00</th>
+                <td>Tren Inferior</td>
+                <td>Tren Superior</td>
+                <td>Cardio</td>
+                <td>Estiramiento</td>
+                <td>Masajes</td>
+            </tr>
+        </table>
+    </section>";
+}
+?>
 
 <section id="planes">
     <div class="plan">
