@@ -1,6 +1,5 @@
 <?php
 namespace App\Controllers;
-session_start();
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 
