@@ -20,21 +20,6 @@ header{
     padding: 1rem;
 }
 
-<<<<<<< HEAD
-.logoprueba{
-    max-width: 6rem;
-}
-
-.navlist{
-    list-style-type: none;
-    display: flex;
-    gap: 2rem;
-}
-
-.navlist li a{  
-    color: white;
-    text-decoration: none;
-=======
 .navbar {
     text-align: center;
     display: flex;
@@ -76,7 +61,6 @@ li {
 }
 .navbar li a:hover{
     color: #4B0082;
->>>>>>> 0ff3812fd59072aad001f6bbcfc35765e9143ab9
 }
 
 .abrirmenu, .cerrarmenu{
