@@ -14,7 +14,7 @@ SimpleRouter::get('/cliente', function(){
     header('Location: Public/crearUsuario.html');
 });
 SimpleRouter::get('/login', function(){
-    header('Location: Public/login.html');
+    header('Location: Public/login.php');
 });
 SimpleRouter::error(function() {
     // Instancia el controlador de errores y llama a su método

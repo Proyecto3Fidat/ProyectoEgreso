@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+session_start();
 use App\Services\ClienteService;
 use App\Models\ClienteModel;
 
@@ -34,6 +35,8 @@ class ClienteController {
     }
     public function autenticar(){
         if($this->clienteService->autenticar($_POST['documento'], $_POST['passwd'])){
+            $_SESSION['loged'] = true;
+            $_SESSION['nroDocumento'] = $nroDocumento;
             echo "Sesion iniciada";
         }else 
             echo "algo anduvo mal";
