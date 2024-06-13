@@ -4,21 +4,37 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-decoration: none;
-    list-style: none;
 }
-
 body {
     background-color: #030303;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
 
-.header {
-    background-color: #030303;
-    padding: 10px 0;
+/*---------------------Nav----------------------------*/
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
+<<<<<<< HEAD
+.logoprueba{
+    max-width: 6rem;
+}
+
+.navlist{
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.navlist li a{  
+    color: white;
+    text-decoration: none;
+=======
 .navbar {
     text-align: center;
     display: flex;
@@ -60,20 +76,14 @@ li {
 }
 .navbar li a:hover{
     color: #4B0082;
+>>>>>>> 0ff3812fd59072aad001f6bbcfc35765e9143ab9
 }
 
-.menu{
+.abrirmenu, .cerrarmenu{
     display: none;
-    cursor: pointer;
-    float: right;
 }
-#menuimg{
-    top: -10px;
-    right: 20px;
-    position: relative;
-    width: 30px;
-    height: 30px;
-}
+
+/*--------------------------------------------------*/
 
 .slide {
     position: relative;
