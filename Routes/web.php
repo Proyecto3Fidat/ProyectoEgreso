@@ -44,5 +44,11 @@ SimpleRouter::post('/login', function() {
     $usuarioController = new UsuarioController($usuarioService);
     $usuarioController->autenticar();
 });
-
+SimpleRouter::get('Public/logout', function() {
+    $usuarioModel = new UsuarioModel(null, null, null);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService);
+    $usuarioController->logout();
+});
 SimpleRouter::start();

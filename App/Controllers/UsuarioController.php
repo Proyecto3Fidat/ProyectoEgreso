@@ -22,10 +22,15 @@ class UsuarioController {
     }
     public function autenticar(){
         if($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd'])){
-            $_SESSION['loged'] = true;
+            $_SESSION['logged'] = true;
             $_SESSION['nroDocumento'] = $_POST['documento'];
             echo "Sesion iniciada";
+            header("Location: ../../Public/inicio.php");
         }else 
             echo "algo anduvo mal";
+    }
+    public function logout(){
+        session_destroy();
+        header("Location: ../../Public/inicio.php");
     }
 }

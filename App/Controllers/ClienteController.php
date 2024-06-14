@@ -30,12 +30,4 @@ class ClienteController {
         // 4. Llamar al servicio para crear el cliente
         $this->clienteService->crearCliente($cliente);
     }
-    public function autenticar(){
-        if($this->clienteService->autenticar($_POST['documento'], $_POST['passwd'])){
-            $_SESSION['loged'] = true;
-            $_SESSION['nroDocumento'] = $nroDocumento;
-            echo "Sesion iniciada";
-        }else 
-            echo "algo anduvo mal";
-    }
 }
