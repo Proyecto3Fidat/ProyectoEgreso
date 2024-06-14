@@ -2,7 +2,7 @@
     .abrirmenu, .cerrarmenu{
         display: block;
    }
-   .nav{
+.nav{
     opacity: 0;
     visibility: hidden;
 }
