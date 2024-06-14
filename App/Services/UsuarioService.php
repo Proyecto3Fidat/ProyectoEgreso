@@ -15,10 +15,6 @@ class UsuarioService {
         $this->usuarioRepository->guardar($usuarioModel);
     }
     public function autenticar($documento,$passwd) {
-        if($this->usuarioRepository->autenticar($documento,$passwd)){
-            return true;
-        }else
-            return false;
+        return $this->usuarioRepository->autenticar($documento,$passwd);
     }
-
 }

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" href="">
+    <title>Gym</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#horarios">Horarios</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+            </ul>
+            <div id="welcome-message"></div>
+        </nav>
+        <div class="menu" aria-label="Abrir menu de navegación">
+            <img src="images/menu.png" id="menuimg">
+        </div>
+    </header>
+    <section id="Inicio">
+        <div class="slide">
+            <div class="slide-inner">
+                <input class="slide-open" type="radio" id="slide-1" 
+                    name="slide" aria-hidden="true" hidden="" checked="checked">
+                <div class="slide-item">
+                    <img src="images/1.jpg" height="700" width="2000">
+                </div>
+                <input class="slide-open" type="radio" id="slide-2" 
+                    name="slide" aria-hidden="true" hidden="">
+                <div class="slide-item">
+                    <img src="images/2.jpg" height="700" width="2000">
+                </div>
+                <input class="slide-open" type="radio" id="slide-3" 
+                    name="slide" aria-hidden="true" hidden="">
+                <div class="slide-item">
+                    <img src="images/3.jpg" height="700" width="2000">
+                </div>
+                <label for="slide-3" class="slide-control prev control-1">‹</label>
+                <label for="slide-2" class="slide-control next control-1">›</label>
+                <label for="slide-1" class="slide-control prev control-2">‹</label>
+                <label for="slide-3" class="slide-control next control-2">›</label>
+                <label for="slide-2" class="slide-control prev control-3">‹</label>
+                <label for="slide-1" class="slide-control next control-3">›</label>
+                <ol class="slide-indicador">
+                    <li>
+                        <label for="slide-1" class="slide-circulo">•</label>
+                    </li>
+                    <li>
+                        <label for="slide-2" class="slide-circulo">•</label>
+                    </li>
+                    <li>
+                        <label for="slide-3" class="slide-circulo">•</label>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <section id="horarios">
+        <a href="Horarios.html"><h1>Horarios</h1></a>
+        <table class="horarios">
+            <tr>
+                <th>Hora</th>
+                <th>Lunes</th>
+                <th>Martes</th>
+                <th>Miércoles</th>
+                <th>Jueves</th>
+                <th>Viernes</th>
+            </tr>
+            <tr>
+                <th>7:00 - 8:00</th>
+                <td>Pilates</td>
+                <td>Gimnasio Libre</td>
+                <td>Estiramiento</td>
+                <td>Pilates</td>
+                <td>Boxeo</td>
+            </tr>
+            <tr>
+                <th>8:30 - 9:45</th>
+                <td>Gimnasio Libre</td>
+                <td>Pilates</td>
+                <td>Recuperación Muscular</td>
+                <td>Cardio</td>
+                <td>Gimnasio Libre</td>
+            </tr>
+            <tr>
+                <th>9:45 - 10:30</th>
+                <td>Caminadora</td>
+                <td>Boxeo</td>
+                <td>Masajes</td>
+                <td>Boxeo</td>
+                <td>Cardio</td>
+            </tr>
+            <tr>
+                <th>9:45 - 10:30</th>
+                <td>Boxeo</td>
+                <td>Cardio</td>
+                <td>Fortalecimiento de tendones</td>
+                <td>Tren Inferior</td>
+                <td>Tren Superior</td>
+            </tr>
+            <tr>
+                <th>11:00 - 12:00</th>
+                <td>Tren Superior</td>
+                <td>Tren Inferior</td>
+                <td>Libre</td>
+                <td>Tren Superior</td>
+                <td>Recuperación Muscular</td>
+            </tr>
+            <tr>
+                <th>12:15 - 13:45</th>
+                <td>Cardio</td>
+                <td>Caminadora</td>
+                <td>Tren Superior</td>
+                <td>Fortalecimiento de tendones</td>
+                <td>Caminadora</td>
+            </tr>
+            <tr>
+                <th>14:00 - 15:00</th>
+                <td>Tren Inferior</td>
+                <td>Tren Superior</td>
+                <td>Cardio</td>
+                <td>Estiramiento</td>
+                <td>Masajes</td>
+            </tr>
+        </table>
+    </section>
+    <section id="planes">
+        <div class="plan">
+            <h2>Plan 3 Meses</h2>
+        </div>
+        <div class="plan">
+            <h2>Plan 6 Meses</h2>
+        </div>
+        <div class="plan">
+            <h2>Plan Anual</h2>
+        </div>
+    </section>
+    <section id="nosotros">
+        <div class="empresa">
+            <h1>GYM</h1>
+            <h2>En (GYM) te vamos a ayudar a completar todos tus objetivos fitness, ya sea en gimnasio convencional o en fisioterapia. 
+                Tenemos los mejores equipos de ejercicio del mercado, todo lo que necesites está al alcance de tu mano con (GYM). 
+                Así que si querés comenzar tu vida "culturista" o simplemente recuperarte de una lesión o incluso fortalecer tus músculos o articulaciones,
+                (GYM) es el lugar que estás buscando, simplemente elegí un plan y comenzá a entrenar. 
+            </h2>
+        </div>
+        <br><br>
+        <div class="contacto">
+            <h1>CONTÁCTANOS</h1>
+            <h2>Teléfono: <span>999 999 999</span></h2>
+            <h2>Email: <span>holahola@gmail.com</span></h2>
+            <h2>Oficinas: <span>Calle Falsa 123</span></h2>
+        </div>
+    </section>
+    <footer>
+        <h2>Derechos reservados. Creado por Teodolina Orellana.</h2>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            const documento = localStorage.getItem('documento');
+    
+            if (documento) {
+                welcomeMessage.innerHTML = `Bienvenido, ${documento} | <a href="logout">Cerrar sesión</a>`;
+                setTimeout(function() {
+                    alert('Tu sesión ha caducado debido a inactividad.');
+                    localStorage.clear(); 
+                    window.location.href = 'logout'; 
+                }, 30 * 60 * 1000); // 30 minutos en milisegundos
+            } else {
+                welcomeMessage.innerHTML = '<a href="login.php">Login</a> | <a href="crearUsuario.html">Registrar</a>';
+            }
+        });
+    </script>
+</body>
+</html>

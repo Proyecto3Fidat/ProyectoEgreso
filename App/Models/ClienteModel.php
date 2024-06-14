@@ -15,7 +15,6 @@ class ClienteModel{
     private $nombre;
     private $apellido;
 
-    // Constructor
     public function __construct($nroDocumento, $tipoDocumento, $altura, $peso, $calle, $numero, $esquina, $email, $patologias,$fechaNacimiento, $nombre, $apellido)
     {
         $this->nroDocumento = $nroDocumento;
@@ -32,7 +31,6 @@ class ClienteModel{
         $this->apellido = $apellido;
     }
 
-    // Getters and Setters
     public function getNroDocumento()
     {
         return $this->nroDocumento;

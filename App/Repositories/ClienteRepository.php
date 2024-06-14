@@ -12,12 +12,11 @@ class ClienteRepository {
     }
 
     public function guardar(ClienteModel $clienteModel){
-        $this->database->connect(); // Conectar a la base de datos
+        $this->database->connect();
             
         $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
                 VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)";
         
-        // Asignar los valores de los métodos a variables
         $nroDocumento = $clienteModel->getNroDocumento();
         $tipoDocumento = $clienteModel->getTipoDocumento();
         $altura = $clienteModel->getAltura();
@@ -32,7 +31,7 @@ class ClienteRepository {
         $apellido = $clienteModel->getApellido();
 
         
-        $stmt = $this->database->getConnection()->prepare($sql); // Preparar la consulta SQL
+        $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "isiisissssss",
             $nroDocumento,
@@ -50,7 +49,7 @@ class ClienteRepository {
         );
         $stmt->execute();
         $stmt->close();
-        $this->database->disconnect(); // Desconectar de la base de datos
+        $this->database->disconnect(); 
     }
     
 }

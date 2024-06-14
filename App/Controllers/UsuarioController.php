@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 
@@ -15,22 +16,33 @@ class UsuarioController {
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
             $_POST['rol'],
-            $_POST['passwd'],
-            );
-        // 4. Llamar al servicio para crear el cliente
+            $_POST['passwd']
+        );
+
+        // 4. Llamar al servicio para crear el usuario
         $this->usuarioService->crearUsuario($usuario);
     }
-    public function autenticar(){
-        if($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd'])){
+
+    public function autenticar() {
+        if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
+            echo "algo anduvo mal";
+        } else {
+            echo "<script>
+                localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');
+                window.location.href = '../../Public/inicio.html'; 
+                </script>";
             $_SESSION['logged'] = true;
             $_SESSION['nroDocumento'] = $_POST['documento'];
             echo "Sesion iniciada";
-            
-        }else 
-            echo "algo anduvo mal";
+        }
     }
-    public function logout(){
+
+    public function logout() {
         session_destroy();
-        header("Location: ../../Public/inicio.php");
+        echo "<script>
+            localStorage.removeItem('documento');
+            window.location.href = '../../Public/inicio.html'; // Redirigir a la página de inicio
+            </script>";
     }
 }
+?>

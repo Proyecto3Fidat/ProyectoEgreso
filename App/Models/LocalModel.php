@@ -8,7 +8,7 @@ class LocalModel {
         "numPuerta" => "" ,
         "nomEsquina" => ""
     ];
-     // Constructor
+
      public function __construct($nombreLocal, $calleLocal, $numPuerta, $nomEsquina)
      {
          $this->nombreLocal = $nombreLocal;
@@ -16,7 +16,7 @@ class LocalModel {
          $this->direccionLocal["numPuerta"] = $numPuerta;
          $this->direccionLocal["nomEsquina"] = $nomEsquina;
      }
-     //Setters
+
      public function setDireccionLocal($calleLocal, $numPuerta, $nomEsquina)
      {
          $this->direccionLocal["calleLocal"] = $calleLocal;
@@ -28,7 +28,7 @@ class LocalModel {
      {
          $this->nombreLocal = $nombreLocal;
      }
-     //Getters
+
      public function getNombreLocal()
      {
          return $this->nombreLocal;

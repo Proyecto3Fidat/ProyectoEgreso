@@ -13,7 +13,7 @@ class PlanModel {
         $this->tipoPlan = $tipoPlan;
     }
 
-    // Getters
+
     public function getNombre() {
         return $this->nombre;
     }
@@ -26,7 +26,7 @@ class PlanModel {
         return $this->tipoPlan;
     }
  
-    // Setters
+ 
     public function setNombre($nombre) {
         $this->nombre = $nombre;
     }

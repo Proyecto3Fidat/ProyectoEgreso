@@ -1,8 +1,10 @@
 <?php
 namespace App\Repositories;
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 use App\Models\UsuarioModel;
 
 class UsuarioRepository {
@@ -13,30 +15,28 @@ class UsuarioRepository {
     }
 
     public function guardar(UsuarioModel $usuarioModel){
-        $this->database->connect(); // Conectar a la base de datos
+        $this->database->connect();
             
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
                 VALUES (?,?, ?)";
         
-        // Asignar los valores de los métodos a variables
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();       
-        $stmt = $this->database->getConnection()->prepare($sql); // Preparar la consulta SQL
+        $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "iis",
             $nroDocumento,
             $rol,
-            $passwd,
+            $passwd
         );
         $stmt->execute();
         $stmt->close();
-        $this->database->disconnect(); // Desconectar de la base de datos
+        $this->database->disconnect();
     }
     
     public function autenticar($nroDocumento, $passwd) {
-        $this->database->connect(); // Conectar a la base de datos
-
+        $this->database->connect();
         $sql = "SELECT passwd , nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $nroDocumento);
@@ -47,10 +47,27 @@ class UsuarioRepository {
         $stmt->bind_result($epasswd, $edocumento);
         $stmt->fetch();
         $stmt->close();
-        $this->database->disconnect(); // Desconectar de la base de datos
+        $this->database->disconnect();
         if ($epasswd == $passwd || password_verify($passwd, $epasswd)){
-            return true;
+            return $this->nombreCliente($edocumento);
         }
         return false;
     }
+
+    public function nombreCliente($documento){
+        $this->database->connect();
+        $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $documento);
+        $stmt->execute();
+        if($stmt->error){
+            echo "error";
+        }
+        $stmt->bind_result($nombre);
+        $stmt->fetch();
+        $stmt->close();
+        $this->database->disconnect();
+        return $nombre;
+    }
 }
+?>

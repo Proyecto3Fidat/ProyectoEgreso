@@ -6,7 +6,6 @@ class UsuarioModel{
     private $rol;
     private $passwd;
 
-    // Constructor
     public function __construct($nroDocumento, $rol, $passwd)
     {
         $this->nroDocumento = $nroDocumento;
@@ -15,7 +14,6 @@ class UsuarioModel{
         $this->passwd = $passwdHASH;
         }
 
-    // Getters and Setters
     public function getNroDocumento()
     {
         return $this->nroDocumento;
