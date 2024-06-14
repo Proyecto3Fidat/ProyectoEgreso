@@ -24,6 +24,17 @@ body {
     text-align: center;
 }
 
+.logoprueba{
+    max-width: 6rem;
+    padding: 0;
+    margin: 0;
+}
+.abrirmenu, .cerrarmenu{
+    display: none;
+    cursor: pointer;
+    float: right;
+}
+
 .navbar ul {
     display: inline-flex;
     padding: 0;
