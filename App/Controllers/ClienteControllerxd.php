@@ -33,4 +33,10 @@ class ClienteController {
         // 4. Llamar al servicio para crear el cliente
         $this->clienteService->crearCliente($cliente);
     }
+    public function autenticar($documento, $passwd){
+        if($this->cllienteService->autenticar()){
+            echo "Sesion iniciada";
+        }else 
+            echo "algo anduvo mal";
+    }
 }

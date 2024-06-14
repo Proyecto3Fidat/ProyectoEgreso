@@ -1,73 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
 }
+
 body {
     background-color: #030303;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Bebas Neue", sans-serif;
     color: white;
 }
 
-/*---------------------Nav----------------------------*/
-
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
+.header {
+    background-color: #030303;
+    padding: 10px 0;
 }
 
 .navbar {
     text-align: center;
-    display: flex;
-    justify-content: space-between;
 }
 
-ul {
+.navbar ul {
     display: inline-flex;
     padding: 0;
-    margin-left: 700px;
 }
 
-li {
-    margin: 0 1rem;
+.navbar li {
+    margin: 0 15px;
 }   
 
-.navbar .login-btn {
-    font-size: 18px;
-    color: #fff;
-    position: relative;
-    left: 6%;
-}
-.navbar .sign-in-btn {
-    font-size: 18px;
-    color: #fff;
-    transition: color 0.3s, background-color 0.3s;
-    margin-right: 1.5rem;
-}
-.login-btn:hover , .sign-in-btn:hover {
-    color: #6f41bb;
-}
-
-.navbar li a {
+.navbar a {
     color: white;
     text-decoration: none;
     font-size: 18px;
-    padding: 0 1rem;
+    padding: 5px 10px;
     transition: color 0.3s, background-color 0.3s;
 }
 .navbar li a:hover{
     color: #4B0082;
 }
 
-.abrirmenu, .cerrarmenu{
+.menu{
     display: none;
+    cursor: pointer;
+    float: right;
 }
-
-/*--------------------------------------------------*/
+#menuimg{
+    top: -10px;
+    right: 20px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
 
 .slide {
     position: relative;
@@ -163,46 +150,33 @@ li:nth-child(2) .slide-circulo,
 li:nth-child(3) .slide-circulo {
     color: #428bca;
 }
-#horarios {
+#Horarios {
     margin-bottom: 0px;
     margin-top: 0;
 }
-#horarios a {
-    color: white;
+#Horarios h1 {
     margin-top: 0;
-    font-size: 20px;
+    font-size: 25px;
     text-align: center;
     padding-bottom: 10px;
-    text-transform: uppercase;
-    transition: color 0.3s, background-color 0.3s;
-}
-#horarios a:hover {
-    color: #6f41bb;
 }
 .horarios {
-    padding-left: 200px;
-    padding-bottom: 200px;
+    padding-left: 350px;
+    padding-bottom: 250px;
     font-size: 20px;
     text-align: center;
 }
 .horarios td {
-    cursor: default;
+    cursor: pointer;
     color: #fff;
-    border: 1px solid white;
-    border-top: none;
-    border-right: none;
-}
-.horarios td:hover {
-    color: #6f41bb;
 }
 .horarios th {
     font-size: 25px;
     text-transform: uppercase;
     background-color: #6f41bb;
     color: #030303;
-    border: 0.1rem solid black;
-    border-right: none;
 }
+
 #planes { 
     padding: 40px;
     display: flex;
@@ -213,15 +187,16 @@ li:nth-child(3) .slide-circulo {
     padding-bottom: 0;
     
 }
+
 .plan { 
     border: 1px solid white;
-    padding: 11rem;
+    padding: 200px;
     border-radius: 40px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
 }
 .plan  h2 {
-    font-size: 25px;
+    font-size: 30px;
     font-weight: bold;
     position: relative;
     bottom: 100%;
@@ -243,11 +218,9 @@ li:nth-child(3) .slide-circulo {
 .empresa h2 {
     font-size: 20px;
     text-align: center;
-    font-weight: 300;
 }
 .contacto {
     margin-top: 50px;
-    margin-bottom: 80px;
 }
 .contacto h1 {
     text-align: center;
@@ -257,76 +230,33 @@ li:nth-child(3) .slide-circulo {
 
 .contacto h2 {
     text-align: center;
-    font-weight: bold;
 
 }
-.contacto span {
-    font-weight: 300;
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 0;
+    margin-top: 100px;
+    border-top: 1px solid #2e359c3d;
 }
-.footer { 
-    padding: 100px;
-    margin: 0;
+
+.footer ul {
+    display: flex;
 }
-.footer h1 {
-    font-size: 25px;
-    font-weight: 600;
-    text-align: center;
-    color: #6f41bb;
-    text-transform: uppercase;
+
+.footer h3 {
+    font-size: 30px;
 }
-.footer h2 {
+
+
+.footer a {
+    color: white;
     font-size: 20px;
-    font-weight: 400;
-    position: relative;
-    top: 30px;
-    right: 40px;
-    color: #6f41bb;
-}
-.footer h4 {
-    text-align: center;
-    margin-bottom: 0;
-    position: relative;
-    top: 150px;
-    font-weight: 400;
-}
-.footer .ig-logo {
-    position: relative;
-    top: 35px;
-    color: #fff;
-}
-.footer .ig-logo:hover { 
-    color: #6f41bb;
-    transition: color 0.3s, background-color 0.3s;
-}
-.footer .twitter-logo { 
-    position: relative;
-    top: 60px;
-    right: 20px;
-    color: #fff;
-}
-.footer .twitter-logo:hover {
-    color: #6f41bb;
-    transition: color 0.3s, background-color 0.3s;
-}
-.footer .wpp-logo { 
-    position: relative;
-    top: 10px;
-    right: 40px;
-    color: #fff;
-    transition: color 0.3s, background-color 0.3s;
-}
-.footer .wpp-logo:hover {
-    color: #6f41bb;
-}
-.footer .fb-logo {
-    position: relative;
-    top: 85px;
-    right: 62px;
-    color: #fff;
-    transition: color 0.3s, background-color 0.3s;
-}
-.footer .fb-logo:hover {
-    color: #6f41bb;
+    margin-right: 20px;
+    display: block;
 }
 
-
+.footer a:hover {
+    color: #3e79a3;
+}

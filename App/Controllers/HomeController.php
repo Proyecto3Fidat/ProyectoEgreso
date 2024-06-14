@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class HomeController {
     public function index() {
-        header("Location: ../../Public/index.html");
+        header("Location: ../../Public/inicio.php");
         exit();
     }
 }

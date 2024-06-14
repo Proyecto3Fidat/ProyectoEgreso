@@ -11,53 +11,43 @@ class ClienteRepository {
         $this->database = new Database();
     }
 
-    public function guardar(ClienteModel $clienteModel) {
+    public function guardar(ClienteModel $clienteModel){
         $this->database->connect(); // Conectar a la base de datos
             
-        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, contrasena, altura, peso, calle, numero, esquina, email, telefono, patologias, edad, fechaNacimiento, primerNombre, segundoNombre, primerApellido, segundoApellido) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
+                VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)";
         
         // Asignar los valores de los métodos a variables
-        $nroDocumento = $clienteModel->getNumeroDocumento();
-        $tipoDocumento = $clienteModel->gettipoDocumento();
-        $contrasena = $clienteModel->getPassword();
-        $altura = $clienteModel->getaltura();
-        $peso = $clienteModel->getpeso();
-        $calle = $clienteModel->getcalle();
-        $numero = $clienteModel->getnumero();
-        $esquina = $clienteModel->getesquina();
-        $email = $clienteModel->getemail();
-        $telefono = $clienteModel->getTelefono1();
-        $patologias = $clienteModel->getpatologias();
-        $edad = $clienteModel->getedad();
-        $fechaNacimiento = $clienteModel->getfechaNacimiento();
-        $primerNombre = $clienteModel->getprimerNombre();
-        $segundoNombre = $clienteModel->getsegundoNombre();
-        $primerApellido = $clienteModel->getprimerApellido();
-        $segundoApellido = $clienteModel->getsegundoApellido();
+        $nroDocumento = $clienteModel->getNroDocumento();
+        $tipoDocumento = $clienteModel->getTipoDocumento();
+        $altura = $clienteModel->getAltura();
+        $peso = $clienteModel->getPeso();
+        $calle = $clienteModel->getCalle();
+        $numero = $clienteModel->getNumero();
+        $esquina = $clienteModel->getEsquina();
+        $email = $clienteModel->getEmail();
+        $patologias = $clienteModel->getPatologias();
+        $fechaNacimiento = $clienteModel->getFechaNacimiento();
+        $nombre = $clienteModel->getNombre();
+        $apellido = $clienteModel->getApellido();
+
         
         $stmt = $this->database->getConnection()->prepare($sql); // Preparar la consulta SQL
         $stmt->bind_param(
-            "sssssssssssssssss",
+            "isiisissssss",
             $nroDocumento,
             $tipoDocumento,
-            $contrasena,
             $altura,
             $peso,
             $calle,
             $numero,
             $esquina,
             $email,
-            $telefono,
             $patologias,
-            $edad,
             $fechaNacimiento,
-            $primerNombre,
-            $segundoNombre,
-            $primerApellido,
-            $segundoApellido
+            $nombre,
+            $apellido,
         );
-        
         $stmt->execute();
         $stmt->close();
         $this->database->disconnect(); // Desconectar de la base de datos
