@@ -25,13 +25,16 @@ if (session_status() == PHP_SESSION_NONE) {
                 <li><a href="#nosotros">Nosotros</a></li>
             </ul>
             <?php
-           if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
-            echo "<a href='logout' class='logout-btn'>Cerrar sesión</a>";
-        } else {
-            // El usuario no está logueado
-            echo "<a href='login.php' class='login-btn'>Ingresar</a>";
-            echo "<a href='crearUsuario.html' class='sign-in-btn'>Registrarse</a>";
-        }
+            if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
+                if (isset($_SESSION['documento'])) {
+                    echo "<a href='#' class='logout-btn'>Bienvenido " . $_SESSION['documento'] . "</a>";
+                }
+                echo "<a href='logout' class='logout-btn'>Cerrar sesión</a>";
+            }else {
+                // El usuario no está logueado
+                echo "<a href='login.php' class='login-btn'>Ingresar</a>";
+                echo "<a href='crearUsuario.html' class='sign-in-btn'>Registrarse</a>";
+            }
             ?>
         </nav>
 

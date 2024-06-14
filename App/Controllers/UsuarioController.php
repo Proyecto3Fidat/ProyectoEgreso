@@ -25,7 +25,7 @@ class UsuarioController {
             $_SESSION['logged'] = true;
             $_SESSION['nroDocumento'] = $_POST['documento'];
             echo "Sesion iniciada";
-            header("Location: ../../Public/inicio.php");
+            
         }else 
             echo "algo anduvo mal";
     }
