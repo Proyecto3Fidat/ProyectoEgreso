@@ -184,20 +184,30 @@ li:nth-child(3) .slide-circulo {
 #horarios a {
     margin-top: 0;
     color: white;
-    font-size: 25px;
+    font-size: 1.2rem;
     text-align: center;
     padding-bottom: 10px;
     text-transform: uppercase;
+    cursor: pointer;
+}
+#horarios a:hover {
+    color: #6f41bb;
 }
 .horarios {
-    padding-left: 350px;
-    padding-bottom: 250px;
+    padding-left: 15rem;
+    padding-bottom: 20rem;
     font-size: 20px;
     text-align: center;
 }
 .horarios td {
-    cursor: pointer;
+    cursor: default;
     color: #fff;
+    border: 1px solid white;
+    border-right: black;
+    border-top: black;
+}
+.horarios td:hover {
+    color: #6f41bb;
 }
 .horarios th {
     font-size: 25px;
@@ -219,13 +229,13 @@ li:nth-child(3) .slide-circulo {
 
 .plan { 
     border: 1px solid white;
-    padding: 200px;
+    padding: 11rem;
     border-radius: 40px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
 }
 .plan  h2 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     position: relative;
     bottom: 100%;
@@ -247,6 +257,7 @@ li:nth-child(3) .slide-circulo {
 .empresa h2 {
     font-size: 20px;
     text-align: center;
+    font-weight: 400;
 }
 .contacto {
     margin-top: 50px;
@@ -259,33 +270,75 @@ li:nth-child(3) .slide-circulo {
 
 .contacto h2 {
     text-align: center;
-
+}
+.contacto span { 
+    font-weight: 400;
 }
 .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 100px 0;
-    margin-top: 100px;
-    border-top: 1px solid #2e359c3d;
+    padding: 20rem;
+    margin: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.footer h1 {
+    text-align: center;
+    color: #6f41bb;
+    font-weight: 600;
 }
 
-.footer ul {
-    display: flex;
-}
-
-.footer h3 {
-    font-size: 30px;
-}
-
-
-.footer a {
-    color: white;
+.footer h2 {
     font-size: 20px;
-    margin-right: 20px;
-    display: block;
+    font-weight: 400;
+    position: relative;
+    top: 30px;
+    right: 10rem;
+    color: #6f41bb;
+}
+.footer h4 {
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    top: 150px;
+    font-weight: 400;
+}
+.footer .ig-logo {
+    position: relative;
+    top: 38px;
+    right: 9rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
 }
 
-.footer a:hover {
-    color: #3e79a3;
+.footer .ig-logo:hover {
+    color: #6f41bb;
+}
+.footer .twitter-logo {
+    position: relative;
+    top: 60px;
+    right: 10.2rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .twitter-logo:hover {
+    color: #6f41bb;
+}
+.footer .wpp-logo {
+    position: relative;
+    top: 15px;
+    right: 11.5rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .wpp-logo:hover {
+    color: #6f41bb;
+}
+.footer .fb-logo {
+    position: relative;
+    top: 82px;
+    right: 12.7rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .fb-logo:hover {
+    color: #6f41bb;
 }
