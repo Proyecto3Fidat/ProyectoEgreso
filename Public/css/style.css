@@ -228,7 +228,8 @@ li:nth-child(3) .slide-circulo {
 }
 
 #planes { 
-    padding: 40px;
+    padding: 5rem;
+    gap: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -241,13 +242,13 @@ li:nth-child(3) .slide-circulo {
 
 .plan { 
     border: 1px solid white;
-    padding: 11rem;
-    border-radius: 40px;
+    padding: 10rem;
+    border-radius: 20px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
 }
 .plan  a {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
     color: white;
