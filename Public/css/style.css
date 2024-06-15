@@ -246,14 +246,21 @@ li:nth-child(3) .slide-circulo {
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
 }
-.plan  h2 {
+.plan  a {
     font-size: 25px;
     font-weight: bold;
     text-align: center;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.plan a:hover {
+    color: black;
+}
+.plan a::selection {
+    color: black;
 }
 .plan:hover { 
     background-color: #6f41bb;
-    color: #030303;
 }
 .plan p {
     font-size: 20px;
