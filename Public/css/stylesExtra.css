@@ -249,6 +249,34 @@ left: 15%;
     color: #6f41bb;
 }
 
+form {
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 40px auto;
+    margin-top: 10rem;
+
+}
+form h2 {
+    color: #6f41bb;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+form input {
+width: 100%;
+padding: 1rem;
+border-radius: 10px;
+border: none;
+font-size: 1rem;
+}
+form .button {
+    cursor: pointer;
+    margin-top: 1rem;
+    
+}
+.button:hover {
+    background-color: #6f41bb;
+}
+
 @media (max-width:768px) {
     * {
         width: 100%;
