@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.1">
-    <link rel="stylesheet" href="style.css">
-    <title>Ingresar</title>
+    <link rel="stylesheet" href="css/stylesExtra.css">
+    <title>Ingresar Cliente</title>
 </head>
 <body>
+    <header class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="agenda.html">Horarios</a></li>
+                <li><a href="planes.html">Planes</a></li>
+                <li><a href="inicio.html">Nosotros</a></li>
+                <li><a href="#" class="login-btn" style="color: #6f41bb;">Ingresar</a></li>
+                <li><a href="crearUsuario.html" class="sign-in-btn">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
     <form action="/login" method="post">
-        <input type="password" name="passwd" placeholder="Contraseña" style="border: 2px solid black; font-size: 15px;"> <br> <br>
-        <input type="text" name="documento" placeholder="Documento" style="border: 2px solid black; font-size: 15px; "> <br> <br>
-        <input type="submit" name="Ingresar" value="INGRESAR" style="border: 0.1rem solid black; background-color: blueviolet; border-radius: 10px; padding: 10px 20px; color: black; font-weight: bold; font-size: 15px; cursor: pointer;"> 
+        <h2>Usuario</h2>
+        <input type="text" name="user" placeholder="Contraseña" > <br> <br>
+        <h2>Contraseña</h2>
+        <input type="password" name="passwd" placeholder="Documento"> <br> <br>
+        <input type="submit" name="Ingresar" value="INGRESAR" class="button">
     </form>
 </body>
 </html>
