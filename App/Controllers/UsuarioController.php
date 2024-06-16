@@ -12,14 +12,11 @@ class UsuarioController {
     }
 
     public function crearUsuario() {
-        // 1. Crear instancia del modelo
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
             $_POST['rol'],
             $_POST['passwd']
         );
-
-        // 4. Llamar al servicio para crear el usuario
         $this->usuarioService->crearUsuario($usuario);
     }
 
