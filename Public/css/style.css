@@ -47,7 +47,7 @@ body {
 .navbar li a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1.2rem;
     padding: 5px 10px;
     position: relative;
     left: 40rem;
@@ -62,9 +62,9 @@ body {
         color: white;
         text-align: center;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 1.2rem;
         position: relative;
-        left: 55rem;
+        left: 45rem;
         transition: color 0.3s, background-color 0.3s;
 }
 .sign-in-btn { 
@@ -72,9 +72,9 @@ body {
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1.2rem;
     position: relative;
-    left: 68rem; 
+    left: 58rem; 
     transition: color 0.3s, background-color 0.3s;
 }
 
@@ -188,53 +188,14 @@ li:nth-child(2) .slide-circulo,
 li:nth-child(3) .slide-circulo {
     color: #428bca;
 }
-#horarios {
-    margin-bottom: 0px;
-    margin-top: 0;
-}
-#horarios a {
-    margin-top: 0;
-    color: white;
-    font-size: 1.2rem;
-    text-align: center;
-    padding-bottom: 10px;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-#horarios a:hover {
-    color: #6f41bb;
-}
-.horarios {
-    padding-left: 15rem;
-    padding-bottom: 20rem;
-    font-size: 20px;
-    text-align: center;
-}
-.horarios td {
-    cursor: default;
-    color: #fff;
-    border: 1px solid white;
-    border-right: black;
-    border-top: black;
-}
-.horarios td:hover {
-    color: #6f41bb;
-}
-.horarios th {
-    font-size: 25px;
-    text-transform: uppercase;
-    background-color: #6f41bb;
-    color: #030303;
-}
-
 #planes { 
     padding: 5rem;
     gap: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 200px;
-    margin-top: 0;
+    margin-bottom: 5rem;
+    margin-top: 10rem;
     padding-bottom: 0;
     
 }
@@ -266,6 +227,9 @@ li:nth-child(3) .slide-circulo {
 .plan p {
     font-size: 20px;
     text-align: center;
+}
+.empresa {
+    margin-top: 1.5rem;
 }
 .empresa h1 {
     text-align: center;
