@@ -13,7 +13,7 @@ class EjercicioModel {
         "series" =>"" 
 
     ];
-    // Constructor
+
     public function __construct($nombreEjercicio, $descripcionEjercicio, $grupoMuscular, $tipoEjercicio, $idEjercicio, $dia, $repeticiones, $series)
     {
         $this->nombreEjercicio = $nombreEjercicio;
@@ -26,7 +26,6 @@ class EjercicioModel {
         $this->rutina["series"] = $series;
     }
 
-    //Getters
     public function getNombreEjercicio()
     {
         return $this->nombreEjercicio;
@@ -52,7 +51,7 @@ class EjercicioModel {
         return $this->rutina;
     }
 
-    //Setters
+
     public function setNombreEjercicio($nombreEjercicio)
     {
         $this->nombreEjercicio = $nombreEjercicio;

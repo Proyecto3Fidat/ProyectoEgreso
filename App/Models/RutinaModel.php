@@ -7,14 +7,13 @@ class RutinaModel {
     private $repeticiones;
     private $dia;
 
-    // Constructor
     public function __construct($series, $repeticiones, $dia) {
         $this->series = $series;
         $this->repeticiones = $repeticiones;
         $this->dia = $dia;
     }
 
-    // Getters
+
     public function getSeries() {
         return $this->series;
     }
@@ -27,7 +26,7 @@ class RutinaModel {
         return $this->dia;
     }
 
-    // Setters
+
     public function setSeries($series) {
         $this->series = $series;
     }

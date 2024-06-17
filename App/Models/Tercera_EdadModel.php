@@ -7,14 +7,13 @@ class Tercera_EdadModel {
     private $peso;
     private $edad;
 
-    // Constructor
+
     public function __construct($altura, $peso, $edad) {
         $this->altura = $altura;
         $this->peso = $peso;
         $this->edad = $edad;
     }
 
-    // Getters
     public function getAltura() {
         return $this->altura;
     }
@@ -27,7 +26,7 @@ class Tercera_EdadModel {
         return $this->edad;
     }
 
-    // Setters
+
     public function setAltura($altura) {
         $this->altura = $altura;
     }

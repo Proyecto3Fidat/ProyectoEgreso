@@ -10,7 +10,6 @@ class PagoModel {
         $this->idPago = $idPago;
     }
 
-    // Getters
     public function getUltimoMesAbonado() {
         return $this->ultimoMesAbonado;
     }
@@ -18,8 +17,7 @@ class PagoModel {
     public function getIdPago() {
         return $this->idPago;
     }
- 
-    // Setters
+
     public function setUltimoMesAbonado($ultimoMesAbonado) {
         $this->ultimoMesAbonado = $ultimoMesAbonado;
     }
