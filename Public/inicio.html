@@ -15,12 +15,14 @@
         <nav class="navbar">
             <ul>
                 <li><a href="#">Inicio</a></li>
-                <li><a href="agenda.html">Horarios</a></li>
-                <li><a href="planes.html">Planes</a></li>
+                <li><a href="../App/Views/agenda.html">Horarios</a></li>
+                <li><a href="../App/Views/planes.html">Planes</a></li>
                 <li><a href="#nosotros">Nosotros</a></li>
+                <li id="welcome-message"></li>
             </ul>
+            <!--<div id="welcome-message"></div>
            <a href="../App/Views/loginusuario.html" class="login-btn">Ingresar</a>
-           <a href="crearUsuario.html" class="sign-in-btn">Registrarse</a>
+           <a href="crearUsuario.html" class="sign-in-btn">Registrarse</a>-->
         </nav>
 
     <div class="menu" aria-label="Abrir menu de navegación">
@@ -85,13 +87,13 @@
 
 <section id="planes">
     <div class="plan">
-        <a href="planes.html">Plan 3 meses</a>
+        <a href="../App/Views/planes.html">Plan 3 meses</a>
     </div>
     <div class="plan">
-        <a href="planes.html">Plan 6 Meses</a>
+        <a href="../App/Views/planes.html">Plan 6 Meses</a>
     </div>
     <div class="plan">
-    <a href="planes.html">Plan Anual</a>
+    <a href="../App/Views/planes.html">Plan Anual</a>
     </div>
 </section>
 
@@ -129,14 +131,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const documento = localStorage.getItem('documento');
     
             if (documento) {
-                welcomeMessage.innerHTML = `Bienvenido, ${documento} | <a href="logout">Cerrar sesión</a>`;
+                welcomeMessage.innerHTML = `Bienvenido, ${documento}  <a href="logout">Cerrar sesión</a>`;
                 setTimeout(function() {
                     alert('Tu sesión ha caducado debido a inactividad.');
                     localStorage.clear(); 
                     window.location.href = 'logout'; 
                 }, 30 * 60 * 1000); // 30 minutos en milisegundos
             } else {
-                welcomeMessage.innerHTML = '<a href="../App/Views/login.php">Login</a> | <a href="../App/Views/crearUsuario.html">Registrar</a>';
+                welcomeMessage.innerHTML = '<a href="../App/Views/loginusuario.html">Ingresar</a> <a href="../App/Views/crearUsuario.html">Registrarse</a>';
             }
         });
 </script>

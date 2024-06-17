@@ -324,3 +324,10 @@ li:nth-child(3) .slide-circulo {
 .footer .fb-logo:hover {
     color: #6f41bb;
 }
+#welcome-message a {
+    color: white;
+}
+#welcome-message {
+    margin-left: auto;
+    float: right;
+}
