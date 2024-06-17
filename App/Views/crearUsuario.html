@@ -3,45 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylesExtra.css">
     <title>Registrar Cliente</title>
 </head>
 <body>
+    <header class="header">
+        <nav class="navbar">
+            <ul>
+                <li><a href="inicio.html">Inicio</a></li>
+                <li><a href="agenda.html">Horarios</a></li>
+                <li><a href="planes.html">Planes</a></li>
+                <li><a href="inicio.html">Nosotros</a></li>
+                <li><a href="loginusuario.html" class="login-btn">Ingresar</a></li>
+                <li><a href="#" class="sign-in-btn" style="color: #6f41bb;">Registrarse</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <form action= "/registrarcliente" method= "POST">
-        Numero de Documento <input type="number" placeholder="Numero de Documento" name="nroDocumento" required>
+        <h2>Documento</h2>
+        <input type="number" name="nroDocumento" required>
         <br></br>
-        Tipo de Documento <input type="text" placeholder="Tipo de Documento" name="tipoDocumento" maxlength= "10" required>
+        <h2>Tipo de Documento</h2>
+         <input type="text"  name="tipoDocumento" maxlength= "10" required>
         <br></br>
-        Contraseña <input type="password" placeholder="contraseña" name="passwd" minlength= "08" required>
+        <h2>Contraseña</h2>
+         <input type="password"  name="passwd" minlength= "08" required>
         <br></br>
-        Rol <input type="int" placeholder="rol" name="rol" required>
+        <h2>Rol</h2>
+         <input type="int" name="rol" required>
         <br></br>
-        Puntuacion<input type="int" placeholder="Puntuacion" name="puntuacion" required>
+        <h2>Puntuacion</h2>
+        <input type="int"  name="puntuacion" required>
         <br></br>
-        Altura <input type="number" min="0" name="altura" placeholder="Altura" required>
+        <h2>Altura</h2>
+        <input type="number" min="0" name="altura"  required>
         <br></br>
-        Peso <input type="number" placeholder="Peso" name="peso" required>
+        <h2>Peso</h2>
+         <input type="number"  name="peso" required>
         <br></br>
-        Calle <input type="text" placeholder="Calle" name="calle" required>
+        <h2>Calle</h2>
+         <input type="text"  name="calle" required>
         <br></br>
-        Numero de Puerta <input type="number" placeholder="Numero de Puerta" name="numero" required>
+        <h2>Numero de Puerta</h2>
+         <input type="number"  name="numero" required>
         <br></br>
-        Esquina <input type="text" placeholder="Esquina" name="esquina" required>
+        <h2>Esquina</h2>
+         <input type="text"  name="esquina" required>
         <br></br>
-        Correo Electronico  <input type="email" placeholder="Correo Electronica" name="email" required>
+        <h2>Correo Electronico</h2>
+          <input type="email"  name="email" required>
         <br></br>
-        Telefono <input type="number" placeholder="Telefono" name="telefono" required>
+        <h2>N° de Telefono</h2>
+         <input type="number"  name="telefono" required>
         <br></br>
-        Patologias <input type="text" placeholder="Patologias" name="patologias" required>
+        <h2>Patologias</h2>
+        <input type="text"  name="patologias" required>
         <br></br>
-        Edad <input type="number" placeholder="Edad" name="edad" required>
+        <h2>Edad</h2>
+        <input type="number"  name="edad" required>
         <br></br>
-        Fecha de Nacimiento <input type="date" name="fechaNacimiento" required>
+        <h2>Fecha de Nacimiento</h2>
+        <input type="date"  required>
         <br></br>
-        Primer Nombre <input type="text" name="nombre" placeholder="Primer Nombre" required>
+        <h2>Primer Nombre</h2>
+        <input type="text" name="nombre" placeholder="Primer Nombre" required>
         <br></br>
-        Primer Apellido <input type="text" name="apellido" placeholder="Primer Apellido" required>
+        <h2>Primer Apellido</h2>
+        <input type="text" name="apellido" placeholder="Primer Apellido" required>
         <br></br>
-        Guardar<input type="submit" value="ENVIAR">
+        <input type="submit" value="ENVIAR" class="button">
         <br></br>
 </form>
 </body>
