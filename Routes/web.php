@@ -19,7 +19,7 @@ SimpleRouter::get('/cliente', function(){
     header('Location: Public/crearUsuario.html');
 });
 SimpleRouter::get('/login', function(){
-    header('Location: Public/login.php');
+    header('Location: App/Views/login.php');
 });
 SimpleRouter::error(function() {
     $errorController = new ErrorController();
