@@ -13,4 +13,6 @@ RewriteRule ^ Public/index.php [QSA,L]
 # Deshabilita la visualización del índice de directorios
 Options -Indexes
 
-ErrorDocument 403 /App/Controllers/EarrorController.php
+ErrorDocument 403 /Public/index.php
+ErrorDocument 404 /Public/index.php
+ErrorDocument 500 /Public/index.php

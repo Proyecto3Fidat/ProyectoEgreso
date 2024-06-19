@@ -11,6 +11,9 @@ class UsuarioController {
         $this->usuarioService = $usuarioService;
     }
 
+    public function comprobarUsuario() {
+        $this->usuarioService->comprobarUsuario($_POST['nroDocumento']);
+    }
     public function crearUsuario() {
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
@@ -22,7 +25,8 @@ class UsuarioController {
 
     public function autenticar() {
         if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
-            echo "algo anduvo mal";
+            header("Location: ../../App/Views/loginusuario.html?error=true");
+            exit();
         } else {
             echo "<script>
                 localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');

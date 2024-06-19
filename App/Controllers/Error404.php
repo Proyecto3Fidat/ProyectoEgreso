@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class ErrorController {
+class Error404{
 
     public function notFound() {
         echo '<!DOCTYPE html>
