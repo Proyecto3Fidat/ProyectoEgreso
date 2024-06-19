@@ -132,11 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
             if (documento) {
                 welcomeMessage.innerHTML = `Bienvenido, ${documento}  <a href="logout">Cerrar sesión</a>`;
-                setTimeout(function() {
-                    alert('Tu sesión ha caducado debido a inactividad.');
-                    localStorage.clear(); 
-                    window.location.href = 'logout'; 
-                }, 30 * 60 * 1000); // 30 minutos en milisegundos
             } else {
                 welcomeMessage.innerHTML = '<a href="../App/Views/loginusuario.html">Ingresar</a> <a href="../App/Views/crearUsuario.html">Registrarse</a>';
             }
