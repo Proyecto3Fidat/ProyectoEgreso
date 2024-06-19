@@ -22,7 +22,8 @@ class UsuarioController {
 
     public function autenticar() {
         if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
-            echo "algo anduvo mal";
+            header("Location: ../../App/Views/loginusuario.html?error=true");
+            exit();
         } else {
             echo "<script>
                 localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');

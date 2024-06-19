@@ -25,7 +25,14 @@
         <h2>Contraseña</h2>
         <input type="password" name="passwd" placeholder="Contraseña"> <br> <br>
         <input type="submit" name="Ingresar" value="INGRESAR" class="button">
+        <p id="error-message" style="color: red;"></p>
     </form>
 </body>
-
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error === 'true') {
+        document.getElementById('error-message').textContent = 'El usuario o la contraseña es incorrecto.';
+    }
+</script>
 </html>
