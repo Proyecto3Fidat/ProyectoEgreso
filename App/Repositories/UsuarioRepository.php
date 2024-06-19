@@ -13,7 +13,25 @@ class UsuarioRepository {
     public function __construct() {
         $this->database = new Database();
     }
+    public function comprobarUsuario($documento) {
+        $this->database->connect();
+        $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
+        $nroDocumento = $documento;
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $nroDocumento);
+        $stmt->execute();
+        $stmt->bind_result($nroDocumento);
+        $stmt->fetch();
+        $stmt->close();
+        $this->database->disconnect();
+        if (isset($nroDocumento)) {
+            echo "<script>
+                alert('El usuario ya existe');
+                window.location.href = '../../Views/crearUsuario.html'; 
+                </script>";
+            exit();}
 
+    }
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
             
