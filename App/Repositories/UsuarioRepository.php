@@ -27,7 +27,7 @@ class UsuarioRepository {
         if (isset($nroDocumento)) {
             echo "<script>
                 alert('El usuario ya existe');
-                window.location.href = '../App/Views/crearUsuario.html'; 
+                window.location.href = '../../Views/crearUsuario.html'; 
                 </script>";
             exit();}
 
