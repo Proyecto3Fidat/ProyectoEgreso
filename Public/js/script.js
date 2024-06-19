@@ -1,18 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtén el contenido de tu plantilla
-    var source = document.getElementById("footer-template").innerHTML;
-
-    // Compila la plantilla Handlebars
-    var template = Handlebars.compile(source);
-
-    // Define los datos para tu plantilla
-    var data = {
-        // Puedes proporcionar los datos que desees pasar a la plantilla aquí
-    };
-
-    // Renderiza la plantilla con los datos proporcionados
-    var html = template(data);
-
-    // Inserta el HTML renderizado en el DOM
-    document.getElementById("output").innerHTML = html;
-});
+            const welcomeMessage = document.getElementById('welcome-message');
+            const documento = localStorage.getItem('documento');
+    
+            if (documento) {
+                welcomeMessage.innerHTML = `<a>Bienvenido, ${documento}</a>  <a href="/logout">Cerrar sesión</a>`;
+            } else {
+                welcomeMessage.innerHTML = '<a href="/login">Ingresar</a> <a href="../App/Views/crearUsuario.html">Registrarse</a>';
+            }
+        });
