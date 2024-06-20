@@ -34,9 +34,9 @@ class UsuarioController {
         }
     }
     public function crearUsuario() {
+        echo "Creando usuario...";
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
-            $_POST['rol'],
             $_POST['passwd']
         );
         $this->usuarioService->crearUsuario($usuario);
@@ -65,3 +65,4 @@ class UsuarioController {
             </script>";
     }
 }
+?>
