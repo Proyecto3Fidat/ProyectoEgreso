@@ -31,8 +31,7 @@ SimpleRouter::post('/registrarcliente', function() {
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService);
     $usuarioController->comprobarUsuario();
-    $usuarioController->crearUsuario();
-    $clienteController->crearCliente();
+
 });
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();

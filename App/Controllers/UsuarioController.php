@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
+use App\Repositories\UsuarioRepository;
 
 class UsuarioController {
     private $usuarioService;
@@ -12,7 +13,16 @@ class UsuarioController {
     }
 
     public function comprobarUsuario() {
-        $this->usuarioService->comprobarUsuario($_POST['nroDocumento']);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        if($usuarioService->comprobarUsuario($_POST['nroDocumento']) == true) {
+            echo "El usuario ya existe";
+            exit();
+        }else {
+            $this->crearUsuario();
+            echo "Usuario creado";
+            exit();
+        }
     }
     public function crearUsuario() {
         $usuario = new UsuarioModel(
