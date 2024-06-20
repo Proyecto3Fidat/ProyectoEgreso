@@ -7,4 +7,7 @@ class HomeController {
         header("Location: ../../Public/inicio.html");
         exit();
     }
+
+    
+
 }

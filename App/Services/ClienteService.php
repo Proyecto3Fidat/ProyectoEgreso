@@ -14,11 +14,5 @@ class ClienteService {
     public function crearCliente(ClienteModel $clienteModel) {
         $this->clienteRepository->guardar($clienteModel);
     }
-    public function autenticar($documento,$passwd) {
-        if($this->clienteRepository->autenticar($documento,$passwd)){
-            return true;
-        }else
-            return false;
-    }
 
 }
