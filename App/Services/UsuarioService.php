@@ -11,6 +11,10 @@ class UsuarioService {
         $this->usuarioRepository = $usuarioRepository;
     }
 
+    public function comprobarUsuario($documento) {
+        return $this->usuarioRepository->comprobarUsuario($documento);
+
+    }
     public function crearUsuario(UsuarioModel $usuarioModel) {
         $this->usuarioRepository->guardar($usuarioModel);
     }

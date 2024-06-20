@@ -13,10 +13,20 @@ class UsuarioRepository {
     public function __construct() {
         $this->database = new Database();
     }
-
+    public function comprobarUsuario($nroDocumento) {
+        $this->database->connect();
+        $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $nroDocumento);
+        $stmt->execute();
+        $stmt->store_result();
+        $num_of_rows = $stmt->num_rows;
+        $stmt->close();
+        $this->database->disconnect();
+        return $num_of_rows > 0;
+    }
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
-            
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
                 VALUES (?,?, ?)";
         
