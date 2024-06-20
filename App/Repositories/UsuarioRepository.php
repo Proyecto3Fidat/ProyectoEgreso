@@ -23,7 +23,6 @@ class UsuarioRepository {
         $num_of_rows = $stmt->num_rows;
         $stmt->close();
         $this->database->disconnect();
-        echo $num_of_rows." valor de num_of_rows";
         return $num_of_rows > 0;
     }
     public function guardar(UsuarioModel $usuarioModel){

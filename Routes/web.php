@@ -24,14 +24,10 @@ SimpleRouter::error(function() {
     $errorController->notFound();
 });
 SimpleRouter::post('/registrarcliente', function() {
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService);
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService);
     $usuarioController->comprobarUsuario();
-
 });
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();

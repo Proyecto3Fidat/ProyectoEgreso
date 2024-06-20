@@ -4,6 +4,8 @@ namespace App\Controllers;
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 use App\Repositories\UsuarioRepository;
+use App\Repositories\ClienteRepository;
+use App\Services\ClienteService;
 
 class UsuarioController {
     private $usuarioService;
@@ -16,11 +18,18 @@ class UsuarioController {
         $usuarioRepository = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepository);
         if($usuarioService->comprobarUsuario($_POST['nroDocumento']) == true) {
-            echo "El usuario ya existe";
+            echo "<script>
+                alert('El usuario ya existe');
+                window.location.href = '../../App/Views/crearUsuario.html'; 
+                </script>";
             exit();
         }else {
             $this->crearUsuario();
-            echo "Usuario creado";
+            $clienteRepository = new ClienteRepository();
+            $clienteService = new ClienteService($clienteRepository);
+            $clienteController = new ClienteController($clienteService);
+            $clienteController->crearCliente();
+            header("location: ../../Public/inicio.html");
             exit();
         }
     }
