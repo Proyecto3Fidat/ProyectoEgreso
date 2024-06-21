@@ -48,7 +48,7 @@ class UsuarioController {
             exit();
         } else {
             echo "<script>
-                localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');
+                localStorage.setItem('nombre', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');
                 window.location.href = '../../Public/inicio.html'; 
                 </script>";
             $_SESSION['logged'] = true;
@@ -60,7 +60,7 @@ class UsuarioController {
     public function logout() {
         session_destroy();
         echo "<script>
-            localStorage.removeItem('documento');
+            localStorage.removeItem('nombre');
             window.location.href = '../../Public/inicio.html'; // Redirigir a la página de inicio
             </script>";
     }
