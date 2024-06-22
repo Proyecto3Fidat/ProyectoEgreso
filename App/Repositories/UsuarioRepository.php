@@ -32,7 +32,8 @@ class UsuarioRepository {
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
-        $passwd = $usuarioModel->getPasswd();       
+        $passwd = $usuarioModel->getPasswd();    
+        echo $usuarioModel->getPasswd();   
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "iis",
@@ -58,7 +59,7 @@ class UsuarioRepository {
         $stmt->fetch();
         $stmt->close();
         $this->database->disconnect();
-        if ($epasswd == $passwd || password_verify($passwd, $epasswd)){
+        if (password_verify($passwd, $epasswd)){
             return $this->nombreCliente($edocumento);
         }
         return false;

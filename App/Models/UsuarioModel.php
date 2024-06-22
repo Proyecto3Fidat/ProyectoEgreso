@@ -11,7 +11,7 @@ class UsuarioModel{
         $this->nroDocumento = $nroDocumento;
         $this->rol = 1;
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
-        $this->passwd = $passwd;
+        $this->passwd = $passwdHASH;
         }
 
     public function getNroDocumento()

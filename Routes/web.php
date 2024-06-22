@@ -10,8 +10,17 @@ use App\Services\UsuarioService;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
 
-
 SimpleRouter::get('/', [HomeController::class, 'index']);
+SimpleRouter::get('hash', function() {
+    $original = 'password';
+    $hash = password_hash($original, PASSWORD_DEFAULT);
+    if(password_verify($original, $hash)){  
+    echo $hash;
+    }
+    else{
+        echo "error";
+    }
+});
 SimpleRouter::get('/inicio', [HomeController::class, 'index']);
 SimpleRouter::get('/cliente', function(){
     header('Location: Public/crearUsuario.html');
@@ -28,7 +37,7 @@ SimpleRouter::post('/registrarcliente', function() {
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService);
     $usuarioController->comprobarUsuario();
-});
+    });
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
