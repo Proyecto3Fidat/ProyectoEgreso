@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (nombre) {
                 welcomeMessage.innerHTML = `<a>Bienvenido, ${nombre}</a>  <a href="/logout">Cerrar sesión</a>`;
             } else {
-                welcomeMessage.innerHTML = '<a href="/login">Ingresar</a> <a href="../App/Views/crearUsuario.html">Registrarse</a>';
+                welcomeMessage.innerHTML = '<a href="/login">Ingresar</a> <a href="/registrar">Registrarse</a>';
             }
         });

@@ -12,6 +12,9 @@ use App\Repositories\UsuarioRepository;
 
 
 SimpleRouter::get('/', [HomeController::class, 'index']);
+SimpleRouter::get('/registrar', function(){
+    header('Location: App/Views/crearUsuario.html');
+});
 SimpleRouter::get('/login', function(){
     header('Location: App/Views/loginusuario.html');
 });
