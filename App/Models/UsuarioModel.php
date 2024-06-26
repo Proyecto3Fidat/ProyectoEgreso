@@ -9,9 +9,8 @@ class UsuarioModel{
     public function __construct($nroDocumento, $passwd)
     {
         $this->nroDocumento = $nroDocumento;
-        $this->rol = 1;
-        $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
-        $this->passwd = $passwd;
+        $this->rol = 1;  
+        $this->passwd = password_hash($passwd, PASSWORD_DEFAULT);;
         }
 
     public function getNroDocumento()
