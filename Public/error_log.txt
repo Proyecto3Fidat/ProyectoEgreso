@@ -1,5 +1,0 @@
-2024-06-29 05:23:12 - Error en Database::connect(): Access denied for user 'admina'@'localhost' (using password: YES)
-2024-06-29 05:25:50 - Error en Database::connect(): Access denied for user 'admina'@'localhost' (using password: YES)
-2024-06-29 05:27:07 - Error en Database::connect(): Access denied for user 'admina'@'localhost' (using password: YES)
-2024-06-29 05:27:21 - Error en Database::connect(): Access denied for user 'admina'@'localhost' (using password: YES)
-2024-06-29 05:28:44 - Error en Database::connect(): Access denied for user 'admina'@'localhost' (using password: YES)
