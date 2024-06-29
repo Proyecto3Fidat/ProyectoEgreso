@@ -31,6 +31,7 @@ class UsuarioController {
             $clienteController->crearCliente();
             header("location: ../../Public/inicio.html");
             exit();
+            
         }
     }
     public function crearUsuario() {

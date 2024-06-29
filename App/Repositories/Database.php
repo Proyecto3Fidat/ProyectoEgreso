@@ -11,7 +11,7 @@ class Database {
     private $conn;
     private $logger;
 
-    public function __construct($servername = "localhost", $username = "admina", $password = "admin", $dbname = "fidatbd") {
+    public function __construct($servername = "localhost", $username = "admin", $password = "admin", $dbname = "fidatbd") {
         $this->servername = $servername;
         $this->username = $username;
         $this->password = $password;

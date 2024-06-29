@@ -16,6 +16,7 @@ class UsuarioService {
 
     }
     public function crearUsuario(UsuarioModel $usuarioModel) {
+        echo "Service Creando usuario...";
         $this->usuarioRepository->guardar($usuarioModel);
     }
     public function autenticar($documento,$passwd) {

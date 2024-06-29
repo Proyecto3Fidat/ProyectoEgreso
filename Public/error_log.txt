@@ -1,0 +1,108 @@
+2024-06-29 05:49:37 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 05:51:33 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 05:51:33 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 05:51:34 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 05:51:34 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 05:51:34 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:03:17 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:05:43 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:06:21 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:08:59 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:09:04 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
+2024-06-29 06:30:04 [ERROR] Access denied for user 'admina'@'localhost' (using password: YES) (Archivo: C:\Users\Ismael\Documents\ProyectoEgreso\ProyectoEgreso\App\Repositories\Database.php, Línea: 38)
+Contexto:
+Array
+(
+    [servername] => localhost
+    [username] => admina
+    [dbname] => fidatbd
+)
+
