@@ -30,8 +30,12 @@ class Database {
             
             echo "Conexión exitosa";
         } catch (\Exception $e) {
-            // Registrar el error utilizando el logger
-            $this->logger->logError("Error en Database::connect(): " . $e->getMessage());
+            $context = [
+                'servername' => $this->servername,
+                'username' => $this->username,
+                'dbname' => $this->dbname,
+            ]; // Ejemplo de contexto
+            $this->logger->logError($e->getMessage(), 'ERROR', $context);
             die("Error en la conexión a la base de datos. Revisa el registro de errores.");
         }
     }

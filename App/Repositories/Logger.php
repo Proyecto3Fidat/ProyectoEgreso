@@ -8,17 +8,25 @@ class Logger {
         $this->logFile = $logFile;
     }
 
-    public function logError($message) {
+    public function logError($message, $level = 'ERROR', $context = []) {
         $timestamp = date('Y-m-d H:i:s');
-        $logMessage = "$timestamp - $message\n";
+        $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2); // Obtener información de la pila de llamadas
+        $callingFile = $backtrace[0]['file'] ?? 'Desconocido';
+        $callingLine = $backtrace[0]['line'] ?? 'Desconocida';
 
-        // Abrir el archivo en modo append (a) para agregar al final
+        $logMessage = "$timestamp [$level] $message (Archivo: $callingFile, Línea: $callingLine)";
+
+        if (!empty($context)) {
+            $logMessage .= "\nContexto:\n" . print_r($context, true); // Agregar contexto si está disponible
+        }
+
+        $logMessage .= "\n"; // Nueva línea para separar los mensajes
+
         $fileHandle = fopen($this->logFile, 'a');
         if ($fileHandle) {
             fwrite($fileHandle, $logMessage);
             fclose($fileHandle);
         } else {
-            // Manejar el error si no se puede abrir el archivo (por ejemplo, registrar en otro lugar)
             error_log("Error al escribir en el archivo de registro: " . $this->logFile);
         }
     }
