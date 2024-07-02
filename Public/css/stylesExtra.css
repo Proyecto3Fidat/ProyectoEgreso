@@ -64,13 +64,14 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    background-color: antiquewhite;
+    background-color: black;
     padding-bottom: 15rem;
 }
 
 .cart {
+    color: white;
     position: relative;
-    top: 25dvh;
+    top: 22dvh;
     right: 75.5%;
 }
 .cart:hover {
@@ -78,8 +79,9 @@ body {
     color: #6f41bb;
 }
 .cart-2 {
+    color: white;
     position: relative;
-    top: 25dvh;
+    top: 22dvh;
     right: 51%;
 }
 .cart-2:hover {
@@ -87,8 +89,9 @@ body {
     color: #6f41bb;
 }
 .cart-3 {
+    color: white;
     position: relative;
-    top: 26dvh;
+    top: 23dvh;
     right: 28%;
 }
 .cart-3:hover {
@@ -96,31 +99,23 @@ body {
     color: #6f41bb;
 }
 
-.bi bi-cart {
-    color: black;
-}
 
 .plan { 
     color: black;
     border: 1px solid black;
     border-radius: 20px;
-    padding: 2rem;
-    background-color: white;
-}
-.planA {
-    color: black;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 2.38rem;
+    padding: 2.2rem;
     background-color: white;
 }
 
-.planA h1, .plan h1 {
+
+
+.plan h1 {
     font-size: 1.2rem;
     color: #4B0082;
     text-align: center;
 }
-.planA h2, .plan h2 {
+.plan h2 {
     font-size: 1.1rem;
     text-align: center;
 }
