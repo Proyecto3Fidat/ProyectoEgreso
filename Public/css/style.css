@@ -42,7 +42,9 @@ body {
 
 .navbar li {
     margin: 0 0.5rem;
-}   
+} 
+
+
 
 .navbar li a {
     color: white;
@@ -56,6 +58,8 @@ body {
 .navbar li a:hover{
     color: #4B0082;
 }
+
+
 
 .login-btn { 
         float: right;
