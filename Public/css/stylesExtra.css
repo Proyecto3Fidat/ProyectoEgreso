@@ -43,6 +43,11 @@ body {
     transition: color 0.3s, background-color 0.3s;
     text-align: center;
 }
+
+#welcome-message {
+    display: flex;
+    gap: 30px;
+}
 .login-btn {
     position: relative;
     left: 200%;
@@ -273,6 +278,8 @@ form .button {
 .button:hover {
     background-color: #6f41bb;
 }
+
+
 
 @media (max-width:768px) {
     * {
