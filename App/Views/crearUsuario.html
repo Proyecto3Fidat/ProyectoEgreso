@@ -22,10 +22,13 @@
 
     <form action= "/registrarcliente" method= "POST">
         <h2>Documento</h2>
-        <input type="number" name="nroDocumento" required>
+        <input type="text" name="nroDocumento" required>
         <br></br>
         <h2>Tipo de Documento</h2>
-         <input type="text"  name="tipoDocumento" maxlength= "10" required>
+         <select name="tipodocumento" id="tipodocumento">
+            <option value="CI">Cédula de Identidad</option>
+            <option value="Pasaporte">Pasaporte</option>
+         </select>
         <br></br>
         <h2>Contraseña</h2>
          <input type="password"  name="passwd" minlength= "08" required>
@@ -37,10 +40,10 @@
         <input type="int"  name="puntuacion" required>
         <br></br>
         <h2>Altura</h2>
-        <input type="number" min="0" name="altura"  required>
+        <input type="text" min="0" name="altura"  required>
         <br></br>
         <h2>Peso</h2>
-         <input type="number"  name="peso" required>
+         <input type="text"  name="peso" required>
         <br></br>
         <h2>Calle</h2>
          <input type="text"  name="calle" required>
@@ -55,7 +58,7 @@
           <input type="email"  name="email" required>
         <br></br>
         <h2>N° de Telefono</h2>
-         <input type="number"  name="telefono" required>
+         <input type="number"  name="telefono" required maxlength="9">
         <br></br>
         <h2>Patologias</h2>
         <input type="text"  name="patologias" required>
