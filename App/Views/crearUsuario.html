@@ -22,7 +22,7 @@
 
     <form action= "/registrarcliente" method= "POST">
         <h2>Documento</h2>
-        <input type="text" name="nroDocumento" required>
+        <input type="text" name="nroDocumento" placeholder="Número de Documento" required>
         <br></br>
         <h2>Tipo de Documento</h2>
          <select name="tipodocumento" id="tipodocumento">
@@ -31,43 +31,37 @@
          </select>
         <br></br>
         <h2>Contraseña</h2>
-         <input type="password"  name="passwd" minlength= "08" required>
-        <br></br>
-        <h2>Rol</h2>
-         <input type="int" name="rol" required>
-        <br></br>
-        <h2>Puntuacion</h2>
-        <input type="int"  name="puntuacion" required>
+         <input type="password"  name="passwd" minlength= "08" placeholder="Contraseña" required>
         <br></br>
         <h2>Altura</h2>
-        <input type="text" min="0" name="altura"  required>
+        <input type="text" min="0" name="altura" placeholder="Altura" required>
         <br></br>
         <h2>Peso</h2>
-         <input type="text"  name="peso" required>
+         <input type="text"  name="peso"  placeholder="Peso" required>
         <br></br>
         <h2>Calle</h2>
-         <input type="text"  name="calle" required>
+         <input type="text"  name="calle" placeholder="Calle" required>
         <br></br>
         <h2>Numero de Puerta</h2>
-         <input type="number"  name="numero" required>
+         <input type="text"  name="numero" placeholder="Número de puerta" maxlength="4" required>
         <br></br>
         <h2>Esquina</h2>
-         <input type="text"  name="esquina" required>
+         <input type="text"  name="esquina" placeholder="Esquina" required>
         <br></br>
         <h2>Correo Electronico</h2>
-          <input type="email"  name="email" required>
+          <input type="email"  name="email" placeholder="example@gmail.com" required>
         <br></br>
         <h2>N° de Telefono</h2>
-         <input type="number"  name="telefono" required maxlength="9">
+         <input type="text"  name="telefono" required maxlength="9" placeholder="Número de teléfono">
         <br></br>
         <h2>Patologias</h2>
-        <input type="text"  name="patologias" required>
+        <input type="text"  name="patologias" required placeholder="Patologias">
         <br></br>
         <h2>Edad</h2>
-        <input type="number"  name="edad" required>
+        <input type="text"  name="edad" required placeholder="Edad" maxlength="2">
         <br></br>
         <h2>Fecha de Nacimiento</h2>
-        <input type="date"  required>
+        <input type="date"  required placeholder="Fecha de Nacimiento">
         <br></br>
         <h2>Primer Nombre</h2>
         <input type="text" name="nombre" placeholder="Primer Nombre" required>
