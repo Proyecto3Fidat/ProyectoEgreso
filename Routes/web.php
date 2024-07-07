@@ -12,14 +12,12 @@ use App\Repositories\UsuarioRepository;
 
 
 SimpleRouter::get('/', [HomeController::class, 'index']);
-SimpleRouter::get('/inicio', [HomeController::class, 'index']);
-SimpleRouter::get('/cliente', function(){
-    header('Location: Public/crearUsuario.html');
+SimpleRouter::get('/registrarcliente', function(){
+    header('Location: App/Views/crearUsuario.html');
 });
 SimpleRouter::get('/login', function(){
     header('Location: App/Views/loginusuario.html');
 });
-
 SimpleRouter::post('/registrarcliente', function() {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
