@@ -5,17 +5,19 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
 
 ## Índice
 
-1. [Características Principales](#características-principales)
-2. [Programación](#programación)
-   - [Requisitos del Sistema](#requisitos-del-sistema)
-   - [Instalación](#instalación)
-     1. [Clonar el repositorio](#clonar-el-repositorio)
-     2. [Instalación de Composer](#instalación-de-composer)
-     3. [Configurar el VirtualHost en Apache](#configurar-el-virtualhost-en-apache)
-     4. [Reiniciar Apache](#reiniciar-apache)
-     5. [Uso de Composer](#uso-de-composer)
-3. [Detalles](#detalles)
-4. [Implicaciones](#implicaciones)
+- [Características Principales](#características-principales)
+    - [Gestión de Planes de Entrenamiento](#gestión-de-planes-de-entrenamiento)
+    - [Seguimiento del Progreso](#seguimiento-del-progreso)
+    - [Informes y Análisis](#informes-y-análisis)
+    - [Gestión Administrativa](#gestión-administrativa)
+    - [Usuarios y Roles](#usuarios-y-roles)
+    - [Alertas y Notificaciones](#alertas-y-notificaciones)
+    - [Personalización y Flexibilidad](#personalización-y-flexibilidad)
+- [Programacion](#programacion)
+    - [Requisitos del Sistema](#requisitos-del-sistema)
+    - [Instalación](#instalación)
+    - [Detalles](#detalles)
+    - [Implicaciones](#implicaciones)
 
 
 ## Características Principales
