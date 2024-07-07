@@ -10,6 +10,15 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
 - [@IsmaelBergaradev](https://www.github.com/IsmaelBergaradev)
 - [@Thisguitoxddd](https://www.github.com/Thisguitoxddd)
 
+## Documentacion 
+  [Programacion](https://docs.google.com/document/d/19vSB3dFqhOWqyqpYA8gIByVBd8gIq5lW/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
+  [Diseño Web](https://docs.google.com/document/d/1xj8YEZUi7dPlQrArb1ahrwRL2w7dPh7o/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
+  [Sistemas Operativos](https://docs.google.com/document/d/11E99Me8L000dhJ4NiVZWE_H5Ykiwzspv/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
+  [Formacion Empresarial](https://docs.google.com/document/d/1G3woINWYzDqqcI8hoEMY2kJwfiDHjGFG/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
+  [Analisis y Diseño de Aplicaciones](https://docs.google.com/document/d/1-rRJfJ6yZolVou6n9b0Ytq5x2lY6CoAX/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
+
+  
+
 
 ## Índice
 
