@@ -3,6 +3,21 @@
 
 SIGEN es un sistema web diseñado para optimizar la gestión de planes de entrenamiento y fisioterapia en centros deportivos y de rehabilitación. El sistema permite a los entrenadores crear y asignar planes de entrenamiento personalizados, realizar un seguimiento del progreso de los deportistas y pacientes, y generar informes detallados sobre su evolución.
 
+## Índice
+
+1. [Características Principales](#características-principales)
+2. [Programación](#programación)
+   - [Requisitos del Sistema](#requisitos-del-sistema)
+   - [Instalación](#instalación)
+     1. [Clonar el repositorio](#clonar-el-repositorio)
+     2. [Instalación de Composer](#instalación-de-composer)
+     3. [Configurar el VirtualHost en Apache](#configurar-el-virtualhost-en-apache)
+     4. [Reiniciar Apache](#reiniciar-apache)
+     5. [Uso de Composer](#uso-de-composer)
+3. [Detalles](#detalles)
+4. [Implicaciones](#implicaciones)
+
+
 ## Características Principales
 ### Gestión de Planes de Entrenamiento
 - Creación, modificación y eliminación de planes de entrenamiento personalizados para deportistas y pacientes.
