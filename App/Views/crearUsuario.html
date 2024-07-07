@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Public/css/stylesExtra.css">
+    <link rel="stylesheet" href="/Public/css/stylesExtra.css">
     <title>Registrar Cliente</title>
 </head>
 <body>
     <header class="header">
         <nav class="navbar">
             <ul>
-                <li><a href="/">Inicio</a></li>
-                <li><a href="agenda.html">Horarios</a></li>
-                <li><a href="planes.html">Planes</a></li>
-                <li><a href="/">Nosotros</a></li>
+                <li><a href="/Public/inicio.html">Inicio</a></li>
+                <li><a href="/App/Views/agenda.html">Horarios</a></li>
+                <li><a href="/App/Views/planes.html">Planes</a></li>
+                <li><a href="/Public/inicio.html">Nosotros</a></li>
                 <li><a href="loginusuario.html" class="login-btn">Ingresar</a></li>
                 <li><a href="#" class="sign-in-btn" style="color: #6f41bb;">Registrarse</a></li>
             </ul>
@@ -21,50 +21,51 @@
     </header>
 
     <form action= "/registrarcliente" method= "POST">
-        <h2>Documento</h2>
-        <input type="number" name="nroDocumento" required>
-        <br></br>
-        <h2>Tipo de Documento</h2>
-         <input type="text"  name="tipoDocumento" maxlength= "10" required>
-        <br></br>
-        <h2>Contraseña</h2>
-         <input type="password"  name="passwd" minlength= "08" required>
-        <br></br>
-        <h2>Altura</h2>
-        <input type="number" min="0" name="altura"  required>
-        <br></br>
-        <h2>Peso</h2>
-         <input type="number"  name="peso" required>
-        <br></br>
-        <h2>Calle</h2>
-         <input type="text"  name="calle" required>
-        <br></br>
-        <h2>Numero de Puerta</h2>
-         <input type="number"  name="numero" required>
-        <br></br>
-        <h2>Esquina</h2>
-         <input type="text"  name="esquina" required>
-        <br></br>
-        <h2>Correo Electronico</h2>
-          <input type="email"  name="email" required>
-        <br></br>
-        <h2>N° de Telefono</h2>
-         <input type="number"  name="telefono" required>
-        <br></br>
-        <h2>Patologias</h2>
-        <input type="text"  name="patologias" required>
-        <br></br>
-        <h2>Fecha de Nacimiento</h2>
-        <input type="date" name="fechaNacimiento"  required>
-        <br></br>
         <h2>Nombre</h2>
         <input type="text" name="nombre" placeholder="Nombre" required>
         <br></br>
         <h2>Apellido</h2>
         <input type="text" name="apellido" placeholder="Apellido" required>
         <br></br>
+        <h2>N° de Telefono</h2>
+        <input type="number"  name="telefono" required>
+        <br></br>
+        <h2>Correo Electronico</h2>
+        <input type="email"  name="email" required>
+        <br></br>
+        <h2>Contraseña</h2>
+        <input type="password"  name="passwd" minlength= "08" required>
+        <br></br>
+        <h2>Documento</h2>
+        <input type="number" name="nroDocumento" required>
+        <br></br>
+        <h2>Tipo de Documento</h2>
+        <input type="text"  name="tipoDocumento" maxlength= "10" required>
+        <br></br>
+        <h2>Fecha de Nacimiento</h2>
+        <input type="date"  required>
+        <br></br>
+        <h2>Patologias</h2>
+        <input type="text"  name="patologias" required>
+        <br></br>
+        <h2>Altura</h2>
+        <input type="text" id="altura" name="altura" required pattern="\d(\.\d{1,2})?" title="Formato: 1.85">
+        <br></br>
+        <h2>Peso</h2>
+        <input type="number"  name="peso" required>
+        <br></br>
+        <h2>Calle</h2>
+        <input type="text"  name="calle" required>
+        <br></br>
+        <h2>Numero de Puerta</h2>
+        <input type="number"  name="numero" required>
+        <br></br>
+        <h2>Esquina</h2>
+        <input type="text"  name="esquina" required>
+        <br></br>
         <input type="submit" value="ENVIAR" class="button">
         <br></br>
 </form>
+<script src="/Public/js/script.js"></script>
 </body>
 </html>
