@@ -1,0 +1,337 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    background-color: #030303;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+
+.header {
+    background-color: #030303;
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar {
+    text-align: center;
+}
+
+.logoprueba{
+    max-width: 6rem;
+    padding: 0;
+    margin: 0;
+}
+.abrirmenu, .cerrarmenu{
+    display: none;
+    cursor: pointer;
+    float: right;
+}
+
+.navbar ul {
+    display: inline-flex;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 0.5rem;
+} 
+
+
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 5px 10px;
+    position: relative;
+    left: 40rem;
+    transition: color 0.3s, background-color 0.3s;
+}
+.navbar li a:hover{
+    color: #4B0082;
+}
+
+
+
+.login-btn { 
+        float: right;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.2rem;
+        position: relative;
+        left: 45rem;
+        transition: color 0.3s, background-color 0.3s;
+}
+.sign-in-btn { 
+    float: right;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    position: relative;
+    left: 58rem; 
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.login-btn:hover, .sign-in-btn:hover {
+    color: #6f41bb;
+}
+.menu{
+    display: none;
+    cursor: pointer;
+    float: right;
+}
+#menuimg{
+    top: -10px;
+    right: 20px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.slide {
+    position: relative;
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.64);
+    margin-top: 2px;
+}
+.slide-inner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.slide-open:checked + .slide-item {
+    position: static;
+    opacity: 100;
+}
+.slide-item {
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: opacity 0.6s ease-out;
+    transition: opacity 0.6s ease-out;
+}
+.slide-item img {
+    display: block;
+    
+    
+}
+.slide-control {
+    background: rgba(0, 0, 0, 0.28);
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    display: none;
+    font-size: 40px;
+    height: 40px;
+    line-height: 35px;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    cursor: pointer;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    text-align: center;
+    width: 40px;
+    z-index: 10;
+}
+.slide-control.prev {
+    left: 2%;
+}
+.slide-control.next {
+    right: 2%;
+}
+.slide-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: #aaaaaa;
+}
+#slide-1:checked ~ .control-1,
+#slide-2:checked ~ .control-2,
+#slide-3:checked ~ .control-3 {
+    display: block;
+}
+.slide-indicador {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 2%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+}
+.slide-indicador li {
+    display: inline-block;
+    margin: 0 5px;
+}
+.slide-circulo {
+    color: #828282;
+    cursor: pointer;
+    display: block;
+    font-size: 35px;
+}
+.slide-circulo:hover {
+    color: #aaaaaa;
+}
+#slide-1:checked ~ .control-1 ~ .slide-indicador 
+li:nth-child(1) .slide-circulo,
+#slide-2:checked ~ .control-2 ~ .slide-indicador 
+li:nth-child(2) .slide-circulo,
+#slide-3:checked ~ .control-3 ~ .slide-indicador 
+li:nth-child(3) .slide-circulo {
+    color: #428bca;
+}
+#planes { 
+    padding: 5rem;
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+    margin-top: 10rem;
+    padding-bottom: 0;
+    
+}
+
+
+.plan { 
+    border: 1px solid white;
+    padding: 10rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+.plan  a {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.plan a:hover {
+    color: black;
+}
+.plan a::selection {
+    color: black;
+}
+.plan:hover { 
+    background-color: #6f41bb;
+}
+.plan p {
+    font-size: 20px;
+    text-align: center;
+}
+.empresa {
+    margin-top: 1.5rem;
+}
+.empresa h1 {
+    text-align: center;
+    color: #6f41bb;
+    font-size: 25px;
+}
+.empresa h2 {
+    font-size: 20px;
+    text-align: center;
+    font-weight: 400;
+}
+.contacto {
+    margin-top: 50px;
+}
+.contacto h1 {
+    text-align: center;
+    font-size: 25px;
+    color: #6f41bb;
+}
+
+.contacto h2 {
+    text-align: center;
+}
+.contacto span { 
+    font-weight: 400;
+}
+.footer {
+    padding: 20rem;
+    margin: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.footer h1 {
+    text-align: center;
+    color: #6f41bb;
+    font-weight: 600;
+}
+
+.footer h2 {
+    font-size: 20px;
+    font-weight: 400;
+    position: relative;
+    top: 30px;
+    right: 10rem;
+    color: #6f41bb;
+}
+.footer h4 {
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    top: 150px;
+    font-weight: 400;
+}
+.footer .ig-logo {
+    position: relative;
+    top: 38px;
+    right: 9rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.footer .ig-logo:hover {
+    color: #6f41bb;
+}
+.footer .twitter-logo {
+    position: relative;
+    top: 60px;
+    right: 10.2rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .twitter-logo:hover {
+    color: #6f41bb;
+}
+.footer .wpp-logo {
+    position: relative;
+    top: 15px;
+    right: 11.5rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .wpp-logo:hover {
+    color: #6f41bb;
+}
+.footer .fb-logo {
+    position: relative;
+    top: 82px;
+    right: 12.7rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .fb-logo:hover {
+    color: #6f41bb;
+}
+#welcome-message a {
+    color: white;
+}
+#welcome-message {
+    margin-left: auto;
+    float: right;
+}
