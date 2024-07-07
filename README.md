@@ -50,11 +50,12 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
    ProyectoEgreso.git
 ```
 2. Instalación de Composer
-2.1 Descarga Composer desde el sitio oficial de Composer:
+  
+  2.1 Descarga Composer desde el sitio oficial de Composer:
 ```sh
    https://getcomposer.org
 ```
-2.2 Sigue las instrucciones de instalación proporcionadas en el sitio.
+ 2.2 Sigue las instrucciones de instalación proporcionadas en el sitio.
 
 3. Configurar el VirtualHost en Apache
  3.1 Abre el archivo de configuración de Apache para VirtualHosts. Este archivo suele encontrarse en:
