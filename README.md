@@ -34,7 +34,7 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
 ### Personalización y Flexibilidad
 - Posibilidad de parametrizar ejercicios, clubes, períodos, calificaciones y otros datos relevantes.
 
-## Programacion
+## Programación
 ### Requisitos del Sistema
 - Servidor web (Apache, Nginx, etc.)
 - PHP 7.x o superior
