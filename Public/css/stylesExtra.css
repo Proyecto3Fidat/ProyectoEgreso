@@ -76,8 +76,8 @@ body {
 .cart {
     color: white;
     position: relative;
-    top: 22dvh;
-    right: 75.5%;
+    top: 32dvh;
+    right: 73%;
 }
 .cart:hover {
     cursor: pointer;
@@ -86,8 +86,8 @@ body {
 .cart-2 {
     color: white;
     position: relative;
-    top: 22dvh;
-    right: 51%;
+    top: 32dvh;
+    right: 51.5%;
 }
 .cart-2:hover {
     cursor: pointer;
@@ -96,8 +96,8 @@ body {
 .cart-3 {
     color: white;
     position: relative;
-    top: 23dvh;
-    right: 28%;
+    top: 31dvh;
+    right: 30%;
 }
 .cart-3:hover {
     cursor: pointer;
