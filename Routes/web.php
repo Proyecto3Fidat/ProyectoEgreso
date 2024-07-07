@@ -19,10 +19,7 @@ SimpleRouter::get('/cliente', function(){
 SimpleRouter::get('/login', function(){
     header('Location: App/Views/loginusuario.html');
 });
-SimpleRouter::error(function() {
-    $errorController = new Error404();
-    $errorController->notFound();
-});
+
 SimpleRouter::post('/registrarcliente', function() {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);

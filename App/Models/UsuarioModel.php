@@ -6,10 +6,10 @@ class UsuarioModel{
     private $rol;
     private $passwd;
 
-    public function __construct($nroDocumento, $rol, $passwd)
+    public function __construct($nroDocumento, $passwd)
     {
         $this->nroDocumento = $nroDocumento;
-        $this->rol = $rol;
+        $this->rol = 1;
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $passwdHASH;
         }
