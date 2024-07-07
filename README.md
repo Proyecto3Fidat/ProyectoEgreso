@@ -13,7 +13,7 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
     - [Usuarios y Roles](#usuarios-y-roles)
     - [Alertas y Notificaciones](#alertas-y-notificaciones)
     - [Personalización y Flexibilidad](#personalización-y-flexibilidad)
-- [Programacion](#programacion)
+- [Programacion](#programación)
     - [Requisitos del Sistema](#requisitos-del-sistema)
     - [Instalación](#instalación)
     - [Detalles](#detalles)
