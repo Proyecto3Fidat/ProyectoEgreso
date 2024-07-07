@@ -1,0 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding: 0 0;
+}
+.navbar {
+    text-align: center;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.navbar ul {
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    gap: 1.5rem;
+    text-align: center;
+    position: absolute;
+    left: 40%;
+    top: 3%;
+    padding: 0;
+    margin: 0;
+}
+.navbar li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s, background-color 0.3s;
+    text-align: center;
+}
+
+#welcome-message {
+    display: flex;
+    gap: 30px;
+}
+.login-btn {
+    position: relative;
+    left: 200%;
+}
+.sign-in-btn {
+    position: relative;
+    left: 150%;
+}
+
+.navbar li a:hover {
+    color: #4B0082;
+}
+
+.planes { 
+    padding: 7rem;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    background-color: black;
+    padding-bottom: 15rem;
+}
+
+.cart {
+    color: white;
+    position: relative;
+    top: 22dvh;
+    right: 75.5%;
+}
+.cart:hover {
+    cursor: pointer;
+    color: #6f41bb;
+}
+.cart-2 {
+    color: white;
+    position: relative;
+    top: 22dvh;
+    right: 51%;
+}
+.cart-2:hover {
+    cursor: pointer;
+    color: #6f41bb;
+}
+.cart-3 {
+    color: white;
+    position: relative;
+    top: 23dvh;
+    right: 28%;
+}
+.cart-3:hover {
+    cursor: pointer;
+    color: #6f41bb;
+}
+
+
+.plan { 
+    color: black;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 2.2rem;
+    background-color: white;
+}
+
+
+
+.plan h1 {
+    font-size: 1.2rem;
+    color: #4B0082;
+    text-align: center;
+}
+.plan h2 {
+    font-size: 1.1rem;
+    text-align: center;
+}
+.agenda {
+    margin-top: 10rem;
+    padding: 3rem;
+    font-size: 20px;
+    text-align: center;
+}
+.agenda h1 {
+    margin-top: 0;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.agenda h1:hover {
+    color: #6f41bb;
+}
+
+.horarios{ 
+position: absolute;
+left: 15%;
+}
+.horarios a {
+    margin-top: 0;
+    color: white;
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.horarios a:hover {
+    color: #6f41bb;
+}
+.horarios td {
+    cursor: default;
+    color: #fff;
+    border: 1px solid white;
+    border-right: black;
+    border-top: black;
+}
+.horarios td:hover {
+    color: #6f41bb;
+}
+.horarios th {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    background-color: #6f41bb;
+    color: #030303;
+}
+
+.footer {
+    margin-top: 0;
+    padding: 10rem;
+    margin: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-right: 0;
+}
+.footer h1 {
+    text-align: center;
+    color: #6f41bb;
+    font-weight: 600;
+}
+
+.footer h2 {
+    font-size: 20px;
+    font-weight: 400;
+    position: relative;
+    top: 30px;
+    right: 7rem;
+    color: #6f41bb;
+}
+.footer h4 {
+    text-align: center;
+    margin-bottom: 0;
+    position: relative;
+    top: 9.5rem;
+    font-weight: 400;
+    color: white;
+}
+.footer .ig-logo {
+    position: relative;
+    top: 38px;
+    right: 6rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.footer .ig-logo:hover {
+    color: #6f41bb;
+}
+.footer .twitter-logo {
+    position: relative;
+    top: 60px;
+    right: 7.2rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .twitter-logo:hover {
+    color: #6f41bb;
+}
+.footer .wpp-logo {
+    position: relative;
+    top: 15px;
+    right: 8.5rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .wpp-logo:hover {
+    color: #6f41bb;
+}
+.footer .fb-logo {
+    position: relative;
+    top: 82px;
+    right: 9.8rem;
+    color: white;
+    transition: color 0.3s, background-color 0.3s;
+}
+.footer .fb-logo:hover {
+    color: #6f41bb;
+}
+
+form {
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 40px auto;
+    margin-top: 10rem;
+
+}
+form h2 {
+    color: #6f41bb;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+form input, select{
+width: 100%;
+padding: 1rem;
+border-radius: 10px;
+border: none;
+font-size: 1rem;
+}
+
+
+form .button {
+    cursor: pointer;
+    margin-top: 1rem;
+    
+}
+.button:hover {
+    background-color: #6f41bb;
+}
+
+
+
+@media (max-width:768px) {
+    * {
+        width: 100%;
+    }
+
+}
