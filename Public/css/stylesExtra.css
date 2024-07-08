@@ -56,6 +56,11 @@ body {
     color: #4B0082;
 }
 
+#welcome-message { 
+    display: flex;
+    gap: 30px;
+}
+
 .planes { 
     padding: 7rem;
     margin-top: 5rem;
@@ -64,22 +69,25 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    background-color: antiquewhite;
+    background-color: black;
     padding-bottom: 15rem;
 }
 
 .cart {
+    color: white;
     position: relative;
-    top: 25dvh;
+    top: 27dvh;
     right: 75.5%;
 }
 .cart:hover {
     cursor: pointer;
     color: #6f41bb;
 }
+
 .cart-2 {
+    color: white;
     position: relative;
-    top: 25dvh;
+    top: 27dvh;
     right: 51%;
 }
 .cart-2:hover {
@@ -87,8 +95,9 @@ body {
     color: #6f41bb;
 }
 .cart-3 {
+    color: white;
     position: relative;
-    top: 26dvh;
+    top: 28dvh;
     right: 28%;
 }
 .cart-3:hover {
@@ -96,9 +105,6 @@ body {
     color: #6f41bb;
 }
 
-.bi bi-cart {
-    color: black;
-}
 
 .plan { 
     color: black;
@@ -137,7 +143,7 @@ body {
     text-align: center;
     padding-bottom: 10px;
     text-transform: uppercase;
-    cursor: pointer;
+    cursor: default;
 }
 .agenda h1:hover {
     color: #6f41bb;
@@ -145,7 +151,7 @@ body {
 
 .horarios{ 
 position: absolute;
-left: 15%;
+left: 10%;
 }
 .horarios a {
     margin-top: 0;
@@ -162,12 +168,15 @@ left: 15%;
 .horarios td {
     cursor: default;
     color: #fff;
-    border: 1px solid white;
-    border-right: black;
-    border-top: black;
+    border-bottom: 1px solid  white;
+    border-left:1px solid  white;
 }
 .horarios td:hover {
     color: #6f41bb;
+}
+.horarios #td-final {
+    border: 1px solid white;
+    border-top: none;
 }
 .horarios th {
     font-size: 1.2rem;
@@ -261,7 +270,7 @@ form h2 {
     font-weight: 400;
     font-size: 1.5rem;
 }
-form input {
+form input, select {
 width: 100%;
 padding: 1rem;
 border-radius: 10px;
