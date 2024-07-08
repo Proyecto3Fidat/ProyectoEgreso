@@ -36,7 +36,7 @@ class UsuarioRepository {
         echo $usuarioModel->getPasswd();   
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "iis",
+            "sis",
             $nroDocumento,
             $rol,
             $passwd

@@ -16,5 +16,20 @@ function validateForm() {
         alert("La altura debe tener el formato correcto: 1.85");
         return false;
     }
+
+
+    var tipoDocumento = document.getElementsByName("tipoDocumento")[0].value;
+    var nroDocumento = document.getElementsByName("nroDocumento")[0].value;
+
+    var ciPattern = /^\d{7,8}$/; // Cédula de identidad: 7 u 8 dígitos
+    var pasaportePattern = /^[A-Z0-9]{5,9}$/; // Pasaporte: 5 a 9 caracteres alfanuméricos
+
+    if (tipoDocumento === "CI" && !ciPattern.test(nroDocumento)) {
+        alert("El número de Cédula de identidad debe tener 7 u 8 dígitos.");
+        return false;
+    } else if (tipoDocumento === "Pasaporte" && !pasaportePattern.test(nroDocumento)) {
+        alert("El número de Pasaporte debe tener entre 5 y 9 caracteres alfanuméricos.");
+        return false;
+    }
     return true;
 }

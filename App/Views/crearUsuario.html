@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Public/css/stylesExtra.css">
+    <script src="/Public/js/script.js"></script>
     <title>Registrar Cliente</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
         </nav>
     </header>
 
-    <form action= "/registrarcliente" method= "POST">
+    <form action= "/registrarcliente" method= "POST" onsubmit="return validateForm()">
         <h2>Nombre</h2>
         <input type="text" name="nombre" placeholder="Nombre" required>
         <br></br>
@@ -28,7 +29,7 @@
         <input type="text" name="apellido" placeholder="Apellido" required>
         <br></br>
         <h2>N° de Telefono</h2>
-        <input type="text"  name="telefono"  placeholder="Número de Teléfono" required>
+        <input type="text"  name="telefono"  placeholder="Número de Teléfono (Formato: +598xxxxxxxx)" required pattern="\+598\d{8}" title="Debe comenzar con +598 seguido de 8 dígitos">
         <br></br>
         <h2>Correo Electronico</h2>
         <input type="email"  name="email" placeholder="Correo Electronico" required>
@@ -40,19 +41,19 @@
         <input type="text" name="nroDocumento" required placeholder="Número de Documento">
         <br></br>
         <h2>Tipo de Documento</h2>
-        <select name="tipodocumento">
+        <select name="tipoDocumento">
             <option value="CI">Cédula de identidad</option>
             <option value="Pasaporte">Pasaporte</option>
         </select>
         <br></br>
         <h2>Fecha de Nacimiento</h2>
-        <input type="date" name="fechanacimiento" required >
+        <input type="date" name="fechaNacimiento" required >
         <br></br>
         <h2>Patologias</h2>
         <input type="text"  name="patologias" required placeholder="Patologías">
         <br></br>
         <h2>Altura</h2>
-        <input type="text" id="altura" name="altura" required pattern="\d(\.\d{1,2})?" title="Formato: 1.85" placeholder="Altura(Formato: 1.85)">
+        <input type="text" id="altura" name="altura" required> 
         <br></br>
         <h2>Peso</h2>
         <input type="text"  name="peso" required placeholder="Peso">
@@ -69,6 +70,5 @@
         <input type="submit" value="ENVIAR" class="button">
         <br></br>
 </form>
-<script src="/Public/js/script.js"></script>
 </body>
 </html>

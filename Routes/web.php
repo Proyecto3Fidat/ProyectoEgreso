@@ -14,6 +14,9 @@ SimpleRouter::get('/', [HomeController::class, 'index']);
 SimpleRouter::get('/login', function(){
     header('Location: App/Views/loginusuario.html');
 });
+SimpleRouter::get('/registrarcliente', function(){
+    header('Location: App/Views/crearUsuario.html');
+});
 SimpleRouter::error(function() {
     $errorController = new Error404();
     $errorController->notFound();
