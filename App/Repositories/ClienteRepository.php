@@ -33,7 +33,7 @@ class ClienteRepository {
         
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "isiisissssss",
+            "ssiisissssss",
             $nroDocumento,
             $tipoDocumento,
             $altura,
