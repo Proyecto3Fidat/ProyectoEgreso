@@ -2,6 +2,9 @@
 # Sistema Informático de Gestión de Entrenamiento (SIGEN)
 
 SIGEN es un sistema web diseñado para optimizar la gestión de planes de entrenamiento y fisioterapia en centros deportivos y de rehabilitación. El sistema permite a los entrenadores crear y asignar planes de entrenamiento personalizados, realizar un seguimiento del progreso de los deportistas y pacientes, y generar informes detallados sobre su evolución.
+<p align="center">
+  <img src="Imagenes/LogoFidat1080p.png" alt="LOGO DE FIDAT">
+</p>
 
 ## Authors
 
@@ -9,6 +12,14 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
 - [@DiegoGar15](https://www.github.com/DiegoGar15)
 - [@IsmaelBergaradev](https://www.github.com/IsmaelBergaradev)
 - [@Thisguitoxddd](https://www.github.com/Thisguitoxddd)
+## Sitios
+## Documentacion 
+  [Fidat NET](http://fidat.net)
+  [Fidat UY](http://fidat.uy)
+  [S.I.G.E.N NET](http://sigen.fidat.net)
+  [S.I.G.E.N UY](http://sigen.fidat.uy)
+
+
 
 ## Documentacion 
   [Programacion](https://docs.google.com/document/d/19vSB3dFqhOWqyqpYA8gIByVBd8gIq5lW/edit?usp=sharing&ouid=105375972641917367063&rtpof=true&sd=true)
