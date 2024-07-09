@@ -1,19 +1,19 @@
+DROP if exists DATABASE FidatBD;
 USE FidatBD;
 
-
 CREATE TABLE Cliente(
-	nroDocumento int,
-	tipoDocumento VARCHAR(12),
+	nroDocumento varchar (30) NOT NULL,
+	tipoDocumento VARCHAR (16) NOT NULL,
 	altura double NOT NULL,
 	peso int NOT NULL,
-	calle VARCHAR(25) NOT NULL,
+	calle VARCHAR(100) NOT NULL,
 	numero int NOT NULL,
-	esquina VARCHAR(50) NOT NULL,
-	email VARCHAR(18) NOT NULL,
+	esquina VARCHAR(100) NOT NULL,
+	email VARCHAR(40) NOT NULL,
 	patologias VARCHAR(25) NOT NULL,
 	fechaNacimiento DATE NOT NULL,
-	nombre VARCHAR(12) NOT NULL,
-	apellido VARCHAR(12) NOT NULL,
+	nombre VARCHAR(30) NOT NULL,
+	apellido VARCHAR(30) NOT NULL,
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
@@ -26,14 +26,14 @@ CREATE TABLE Usuario(
 
 CREATE TABLE Cliente_Telefono(
     nroDocumento int,
-	tipoDocumento VARCHAR(12) ,
+	tipoDocumento VARCHAR (16),
 	telefono int,
     PRIMARY KEY(nroDocumento,tipoDocumento, telefono)
 );
 
 CREATE TABLE Deportista(
     nroDocumento int,
-	tipoDocumento VARCHAR(12) ,
+	tipoDocumento VARCHAR (16) ,
 	deporte VARCHAR(15) NOT NULL,
 	posicion VARCHAR(15) NOT NULL,
 	estado VARCHAR (15) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE Estado(
 
 CREATE TABLE Paciente(
     nroDocumento int,
-	tipoDocumento VARCHAR(12),
+	tipoDocumento VARCHAR(16),
     fisioterapia VARCHAR(2) NOT NULL,
     estado VARCHAR (15) NOT NULL,
     PRIMARY KEY(nroDocumento,tipoDocumento)
@@ -113,7 +113,7 @@ CREATE TABLE Ejercicio(
 CREATE TABLE Elige (
     nombre VARCHAR(12),
     nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
     PRIMARY KEY (nombre)
 );
 
@@ -126,28 +126,28 @@ CREATE TABLE Realiza(
 
 CREATE TABLE Arma(
 	nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
 	fecha DATE,
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
 CREATE TABLE Selecciona(
 	nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
 	nombre VARCHAR(20),
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
 CREATE TABLE Conserva(
 	nroDocumento int,
-    tipoDocumento VARCHAR(12), 
+    tipoDocumento VARCHAR (16), 
     id_Estado int,
 	PRIMARY KEY(nroDocumento,tipoDocumento, id_Estado)
 );
 
 CREATE TABLE Posee(
 	nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
 	id_Estado int,
 	PRIMARY KEY(nroDocumento,tipoDocumento, id_Estado)
 );
@@ -155,13 +155,13 @@ CREATE TABLE Posee(
 CREATE TABLE Entrena(
     idDeporte int,
     nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
     PRIMARY KEY (idDeporte)
 );
 
 CREATE TABLE Practica(
     nroDocumento int,
-    tipoDocumento VARCHAR(12),
+    tipoDocumento VARCHAR (16),
     idRutina int,
     PRIMARY KEY (nroDocumento,tipoDocumento,idRutina)
 );
