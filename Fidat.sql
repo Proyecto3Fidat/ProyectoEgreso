@@ -4,7 +4,7 @@ USE FidatBD;
 CREATE TABLE Cliente(
 	nroDocumento int,
 	tipoDocumento VARCHAR(12),
-	altura int NOT NULL,
+	altura double NOT NULL,
 	peso int NOT NULL,
 	calle VARCHAR(25) NOT NULL,
 	numero int NOT NULL,
