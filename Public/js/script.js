@@ -33,3 +33,35 @@ function validateForm() {
     }
     return true;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.slide-item');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === index) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 5000);
+
+    showSlide(currentSlide);
+
+});
+
+document.getElementById('abrir').addEventListener('click', function() {
+    document.querySelector('.navbar').classList.add('show');
+});
+
+document.getElementById('cerrar').addEventListener('click', function() {
+    document.querySelector('.navbar').classList.remove('show');
+});
