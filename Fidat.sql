@@ -1,4 +1,4 @@
-DROP if exists DATABASE FidatBD;
+
 USE FidatBD;
 
 CREATE TABLE Cliente(
@@ -18,21 +18,21 @@ CREATE TABLE Cliente(
 );
 
 CREATE TABLE Usuario(
-    nroDocumento int NOT NULL,
+    nroDocumento varchar(30) NOT NULL,
     rol int,
     passwd VARCHAR(22) NOT NULL,
     PRIMARY KEY(nroDocumento,rol)
 );
 
 CREATE TABLE Cliente_Telefono(
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
 	tipoDocumento VARCHAR (16),
 	telefono int,
     PRIMARY KEY(nroDocumento,tipoDocumento, telefono)
 );
 
 CREATE TABLE Deportista(
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
 	tipoDocumento VARCHAR (16) ,
 	deporte VARCHAR(15) NOT NULL,
 	posicion VARCHAR(15) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE Estado(
 );
 
 CREATE TABLE Paciente(
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
 	tipoDocumento VARCHAR(16),
     fisioterapia VARCHAR(2) NOT NULL,
     estado VARCHAR (15) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE Ejercicio(
 
 CREATE TABLE Elige (
     nombre VARCHAR(12),
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
     PRIMARY KEY (nombre)
 );
@@ -125,28 +125,28 @@ CREATE TABLE Realiza(
 );
 
 CREATE TABLE Arma(
-	nroDocumento int,
+	nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
 	fecha DATE,
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
 CREATE TABLE Selecciona(
-	nroDocumento int,
+	nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
 	nombre VARCHAR(20),
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
 CREATE TABLE Conserva(
-	nroDocumento int,
+	nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16), 
     id_Estado int,
 	PRIMARY KEY(nroDocumento,tipoDocumento, id_Estado)
 );
 
 CREATE TABLE Posee(
-	nroDocumento int,
+	nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
 	id_Estado int,
 	PRIMARY KEY(nroDocumento,tipoDocumento, id_Estado)
@@ -154,13 +154,13 @@ CREATE TABLE Posee(
 
 CREATE TABLE Entrena(
     idDeporte int,
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
     PRIMARY KEY (idDeporte)
 );
 
 CREATE TABLE Practica(
-    nroDocumento int,
+    nroDocumento varchar(30) NOT NULL,
     tipoDocumento VARCHAR (16),
     idRutina int,
     PRIMARY KEY (nroDocumento,tipoDocumento,idRutina)
