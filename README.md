@@ -3,7 +3,7 @@
 
 SIGEN es un sistema web diseñado para optimizar la gestión de planes de entrenamiento y fisioterapia en centros deportivos y de rehabilitación. El sistema permite a los entrenadores crear y asignar planes de entrenamiento personalizados, realizar un seguimiento del progreso de los deportistas y pacientes, y generar informes detallados sobre su evolución.
 <p align="center">
-  <img src="Imagenes/LogoFidat280px.png" alt="LOGO DE FIDAT">
+  <img src="Imagenes/LogoFidat1080p.png" alt="LOGO DE FIDAT">
 </p>
 
 ## Authors
