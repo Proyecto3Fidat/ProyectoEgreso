@@ -1,13 +1,13 @@
-// document.addEventListener('DOMContentLoaded', function() {
-//     const welcomeMessage = document.getElementById('welcome-message');
-//     const documento = localStorage.getItem('documento');
+ document.addEventListener('DOMContentLoaded', function() {
+     const welcomeMessage = document.getElementById('welcome-message');
+     const documento = localStorage.getItem('documento');
 
-//     if (documento) {
-//         welcomeMessage.innerHTML = `<a>Bienvenido, ${documento}</a>  <a href="/logout">Cerrar sesión</a>`;
-//     } else {
-//         welcomeMessage.innerHTML = '<a href="/login">Ingresar</a> <a href="../App/Views/crearUsuario.html">Registrarse</a>';
-//     }
-// });
+     if (documento) {
+         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${documento}</a></li>  <li><a href="/logout" class="sign-in-btn">Cerrar sesión</a></li>`;
+     } else {
+         welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="../App/Views/crearUsuario.html" class="sign-in-btn">Registrarse</a></li>';
+     }
+ });
 
 function validateForm() {
     var altura = document.getElementById("altura").value;
