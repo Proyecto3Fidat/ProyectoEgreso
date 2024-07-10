@@ -8,32 +8,38 @@
 }
 
 body {
-    background-color: #030303;
+    background-color: #ff0000;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
 
-.navbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+header{
     padding: 1rem 2rem;
-    align-items: end;
+    
 }
 
+.navbar {
+    display: flex;
+}
 
 .navbar li a {
     color: white;
     font-size: 1.2rem;
     transition: color 0.3s, background-color 0.3s;
-
 }
 
-.menu1{
+nav{
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+nav a:hover {
+    color: #6f41bb;
+}
+
+.menu1 {
     display: flex;
     margin-right: auto;
- 
 }
 
 .menu2 {
@@ -239,31 +245,4 @@ body {
 
 .footer .fb-logo:hover {
     color: #6f41bb;
-}
-@media screen and (max-width:768px){ 
-    
-    
-    .navbar.show {
-        opacity: 1;
-        visibility: visible;
-        flex-direction: column;
-        align-items: end;
-        background-color: red;
-    }
-    .menu1, .menu2 {
-        flex-direction: column;
-        align-items: end;
-    }
-    .abrirmenu {
-        display: block;
-    }
-       
-    .cerrarmenu{
-        display: block;
-        position: absolute;
-        top: 20px;
-        right: 20px;   
-    }
-
-
 }
