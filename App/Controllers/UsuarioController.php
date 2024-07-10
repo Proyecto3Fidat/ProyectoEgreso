@@ -17,21 +17,7 @@ class UsuarioController {
     public function comprobarUsuario() {
         $usuarioRepository = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepository);
-        if($usuarioService->comprobarUsuario($_POST['nroDocumento']) == true) {
-            echo "<script>
-                alert('El usuario ya existe');
-                window.location.href = '../../App/Views/crearUsuario.html'; 
-                </script>";
-            exit();
-        }else {
-            $this->crearUsuario();
-            $clienteRepository = new ClienteRepository();
-            $clienteService = new ClienteService($clienteRepository);
-            $clienteController = new ClienteController($clienteService);
-            $clienteController->crearCliente();
-            header("location: ../../Public/inicio.html");
-            exit();
-        }
+       return $usuarioService->comprobarUsuario($_POST['nroDocumento']);
     }
     public function crearUsuario() {
         $usuario = new UsuarioModel(

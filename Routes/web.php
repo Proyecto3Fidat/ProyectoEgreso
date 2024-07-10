@@ -25,7 +25,21 @@ SimpleRouter::post('/registrarcliente', function() {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService);
-    $usuarioController->comprobarUsuario();
+    if ($usuarioController->comprobarUsuario() == false){
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService);
+        $clienteController->crearCliente();
+        $usuarioController->crearUsuario();
+        header("location: ../../Public/inicio.html");
+        exit();	
+    }else{
+        echo "<script>
+                alert('El usuario ya existe');
+                window.location.href = '../../App/Views/crearUsuario.html'; 
+                </script>";
+            exit();
+        } 
     });
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();

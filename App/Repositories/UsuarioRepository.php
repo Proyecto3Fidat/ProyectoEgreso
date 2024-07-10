@@ -17,14 +17,20 @@ class UsuarioRepository {
         $this->database->connect();
         $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("i", $nroDocumento);
+        $stmt->bind_param("s", $nroDocumento); // Cambié "i" a "s" si nroDocumento es un string
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
         $stmt->close();
         $this->database->disconnect();
-        return $num_of_rows > 0;
+    
+        if ($num_of_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
