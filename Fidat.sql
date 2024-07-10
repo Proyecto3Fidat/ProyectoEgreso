@@ -4,16 +4,16 @@ USE FidatBD;
 CREATE TABLE Cliente(
 	nroDocumento varchar (30) NOT NULL,
 	tipoDocumento VARCHAR (16) NOT NULL,
-	altura double NOT NULL,
-	peso int NOT NULL,
-	calle VARCHAR(100) NOT NULL,
-	numero int NOT NULL,
-	esquina VARCHAR(100) NOT NULL,
-	email VARCHAR(40) NOT NULL,
-	patologias VARCHAR(25) NOT NULL,
-	fechaNacimiento DATE NOT NULL,
-	nombre VARCHAR(30) NOT NULL,
-	apellido VARCHAR(30) NOT NULL,
+	altura double,
+	peso int,
+	calle VARCHAR(100),
+	numero int,
+	esquina VARCHAR(100),
+	email VARCHAR(40),
+	patologias VARCHAR(25),
+	fechaNacimiento DATE,
+	nombre VARCHAR(30),
+	apellido VARCHAR(30),
 	PRIMARY KEY(nroDocumento,tipoDocumento)
 );
 
