@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Public/css/stylesExtra.css">
+    <script src="/Public/js/script.js"></script>
+    <title>Registrar Cliente</title>
+</head>
+<body>
+
+    <form action= "/registrarcliente" method= "POST" onsubmit="return validateForm()">
+        <h2>Nombre</h2>
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <br></br>
+        <h2>Apellido</h2>
+        <input type="text" name="apellido" placeholder="Apellido" required>
+        <br></br>
+        <h2>N° de Telefono</h2>
+        <input type="text"  name="telefono"  placeholder="Número de Teléfono (Formato: +598xxxxxxxx)" required pattern="\+598\d{8}" title="Debe comenzar con +598 seguido de 8 dígitos">
+        <br></br>
+        <h2>Correo Electronico</h2>
+        <input type="email"  name="email" placeholder="Correo Electronico" required>
+        <br></br>
+        <h2>Contraseña</h2>
+        <input type="password"  name="passwd" minlength= "08" required placeholder="Contraseña">
+        <br></br>
+        <h2>Documento</h2>
+        <input type="text" name="nroDocumento" required placeholder="Número de Documento">
+        <br></br>
+        <h2>Tipo de Documento</h2>
+        <select name="tipoDocumento">
+            <option value="CI">Cédula de identidad</option>
+            <option value="Pasaporte">Pasaporte</option>
+        </select>
+        <br></br>
+        <h2>Fecha de Nacimiento</h2>
+        <input type="date" name="fechaNacimiento" required >
+        <br></br>
+        <h2>Patologias</h2>
+        <input type="text"  name="patologias" required placeholder="Patologías">
+        <br></br>
+        <h2>Altura</h2>
+        <input type="text" id="altura" name="altura" required> 
+        <br></br>
+        <h2>Peso</h2>
+        <input type="text"  name="peso" required placeholder="Peso">
+        <br></br>
+        <h2>Calle</h2>
+        <input type="text"  name="calle" required placeholder="Calle">
+        <br></br>
+        <h2>Numero de Puerta</h2>
+        <input type="number"  name="numero" required placeholder="Número de puerta">
+        <br></br>
+        <h2>Esquina</h2>
+        <input type="text"  name="esquina" required placeholder="Esquina">
+        <br></br>
+        <input type="submit" value="ENVIAR" class="button">
+        <br></br>
+</form>
+</body>
+</html>

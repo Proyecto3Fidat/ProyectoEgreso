@@ -21,4 +21,7 @@ class UsuarioService {
     public function autenticar($documento,$passwd) {
         return $this->usuarioRepository->autenticar($documento,$passwd);
     }
+    public function crearAdministrador(UsuarioModel $usuarioModel) {
+        $this->usuarioRepository->guardarAdministrador($usuarioModel);
+    }
 }

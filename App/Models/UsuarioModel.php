@@ -6,10 +6,9 @@ class UsuarioModel{
     private $rol;
     private $passwd;
 
-    public function __construct($nroDocumento, $passwd)
-    {
+    public function __construct($nroDocumento, $passwd, $rol){
         $this->nroDocumento = $nroDocumento;
-        $this->rol = 1;
+        $this->rol = $rol;
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $passwdHASH;
         }
@@ -45,5 +44,3 @@ class UsuarioModel{
     }
 
 }
-
-?>

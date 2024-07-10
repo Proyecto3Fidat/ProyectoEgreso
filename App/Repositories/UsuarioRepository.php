@@ -45,6 +45,26 @@ class UsuarioRepository {
         $stmt->close();
         $this->database->disconnect();
     }
+    public function guardarAdministrador(UsuarioModel $usuarioModel){
+        $this->database->connect();
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
+                VALUES (?,?, ?)";
+        
+        $nroDocumento = $usuarioModel->getNroDocumento();
+        $rol = $usuarioModel->getRol();
+        $passwd = $usuarioModel->getPasswd();    
+        echo $usuarioModel->getPasswd();   
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "sis",
+            $nroDocumento,
+            $rol,
+            $passwd
+        );
+        $stmt->execute();
+        $stmt->close();
+        $this->database->disconnect();
+    }
     
     public function autenticar($nroDocumento, $passwd) {
         $this->database->connect();

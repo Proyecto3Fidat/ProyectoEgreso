@@ -34,9 +34,9 @@ class UsuarioController {
         }
     }
     public function crearUsuario() {
-        echo "Creando usuario...";
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
+            1,
             $_POST['passwd']
         );
         $this->usuarioService->crearUsuario($usuario);
@@ -63,6 +63,14 @@ class UsuarioController {
             localStorage.removeItem('documento');
             window.location.href = '../../Public/inicio.html'; // Redirigir a la página de inicio
             </script>";
+    }
+    public function crearAdministrador(){
+        $usuario = new UsuarioModel(
+            $_POST['nroDocumento'],
+            $_POST['rol'],
+            $_POST['passwd']
+        );
+        $this->usuarioService->crearAdministrador($usuario);
     }
 }
 ?>
