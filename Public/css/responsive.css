@@ -1,43 +1,14 @@
 @media screen and (max-width:768px){ 
     
     nav{
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 2rem;
-        bottom: 0;
-        box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .6);
-        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-        z-index: 1000;
-    }
-
-    .navbar{
-        background-color: #030303;
-    }
-
-    .menu1, .menu2 {
-        align-items: end;
-        flex-direction: column;
-        margin: auto;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-    
-    .menu1 {
         position: absolute;
         top: 0;
         right: 0;
     }
 
-    .menu2{
-        position: absolute;
-        top: 11rem;
-        right: 0;
+    .listmenu1, .listmenu2{
+        flex-direction: column;
     }
-
 
 
 

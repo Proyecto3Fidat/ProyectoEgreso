@@ -14,8 +14,7 @@ body {
 }
 
 header{
-    padding: 1rem 2rem;
-    
+    background-color: #100e0f;
 }
 
 .navbar {
@@ -29,7 +28,7 @@ header{
 }
 
 nav{
-    background-color: #ffffff;
+    background-color: #100e0f;
     padding: 20px;
 }
 
@@ -45,6 +44,10 @@ nav a:hover {
 .menu2 {
     display: flex;
     margin-left: auto;
+}
+
+.listmenu1, .listmenu2{
+    display: flex;
 }
 
 .abrirmenu, .cerrarmenu {
