@@ -30,6 +30,7 @@ SimpleRouter::post('/registrarcliente', function() {
         $clienteController = new ClienteController($clienteService);
         $clienteController->crearCliente();
         $usuarioController->crearUsuario();
+        $clienteController->emailBienvenida($_POST['email']);
         echo "<script>
                 alert('Usuario creado con exito');
                 window.location.href = '../../Public/inicio.html'; 
@@ -52,7 +53,7 @@ SimpleRouter::post('/registraradministrador', function() {
     if($usuarioController->comprobarUsuario() == false){
         $usuarioController->crearAdministrador();
         $clienteController->crearAdministrador();
-        
+
     } 
 });
 SimpleRouter::post('/login', function() {

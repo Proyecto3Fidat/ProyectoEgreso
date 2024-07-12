@@ -45,4 +45,8 @@ class ClienteController {
         $this->clienteService->crearAdministrador($cliente);
     }
 
+    public function emailBienvenida($email){
+        $this->clienteService->emailBienvenida($email);
+    }
+
 }
