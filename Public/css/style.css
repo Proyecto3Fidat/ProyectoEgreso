@@ -53,6 +53,12 @@ nav a:hover {
 .abrirmenu, .cerrarmenu {
     display: none;
 }
+
+
+
+
+
+
 .inicioa{
     margin-right: 1rem;
 }
@@ -91,7 +97,6 @@ nav a:hover {
     overflow: hidden;
     margin: 0 auto;
 }
-
 
 #planes { 
     padding: 5rem;
