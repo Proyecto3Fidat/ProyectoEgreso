@@ -27,4 +27,22 @@ class ClienteController {
             );
         $this->clienteService->crearCliente($cliente);
     }
+    public function crearAdministrador(){
+        $cliente = new ClienteModel(
+            $_POST['nroDocumento'],
+            $_POST['tipoDocumento'],
+            null,
+            null,
+            null,
+            null,
+            null,
+            $_POST['email'],
+            null,
+            null,
+            $_POST['nombre'],
+            $_POST['apellido'],
+        );
+        $this->clienteService->crearAdministrador($cliente);
+    }
+
 }

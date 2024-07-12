@@ -30,8 +30,10 @@ SimpleRouter::post('/registrarcliente', function() {
         $clienteController = new ClienteController($clienteService);
         $clienteController->crearCliente();
         $usuarioController->crearUsuario();
-        header("location: ../../Public/inicio.html");
-        exit();	
+        echo "<script>
+                alert('Usuario creado con exito');
+                window.location.href = '../../Public/inicio.html'; 
+                </script>";
     }else{
         echo "<script>
                 alert('El usuario ya existe');
@@ -40,6 +42,19 @@ SimpleRouter::post('/registrarcliente', function() {
             exit();
         } 
     });
+SimpleRouter::post('/registraradministrador', function() {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService);
+    if($usuarioController->comprobarUsuario() == false){
+        $usuarioController->crearAdministrador();
+        $clienteController->crearAdministrador();
+        
+    } 
+});
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);

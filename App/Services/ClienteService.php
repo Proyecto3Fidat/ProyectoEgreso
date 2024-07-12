@@ -14,5 +14,8 @@ class ClienteService {
     public function crearCliente(ClienteModel $clienteModel) {
         $this->clienteRepository->guardar($clienteModel);
     }
+    public function crearAdministrador(ClienteModel $clienteModel) {
+        $this->clienteRepository->guardarAdministrador($clienteModel);
+    }
 
 }
