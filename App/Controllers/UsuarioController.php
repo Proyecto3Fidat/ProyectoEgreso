@@ -39,16 +39,7 @@ class UsuarioController {
                 </script>";
             $_SESSION['logged'] = true;
             $_SESSION['nroDocumento'] = $_POST['documento'];
-            echo "Sesion iniciada";
         }
-    }
-
-    public function logout() {
-        session_destroy();
-        echo "<script>
-            localStorage.removeItem('documento');
-            window.location.href = '../../Public/inicio.html'; // Redirigir a la página de inicio
-            </script>";
     }
     public function crearAdministrador(){
         $usuario = new UsuarioModel(
@@ -57,6 +48,14 @@ class UsuarioController {
             $_POST['passwd']
         );
         $this->usuarioService->crearAdministrador($usuario);
+    }
+
+    public function logout() {
+        session_destroy();
+        echo "<script>
+            localStorage.removeItem('documento');
+            window.location.href = '../../Public/inicio.html';
+            </script>";
     }
 }
 ?>

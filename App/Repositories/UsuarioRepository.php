@@ -17,7 +17,7 @@ class UsuarioRepository {
         $this->database->connect();
         $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("s", $nroDocumento); // Cambié "i" a "s" si nroDocumento es un string
+        $stmt->bind_param("s", $nroDocumento);  
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
@@ -76,7 +76,7 @@ class UsuarioRepository {
         $this->database->connect();
         $sql = "SELECT passwd , nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("i", $nroDocumento);
+        $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
             echo "error";
@@ -87,10 +87,12 @@ class UsuarioRepository {
         $this->database->disconnect();
         if (password_verify($passwd, $epasswd)){
             return $this->nombreCliente($edocumento);
+        }else{
+            echo "contraseña incorrecta";
+            echo $epasswd;
+            echo $passwd;
         }
-        return false;
     }
-
     public function nombreCliente($documento){
         $this->database->connect();
         $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";

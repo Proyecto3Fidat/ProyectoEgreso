@@ -17,11 +17,10 @@ SimpleRouter::get('/login', function(){
 SimpleRouter::get('/registrarcliente', function(){
     header('Location: App/Views/crearUsuario.html');
 });
-SimpleRouter::error(function() {
-    $errorController = new Error404();
-    $errorController->notFound();
-});
+
 SimpleRouter::post('/registrarcliente', function() {
+    echo $_POST['nroDocumento'];
+    echo $_POST['passwd'];
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService);
