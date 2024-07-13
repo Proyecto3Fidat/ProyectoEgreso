@@ -17,15 +17,41 @@ class UsuarioRepository {
         $this->database->connect();
         $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("i", $nroDocumento);
+        $stmt->bind_param("s", $nroDocumento);  
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
         $stmt->close();
         $this->database->disconnect();
-        return $num_of_rows > 0;
+    
+        if ($num_of_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
+    
     public function guardar(UsuarioModel $usuarioModel){
+        $this->database->connect();
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
+                VALUES (?,?, ?)";
+        
+        $nroDocumento = $usuarioModel->getNroDocumento();
+        $rol = $usuarioModel->getRol();
+        $passwd = $usuarioModel->getPasswd();    
+        echo $usuarioModel->getPasswd();   
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "sis",
+            $nroDocumento,
+            $rol,
+            $passwd
+        );
+        $stmt->execute();
+        $stmt->close();
+        $this->database->disconnect();
+    }
+    public function guardarAdministrador(UsuarioModel $usuarioModel){
         $this->database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
                 VALUES (?,?, ?)";
@@ -50,7 +76,7 @@ class UsuarioRepository {
         $this->database->connect();
         $sql = "SELECT passwd , nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
-        $stmt->bind_param("i", $nroDocumento);
+        $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
             echo "error";
@@ -61,10 +87,12 @@ class UsuarioRepository {
         $this->database->disconnect();
         if (password_verify($passwd, $epasswd)){
             return $this->nombreCliente($edocumento);
+        }else{
+            echo "contraseña incorrecta";
+            echo $epasswd;
+            echo $passwd;
         }
-        return false;
     }
-
     public function nombreCliente($documento){
         $this->database->connect();
         $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";

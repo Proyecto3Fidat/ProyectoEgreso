@@ -5,10 +5,14 @@
      if (documento) {
          welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${documento}</a></li>  <li><a href="/logout" class="sign-in-btn">Cerrar sesión</a></li>`;
      } else {
-         welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="../App/Views/crearUsuario.html" class="sign-in-btn">Registrarse</a></li>';
+         welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="/registrarcliente" class="sign-in-btn">Registrarse</a></li>';
      }
  });
-
+ const urlParams = new URLSearchParams(window.location.search);
+ const error = urlParams.get('error');
+ if (error === 'true') {
+     document.getElementById('error-message').textContent = 'El usuario o la contraseña es incorrecto.';
+ }
 function validateForm() {
     var altura = document.getElementById("altura").value;
     var alturaPattern = /^\d(\.\d{1,2})?$/;
@@ -65,7 +69,13 @@ document.getElementById('abrir').addEventListener('click', function() {
 document.getElementById('cerrar').addEventListener('click', function() {
     document.querySelector('.navbar').classList.remove('show');
 });
-
+function errorContraseña(){
+const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if (error === 'true') {
+        document.getElementById('error-message').textContent = 'El usuario o la contraseña es incorrecto.';
+    }
+}
 /*Script responsive*/
 const nav = document.querySelector("#nav");
 const abrir = document.querySelector("#abrir");

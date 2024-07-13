@@ -51,5 +51,31 @@ class ClienteRepository {
         $stmt->close();
         $this->database->disconnect(); 
     }
+    public function guardarAdministrador(ClienteModel $clienteModel){
+        $this->database->connect();
+            
+        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, email, nombre, apellido) 
+                VALUES (?,?, ?, ?, ?)";
+        
+        $nroDocumento = $clienteModel->getNroDocumento();
+        $tipoDocumento = $clienteModel->getTipoDocumento();
+        $email = $clienteModel->getEmail();
+        $nombre = $clienteModel->getNombre();
+        $apellido = $clienteModel->getApellido();
+
+        
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "sssss",
+            $nroDocumento,
+            $tipoDocumento,
+            $email,
+            $nombre,
+            $apellido,
+        );
+        $stmt->execute();
+        $stmt->close();
+        $this->database->disconnect(); 
+    }
     
 }

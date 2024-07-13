@@ -17,26 +17,12 @@ class UsuarioController {
     public function comprobarUsuario() {
         $usuarioRepository = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepository);
-        if($usuarioService->comprobarUsuario($_POST['nroDocumento']) == true) {
-            echo "<script>
-                alert('El usuario ya existe');
-                window.location.href = '../../App/Views/crearUsuario.html'; 
-                </script>";
-            exit();
-        }else {
-            $this->crearUsuario();
-            $clienteRepository = new ClienteRepository();
-            $clienteService = new ClienteService($clienteRepository);
-            $clienteController = new ClienteController($clienteService);
-            $clienteController->crearCliente();
-            header("location: ../../Public/inicio.html");
-            exit();
-        }
+       return $usuarioService->comprobarUsuario($_POST['nroDocumento']);
     }
     public function crearUsuario() {
-        echo "Creando usuario...";
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
+            1,
             $_POST['passwd']
         );
         $this->usuarioService->crearUsuario($usuario);
@@ -53,15 +39,22 @@ class UsuarioController {
                 </script>";
             $_SESSION['logged'] = true;
             $_SESSION['nroDocumento'] = $_POST['documento'];
-            echo "Sesion iniciada";
         }
+    }
+    public function crearAdministrador(){
+        $usuario = new UsuarioModel(
+            $_POST['nroDocumento'],
+            $_POST['rol'],
+            $_POST['passwd']
+        );
+        $this->usuarioService->crearAdministrador($usuario);
     }
 
     public function logout() {
         session_destroy();
         echo "<script>
             localStorage.removeItem('documento');
-            window.location.href = '../../Public/inicio.html'; // Redirigir a la página de inicio
+            window.location.href = '../../Public/inicio.html';
             </script>";
     }
 }
