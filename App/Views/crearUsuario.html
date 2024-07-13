@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Public/css/stylesExtra.css">
-    <script src="/Public/js/script.js"></script>
+    <link rel="stylesheet" href="../../Public/css/stylesExtra.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Registrar Cliente</title>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <ul>
-                <li><a href="/Public/inicio.html">Inicio</a></li>
-                <li><a href="/App/Views/agenda.html">Horarios</a></li>
-                <li><a href="/App/Views/planes.html">Planes</a></li>
-                <li><a href="/Public/inicio.html">Nosotros</a></li>
-                <li><a href="loginusuario.html" class="login-btn">Ingresar</a></li>
-                <li><a href="#" class="sign-in-btn" style="color: #6f41bb;">Registrarse</a></li>
-            </ul>
+    <header>
+        <section class="navhead">
+            <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
+        </section>
+        <nav class="navbar" id="nav">
+            <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
+                <div class="menu1">
+                    <ul class="listmenu1">
+                        <li><a href="#" class="inicioa">Inicio</a></li>
+                        <li><a href="../App/Views/agenda.html" class="inicioa">Horarios</a></li>
+                        <li><a href="../App/Views/planes.html" class="inicioa">Planes</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="menu2">
+                    <ul class="listmenu2" id="welcome-message">
+                    </ul>
+                </div>
         </nav>
     </header>
 
@@ -70,5 +80,6 @@
         <input type="submit" value="ENVIAR" class="button">
         <br></br>
 </form>
+        <script src="js/script.js"></script>
 </body>
 </html>

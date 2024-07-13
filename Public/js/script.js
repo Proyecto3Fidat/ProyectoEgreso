@@ -66,12 +66,7 @@ document.getElementById('cerrar').addEventListener('click', function() {
     document.querySelector('.navbar').classList.remove('show');
 });
 
-
-
-
-
-
-
+/*Script responsive*/
 const nav = document.querySelector("#nav");
 const abrir = document.querySelector("#abrir");
 const cerrar = document.querySelector("#cerrar");
@@ -83,3 +78,4 @@ abrir.addEventListener("click", () => {
 cerrar.addEventListener("click", () => {
     nav.classList.remove("visible");
 })
+/*Fin script responsive*/

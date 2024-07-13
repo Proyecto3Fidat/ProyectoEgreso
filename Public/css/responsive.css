@@ -1,5 +1,6 @@
 @media screen and (max-width:768px){ 
     
+    /* Nav y menu desplegable */
     .cerrarmenu {
         display: block;
         background-color: #100e0f;
@@ -18,6 +19,8 @@
     }
 
     nav {
+        opacity: 0;
+        visibility: hidden;
         display: flex;
         position: absolute;
         top: 0;
@@ -26,7 +29,9 @@
         flex-direction: column;
         padding: 2rem;
         font-size: 2rem;
+        z-index: 1000;
         box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.8);
+        transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
     }
 
     nav.visible {
@@ -38,35 +43,19 @@
         padding:3rem;
     }
 
-
     .listmenu1, .listmenu2{
         flex-direction: column;
     }
-
-
-
-
-
-
-
-
-    #Inicio{
-        display: none;
-    }
-
-    #nosotros {
-        display: none;
-    }
-    
-    .contacto {
-        display: none;
-    }
+    /* fin de nav y menu desplegable */
 
     #planes {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
-
+    
     .footer{
-        display: none;
+        display: flex;
+        flex-direction: column;
     }
 }
