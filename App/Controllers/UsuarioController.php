@@ -4,8 +4,7 @@ namespace App\Controllers;
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 use App\Repositories\UsuarioRepository;
-use App\Repositories\ClienteRepository;
-use App\Services\ClienteService;
+
 
 class UsuarioController {
     private $usuarioService;
@@ -41,15 +40,8 @@ class UsuarioController {
             $_SESSION['nroDocumento'] = $_POST['documento'];
         }
     }
-    public function crearAdministrador(){
-        $usuario = new UsuarioModel(
-            $_POST['nroDocumento'],
-            $_POST['rol'],
-            $_POST['passwd']
-        );
-        $this->usuarioService->crearAdministrador($usuario);
-    }
 
+    
     public function logout() {
         session_destroy();
         echo "<script>

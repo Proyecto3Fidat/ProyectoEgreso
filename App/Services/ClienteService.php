@@ -14,9 +14,6 @@ class ClienteService {
     public function crearCliente(ClienteModel $clienteModel) {
         $this->clienteRepository->guardar($clienteModel);
     }
-    public function crearAdministrador(ClienteModel $clienteModel) {
-        $this->clienteRepository->guardarAdministrador($clienteModel);
-    }
     public function emailBienvenida($email) {
         $para = $email;
         $asunto = "Bienvenido a la plataforma de entrenamiento";

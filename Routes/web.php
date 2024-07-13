@@ -53,20 +53,6 @@ SimpleRouter::post('/registrarcliente', function() {
             exit();
         } 
     });
-//ruta post para el registro de administradores
-SimpleRouter::post('/registraradministrador', function() {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService);
-    if($usuarioController->comprobarUsuario() == false){
-        $usuarioController->crearAdministrador();
-        $clienteController->crearAdministrador();
-
-    } 
-});
 //ruta post para el login de clientes
 SimpleRouter::post('/login', function() {
     $usuarioRepository = new UsuarioRepository();
