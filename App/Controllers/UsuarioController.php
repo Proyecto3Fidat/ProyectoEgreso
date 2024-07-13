@@ -4,13 +4,15 @@ namespace App\Controllers;
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 use App\Repositories\UsuarioRepository;
-
+use Monolog\Logger;
 
 class UsuarioController {
     private $usuarioService;
+    private $logger;
 
-    public function __construct(UsuarioService $usuarioService) {
+    public function __construct(UsuarioService $usuarioService,  Logger $logger) {
         $this->usuarioService = $usuarioService;
+        $this->logger = $logger;
     }
 
     public function comprobarUsuario() {
@@ -27,23 +29,22 @@ class UsuarioController {
         $this->usuarioService->crearUsuario($usuario);
     }
 
-    public function autenticar() {
-        if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
-            header("Location: ../../App/Views/loginusuario.html?error=true");
-            exit();
-        } else {
-            echo "<script>
-                localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']). "');
-                window.location.href = '../../Public/inicio.html'; 
-                </script>";
-            $_SESSION['logged'] = true;
-            $_SESSION['nroDocumento'] = $_POST['documento'];
-        }
+    public function autenticar(){
+            $this->logger->info('Autenticando usuario...'. $_POST['documento']);
+            if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
+                header("Location: ../../App/Views/loginusuario.html?error=true");
+                throw new \Exception('Fallo en la autenticación');
+            } else { 
+                $this->logger->info('El usuario: '. $_POST['documento']. "se autentico correctamente");
+                echo "<script>
+                    localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) . "');
+                    window.location.href = '../../Public/inicio.html'; 
+                    </script>";
+            }
     }
 
     
     public function logout() {
-        session_destroy();
         echo "<script>
             localStorage.removeItem('documento');
             window.location.href = '../../Public/inicio.html';

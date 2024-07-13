@@ -42,7 +42,6 @@ class ClienteController {
             $_POST['nombre'],
             $_POST['apellido'],
         );
-        $this->clienteService->crearAdministrador($cliente);
     }
 
     public function emailBienvenida($email){

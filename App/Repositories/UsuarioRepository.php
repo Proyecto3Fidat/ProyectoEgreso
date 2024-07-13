@@ -68,9 +68,7 @@ class UsuarioRepository {
         if (password_verify($passwd, $epasswd)){
             return $this->nombreCliente($edocumento);
         }else{
-            echo "contraseña incorrecta";
-            echo $epasswd;
-            echo $passwd;
+            return false;
         }
     }
     public function nombreCliente($documento){
