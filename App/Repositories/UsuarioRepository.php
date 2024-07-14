@@ -38,8 +38,7 @@ class UsuarioRepository {
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
-        $passwd = $usuarioModel->getPasswd();    
-        echo $usuarioModel->getPasswd();   
+        $passwd = $usuarioModel->getPasswd();     
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "sis",
@@ -59,7 +58,7 @@ class UsuarioRepository {
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
-            echo "error";
+            // echo "error";
         }
         $stmt->bind_result($epasswd, $edocumento);
         $stmt->fetch();
@@ -78,7 +77,7 @@ class UsuarioRepository {
         $stmt->bind_param("i", $documento);
         $stmt->execute();
         if($stmt->error){
-            echo "error";
+            // echo "error";
         }
         $stmt->bind_result($nombre);
         $stmt->fetch();
