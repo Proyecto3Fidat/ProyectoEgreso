@@ -38,16 +38,16 @@ class UsuarioController {
             } else { 
                 $this->logger->info('El usuario: '. $_POST['documento']. "se autentico correctamente");
                 echo "<script>
-                    localStorage.setItem('documento', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) . "');
+                    localStorage.setItem('nombre', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) . "');
                     window.location.href = '../../Public/inicio.html'; 
                     </script>";
             }
     }
     
     public function logout() {
-        $this->logger->info('Se deslogeo '. $_POST['documento']); 
+        $this->logger->info('Se deslogeo '. $_GET['documento']); 
         echo "<script>
-            localStorage.removeItem('documento');
+            localStorage.removeItem('nombre');
             window.location.href = '../../Public/inicio.html';
             </script>";
     }

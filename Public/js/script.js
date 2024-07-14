@@ -1,13 +1,14 @@
  document.addEventListener('DOMContentLoaded', function() {
      const welcomeMessage = document.getElementById('welcome-message');
-     const documento = localStorage.getItem('documento');
+     const nombre = localStorage.getItem('nombre');
 
-     if (documento) {
-         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${documento}</a></li>  <li><a href="/logout" class="sign-in-btn">Cerrar sesión</a></li>`;
+     if (nombre) {
+         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${nombre}</a></li>  <li><a href="/logout?documento=${nombre}" class="sign-in-btn">Cerrar sesión</a></li>`;
      } else {
          welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="/registrarcliente" class="sign-in-btn">Registrarse</a></li>';
      }
  });
+
  const urlParams = new URLSearchParams(window.location.search);
  const error = urlParams.get('error');
  if (error === 'true') {
