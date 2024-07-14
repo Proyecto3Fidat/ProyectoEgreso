@@ -34,9 +34,9 @@ class UsuarioController {
             $this->logger->info('Se intento autenticar el usuario: '. $_POST['documento']);
             if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
                 header("Location: ../../App/Views/loginusuario.html?error=true");
-                $this->logger->info('El usuario: '. $_POST['documento']. "no se autentico correctamente");
+                $this->logger->info('El usuario: '. $_POST['documento']. " no se autentico correctamente");
             } else { 
-                $this->logger->info('El usuario: '. $_POST['documento']. "se autentico correctamente");
+                $this->logger->info('El usuario: '. $_POST['documento']. " se autentico correctamente");
                 echo "<script>
                     localStorage.setItem('nombre', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) . "');
                     window.location.href = '../../Public/inicio.html'; 
