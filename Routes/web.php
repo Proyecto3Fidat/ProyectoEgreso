@@ -4,7 +4,6 @@ use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
 use App\Controllers\UsuarioController;
-use App\Controllers\Error404;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
 use App\Repositories\ClienteRepository;
@@ -49,7 +48,7 @@ SimpleRouter::post('/registrarcliente', function() use ($logger) {
     if (!$usuarioController->comprobarUsuario()) {
         $clienteRepository = new ClienteRepository();
         $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService);
+        $clienteController = new ClienteController($clienteService, $logger);
         $clienteController->crearCliente();
         $usuarioController->crearUsuario();
         $clienteController->emailBienvenida($_POST['email']);

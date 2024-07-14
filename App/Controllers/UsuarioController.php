@@ -45,6 +45,7 @@ class UsuarioController {
     }
     
     public function logout() {
+        $this->logger->info('Se deslogeo '. $_POST['documento']); 
         echo "<script>
             localStorage.removeItem('documento');
             window.location.href = '../../Public/inicio.html';
