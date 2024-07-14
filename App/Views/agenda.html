@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Public/css/stylesExtra.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Agenda GYM</title>
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <ul>
-                <li><a href="../../Public/inicio.html">Inicio</a></li>
-                <li><a href="planes.html">Planes</a></li>
-                <li><a href="../../Public/inicio.html">Nosotros</a></li>
-                <li id="welcome-message"></li>
-            </ul>
+    <header>
+        <section class="navhead">
+            <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
+        </section>
+        <nav class="navbar" id="nav">
+            <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
+                <div class="menu1">
+                    <ul class="listmenu1">
+                        <li><a href="/" class="inicioa">Inicio</a></li>
+                        <li><a style="color: #6f41bb;" href="#" class="inicioa">Horarios</a></li>
+                        <li><a href="/planes" class="inicioa">Planes</a></li>
+                        <li><a href="/">Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="menu2">
+                    <ul class="listmenu2" id="welcome-message">
+                    </ul>
+                </div>
         </nav>
     </header>
 
@@ -35,7 +48,7 @@
                 <td>Gimnasio Libre</td>
                 <td>Estiramiento</td>
                 <td>Pilates</td>
-                <td>Boxeo</td>
+                <td id="td-final">Boxeo</td>
             </tr>
             <tr>
                 <th>8:30 - 9:45</th>
@@ -43,7 +56,7 @@
                 <td>Pilates</td>
                 <td>Recuperación Muscular</td>
                 <td>Cardio</td>
-                <td>Gimnasio Libre</td>
+                <td id="td-final">Gimnasio Libre</td>
             </tr>
             <tr>
                 <th>9:45 - 10:30</th>
@@ -51,7 +64,7 @@
                 <td>Boxeo</td>
                 <td>Masajes</td>
                 <td>Boxeo</td>
-                <td>Cardio</td>
+                <td id="td-final">Cardio</td>
             </tr>
             <tr>
                 <th>9:45 - 10:30</th>
@@ -59,7 +72,7 @@
                 <td>Cardio</td>
                 <td>Fortalecimiento de tendones</td>
                 <td>Tren Inferior</td>
-                <td>Tren Superior</td>
+                <td id="td-final">Tren Superior</td>
             </tr>
             <tr>
                 <th>11:00 - 12:00</th>
@@ -67,7 +80,7 @@
                 <td>Tren Inferior</td>
                 <td>Libre</td>
                 <td>Tren Superior</td>
-                <td>Recuperación Muscular</td>
+                <td id="td-final">Recuperación Muscular</td>
             </tr>
             <tr>
                 <th>12:15 - 13:45</th>
@@ -75,7 +88,7 @@
                 <td>Caminadora</td>
                 <td>Tren Superior</td>
                 <td>Fortalecimiento de tendones</td>
-                <td>Caminadora</td>
+                <td id="td-final">Caminadora</td>
             </tr>
             <tr>
                 <th>14:00 - 15:00</th>
@@ -83,11 +96,12 @@
                 <td>Tren Superior</td>
                 <td>Cardio</td>
                 <td>Estiramiento</td>
-                <td>Masajes</td>
+                <td id="td-final">Masajes</td>
             </tr>
           </table> 
 
     </section>
+    
 
 </body>
     <script src="../../Public/js/script.js"></script>
