@@ -18,9 +18,10 @@ class UsuarioController {
     public function comprobarUsuario() {
         $usuarioRepository = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepository);
-       return $usuarioService->comprobarUsuario($_POST['nroDocumento']);
+        return $usuarioService->comprobarUsuario($_POST['nroDocumento']);
     }
     public function crearUsuario() {
+        $this->logger->info('Se intento crear el usuario: '. $_POST['nroDocumento']);
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
             1,
@@ -30,10 +31,10 @@ class UsuarioController {
     }
 
     public function autenticar(){
-            $this->logger->info('Autenticando usuario...'. $_POST['documento']);
+            $this->logger->info('Se intento autenticar el usuario: '. $_POST['documento']);
             if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
                 header("Location: ../../App/Views/loginusuario.html?error=true");
-                throw new \Exception('Fallo en la autenticación');
+                $this->logger->info('El usuario: '. $_POST['documento']. "no se autentico correctamente");
             } else { 
                 $this->logger->info('El usuario: '. $_POST['documento']. "se autentico correctamente");
                 echo "<script>
@@ -42,7 +43,6 @@ class UsuarioController {
                     </script>";
             }
     }
-
     
     public function logout() {
         echo "<script>
