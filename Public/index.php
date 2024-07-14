@@ -8,7 +8,7 @@ $logger = $config['logger']();
 set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($logger) {
     $message = "Error [$errno]: $errstr at $errfile line $errline";
     $logger->error($message);
-    
+    header ("Location: /App/Views/error.html");
 });
 
 set_exception_handler(function ($exception) use ($logger) {
@@ -16,8 +16,8 @@ set_exception_handler(function ($exception) use ($logger) {
     $logger->error($message, ['exception' => (string) $exception]);
     if ($exception instanceof Pecee\SimpleRouter\Exceptions\NotFoundHttpException) {
         header ("Location: /App/Views/404.html");    
-    }
-
+    }else 
+    header ("Location: /App/Views/error.html");
 });
 
 require_once  '../Routes/web.php';
