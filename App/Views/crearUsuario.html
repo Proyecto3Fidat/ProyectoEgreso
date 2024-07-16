@@ -33,16 +33,16 @@
 
     <form action= "/registrarcliente" method= "POST" onsubmit="return validateForm()">
         <h2>Nombre</h2>
-        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" maxlength="30" name="nombre" placeholder="Nombre" required>
         <br></br>
         <h2>Apellido</h2>
-        <input type="text" name="apellido" placeholder="Apellido" required>
+        <input type="text" max="30" name="apellido" placeholder="Apellido" required>
         <br></br>
         <h2>N° de Telefono</h2>
         <input type="text"  name="telefono"  placeholder="Número de Teléfono (Formato: +598xxxxxxxx)" required pattern="\+598\d{8}" title="Debe comenzar con +598 seguido de 8 dígitos">
         <br></br>
         <h2>Correo Electronico</h2>
-        <input type="email"  name="email" placeholder="Correo Electronico" required>
+        <input type="email" maxlength="40"  name="email" placeholder="Correo Electronico" required>
         <br></br>
         <h2>Contraseña</h2>
         <input type="password"  name="passwd" minlength= "08" required placeholder="Contraseña">
@@ -60,16 +60,16 @@
         <input type="date" name="fechaNacimiento" required >
         <br></br>
         <h2>Patologias</h2>
-        <input type="text"  name="patologias" required placeholder="Patologías">
+        <input type="text" maxlength="25"  name="patologias" required placeholder="Patologías">
         <br></br>
         <h2>Altura</h2>
-        <input type="text" id="altura" name="altura" required> 
+        <input type="text" placeholder="1.90" id="altura" name="altura" required> 
         <br></br>
         <h2>Peso</h2>
         <input type="text"  name="peso" required placeholder="Peso">
         <br></br>
         <h2>Calle</h2>
-        <input type="text"  name="calle" required placeholder="Calle">
+        <input type="text" maxlength="100"  name="calle" required placeholder="Calle">
         <br></br>
         <h2>Numero de Puerta</h2>
         <input type="number"  name="numero" required placeholder="Número de puerta">
