@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Gant_Proyecto" company="" webLink="" view-date="2024-05-01" view-index="2" gantt-divider-location="458" resource-divider-location="300" version="3.3.3309" locale="es_ES">
+    <description/>
+    <view zooming-state="default:8" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="259" order="0"/>
+        <field id="tpd4" name="Fecha de inicio" width="98" order="1"/>
+        <field id="tpd5" name="Fecha de fin" width="100" order="2"/>
+        <field id="tpd15" name="Notas" width="20" order="3"/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <timeline><![CDATA[1]]></timeline>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="211" order="0"/>
+        <field id="1" name="Función" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="0" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="29" uid="caad07baf95146b08b3729f9c303db03" name="FORMACIÓN EMPRESARIAL" meeting="false" start="2024-05-22" duration="37" complete="0" expand="false">
+            <depend id="63" type="2" difference="17" hardness="Strong"/>
+            <task id="19" uid="5abba5bcb2b24f108bba58ccd3840de1" name="Enfoque de la empresa y sus productos" meeting="false" start="2024-06-25" duration="3" complete="0" expand="true"/>
+            <task id="31" uid="c6909c63ea6c4e9fa984023d84b05227" name="Nombre de la empresa" meeting="false" start="2024-05-22" duration="1" complete="0" expand="true"/>
+            <task id="59" uid="7e8b70171b7b4f9584f756141658141f" name="Logo, isotipo y slogan" meeting="false" start="2024-05-30" duration="4" complete="0" expand="true"/>
+            <task id="58" uid="0d15d8b3efe04890b0f509947da6e180" name="Determinación empresa" meeting="false" start="2024-05-22" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="30" uid="604653eaac894bd4bc8084ef977e0e29" name="SOCIOLOGÍA" meeting="false" start="2024-05-21" duration="56" complete="0" expand="false">
+            <depend id="63" type="3" difference="0" hardness="Strong"/>
+            <task id="9" uid="18347db6c1144feb8d20d1927b8441cd" name="Fundamentación importancia proyecto" meeting="false" start="2024-05-30" duration="5" complete="0" expand="true"/>
+            <task id="21" uid="3f7b7134fc38476ba17e45292f6331ef" name="Revisión bibliográfica" meeting="false" start="2024-06-09" duration="37" complete="0" expand="true"/>
+            <task id="60" uid="944d0146ff564f38bcdc158f1c302c6d" name="Identificación de integrantes" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="5" uid="15228c2d4d9b470ebd0473bc0d130bd3" name="Planteo preguntas de investigación" meeting="false" start="2024-06-27" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="23" uid="337222fab0b84a74a1b0c2ae41b564de" name="ADA" meeting="false" start="2024-05-21" duration="21" complete="0" expand="false">
+            <depend id="24" type="1" difference="0" hardness="Strong"/>
+            <depend id="27" type="1" difference="9" hardness="Strong"/>
+            <depend id="28" type="1" difference="9" hardness="Strong"/>
+            <task id="41" uid="c44dd4593af84fa59c6f4b6432b0196e" name="Modelo de Comportamiento" meeting="false" start="2024-06-04" duration="1" complete="0" expand="true"/>
+            <task id="40" uid="ab14896ee8324d2f8b27174220a6cf0d" name="Modelo Ambiental" meeting="false" start="2024-06-04" duration="1" complete="0" expand="true"/>
+            <task id="10" uid="53a32214c0914da4a7b4a62e3e9d6a07" name="Métricas" meeting="false" start="2024-05-30" duration="3" complete="0" expand="true"/>
+            <task id="22" uid="40d35ab68ef1431986040a05d700b3c7" name="Requerimientos funcionales" meeting="false" start="2024-05-21" duration="9" complete="0" expand="true"/>
+            <task id="32" uid="0a138c92c9c34738ae9bfc62538576d8" name="Relevamiento" meeting="false" start="2024-05-30" duration="1" complete="0" expand="true"/>
+            <task id="34" uid="bac97f810d644dd38328354234fe0b14" name="Estudio de factibilidad" meeting="false" start="2024-05-30" duration="1" complete="0" expand="true"/>
+            <task id="35" uid="9530326d887341f992c5b77e8ef0dfc9" name="Análisis F.O.D.A" meeting="false" start="2024-06-03" duration="1" complete="0" expand="true"/>
+            <task id="37" uid="15ed266f6484428c86534051d826ae42" name="Casos de Uso" meeting="false" start="2024-06-08" duration="1" complete="0" expand="true"/>
+            <task id="38" uid="654c93d828434d749015642d68f730b8" name="Diagrama de casos de uso" meeting="false" start="2024-06-09" duration="2" complete="0" expand="true"/>
+            <task id="39" uid="56692a4b4c7a4989a47d1abb15f0a11a" name="Modelo esencial" meeting="false" start="2024-06-04" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="24" uid="b24353cd2a204e3881f41df6c2dcc8a4" name="PROGRAMACIÓN" meeting="false" start="2024-05-21" duration="48" complete="0" expand="false">
+            <depend id="63" type="2" difference="7" hardness="Strong"/>
+            <task id="0" uid="46bf4c2e1c874c75a6c11fc0c5dca9cc" name="Repositorio GitHub" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="49" uid="9cfd56fb5939429c8a9547e9cbdd5a43" name="Creación de código" meeting="false" start="2024-05-21" duration="14" complete="0" expand="true"/>
+            <task id="47" uid="97c3c48b01aa4a0daf4611349da7fbf1" name="Documentación" meeting="false" start="2024-06-25" duration="13" complete="0" expand="true"/>
+            <task id="48" uid="ae58f87072844d9aa554613941b43f1a" name="Conexión al motor base de datos" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="25" uid="343050d01a5845259808d8f1b59f1b98" name="PROYECTO" meeting="false" start="2024-05-21" duration="54" complete="0" expand="false">
+            <depend id="63" type="2" difference="1" hardness="Strong"/>
+            <task id="3" uid="d6dfffee8b8943a98696e0aeec4879db" name="Caratula de carpeta" meeting="false" start="2024-06-27" duration="1" complete="0" expand="true"/>
+            <task id="4" uid="a39b907248644989befe5c2dae43e782" name="Carta presentación" meeting="false" start="2024-06-03" duration="1" complete="0" expand="true"/>
+            <task id="50" uid="b6e7f5d860004aad890cd05292b3ee00" name="Nombre del grupo, integrantes y roles" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="51" uid="0878680a6d04467b896dcbc5facdfbc4" name="Reglas del grupo" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="52" uid="24666d828001469295190223a61fc9cc" name="Implementación de metodologías" meeting="false" start="2024-05-23" duration="52" complete="0" expand="true"/>
+            <task id="53" uid="f7f7558aba2d4f348acdd50ee6fd9187" name="Formato de actas" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="54" uid="f98cacc81b4f499a93e1cc5c5bda396f" name="Formularios de uso común" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="56" uid="159d5690d7c44c2e8da53cacc57d3f76" name="Creación repositorio GitHub" meeting="false" start="2024-05-21" duration="1" complete="0" expand="true"/>
+            <task id="55" uid="6ff867cadb77442ea408d95ccbfbfdec" name="Actas de reuniones" meeting="false" start="2024-05-26" duration="49" complete="0" expand="true"/>
+            <task id="15" uid="2bd6ae39e41048db87521b9ece40e871" name="Paradigma conformación de equipos" meeting="false" start="2024-06-01" duration="1" complete="0" expand="true">
+                <notes><![CDATA[Mantei Centralizado]]></notes>
+            </task>
+        </task>
+        <task id="26" uid="0935c55fb08b4849b75f1bb5600e591f" name="SISTEMAS OPERATIVOS" meeting="false" start="2024-06-19" duration="13" complete="0" expand="false">
+            <depend id="63" type="2" difference="13" hardness="Strong"/>
+            <task id="18" uid="3c8e4609c7ec47b2a0632f40002b3696" name="Instalación servidor LAMP" meeting="false" start="2024-06-27" duration="5" complete="0" expand="true"/>
+            <task id="16" uid="b8254c4c98cc44c2a5986c9c3adaca4c" name="Manual de instalación servidor" meeting="false" start="2024-06-27" duration="3" complete="0" expand="true"/>
+            <task id="17" uid="7922af9004fb4e639e9535bc4ed48079" name="Instalación Docker" meeting="false" start="2024-06-27" duration="3" complete="0" expand="true"/>
+            <task id="14" uid="6c8e53992dca4f05bc57a345fce312c5" name="Estudio de roles, usuarios del servidor" meeting="false" start="2024-06-24" duration="1" complete="0" expand="true"/>
+            <task id="57" uid="201af4df01d94fd3ba7e25be923d8b56" name="Relevamiento y justificación del S.O" meeting="false" start="2024-06-19" duration="1" complete="0" expand="true"/>
+            <task id="13" uid="135bfba284894e21941c0cbb8d996d14" name="Instructivo sistemas operativos" meeting="false" start="2024-06-26" duration="2" complete="0" expand="true"/>
+            <task id="20" uid="ed4073941226425ea91d0bfacab5ebb7" name="Script sistemas operativos" meeting="false" start="2024-06-22" duration="5" complete="0" expand="true"/>
+        </task>
+        <task id="27" uid="cdd47f0eb56542b69ad9f1a9dbc3840a" name="DISEÑO WEB" meeting="false" start="2024-05-30" duration="47" complete="0" expand="false">
+            <depend id="63" type="3" difference="0" hardness="Strong"/>
+            <task id="6" uid="06cac6685aff4b2bb1c32d6104d5762f" name="Logo,nombre y justificación de página" meeting="false" start="2024-05-30" duration="4" complete="0" expand="true"/>
+            <task id="12" uid="a1cd43bba32a42bf9c715e869e98f3c8" name="Diseño y funcionameinto de la página web" meeting="false" start="2024-06-05" duration="41" complete="0" expand="true"/>
+            <task id="8" uid="84d55ed969144822a4cde07b0b462367" name="WireFrame" meeting="false" start="2024-05-30" duration="6" complete="0" expand="true"/>
+            <task id="7" uid="734b5bc5cb184d30967b0ffe9e39eeb2" name="Página institucional" meeting="false" start="2024-05-30" duration="5" complete="0" expand="true"/>
+        </task>
+        <task id="62" uid="c7d99501325a48b2b29226be13bc89e8" name="NODO INICIO" meeting="false" start="2024-05-20" duration="1" complete="0" thirdDate="2024-05-20" thirdDate-constraint="1" expand="true">
+            <depend id="23" type="4" difference="0" hardness="Strong"/>
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+            <depend id="29" type="2" difference="1" hardness="Strong"/>
+            <depend id="30" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="63" uid="00c9b334e351421ab336900f45f0897d" name="NODO FINAL" meeting="false" start="2024-07-15" duration="1" complete="0" expand="true"/>
+        <task id="28" uid="a1ad0782ac3e4780b97bdbf8354b0737" name="BASE DE DATOS" meeting="false" start="2024-05-30" duration="18" complete="0" expand="false">
+            <depend id="26" type="2" difference="2" hardness="Strong"/>
+            <task id="11" uid="ac393505d7fb4f38870d5c54dd74d8fd" name="Diagrama Batchman" meeting="false" start="2024-06-14" duration="3" complete="0" expand="true"/>
+            <task id="43" uid="ed9882ee93ce409cb8779d41c100acc3" name="Modelo Relacional" meeting="false" start="2024-06-01" duration="10" complete="0" expand="true"/>
+            <task id="1" uid="164ff0069c1a4b1982a9f3edccbc5843" name="D.E.R y R.N.E" meeting="false" start="2024-05-30" duration="15" complete="0" expand="true"/>
+            <task id="2" uid="1d92dd0aceab47d2a237479dc1d4da96" name="Diccionario de datos" meeting="false" start="2024-06-14" duration="3" complete="0" expand="true"/>
+        </task>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
