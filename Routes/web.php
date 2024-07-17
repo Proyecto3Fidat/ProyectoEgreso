@@ -17,7 +17,9 @@ SimpleRouter::get('/login', function(){
 SimpleRouter::get('/registrarcliente', function(){
     header('Location: App/Views/crearUsuario.html');
 });
-
+//Funcion get favicon.ico para resolver error del navegador
+SimpleRouter::get('/favicon.ico', function() {
+});
 SimpleRouter::post('/registrarcliente', function() {
     echo $_POST['nroDocumento'];
     echo $_POST['passwd'];
