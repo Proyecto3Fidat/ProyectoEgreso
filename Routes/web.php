@@ -20,7 +20,7 @@ SimpleRouter::get('/registrarcliente', function(){
 //Funcion get favicon.ico para resolver error del navegador
 SimpleRouter::get('/favicon.ico', function() {
 });
-SimpleRouter::post('/registrarcliente', function() {
+/*SimpleRouter::post('/registrarcliente', function() {
     echo $_POST['nroDocumento'];
     echo $_POST['passwd'];
     $usuarioRepository = new UsuarioRepository();
@@ -44,14 +44,40 @@ SimpleRouter::post('/registrarcliente', function() {
                 </script>";
             exit();
         } 
-    });
-SimpleRouter::post('/registraradministrador', function() {
+    });*/
+    // Ruta para registrar clientes (POST)
+SimpleRouter::post('/registrarcliente', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+
+    if (!$usuarioController->comprobarUsuario()) {
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clienteController->crearCliente();
+        $usuarioController->crearUsuario();
+        $clienteController->emailBienvenida($_POST['email']);
+
+        echo "<script>
+                alert('Usuario creado con éxito');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    } else {
+        echo "<script>
+                alert('El usuario ya existe');
+                window.location.href = '../../App/Views/crearUsuario.html'; 
+              </script>";
+        exit();
+    }
+});
+SimpleRouter::post('/registraradministrador', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService);
+    $clienteController = new ClienteController($clienteService, $logger);
     if($usuarioController->comprobarUsuario() == false){
         $usuarioController->crearAdministrador();
         $clienteController->crearAdministrador();
