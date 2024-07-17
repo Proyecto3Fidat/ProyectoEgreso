@@ -36,8 +36,13 @@ class ClienteService {
             echo 'Error al enviar el correo.';
         }
     }
+    
     public function modificarNombre($nroDocumento, ClienteModel $cliente){
         $this->clienteRepository->modificarNombre($nroDocumento, $cliente);
+    }
+
+    public function modificarApellido($nroDocumento, ClienteModel $cliente){
+        $this->clienteRepository->modificarApellido($nroDocumento, $cliente);
     }
     
 }

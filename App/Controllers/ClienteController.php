@@ -71,5 +71,22 @@ class ClienteController {
         );
         $this->clienteService->modificarNombre($nroDocumento, $cliente);
     }
+    public function modificarApellido($nroDocumento, $apellido){
+        $cliente = new ClienteModel(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            $apellido,
+        );
+        $this->clienteService->modificarApellido($nroDocumento, $cliente);
+    }
 
 }

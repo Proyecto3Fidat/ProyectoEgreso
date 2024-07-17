@@ -95,5 +95,23 @@ class ClienteRepository {
 
         $this->database->disconnect();
     }
+
+    public function modificarApellido($nroDocumento, $cliente){
+        $this->database->connect();
+        $sql = "UPDATE Cliente SET apellido = ? WHERE nroDocumento = ?";
+
+        $apellido = $cliente->getApellido();
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "ss",
+            $apellido,
+            $nroDocumento
+        );
+        $stmt->execute();
+        $stmt->execute();
+        $stmt->close();
+
+        $this->database->disconnect();
+    }
     
 }

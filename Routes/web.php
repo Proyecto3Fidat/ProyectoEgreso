@@ -62,8 +62,18 @@ SimpleRouter::post('/modificarNombre', function() use ($logger) {
         $clienteService = new ClienteService($clienteRepository);
         $clienteController = new ClienteController($clienteService, $logger);
         $clienteController->modificarNombre($_POST['nroDocumento'],$_POST['nombre']);
-    }else 
-        echo "naonao";
+    }
+});
+SimpleRouter::post('/modificarApellido', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if(!$usuarioController->comprobarUsuario() == false){
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clienteController->modificarApellido($_POST['nroDocumento'],$_POST['apellido']);
+    }
 });
 
 SimpleRouter::post('/registrarAdministrador', function() use ($logger) {
