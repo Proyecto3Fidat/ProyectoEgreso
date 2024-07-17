@@ -2,15 +2,18 @@
 namespace App\Controllers;
 use App\Services\ClienteService;
 use App\Models\ClienteModel;
+use Monolog\Logger;
 
 class ClienteController {
     private $clienteService;
-
-    public function __construct(ClienteService $clienteService) {
+    private $logger;
+    public function __construct(ClienteService $clienteService, Logger $logger) {
         $this->clienteService = $clienteService;
+        $this->logger = $logger;
     }
 
     public function crearCliente() {
+        $this->logger->info('Se intento crear el cliente: '. $_POST['nroDocumento']);
         $cliente = new ClienteModel(
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],
@@ -27,6 +30,12 @@ class ClienteController {
             );
         $this->clienteService->crearCliente($cliente);
     }
+
+    public function emailBienvenida($email){
+        $this->logger->info('Se envio el email de bienvenida a: '. $email);
+        $this->clienteService->emailBienvenida($email);
+    }
+
     public function crearAdministrador(){
         $cliente = new ClienteModel(
             $_POST['nroDocumento'],
@@ -45,8 +54,22 @@ class ClienteController {
         $this->clienteService->crearAdministrador($cliente);
     }
 
-    public function emailBienvenida($email){
-        $this->clienteService->emailBienvenida($email);
+    public function modificarNombre($nroDocumento, $nombre){
+        $cliente = new ClienteModel(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            $nombre,
+            null,
+        );
+        $this->clienteService->modificarNombre($nroDocumento, $cliente);
     }
 
 }

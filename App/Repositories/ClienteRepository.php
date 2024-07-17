@@ -77,5 +77,23 @@ class ClienteRepository {
         $stmt->close();
         $this->database->disconnect(); 
     }
+
+    public function modificarNombre($nroDocumento, $cliente){
+        $this->database->connect();
+        $sql = "UPDATE Cliente SET nombre = ? WHERE nroDocumento = ?";
+
+        $nombre = $cliente->getNombre();
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "ss",
+            $nombre,
+            $nroDocumento
+        );
+        $stmt->execute();
+        $stmt->execute();
+        $stmt->close();
+
+        $this->database->disconnect();
+    }
     
 }
