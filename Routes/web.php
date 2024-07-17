@@ -97,9 +97,9 @@ SimpleRouter::post('/login', function() use ($logger) {
     $usuarioController->autenticar();
 });
 
-SimpleRouter::get('/logout', function() {
+SimpleRouter::get('/logout', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
     $usuarioController->logout();
 });

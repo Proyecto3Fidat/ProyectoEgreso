@@ -3,7 +3,7 @@
      const nombre = localStorage.getItem('nombre');
 
      if (nombre) {
-         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${nombre}</a></li>  <li><a href="/logout" class="sign-in-btn">Cerrar sesión</a></li>`;
+         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${nombre}</a></li>  <li><a href="/logout?documento=${nombre}" class="sign-in-btn">Cerrar sesión</a></li>`;
      } else {
          welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="../App/Views/crearUsuario.html" class="sign-in-btn">Registrarse</a></li>';
      }
