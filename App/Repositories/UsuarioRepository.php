@@ -74,23 +74,24 @@ class UsuarioRepository {
     
     public function autenticar($nroDocumento, $passwd) {
         $this->database->connect();
-        $sql = "SELECT passwd , nroDocumento FROM Usuario WHERE nroDocumento = ?";
+        $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
             echo "error";
         }
-        $stmt->bind_result($epasswd, $edocumento);
+        $stmt->bind_result($epasswd, $edocumento, $rol);
         $stmt->fetch();
         $stmt->close();
         $this->database->disconnect();
         if (password_verify($passwd, $epasswd)){
-            return $this->nombreCliente($edocumento);
+            return [
+                'nombre' => $this->nombreCliente($edocumento),
+                'rol' => $rol
+            ];
         }else{
-            echo "contraseña incorrecta";
-            echo $epasswd;
-            echo $passwd;
+            return false;
         }
     }
     public function nombreCliente($documento){
