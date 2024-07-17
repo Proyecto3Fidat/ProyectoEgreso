@@ -20,7 +20,7 @@ CREATE TABLE Cliente(
 CREATE TABLE Usuario(
     nroDocumento varchar(30) NOT NULL,
     rol int,
-    passwd VARCHAR(22) NOT NULL,
+    passwd VARCHAR(255) NOT NULL,
     PRIMARY KEY(nroDocumento,rol)
 );
 
