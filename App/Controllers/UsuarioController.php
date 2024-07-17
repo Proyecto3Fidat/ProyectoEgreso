@@ -45,7 +45,7 @@ class UsuarioController {
     }
     
     public function logout() {
-        $this->logger->info('Se deslogeo '. $_GET['documento']); 
+        $this->logger->info('Se deslogeo '. $_GET['nombre']); 
         echo "<script>
             localStorage.removeItem('nombre');
             window.location.href = '../../Public/inicio.html';
