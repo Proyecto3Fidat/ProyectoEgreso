@@ -51,7 +51,6 @@ class UsuarioController {
     }
 
     public function logout() {
-        session_destroy();
         echo "<script>
             localStorage.removeItem('documento');
             window.location.href = '../../Public/inicio.html';
