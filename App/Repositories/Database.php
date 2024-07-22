@@ -8,6 +8,7 @@ class Database {
     private $password;
     private $dbname;
     private $conn;
+    private static $instance = null;
 
     public function __construct($servername = "localhost", $username = "admin", $password = "admin", $dbname = "fidatbd") {
         $this->servername = $servername;
@@ -15,6 +16,13 @@ class Database {
         $this->password = $password;
         $this->dbname = $dbname;
         $this->conn = null;
+    }
+    
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
     }
 
     public function connect() {
