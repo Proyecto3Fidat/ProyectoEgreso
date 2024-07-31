@@ -23,8 +23,10 @@
 .cart {
     color: white;
     position: relative;
-    top: 27dvh;
-    right: 75.5%;
+    top: 5.6rem;
+    right: 8.3rem;
+    display: flex;
+    justify-content: space-between;
 }
 .cart:hover {
     cursor: pointer;
@@ -34,8 +36,8 @@
 .cart-2 {
     color: white;
     position: relative;
-    top: 27dvh;
-    right: 51%;
+    top: 5.8rem;
+    right: 35.5rem;
 }
 .cart-2:hover {
     cursor: pointer;
@@ -44,8 +46,8 @@
 .cart-3 {
     color: white;
     position: relative;
-    top: 28dvh;
-    right: 28%;
+    top: 5.8rem;
+    right: 25rem;
 }
 .cart-3:hover {
     cursor: pointer;
@@ -64,7 +66,7 @@
     color: black;
     border: 1px solid black;
     border-radius: 20px;
-    padding: 2.38rem;
+    padding: 2rem;
     background-color: white;
 }
 
@@ -74,8 +76,18 @@
     text-align: center;
 }
 .planA h2, .plan h2 {
+    padding: 0;
+    margin: 0;
     font-size: 1.1rem;
     text-align: center;
+    color: #4B0082;
+}
+.planA h2:hover, .plan h2:hover {
+    color: #6f41bb;
+    cursor: pointer;
+}
+.planA p, .plan p {
+    font-weight: 600;
 }
 .agenda {
     margin-top: 10rem;
