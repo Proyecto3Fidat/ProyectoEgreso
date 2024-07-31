@@ -3,71 +3,66 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
 
 
+body {
+    color: #030303;
+}
+
+
 .planes { 
-    padding: 7rem;
+    padding: 7rem 2rem 15rem;
     margin-top: 5rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 2rem;
     background-color: black;
-    padding-bottom: 15rem;
+}
+
+
+.cart, .cart-2, .cart-3 {
+    color: white;
+    position: relative;
+    top: 5.8rem;
+    cursor: pointer;
 }
 
 .cart {
-    color: white;
-    position: relative;
-    top: 5.6rem;
-    right: 8.3rem;
-    display: flex;
-    justify-content: space-between;
+    right: 7.2rem;
 }
+
 .cart:hover {
-    cursor: pointer;
     color: #6f41bb;
 }
 
 .cart-2 {
-    color: white;
-    position: relative;
-    top: 5.8rem;
-    right: 35.5rem;
+    right: 33.5rem;
 }
+
 .cart-2:hover {
-    cursor: pointer;
     color: #6f41bb;
 }
+
 .cart-3 {
-    color: white;
-    position: relative;
-    top: 5.8rem;
-    right: 25rem;
+    right: 21.8rem;
 }
+
 .cart-3:hover {
-    cursor: pointer;
     color: #6f41bb;
 }
 
 
-.plan { 
+.plan, .planA {
     color: black;
     border: 1px solid black;
     border-radius: 20px;
     padding: 2rem;
     background-color: white;
-}
-.planA {
-    color: black;
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 2rem;
-    background-color: white;
+    margin-left: 25px;
 }
 
 .planA h1, .plan h1 {
@@ -75,43 +70,49 @@
     color: #4B0082;
     text-align: center;
 }
+
 .planA h2, .plan h2 {
-    padding: 0;
-    margin: 0;
     font-size: 1.1rem;
     text-align: center;
     color: #4B0082;
 }
+
 .planA h2:hover, .plan h2:hover {
     color: #6f41bb;
     cursor: pointer;
 }
+
 .planA p, .plan p {
     font-weight: 600;
 }
+
+
 .agenda {
     margin-top: 10rem;
     padding: 3rem;
     font-size: 20px;
     text-align: center;
 }
+
 .agenda h1 {
     margin-top: 0;
     color: white;
     font-size: 2rem;
-    text-align: center;
     padding-bottom: 10px;
     text-transform: uppercase;
     cursor: default;
 }
+
 .agenda h1:hover {
     color: #6f41bb;
 }
 
-.horarios{ 
-position: absolute;
-left: 10%;
+
+.horarios {
+    position: absolute;
+    left: 10%;
 }
+
 .horarios a {
     margin-top: 0;
     color: white;
@@ -121,22 +122,27 @@ left: 10%;
     text-transform: uppercase;
     cursor: pointer;
 }
+
 .horarios a:hover {
     color: #6f41bb;
 }
+
 .horarios td {
-    cursor: default;
     color: #fff;
-    border-bottom: 1px solid  white;
-    border-left:1px solid  white;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    cursor: default;
 }
+
 .horarios td:hover {
     color: #6f41bb;
 }
+
 .horarios #td-final {
     border: 1px solid white;
     border-top: none;
 }
+
 .horarios th {
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -144,30 +150,33 @@ left: 10%;
     color: #030303;
 }
 
-form {
-    justify-content: space-between;
-    max-width: 600px;
-    margin: 40px auto;
-    margin-top: 10rem;
 
+form {
+    max-width: 600px;
+    margin: 10rem auto 40px;
+    display: flex;
+    flex-direction: column;
 }
+
 form h2 {
     color: #6f41bb;
     font-weight: 400;
     font-size: 1.5rem;
 }
+
 form input, select {
-width: 100%;
-padding: 1rem;
-border-radius: 10px;
-border: none;
-font-size: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
 }
+
 form .button {
     cursor: pointer;
     margin-top: 1rem;
-    
 }
+
 .button:hover {
     background-color: #6f41bb;
 }
