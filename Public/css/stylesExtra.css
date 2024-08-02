@@ -12,6 +12,9 @@ body {
     color: #030303;
 }
 
+header { 
+    height: 0;
+}
 
 .planes { 
     padding: 7rem 2rem 15rem;
