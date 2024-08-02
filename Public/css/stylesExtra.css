@@ -27,12 +27,12 @@ body {
 .cart, .cart-2, .cart-3 {
     color: white;
     position: relative;
-    top: 5.8rem;
+    top: 5.9rem;
     cursor: pointer;
 }
 
 .cart {
-    right: 7.2rem;
+    right: 73.5%;
 }
 
 .cart:hover {
@@ -40,7 +40,7 @@ body {
 }
 
 .cart-2 {
-    right: 33.5rem;
+    right: 48%;
 }
 
 .cart-2:hover {
@@ -48,13 +48,16 @@ body {
 }
 
 .cart-3 {
-    right: 21.8rem;
+    right: 21.5%;
 }
 
 .cart-3:hover {
     color: #6f41bb;
 }
 
+.planes #plananual h2, #planmensual h2 {
+margin-top: 1rem;
+}
 
 .plan, .planA {
     color: black;
@@ -63,6 +66,8 @@ body {
     padding: 2rem;
     background-color: white;
     margin-left: 25px;
+    align-items: stretch;
+    height: 20rem;
 }
 
 .planA h1, .plan h1 {
