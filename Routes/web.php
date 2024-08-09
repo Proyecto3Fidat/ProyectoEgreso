@@ -4,39 +4,26 @@ use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
 use App\Controllers\UsuarioController;
+use App\Controllers\Error404;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
 
-// Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
 
-// Ruta para el inicio
 SimpleRouter::get('/', [HomeController::class, 'index']);
-
-//Funcion get favicon.ico para resolver error del navegador
-SimpleRouter::get('/favicon.ico', function() {
-});
-// Ruta para el login de clientes
-SimpleRouter::get('/login', function() {
+SimpleRouter::get('/login', function(){
     header('Location: App/Views/loginusuario.html');
 });
 
-// Ruta para el registro de clientes
-SimpleRouter::get('/registrarcliente', function() {
+SimpleRouter::get('/registrarcliente', function(){
     header('Location: App/Views/crearUsuario.html');
 });
 
-// Ruta para los horarios
-SimpleRouter::get('/horarios', function() {
-    header('Location: App/Views/agenda.html');
-});
-
-// Ruta para los planes
-SimpleRouter::get('/planes', function() {
-    header('Location: App/Views/planes.html');
+//Funcion get favicon.ico para resolver error del navegador
+SimpleRouter::get('/favicon.ico', function() {
 });
 
 // Ruta para registrar clientes (POST)
@@ -66,7 +53,43 @@ SimpleRouter::post('/registrarcliente', function() use ($logger) {
     }
 });
 
-// Ruta para el login de clientes (POST)
+SimpleRouter::post('/modificarNombre', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if(!$usuarioController->comprobarUsuario() == false){
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clienteController->modificarNombre($_POST['nroDocumento'],$_POST['nombre']);
+    }
+});
+SimpleRouter::post('/modificarApellido', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if(!$usuarioController->comprobarUsuario() == false){
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clienteController->modificarApellido($_POST['nroDocumento'],$_POST['apellido']);
+    }
+});
+
+SimpleRouter::post('/registrarAdministrador', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    if(!$usuarioController->comprobarUsuario()){
+        $usuarioController->crearAdministrador();
+        $clienteController->crearAdministrador();
+
+    }
+});
+
 SimpleRouter::post('/login', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
@@ -74,13 +97,9 @@ SimpleRouter::post('/login', function() use ($logger) {
     $usuarioController->autenticar();
 });
 
-// Ruta para el logout
 SimpleRouter::get('/logout', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService, $logger);
     $usuarioController->logout();
 });
-
-// Iniciar el enrutador
-SimpleRouter::start();

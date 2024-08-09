@@ -1,2 +1,2 @@
-/vendor/
-Config/logs/app.log
+vendor
+Config/logs/*

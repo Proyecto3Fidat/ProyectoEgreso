@@ -7,7 +7,7 @@ class UsuarioModel{
     private $passwd;
 
     public function __construct($nroDocumento,$rol , $passwd){
-        $this->nroDocumento = $nroDocumento;
+        $this->nroDocumento = $nroDocumento."@".$rol;
         $this->rol = $rol;
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $passwdHASH;
