@@ -65,7 +65,11 @@ nav a:hover {
 }
 
 .agenda{
-    width: 3rem;
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .tituloent{
@@ -76,7 +80,6 @@ nav a:hover {
     cursor: default;
     margin-top: 5rem;
 }
-
 
 .btnent {
     display: flex;
