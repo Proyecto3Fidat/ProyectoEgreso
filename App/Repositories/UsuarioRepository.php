@@ -42,7 +42,7 @@ class UsuarioRepository {
         echo $usuarioModel->getPasswd();   
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "sis",
+            "sss",
             $nroDocumento,
             $rol,
             $passwd
