@@ -102,6 +102,8 @@ class ClienteController {
             window.location.href = '../../Public/inicio.html'; 
           </script>";
         }else {
+            echo "token valido";
+
             return $this->clienteService->listarClientes();
         }
     }

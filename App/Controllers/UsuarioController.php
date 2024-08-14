@@ -54,6 +54,7 @@ class UsuarioController {
                         $_SESSION['documento'] = $documento;
                         $_SESSION['nombre'] = $nombre;
                         $_SESSION['rol'] = $rol;
+                        $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../App/Views/entrenador.html'; 
@@ -63,6 +64,7 @@ class UsuarioController {
                         $_SESSION['documento'] = $documento;
                         $_SESSION['nombre'] = $nombre;
                         $_SESSION['rol'] = $rol;
+                        $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../Public/inicio.html'; 

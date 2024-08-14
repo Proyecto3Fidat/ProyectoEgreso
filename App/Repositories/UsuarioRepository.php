@@ -43,7 +43,7 @@ class UsuarioRepository {
         $stmt->fetch();
         $stmt->close();
         $this->database->disconnect();
-        if ($etoken == $token){
+        if ($etoken == $token && $etoken != null){
             return true;
         }else{
             return false;

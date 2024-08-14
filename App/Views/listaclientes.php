@@ -10,8 +10,18 @@
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
-
-    $clientes = $clienteController->listarClientes();       
+    if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "entrenador"){
+        $redireccion = "loginusuario.html"; 
+    
+        echo "<script>
+                alert('No tiene permisos para ver esta página');
+                window.location.href = '$redireccion';
+            </script>";
+        exit(); 
+    }else {
+    $clientes = $clienteController->listarClientes();
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,3 +82,4 @@
     <script src="../../Public/js/script.js"></script>
 </body>
 </html>
+<?php } ?>

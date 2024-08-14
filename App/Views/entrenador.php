@@ -1,3 +1,18 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "entrenador"){
+    $redireccion = "loginusuario.html"; 
+
+    echo "<script>
+            alert('No tiene permisos para ver esta página');
+            window.location.href = '$redireccion';
+        </script>";
+    exit(); 
+}else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +46,7 @@
     </header>
         <section>
             <div>
-                <a class="tituloent" href="#">Bienvenido, *Nombre de entrenador*</a>
+                <a class="tituloent" href="#">Bienvenido, <?php echo $_SESSION['nombre'] ?></a>
             </div>
         </section>
         
@@ -115,3 +130,4 @@
 <script src="../../Public/js/script.js"></script>
 </body>
 </html>
+<?php } ?>
