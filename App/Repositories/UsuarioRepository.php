@@ -30,7 +30,25 @@ class UsuarioRepository {
             return false;
         }
     }
-    
+    public function comprobarToken($documento, $token){
+        $this->database->connect();
+        $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        if($stmt->error){
+            echo "error";
+        }   
+        $stmt->bind_result($etoken);
+        $stmt->fetch();
+        $stmt->close();
+        $this->database->disconnect();
+        if ($etoken == $token){
+            return true;
+        }else{
+            return false;
+        }
+    }
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
@@ -90,6 +108,7 @@ class UsuarioRepository {
         if (password_verify($passwd, $epasswd)){
             return [
                 'nombre' => $this->nombreCliente($edocumento),
+                'documento' => $edocumento, 
                 'rol' => $rol,
                 'resultado' => true,
                 'token' => $this->devolverToken($edocumento)

@@ -8,12 +8,37 @@
          welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="/registrarcliente" class="sign-in-btn">Registrarse</a></li>';
      }
  });
+function cargarClientes() {
+        // Obtener los clientes del local storage
+        const clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+        
+        // Obtener la referencia a la tabla
+        const tablaClientes = document.querySelector('.lista-clientes');
+
+        // Limpiar las filas existentes (excepto la de los encabezados)
+        tablaClientes.querySelectorAll('tr:not(:first-child)').forEach(row => row.remove());
+
+        // Agregar cada cliente a la tabla
+        clientes.forEach(cliente => {
+            const fila = document.createElement('tr');
+            const nombreCell = document.createElement('td');
+            const documentoCell = document.createElement('td');
+
+            nombreCell.textContent = cliente.nombre;
+            documentoCell.textContent = cliente.documento;
+
+            fila.appendChild(nombreCell);
+            fila.appendChild(documentoCell);
+            tablaClientes.appendChild(fila);
+        });
+    }
 
  const urlParams = new URLSearchParams(window.location.search);
  const error = urlParams.get('error');
  if (error === 'true') {
      document.getElementById('error-message').textContent = 'El usuario o la contraseña es incorrecto.';
  }
+
 function validateForm() {
     var altura = document.getElementById("altura").value;
     var alturaPattern = /^\d(\.\d{1,2})?$/;

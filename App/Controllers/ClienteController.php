@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 use App\Services\ClienteService;
+use App\Services\UsuarioService;
+use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
 use Monolog\Logger;
 
@@ -91,5 +93,16 @@ class ClienteController {
     public function comprobarCliente() {
         return $this->clienteService->comprobarCliente($_POST['nroDocumento']);
     }
-
+    public function listarClientes() {
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+        if($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']) == false){
+            echo "<script>
+            alert('Alerta de seguridad: Token invalido');
+            window.location.href = '../../Public/inicio.html'; 
+          </script>";
+        }else {
+            return $this->clienteService->listarClientes();
+        }
+    }
 }

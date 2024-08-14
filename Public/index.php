@@ -2,7 +2,6 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
 require_once '../vendor/autoload.php';
 use Pecee\SimpleRouter\SimpleRouter;
 require_once  '../Config/monolog.php';

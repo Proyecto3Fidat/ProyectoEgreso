@@ -49,4 +49,7 @@ class ClienteService {
        return $this->clienteRepository->comprobarCliente($documento);
       
     }
+    public function listarClientes() {
+            return $this->clienteRepository->listarClientes();
+    }
 }

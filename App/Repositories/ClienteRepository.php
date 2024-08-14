@@ -302,5 +302,24 @@ class ClienteRepository extends Database {
             return "false";
         }
     }
+    public function listarClientes(){
+        $database = Database::getInstance();
+        $database->connect(); 
+        $sql = "SELECT nombre, nroDocumento FROM Cliente";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($nombre, $nroDocumento);
+        $clientes = array();
+        while ($stmt->fetch()) {
+            $clientes[] = array(
+                'nombre' => $nombre,
+                'nroDocumento' => $nroDocumento
+            );
+        }
+        $stmt->close();
+        $database->disconnect();
+        return $clientes;
+    }
 
 }

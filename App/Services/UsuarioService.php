@@ -26,4 +26,7 @@ class UsuarioService {
     public function generarToken() {
         return bin2hex(random_bytes(16));
     }
+    public function comprobarToken($documento, $token) {
+        return $this->usuarioRepository->comprobarToken($documento, $token);
+    }
 }

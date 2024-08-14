@@ -1,3 +1,18 @@
+<?php
+    require __DIR__ . '/../../vendor/autoload.php';
+    use App\Controllers\ClienteController;   
+    use App\Services\ClienteService;
+    use App\Repositories\ClienteRepository;
+
+    $config = require __DIR__ . '/../../Config/monolog.php';
+    $logger = $config['logger']();
+
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+
+    $clientes = $clienteController->listarClientes();       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +32,10 @@
             <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
                 <div class="menu1">
                     <ul class="listmenu1">
-                        <li><a href="#" class="inicioa">Inicio</a></li>
-                        <li><a href="../App/Views/agenda.html" class="inicioa">Horarios</a></li>
-                        <li><a href="../App/Views/planes.html" class="inicioa">Planes</a></li>
-                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="/" class="inicioa">Inicio</a></li>
+                        <li><a href="/horarios" class="inicioa">Horarios</a></li>
+                        <li><a href="/planes" class="inicioa">Planes</a></li>
+                        <li><a href="/">Nosotros</a></li>
                     </ul>
                 </div>
                 <div class="menu2">
@@ -37,9 +52,18 @@
                 <th>Documento</th>
                 <!--<th><a href="#"><button class="btn-detalles">Detalles</button></a></th>-->
             </tr>
-            <tr>
-                
-            </tr>
+            <?php if (is_array($clientes) || is_object($clientes)) : ?>
+                <?php foreach ($clientes as $cliente) : ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
+                        <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <tr>
+                    <td colspan="2">No hay clientes disponibles.</td>
+                </tr>
+            <?php endif; ?>
         </table>
     </section>
 

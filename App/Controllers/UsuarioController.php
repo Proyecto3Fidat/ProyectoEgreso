@@ -1,6 +1,10 @@
 <?php
 namespace App\Controllers;
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 use App\Services\UsuarioService;
 use App\Models\UsuarioModel;
 use App\Repositories\UsuarioRepository;
@@ -43,15 +47,22 @@ class UsuarioController {
                 $rol = $resultadoAutenticacion['rol'];
                 $nombre = $resultadoAutenticacion['nombre'];
                 $token = $resultadoAutenticacion['token'];
+                $documento = $resultadoAutenticacion['documento'];
                 switch($rol){
                     case "entrenador": 
                         $_SESSION['token'] = $token;
+                        $_SESSION['documento'] = $documento;
+                        $_SESSION['nombre'] = $nombre;
+                        $_SESSION['rol'] = $rol;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../App/Views/entrenador.html'; 
                             </script>";
                     case "cliente":
                         $_SESSION['token'] = $token;
+                        $_SESSION['documento'] = $documento;
+                        $_SESSION['nombre'] = $nombre;
+                        $_SESSION['rol'] = $rol;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../Public/inicio.html'; 
@@ -75,10 +86,13 @@ class UsuarioController {
     
     public function logout() {
         $this->logger->info('Se deslogeo '. $_GET['nombre']); 
+        session_unset();
+        session_destroy();
         echo "<script>
             localStorage.removeItem('nombre');
             window.location.href = '../../Public/inicio.html';
             </script>";
+        exit();
     }        
 }    
 

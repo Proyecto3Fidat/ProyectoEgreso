@@ -34,14 +34,14 @@ class Database {
         if ($this->conn->connect_error) {
             die("Conexión fallida: " . $this->conn->connect_error);
         }
-        echo "Conexión exitosa";
+        //echo "Conexión exitosa";
     }
 
     public function disconnect() {
         if ($this->conn !== null) {
             $this->conn->close();
             $this->conn = null;
-            echo "Conexión cerrada";
+           // echo "Conexión cerrada";
         }
     }
 
