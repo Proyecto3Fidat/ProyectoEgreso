@@ -41,10 +41,17 @@ class UsuarioController {
                 $this->logger->info('El usuario: '. $_POST['documento']. " se autentico correctamente");
                 $rol = $resultadoAutenticacion['rol'];
                 $nombre = $resultadoAutenticacion['nombre'];
+                if($rol == 2){
+                    echo "<script>
+                    localStorage.setItem('nombre', '" . $nombre . "');
+                    window.location.href = '../../App/Views/entrenador.html'; 
+                    </script>"; 
+                }else {
                 echo "<script>
                     localStorage.setItem('nombre', '" . $nombre . "');
                     window.location.href = '../../Public/inicio.html'; 
-                    </script>"; 
+                    </script>";
+                }
             }
     }
     
