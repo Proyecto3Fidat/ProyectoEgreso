@@ -38,7 +38,28 @@ class UsuarioRepository {
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
-        $passwd = $usuarioModel->getPasswd();     
+        $passwd = $usuarioModel->getPasswd();    
+        echo $usuarioModel->getPasswd();   
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "sis",
+            $nroDocumento,
+            $rol,
+            $passwd
+        );
+        $stmt->execute();
+        $stmt->close();
+        $this->database->disconnect();
+    }
+    public function guardarAdministrador(UsuarioModel $usuarioModel){
+        $this->database->connect();
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
+                VALUES (?,?, ?)";
+        
+        $nroDocumento = $usuarioModel->getNroDocumento();
+        $rol = $usuarioModel->getRol();
+        $passwd = $usuarioModel->getPasswd();    
+        echo $usuarioModel->getPasswd();   
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "sis",
@@ -53,19 +74,22 @@ class UsuarioRepository {
     
     public function autenticar($nroDocumento, $passwd) {
         $this->database->connect();
-        $sql = "SELECT passwd , nroDocumento FROM Usuario WHERE nroDocumento = ?";
+        $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
-            // echo "error";
+            echo "error";
         }
-        $stmt->bind_result($epasswd, $edocumento);
+        $stmt->bind_result($epasswd, $edocumento, $rol);
         $stmt->fetch();
         $stmt->close();
         $this->database->disconnect();
         if (password_verify($passwd, $epasswd)){
-            return $this->nombreCliente($edocumento);
+            return [
+                'nombre' => $this->nombreCliente($edocumento),
+                'rol' => $rol
+            ];
         }else{
             return false;
         }
@@ -77,7 +101,7 @@ class UsuarioRepository {
         $stmt->bind_param("i", $documento);
         $stmt->execute();
         if($stmt->error){
-            // echo "error";
+            echo "error";
         }
         $stmt->bind_result($nombre);
         $stmt->fetch();

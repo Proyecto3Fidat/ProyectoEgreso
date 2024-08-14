@@ -24,7 +24,7 @@ class UsuarioController {
         $this->logger->info('Se intento crear el usuario: '. $_POST['nroDocumento']);
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
-            1,
+            "cliente",
             $_POST['passwd']
         );
         $this->usuarioService->crearUsuario($usuario);
@@ -32,17 +32,39 @@ class UsuarioController {
 
     public function autenticar(){
             $this->logger->info('Se intento autenticar el usuario: '. $_POST['documento']);
-            if ($this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) == false) {
+            $resultadoAutenticacion = $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']);
+
+            if ( $resultadoAutenticacion == false) {
                 header("Location: ../../App/Views/loginusuario.html?error=true");
                 $this->logger->info('El usuario: '. $_POST['documento']. " no se autentico correctamente");
             } else { 
                 $this->logger->info('El usuario: '. $_POST['documento']. " se autentico correctamente");
+                $rol = $resultadoAutenticacion['rol'];
+                $nombre = $resultadoAutenticacion['nombre'];
+                if($rol == 2){
+                    echo "<script>
+                    localStorage.setItem('nombre', '" . $nombre . "');
+                    window.location.href = '../../App/Views/entrenador.html'; 
+                    </script>"; 
+                }else {
                 echo "<script>
-                    localStorage.setItem('nombre', '" . $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']) . "');
+                    localStorage.setItem('nombre', '" . $nombre . "');
                     window.location.href = '../../Public/inicio.html'; 
                     </script>";
+                }
             }
     }
+    
+    public function crearAdministrador(){
+        $this->logger->info('Se intento crear el administrador: '. $_POST['nroDocumento']);
+        $usuario = new UsuarioModel(
+            $_POST['nroDocumento'],
+            $_POST['rol'],
+            $_POST['passwd']
+        );
+        $this->usuarioService->crearAdministrador($usuario);
+    }
+
     
     public function logout() {
         $this->logger->info('Se deslogeo '. $_GET['nombre']); 
@@ -50,6 +72,7 @@ class UsuarioController {
             localStorage.removeItem('nombre');
             window.location.href = '../../Public/inicio.html';
             </script>";
-    }
-}
+    }        
+}    
+
 ?>

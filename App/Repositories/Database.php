@@ -8,6 +8,7 @@ class Database {
     private $password;
     private $dbname;
     private $conn;
+    private static $instance = null;
 
     public function __construct($servername = "localhost", $username = "admin", $password = "admin", $dbname = "fidatbd") {
         $this->servername = $servername;
@@ -16,6 +17,13 @@ class Database {
         $this->dbname = $dbname;
         $this->conn = null;
     }
+    
+    public static function getInstance() {
+        if (self::$instance == null) {
+            self::$instance = new Database();
+        }
+        return self::$instance;
+    }
 
     public function connect() {
         $this->conn = new \mysqli($this->servername, $this->username, $this->password, $this->dbname);
@@ -23,14 +31,14 @@ class Database {
         if ($this->conn->connect_error) {
             die("Conexión fallida: " . $this->conn->connect_error);
         }
-        // echo "Conexión exitosa";
+        echo "Conexión exitosa";
     }
 
     public function disconnect() {
         if ($this->conn !== null) {
             $this->conn->close();
             $this->conn = null;
-            // echo "Conexión cerrada";
+            echo "Conexión cerrada";
         }
     }
 
