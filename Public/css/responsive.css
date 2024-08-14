@@ -72,18 +72,51 @@
     }
 
     /*Botones de entrenador*/
-    .btnent {
+    .btnent{
         display: flex;
         justify-content: center;
         flex-direction: column;
         text-align: center;
         margin: 8rem;
-        gap: 0;
-        width: 15rem;
+        gap: 1px;
         margin-top: 2rem;
     }
-}
 
     .horarios{
-
+        width:auto;
+        cursor: pointer;
     }
+
+    .horarios, .horarios thead, .horarios tbody, .horarios th, .horarios td, .horarios tr {
+        display: block;
+        width: 100%;
+    }
+
+    .horarios thead tr {
+        display: none;
+    }
+
+    .horarios tr {
+        margin-bottom: 15px;
+    }
+
+    .horarios td, .horarios th {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .horarios td::before, .horarios th::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    #diasagenda{
+        display: none;
+    }
+}

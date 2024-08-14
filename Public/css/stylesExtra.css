@@ -112,7 +112,9 @@ margin-top: 1rem;
 }
 
 .agenda h1:hover {
+    transition: color 0.3s, background-color 0.3s;
     color: #6f41bb;
+   
 }
 
 
@@ -144,20 +146,17 @@ margin-top: 1rem;
     border-bottom: 1px solid #fff; 
 }
 
-
 .horarios tr:nth-child(even) {
-    background-color: #333; 
+    background-color: #222; 
 }
 
 .horarios tr:nth-child(odd) {
     background-color: #222; 
 }
 
-
-.horarios tr:hover {
-    background-color: #444; 
+.horarios td:hover{
+    background-color: #555;
 }
-
 
 form {
     max-width: 600px;

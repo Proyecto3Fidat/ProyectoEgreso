@@ -70,6 +70,7 @@ nav a:hover {
     margin: 1rem;
     flex-direction: column;
     gap: 1rem;
+    
 }
 
 .tituloent{
@@ -86,6 +87,15 @@ nav a:hover {
     justify-content: center;
     flex-direction: row;
     gap: 3rem;
+    
+}
+
+.clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
+    transform: scale(1.2);
+}
+
+.clienteslist, .ejerciciolist, .rutinaslist{
+    transition: transform 0.8s ease-in-out; /*Metodo que logra detalle de animacion tipo "progresion"*/
 }
 
 button { 
@@ -100,12 +110,6 @@ button {
     background-color: #6f41bb;
     border: 0;
 }
-
-button:hover { 
-    background-color: transparent;
-    transition: color 0.4s, background-color 0.4s;
-}
-
 
 .lista-clientes {
     margin: 0 auto; 
