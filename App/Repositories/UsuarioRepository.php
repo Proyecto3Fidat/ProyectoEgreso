@@ -7,7 +7,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 use App\Models\UsuarioModel;
 
-class UsuarioRepository {
+class UsuarioRepository  extends Database {
     private $database;
 
     public function __construct() {
@@ -52,7 +52,7 @@ class UsuarioRepository {
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
-                VALUES (?,?, ?)";
+                VALUES (?,?,?,?)";
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
@@ -71,7 +71,8 @@ class UsuarioRepository {
         $this->database->disconnect();
     }
     public function guardarEntrenador(UsuarioModel $usuarioModel){
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect(); 
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
                 VALUES (?,?, ?, ?)";
         
@@ -79,7 +80,8 @@ class UsuarioRepository {
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();    
         $token = $usuarioModel->getToken();
-        $stmt = $this->database->getConnection()->prepare($sql);
+        
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "ssss",
             $nroDocumento,
@@ -89,7 +91,7 @@ class UsuarioRepository {
         );
         $stmt->execute();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
     }
     
     public function autenticar($nroDocumento, $passwd): array{

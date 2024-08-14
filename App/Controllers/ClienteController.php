@@ -5,6 +5,7 @@ use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
 use Monolog\Logger;
+use TCPDF;
 
 class ClienteController {
     private $clienteService;
@@ -106,5 +107,42 @@ class ClienteController {
 
             return $this->clienteService->listarClientes();
         }
+    }
+    public function imprimirUsuarios() {
+        $usuarios = $this->clienteService->listarClientes();
+
+        $pdf = new TCPDF();
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('SIGEN');
+        $pdf->SetTitle('Lista de Usuarios');
+        $pdf->SetSubject('Lista de Usuarios');
+        $pdf->SetKeywords('TCPDF, PDF, usuarios');
+
+        $pdf->AddPage();
+        $pdf->SetFont('helvetica', '', 12);
+
+        $html = '<h1>Lista de Usuarios</h1>';
+        $html .= '<table border="1" cellpadding="5">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Numero Documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+        foreach ($usuarios as $usuario) {
+            $html .= '<tr>
+                        <td>' . htmlspecialchars($usuario['nombre']) . '</td>
+                        <td>' . htmlspecialchars($usuario['apellido']) . '</td>
+                        <td>' . htmlspecialchars($usuario['nroDocumento']) . '</td>
+                      </tr>';
+        }
+
+        $html .= '</tbody></table>';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Output('lista_usuarios.pdf', 'I');
     }
 }

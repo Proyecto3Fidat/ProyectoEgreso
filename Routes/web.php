@@ -41,6 +41,13 @@ SimpleRouter::get('/planes', function() {
     header('Location: App/Views/planes.html');
 });
 
+SimpleRouter::get('/imprimirUsuarios', function() use ($logger) {
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $clienteController->imprimirUsuarios();
+});
+
 // Ruta para registrar clientes (POST)
 SimpleRouter::post('/registrarcliente', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();
