@@ -57,7 +57,7 @@ class UsuarioController {
                         $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/entrenador.html'; 
+                            window.location.href = '../../App/Views/entrenador.php'; 
                             </script>";
                     case "cliente":
                         $_SESSION['token'] = $token;

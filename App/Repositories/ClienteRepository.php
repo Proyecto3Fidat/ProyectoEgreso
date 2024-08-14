@@ -305,16 +305,17 @@ class ClienteRepository extends Database {
     public function listarClientes(){
         $database = Database::getInstance();
         $database->connect(); 
-        $sql = "SELECT nombre, nroDocumento FROM Cliente";
+        $sql = "SELECT nombre, nroDocumento, apellido FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($nombre, $nroDocumento);
+        $stmt->bind_result($nombre, $nroDocumento, $apellido);
         $clientes = array();
         while ($stmt->fetch()) {
             $clientes[] = array(
                 'nombre' => $nombre,
-                'nroDocumento' => $nroDocumento
+                'nroDocumento' => $nroDocumento,
+                'apellido' => $apellido
             );
         }
         $stmt->close();

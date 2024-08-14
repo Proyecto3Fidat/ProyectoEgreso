@@ -65,7 +65,7 @@
             <?php if (is_array($clientes) || is_object($clientes)) : ?>
                 <?php foreach ($clientes as $cliente) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($cliente['nombre']); ?></td>
+                        <td><?php echo htmlspecialchars($cliente['nombre'])." ". htmlspecialchars($cliente['apellido']); ?></td>
                         <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
                     </tr>
                 <?php endforeach; ?>
