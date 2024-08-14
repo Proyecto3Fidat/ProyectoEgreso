@@ -2,6 +2,10 @@
 
 namespace App\Repositories;
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 use App\Models\ClienteModel;
 
 class ClienteRepository extends Database {

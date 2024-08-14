@@ -23,4 +23,7 @@ class UsuarioService {
     public function crearEntrenador(UsuarioModel $usuarioModel) {
         $this->usuarioRepository->guardarEntrenador($usuarioModel);
     }
+    public function generarToken() {
+        return bin2hex(random_bytes(16));
+    }
 }

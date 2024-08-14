@@ -25,7 +25,8 @@ class UsuarioController {
         $usuario = new UsuarioModel(
             $_POST['nroDocumento'],
             "cliente",
-            $_POST['passwd']
+            $_POST['passwd'],
+            $this->usuarioService->generarToken()
         );
         $this->usuarioService->crearUsuario($usuario);
     }
@@ -41,14 +42,16 @@ class UsuarioController {
                 $this->logger->info('El usuario: '. $_POST['documento']. " se autentico correctamente");
                 $rol = $resultadoAutenticacion['rol'];
                 $nombre = $resultadoAutenticacion['nombre'];
-                echo $rol;
+                $token = $resultadoAutenticacion['token'];
                 switch($rol){
                     case "entrenador": 
+                        $_SESSION['token'] = $token;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../App/Views/entrenador.html'; 
-                            </script>"; 
+                            </script>";
                     case "cliente":
+                        $_SESSION['token'] = $token;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../Public/inicio.html'; 
@@ -63,7 +66,8 @@ class UsuarioController {
         $usuario = new UsuarioModel(
             $_POST['nroDocumento']."@"."entrenador",
             'entrenador',
-            $_POST['passwd']
+            $_POST['passwd'],
+            $this->usuarioService->generarToken()
         );
         $this->usuarioService->crearEntrenador($usuario);
     }

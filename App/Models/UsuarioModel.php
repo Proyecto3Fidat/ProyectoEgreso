@@ -5,12 +5,14 @@ class UsuarioModel{
     private $nroDocumento;
     private $rol;
     private $passwd;
+    private $token;
 
-    public function __construct($nroDocumento, $rol , $passwd){
+    public function __construct($nroDocumento, $rol , $passwd, $token){
         $this->nroDocumento = $nroDocumento;
         $this->rol = $rol;
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $passwdHASH;
+        $this->token = $token;
         }
 
     public function getNroDocumento()
@@ -41,6 +43,14 @@ class UsuarioModel{
     public function setPasswd($passwd){
         $passwdHASH = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $passwdHASH;
+    }
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    public function setToken($token){
+        $this->token = $token;
     }
 
 }

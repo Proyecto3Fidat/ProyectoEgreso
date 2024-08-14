@@ -33,19 +33,20 @@ class UsuarioRepository {
     
     public function guardar(UsuarioModel $usuarioModel){
         $this->database->connect();
-        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
                 VALUES (?,?, ?)";
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();    
-        echo $usuarioModel->getPasswd();   
+        $token = $usuarioModel->getToken();
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "sss",
+            "ssss",
             $nroDocumento,
             $rol,
-            $passwd
+            $passwd,
+            $token
         );
         $stmt->execute();
         $stmt->close();
@@ -53,21 +54,20 @@ class UsuarioRepository {
     }
     public function guardarEntrenador(UsuarioModel $usuarioModel){
         $this->database->connect();
-        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
-                VALUES (?,?, ?)";
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
+                VALUES (?,?, ?, ?)";
         
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();    
-        echo " Passwd ".$usuarioModel->getPasswd();
-        echo " Rol: ".$usuarioModel->getRol();
-        echo "Documento: ".$usuarioModel->getNroDocumento();
+        $token = $usuarioModel->getToken();
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "sss",
+            "ssss",
             $nroDocumento,
             $rol,
-            $passwd
+            $passwd,
+            $token
         );
         $stmt->execute();
         $stmt->close();
@@ -91,7 +91,8 @@ class UsuarioRepository {
             return [
                 'nombre' => $this->nombreCliente($edocumento),
                 'rol' => $rol,
-                'resultado' => true
+                'resultado' => true,
+                'token' => $this->devolverToken($edocumento)
             ];
         }else{
             return ['resultado' => false];
@@ -111,6 +112,22 @@ class UsuarioRepository {
         $stmt->close();
         $this->database->disconnect();
         return $nombre;
+    }
+
+    public function devolverToken($documento){
+        $this->database->connect();
+        $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        if($stmt->error){
+            echo "error";
+        }
+        $stmt->bind_result($token);
+        $stmt->fetch();
+        $stmt->close();
+        $this->database->disconnect();
+        return $token;
     }
 }
 ?>

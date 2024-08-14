@@ -1,6 +1,9 @@
 <?php
-
 namespace App\Repositories;
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 class Database {
     private $servername;
