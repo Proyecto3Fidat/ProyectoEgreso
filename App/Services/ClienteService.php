@@ -14,8 +14,8 @@ class ClienteService {
     public function crearCliente(ClienteModel $clienteModel) {
         $this->clienteRepository->guardar($clienteModel);
     }
-    public function crearAdministrador(ClienteModel $clienteModel) {
-        $this->clienteRepository->guardarAdministrador($clienteModel);
+    public function crearEntrenador(ClienteModel $clienteModel) {
+        $this->clienteRepository->guardarEntrenador($clienteModel);
     }
     public function emailBienvenida($email) {
         $para = $email;
@@ -44,5 +44,9 @@ class ClienteService {
     public function modificarApellido($nroDocumento, ClienteModel $cliente){
         $this->clienteRepository->modificarApellido($nroDocumento, $cliente);
     }
-    
+    public function comprobarCliente($documento) {
+
+       return $this->clienteRepository->comprobarCliente($documento);
+      
+    }
 }

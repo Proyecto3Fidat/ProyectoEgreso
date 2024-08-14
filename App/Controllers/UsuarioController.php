@@ -33,8 +33,8 @@ class UsuarioController {
     public function autenticar(){
             $this->logger->info('Se intento autenticar el usuario: '. $_POST['documento']);
             $resultadoAutenticacion = $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']);
-
-            if ( $resultadoAutenticacion == false) {
+            $resultado = $resultadoAutenticacion['resultado'];
+            if ($resultado == false) {
                 header("Location: ../../App/Views/loginusuario.html?error=true");
                 $this->logger->info('El usuario: '. $_POST['documento']. " no se autentico correctamente");
             } else { 
@@ -55,14 +55,14 @@ class UsuarioController {
             }
     }
     
-    public function crearAdministrador(){
+    public function crearEntrenador(){
         $this->logger->info('Se intento crear el administrador: '. $_POST['nroDocumento']);
         $usuario = new UsuarioModel(
-            $_POST['nroDocumento'],
-            $_POST['rol'],
+            $_POST['nroDocumento']."@"."entrenador",
+            'entrenador',
             $_POST['passwd']
         );
-        $this->usuarioService->crearAdministrador($usuario);
+        $this->usuarioService->crearEntrenador($usuario);
     }
 
     

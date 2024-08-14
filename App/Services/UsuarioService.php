@@ -13,7 +13,6 @@ class UsuarioService {
 
     public function comprobarUsuario($documento) {
         return $this->usuarioRepository->comprobarUsuario($documento);
-
     }
     public function crearUsuario(UsuarioModel $usuarioModel) {
         $this->usuarioRepository->guardar($usuarioModel);
@@ -21,7 +20,7 @@ class UsuarioService {
     public function autenticar($documento,$passwd) {
         return $this->usuarioRepository->autenticar($documento,$passwd);
     }
-    public function crearAdministrador(UsuarioModel $usuarioModel) {
-        $this->usuarioRepository->guardarAdministrador($usuarioModel);
+    public function crearEntrenador(UsuarioModel $usuarioModel) {
+        $this->usuarioRepository->guardarEntrenador($usuarioModel);
     }
 }

@@ -51,7 +51,7 @@ class ClienteRepository extends Database {
         $stmt->close();
         $database->disconnect(); 
     }
-    public function guardarAdministrador(ClienteModel $clienteModel){
+    public function guardarEntrenador(ClienteModel $clienteModel){
         $database = Database::getInstance();
         $database->connect(); 
         $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, email, nombre, apellido) 
@@ -278,6 +278,25 @@ class ClienteRepository extends Database {
         $stmt->execute();
         $stmt->close();
         $database->disconnect();
+    }
+
+    public function comprobarCliente($nroDocumento) {
+        $database = Database::getInstance();
+        $database->connect(); 
+        $sql = "SELECT nroDocumento FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);  
+        $stmt->execute();
+        $stmt->store_result();
+        $num_of_rows = $stmt->num_rows;
+        $stmt->close();
+        $database->disconnect();
+        if ($num_of_rows > 0) {
+            return "true";
+
+        }else {
+            return "false";
+        }
     }
 
 }

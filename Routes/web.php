@@ -82,5 +82,21 @@ SimpleRouter::get('/logout', function() use ($logger) {
     $usuarioController->logout();
 });
 
+SimpleRouter::post('/registrarEntrenador', function() use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    if($clienteController->comprobarCliente() == "false"){
+        $clienteController->crearEntrenador();
+        $usuarioController->crearEntrenador();
+        exit();
+    }else{
+        $usuarioController->crearEntrenador();
+        exit();
+    }
+});
 // Iniciar el enrutador
 SimpleRouter::start();

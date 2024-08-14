@@ -51,7 +51,7 @@ class UsuarioRepository {
         $stmt->close();
         $this->database->disconnect();
     }
-    public function guardarAdministrador(UsuarioModel $usuarioModel){
+    public function guardarEntrenador(UsuarioModel $usuarioModel){
         $this->database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd) 
                 VALUES (?,?, ?)";
@@ -59,10 +59,12 @@ class UsuarioRepository {
         $nroDocumento = $usuarioModel->getNroDocumento();
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();    
-        echo $usuarioModel->getPasswd();   
+        echo " Passwd ".$usuarioModel->getPasswd();
+        echo " Rol: ".$usuarioModel->getRol();
+        echo "Documento: ".$usuarioModel->getNroDocumento();
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "sis",
+            "sss",
             $nroDocumento,
             $rol,
             $passwd
@@ -72,7 +74,7 @@ class UsuarioRepository {
         $this->database->disconnect();
     }
     
-    public function autenticar($nroDocumento, $passwd) {
+    public function autenticar($nroDocumento, $passwd): array{
         $this->database->connect();
         $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
@@ -88,10 +90,11 @@ class UsuarioRepository {
         if (password_verify($passwd, $epasswd)){
             return [
                 'nombre' => $this->nombreCliente($edocumento),
-                'rol' => $rol
+                'rol' => $rol,
+                'resultado' => true
             ];
         }else{
-            return false;
+            return ['resultado' => false];
         }
     }
     public function nombreCliente($documento){

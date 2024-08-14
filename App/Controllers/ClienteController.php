@@ -36,7 +36,7 @@ class ClienteController {
         $this->clienteService->emailBienvenida($email);
     }
 
-    public function crearAdministrador(){
+    public function crearEntrenador(){
         $cliente = new ClienteModel(
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],
@@ -51,7 +51,7 @@ class ClienteController {
             $_POST['nombre'],
             $_POST['apellido'],
         );
-        $this->clienteService->crearAdministrador($cliente);
+        $this->clienteService->crearEntrenador($cliente);
     }
 
     public function modificarNombre($nroDocumento, $nombre){
@@ -87,6 +87,9 @@ class ClienteController {
             $apellido,
         );
         $this->clienteService->modificarApellido($nroDocumento, $cliente);
+    }
+    public function comprobarCliente() {
+        return $this->clienteService->comprobarCliente($_POST['nroDocumento']);
     }
 
 }
