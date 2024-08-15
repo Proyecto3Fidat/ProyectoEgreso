@@ -98,4 +98,48 @@ h1 {
     margin-top: 2rem;
 }
 
-
+.agendaCliente { 
+    margin-top: 0;
+    padding: 0;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .horariosCliente {
+    align-items: center;
+    margin-top: 2rem; 
+    padding: 0;
+    width: 100%;
+    border-collapse: collapse; 
+    background-color: black;
+    color: white;
+    border-radius: 10px; 
+    overflow: hidden; 
+  }
+  
+  .horariosCliente th, .horariosCliente td {
+    padding: 1rem; 
+    text-align: center; 
+    border: 1px solid #fff; 
+  }
+  
+  .horariosCliente th {
+    background-color: #6f41bb; 
+    color: black; 
+    font-size: 1rem; 
+  }
+  
+  .horariosCliente td {
+    border-bottom: 1px solid #fff; 
+  }
+  
+  .horariosCliente tr:nth-child(even) {
+    background-color: #222; 
+  }
+  
+  .horariosCliente tr:nth-child(odd) {
+    background-color: #222; 
+  }
+  
+  .horariosCliente td:hover{
+    background-color: #555;
+  }
