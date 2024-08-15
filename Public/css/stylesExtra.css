@@ -10,6 +10,7 @@
 
 body {
     color: #030303;
+    
 }
 
 header { 
@@ -23,51 +24,19 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: black;
-}
-
-
-.cart, .cart-2, .cart-3 {
-    color: white;
-    position: relative;
-    top: 5.9rem;
-    cursor: pointer;
-}
-
-.cart {
-    right: 73.5%;
-}
-
-.cart:hover {
-    color: #6f41bb;
-}
-
-.cart-2 {
-    right: 48%;
-}
-
-.cart-2:hover {
-    color: #6f41bb;
-}
-
-.cart-3 {
-    right: 21.5%;
-}
-
-.cart-3:hover {
-    color: #6f41bb;
+    background-color: #100e0f;
 }
 
 .planes #plananual h2, #planmensual h2 {
 margin-top: 1rem;
 }
 
-.plan, .planA {
+.planA {
     color: black;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 20px;
     padding: 2rem;
-    background-color: white;
+    background-color: rgb(209, 194, 194);
     margin-left: 25px;
     align-items: stretch;
     height: 20rem;
@@ -75,20 +44,23 @@ margin-top: 1rem;
 
 .planA h1, .plan h1 {
     font-size: 1.2rem;
-    color: #4B0082;
+    color: #6f41bb;
     text-align: center;
 }
 
-.planA h2, .plan h2 {
+.planA a h2 {
+    padding: 0;
     font-size: 1.1rem;
     text-align: center;
-    color: #4B0082;
+    color: #6f41bb;
+    cursor: default;
 }
 
-.planA h2:hover, .plan h2:hover {
-    color: #6f41bb;
+.planA  a h2 span:hover {
+    color: #9c6aec;
     cursor: pointer;
 }
+
 
 .planA p, .plan p {
     font-weight: 600;
