@@ -22,7 +22,7 @@ CREATE TABLE Usuario(
     rol int,
     passwd VARCHAR(255) NOT NULL,
     token VARCHAR(255) NOT NULL,
-    PRIMARY KEY(nroDocumento,rol)
+    PRIMARY KEY(nroDocumento)
 );
 
 CREATE TABLE Cliente_Telefono(
