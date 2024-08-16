@@ -96,12 +96,26 @@ class UsuarioRepository  extends Database {
         $stmt->close();
         $database->disconnect();
     }
-    
+    public function guardarDeportista($cedula){
+        $database = Database::getInstance();
+        $database->connect(); 
+        $sql = "UPDATE Usuario SET rol = ? WHERE nroDocumento = ?";
+        $deportista = "deportista";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "ss",
+            $deportista,
+            $cedula
+        );
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
     public function autenticar($nroDocumento, $passwd): array{
         $database = Database::getInstance();
         $database->connect();
         $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         if($stmt->error){
@@ -127,7 +141,7 @@ class UsuarioRepository  extends Database {
         $database = Database::getInstance();
         $database->connect();
         $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $documento);
         $stmt->execute();
         if($stmt->error){
@@ -144,7 +158,7 @@ class UsuarioRepository  extends Database {
         $database = Database::getInstance();
         $database->connect();
         $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();
         if($stmt->error){

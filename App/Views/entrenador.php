@@ -2,8 +2,16 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+use App\Controllers\UsuarioController;
+use App\Services\UsuarioService;
+use App\Repositories\UsuarioRepository;
+$config = require __DIR__ . '/../../Config/monolog.php';
+$logger = $config['logger']();
+$usuarioRepository = new UsuarioRepository();
+$usuarioService = new UsuarioService($usuarioRepository);
+$usuarioController = new UsuarioController($usuarioService, $logger);
 
-if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "entrenador"){
+if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "entrenador" && $usuarioController->comprobarToken()){
     $redireccion = "loginusuario.html"; 
 
     echo "<script>

@@ -29,4 +29,8 @@ class UsuarioService {
     public function comprobarToken($documento, $token) {
         return $this->usuarioRepository->comprobarToken($documento, $token);
     }
+    public function guardarDeportista($documento){
+        $this->usuarioRepository->guardarDeportista($documento);
+
+    }
 }

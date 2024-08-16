@@ -20,48 +20,72 @@ $logger = $config['logger']();
 
 // Ruta para el inicio
 SimpleRouter::get('/', [HomeController::class, 'index']);
+SimpleRouter::get('/inicio', function() {
+    header('Location: Public/inicio.html');
+});
 
 //Funcion get favicon.ico para resolver error del navegador
-SimpleRouter::get('/favicon.ico', function() {
+SimpleRouter::get('/favicon.ico', function () {
 });
 // Ruta para el login de clientes
-SimpleRouter::get('/login', function() {
+SimpleRouter::get('/login', function () {
     header('Location: App/Views/loginusuario.html');
 });
 
 // Ruta para el registro de clientes
-SimpleRouter::get('/registrarcliente', function() {
+SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
 });
 
 // Ruta para los horarios
-SimpleRouter::get('/horarios', function() {
+SimpleRouter::get('/horarios', function () {
     header('Location: App/Views/agenda.html');
 });
 
 // Ruta para los planes
-SimpleRouter::get('/planes', function() {
+SimpleRouter::get('/planes', function () {
     header('Location: App/Views/planes.html');
 });
 
-SimpleRouter::get('/imprimirUsuarios', function() use ($logger) {
+SimpleRouter::get('/imprimirUsuarios', function () use ($logger) {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
     $clienteController->imprimirUsuarios();
 });
-SimpleRouter::post('/guardarDeportista', function() use ($logger) {
+SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     $deportistaRepository = new DeportistaRepository();
     $deportistaService = new DeportistaService($deportistaRepository);
     $deportistaController = new DeportistaController($deportistaService, $logger);
-    $deportistaController->guardarDeportista();
-});
-// Ruta para registrar clientes (POST)
-SimpleRouter::post('/registrarcliente', function() use ($logger) {
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService, $logger);
-
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    } else {
+        if ($deportistaController->comprobarDeportista() == "false") {
+            $usuarioController->guardarDeportista();
+            $deportistaController->guardarDeportista();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Deportista ya esta registrado');
+                    window.location.href = '../../Public/inicio.html'; 
+                  </script>";
+        }
+    }
+});
+// Ruta para registrar clientes (POST)
+SimpleRouter::post('/registrarcliente', function () use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
     if (!$usuarioController->comprobarUsuario()) {
         $clienteRepository = new ClienteRepository();
         $clienteService = new ClienteService($clienteRepository);
@@ -84,7 +108,7 @@ SimpleRouter::post('/registrarcliente', function() use ($logger) {
 });
 
 // Ruta para el login de clientes (POST)
-SimpleRouter::post('/login', function() use ($logger) {
+SimpleRouter::post('/login', function () use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService, $logger);
@@ -92,25 +116,25 @@ SimpleRouter::post('/login', function() use ($logger) {
 });
 
 // Ruta para el logout
-SimpleRouter::get('/logout', function() use ($logger) {
+SimpleRouter::get('/logout', function () use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService, $logger);
     $usuarioController->logout();
 });
 
-SimpleRouter::post('/registrarEntrenador', function() use ($logger) {
+SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
     $usuarioRepository = new UsuarioRepository();
     $usuarioService = new UsuarioService($usuarioRepository);
     $usuarioController = new UsuarioController($usuarioService, $logger);
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
-    if($clienteController->comprobarCliente() == "false"){
+    if ($clienteController->comprobarCliente() == "false") {
         $clienteController->crearEntrenador();
         $usuarioController->crearEntrenador();
         exit();
-    }else{
+    } else {
         $usuarioController->crearEntrenador();
         exit();
     }

@@ -8,19 +8,22 @@ if (session_status() == PHP_SESSION_NONE) {
 
 use App\Models\ClienteModel;
 
-class ClienteRepository extends Database {
+class ClienteRepository extends Database
+{
     private $database;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
-    public function guardar(ClienteModel $clienteModel){
+    public function guardar(ClienteModel $clienteModel)
+    {
         $database = Database::getInstance();
-        $database->connect();    
+        $database->connect();
         $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
                 VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)";
-        
+
         $nroDocumento = $clienteModel->getNroDocumento();
         $tipoDocumento = $clienteModel->getTipoDocumento();
         $altura = $clienteModel->getAltura();
@@ -34,7 +37,7 @@ class ClienteRepository extends Database {
         $nombre = $clienteModel->getNombre();
         $apellido = $clienteModel->getApellido();
 
-        
+
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "ssiisissssss",
@@ -53,21 +56,22 @@ class ClienteRepository extends Database {
         );
         $stmt->execute();
         $stmt->close();
-        $database->disconnect(); 
+        $database->disconnect();
     }
-    public function guardarEntrenador(ClienteModel $clienteModel){
+    public function guardarEntrenador(ClienteModel $clienteModel)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, email, nombre, apellido) 
                 VALUES (?,?, ?, ?, ?)";
-        
+
         $nroDocumento = $clienteModel->getNroDocumento();
         $tipoDocumento = $clienteModel->getTipoDocumento();
         $email = $clienteModel->getEmail();
         $nombre = $clienteModel->getNombre();
         $apellido = $clienteModel->getApellido();
 
-        
+
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "sssss",
@@ -79,12 +83,13 @@ class ClienteRepository extends Database {
         );
         $stmt->execute();
         $stmt->close();
-        $database->disconnect(); 
+        $database->disconnect();
     }
 
-    public function modificarNombre($nroDocumento, $cliente){
+    public function modificarNombre($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET nombre = ? WHERE nroDocumento = ?";
 
         $nombre = $cliente->getNombre();
@@ -101,7 +106,8 @@ class ClienteRepository extends Database {
         $database->disconnect();
     }
 
-    public function modificarApellido($nroDocumento, $cliente){
+    public function modificarApellido($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
         $database->connect();
         $sql = "UPDATE Cliente SET apellido = ? WHERE nroDocumento = ?";
@@ -120,9 +126,10 @@ class ClienteRepository extends Database {
         $database->disconnect();
     }
 
-    public function modificarFecha($nroDocumento, $cliente){
+    public function modificarFecha($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET fechaNacimiento = ? WHERE nroDocumento = ?";
 
         $fecha = $cliente->getFechaNacimiento();
@@ -138,10 +145,11 @@ class ClienteRepository extends Database {
 
         $database->disconnect();
     }
-    
-    public function modificarPatologia($nroDocumento, $cliente){
+
+    public function modificarPatologia($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET patologias = ? WHERE nroDocumento = ?";
 
         $patologias = $cliente->getPatologias();
@@ -157,10 +165,11 @@ class ClienteRepository extends Database {
 
         $database->disconnect();
     }
-    
-    public function modificarEmail($nroDocumento, $cliente){
+
+    public function modificarEmail($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET email = ? WHERE nroDocumento = ?";
 
         $email = $cliente->getEmail();
@@ -177,11 +186,12 @@ class ClienteRepository extends Database {
         $database->disconnect();
     }
 
-    public function modificarEsquina($nroDocumento, $cliente){
+    public function modificarEsquina($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET esquina = ? WHERE nroDocumento = ?";
-    
+
         $esquina = $cliente->getEsquina();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -192,15 +202,16 @@ class ClienteRepository extends Database {
         $stmt->execute();
         $stmt->execute();
         $stmt->close();
-    
+
         $database->disconnect();
     }
 
-    public function modificarNumero($nroDocumento, $cliente){
+    public function modificarNumero($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET numero = ? WHERE nroDocumento = ?";
-    
+
         $numero = $cliente->getNumero();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -211,15 +222,16 @@ class ClienteRepository extends Database {
         $stmt->execute();
         $stmt->execute();
         $stmt->close();
-    
+
         $database->disconnect();
     }
-    
-    public function modificarCalle($nroDocumento, $cliente){
+
+    public function modificarCalle($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET calle = ? WHERE nroDocumento = ?";
-    
+
         $calle = $cliente->getCalle();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -232,11 +244,12 @@ class ClienteRepository extends Database {
         $stmt->close();
         $database->disconnect();
     }
-    public function modificarPeso($nroDocumento, $cliente){
+    public function modificarPeso($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET peso = ? WHERE nroDocumento = ?";
-    
+
         $peso = $cliente->getPeso();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -249,11 +262,12 @@ class ClienteRepository extends Database {
         $stmt->close();
         $database->disconnect();
     }
-    public function modificarAltura($nroDocumento, $cliente){
+    public function modificarAltura($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Cliente SET altura = ? WHERE nroDocumento = ?";
-    
+
         $altura = $cliente->getAltura();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -266,11 +280,12 @@ class ClienteRepository extends Database {
         $stmt->close();
         $database->disconnect();
     }
-    public function modificarPasswd($nroDocumento, $cliente){
+    public function modificarPasswd($nroDocumento, $cliente)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "UPDATE Usuario SET passwd = ? WHERE nroDocumento = ?";
-    
+
         $passwd = $cliente->getPasswd();
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -284,12 +299,13 @@ class ClienteRepository extends Database {
         $database->disconnect();
     }
 
-    public function comprobarCliente($nroDocumento) {
+    public function comprobarCliente($nroDocumento)
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "SELECT nroDocumento FROM Cliente WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
-        $stmt->bind_param("s", $nroDocumento);  
+        $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
@@ -298,13 +314,14 @@ class ClienteRepository extends Database {
         if ($num_of_rows > 0) {
             return "true";
 
-        }else {
+        } else {
             return "false";
         }
     }
-    public function listarClientes(){
+    public function listarClientes()
+    {
         $database = Database::getInstance();
-        $database->connect(); 
+        $database->connect();
         $sql = "SELECT nombre, nroDocumento, apellido FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();

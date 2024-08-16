@@ -25,4 +25,8 @@ class DeportistaController{
         );
         $this->deportistaService->guardarDeportista($deportista);
     }
+    public function comprobarDeportista(){
+        $nroDocumento = $_POST['nroDocumento'];
+        return $this->deportistaService->comprobarDeportista($nroDocumento);
+    }
 }

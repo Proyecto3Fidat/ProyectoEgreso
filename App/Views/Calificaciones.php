@@ -1,3 +1,26 @@
+<?php
+namespace App\Views;
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+use App\Controllers\UsuarioController;
+use App\Services\UsuarioService;
+use App\Repositories\UsuarioRepository;
+$config = require __DIR__ . '/../../Config/monolog.php';
+$logger = $config['logger']();
+$usuarioRepository = new UsuarioRepository();
+$usuarioService = new UsuarioService($usuarioRepository);
+$usuarioController = new UsuarioController($usuarioService, $logger);
+if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "deportista" && $usuarioController->comprobarToken()){
+    $redireccion = "loginusuario.html"; 
+
+    echo "<script>
+            alert('No tiene permisos para ver esta página');
+            window.location.href = '$redireccion';
+        </script>";
+    exit(); 
+}else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +41,7 @@
             <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
                 <div class="menu1">
                     <ul class="listmenu1">
-                        <li><a href="/" class="inicioa">Inicio</a></li>
+                        <li><a href="/inicio" class="inicioa">Gym</a></li>
                         <li><a href="/horarios" class="inicioa">Horarios</a></li>
                         <li><a href="/planes" class="inicioa">Planes</a></li>
                     </ul>
@@ -52,3 +75,5 @@
     <script src="../../Public/js/script.js"></script>
 </body>
 </html>
+<?php
+}
