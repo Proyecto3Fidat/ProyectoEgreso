@@ -50,11 +50,11 @@ SimpleRouter::get('/planes', function () {
     header('Location: App/Views/planes.html');
 });
 
-SimpleRouter::get('/imprimirUsuarios', function () use ($logger) {
+SimpleRouter::get('/imprimirNota', function () use ($logger) {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
-    $clienteController->imprimirUsuarios();
+    $clienteController->imprimirNota();
 });
 SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     $deportistaRepository = new DeportistaRepository();
