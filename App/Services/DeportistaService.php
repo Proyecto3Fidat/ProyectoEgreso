@@ -17,4 +17,7 @@ class DeportistaService
     {
         return $this->deportistaRepository->comprobarDeportista($nroDocumento);
     }
+    public function listarDeportistas() {
+        return $this->deportistaRepository->listarClientes();
+}
 }

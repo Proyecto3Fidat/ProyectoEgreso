@@ -3,6 +3,9 @@
     use App\Controllers\ClienteController;   
     use App\Services\ClienteService;
     use App\Repositories\ClienteRepository;
+    use App\Controllers\UsuarioController;
+    use App\Services\UsuarioService;
+    use App\Repositories\UsuarioRepository;
 
     $config = require __DIR__ . '/../../Config/monolog.php';
     $logger = $config['logger']();
@@ -10,6 +13,8 @@
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioController = new UsuarioController(new UsuarioService(new UsuarioRepository()), $logger);
+
     if (
         $_SESSION['sesion'] == false ||
         $_SESSION['sesion'] == null ||
@@ -24,8 +29,8 @@
             </script>";
         exit(); 
     }else {
-    $clientes = $clienteController->listarClientes();
-    
+    $usuarios = $clienteController->listarClientes();
+    $clientes = $usuarioController->comprobarDeportistaOPaciente($usuarios);
     
 ?>
 <!DOCTYPE html>
@@ -63,8 +68,9 @@
     <section class="listaclientes">
         <table class="lista-clientes">
             <tr>
-                <th>Nombre de Cliente</th>
+            <th>Nombre de Cliente</th>
                 <th>Documento</th>
+                <th>Rol</th>
                 <!--<th><a href="#"><button class="btn-detalles">Detalles</button></a></th>-->
             </tr>
             <?php if (is_array($clientes) || is_object($clientes)) : ?>
@@ -72,6 +78,7 @@
                     <tr>
                         <td><?php echo htmlspecialchars($cliente['nombre'])." ". htmlspecialchars($cliente['apellido']); ?></td>
                         <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
+                        <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>

@@ -136,6 +136,11 @@ class UsuarioController
         $this->logger->info('Se intento comprobar el token: ' . $_SESSION['documento']);
         return $this->usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']);
     }
+
+    public function comprobarDeportistaOPaciente($usuarios)
+    {
+         return $this->usuarioService->comprobarDeportistaOPaciente($usuarios);
+    }
 }
 
 ?>

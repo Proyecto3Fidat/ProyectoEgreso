@@ -35,4 +35,15 @@ class UsuarioService {
     public function guardarPaciente($documento){
         $this->usuarioRepository->guardarPaciente($documento);
     }
+    public function comprobarDeportistaOPaciente($usuarios){
+        $resultados = array(); 
+        foreach($usuarios as $usuario){
+            $rol = $this->usuarioRepository->comprobarRol($usuario['nroDocumento']);
+            if($rol == "deportista" || $rol == "paciente"){
+                $usuario['rol'] = $rol;
+                $resultados[] = $usuario;
+            }
+        }
+            return $resultados;
+    }
 }

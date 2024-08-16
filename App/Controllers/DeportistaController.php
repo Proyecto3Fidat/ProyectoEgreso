@@ -3,6 +3,8 @@ namespace App\Controllers;
 
 use App\Models\DeportistaModel;
 use App\Services\DeportistaService;
+use App\Repositories\UsuarioRepository;
+use App\Services\UsuarioService;
 use Monolog\Logger;
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -29,4 +31,5 @@ class DeportistaController{
         $nroDocumento = $_POST['nroDocumento'];
         return $this->deportistaService->comprobarDeportista($nroDocumento);
     }
+    
 }
