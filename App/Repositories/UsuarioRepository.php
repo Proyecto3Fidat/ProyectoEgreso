@@ -111,6 +111,21 @@ class UsuarioRepository  extends Database {
         $stmt->close();
         $database->disconnect();
     }
+    public function guardarPaciente($cedula){
+        $database = Database::getInstance();
+        $database->connect(); 
+        $sql = "UPDATE Usuario SET rol = ? WHERE nroDocumento = ?";
+        $paciente = "paciente";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param(
+            "ss",
+            $paciente,
+            $cedula
+        );
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
     public function autenticar($nroDocumento, $passwd): array{
         $database = Database::getInstance();
         $database->connect();

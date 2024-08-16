@@ -84,6 +84,16 @@ class UsuarioController
                             localStorage.setItem('nombre', '" . $nombre . "');
                             window.location.href = '../../App/Views/Calificaciones.php'; 
                             </script>";
+                case "paciente":
+                    $_SESSION['token'] = $token;
+                    $_SESSION['documento'] = $documento;
+                    $_SESSION['nombre'] = $nombre;
+                    $_SESSION['rol'] = $rol;
+                    $_SESSION['sesion'] = true;
+                    echo "<script>
+                        localStorage.setItem('nombre', '" . $nombre . "');
+                        window.location.href = '../../App/Views/Calificaciones.php'; 
+                        </script>";
             }
         }
     }
@@ -105,6 +115,11 @@ class UsuarioController
         $this->logger->info('Se intento guardar el entrenador: ' . $_POST['nroDocumento']);
         $this->usuarioService->guardarDeportista($_POST['nroDocumento']);
     }
+    public function guardarPaciente()
+    {
+        $this->logger->info('Se intento guardar el entrenador: ' . $_POST['nroDocumento']);
+        $this->usuarioService->guardarPaciente($_POST['nroDocumento']);
+    }
     public function logout()
     {
         $this->logger->info('Se deslogeo ' . $_GET['nombre']);
@@ -118,8 +133,8 @@ class UsuarioController
     }
     public function comprobarToken()
     {
-        $this->logger->info('Se intento comprobar el token: ' . $_POST['documento']);
-        $this->usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']);
+        $this->logger->info('Se intento comprobar el token: ' . $_SESSION['documento']);
+        return $this->usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']);
     }
 }
 

@@ -31,6 +31,8 @@ class UsuarioService {
     }
     public function guardarDeportista($documento){
         $this->usuarioRepository->guardarDeportista($documento);
-
+    }
+    public function guardarPaciente($documento){
+        $this->usuarioRepository->guardarPaciente($documento);
     }
 }

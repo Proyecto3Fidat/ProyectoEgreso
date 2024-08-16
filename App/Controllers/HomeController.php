@@ -10,7 +10,7 @@ class HomeController {
         }else if($_SESSION['rol'] == "entrenador" && $_SESSION['rol'] != null){
             header("Location: ../../App/Views/entrenador.php");
             exit();
-        }else if($_SESSION['rol']== "deportista" && $_SESSION['rol'] != null)
+        }else if($_SESSION['rol'] == "deportista" || $_SESSION['rol'] == "paciente" && $_SESSION['rol'] != null)
         {
             header("Location: ../../App/Views/Calificaciones.php");
             exit();

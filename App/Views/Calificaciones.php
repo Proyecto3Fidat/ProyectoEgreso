@@ -11,7 +11,13 @@ $logger = $config['logger']();
 $usuarioRepository = new UsuarioRepository();
 $usuarioService = new UsuarioService($usuarioRepository);
 $usuarioController = new UsuarioController($usuarioService, $logger);
-if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "deportista" && $usuarioController->comprobarToken()){
+$token = $usuarioController->comprobarToken();
+if (
+    $_SESSION['sesion'] == false ||
+    $_SESSION['sesion'] == null ||
+    $_SESSION['rol'] == null ||
+    ($_SESSION['rol'] != "deportista" && $_SESSION['rol'] != "paciente" && $usuarioController->comprobarToken() == false)
+){
     $redireccion = "loginusuario.html"; 
 
     echo "<script>

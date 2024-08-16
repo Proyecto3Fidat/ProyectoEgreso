@@ -13,6 +13,9 @@ use App\Services\DeportistaService;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
 use App\Repositories\DeportistaRepository;
+use App\Controllers\PacienteController;
+use App\Services\PacienteService;
+use App\Repositories\PacienteRepository;
 
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
@@ -76,6 +79,35 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
         } else {
             echo "<script>
                     alert('El Deportista ya esta registrado');
+                    window.location.href = '../../Public/inicio.html'; 
+                  </script>";
+        }
+    }
+});
+
+SimpleRouter::post('/guardarPaciente', function () use ($logger) {
+    $pacienteRepository = new PacienteRepository();
+    $pacienteService = new PacienteService($pacienteRepository);
+    $pacienteController = new PacienteController($pacienteService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    } else {
+        if ($pacienteController->comprobarPaciente() == "false") {
+            $usuarioController->guardarPaciente();
+            $pacienteController->guardarPaciente();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Paciente ya esta registrado');
                     window.location.href = '../../Public/inicio.html'; 
                   </script>";
         }

@@ -10,7 +10,12 @@
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
-    if($_SESSION['sesion'] == false || $_SESSION['sesion'] == null && $_SESSION['rol'] == null || $_SESSION['rol'] != "entrenador" && $usuarioController->comprobarToken()){
+    if (
+        $_SESSION['sesion'] == false ||
+        $_SESSION['sesion'] == null ||
+        $_SESSION['rol'] == null ||
+        ($_SESSION['rol'] != "entrenador"&& $usuarioController->comprobarToken() == false)
+    ){
         $redireccion = "loginusuario.html"; 
     
         echo "<script>
