@@ -6,10 +6,13 @@ use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
 use App\Controllers\UsuarioController;
+use App\Controllers\DeportistaController;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
+use App\Services\DeportistaService;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
+use App\Repositories\DeportistaRepository;
 
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
@@ -47,7 +50,12 @@ SimpleRouter::get('/imprimirUsuarios', function() use ($logger) {
     $clienteController = new ClienteController($clienteService, $logger);
     $clienteController->imprimirUsuarios();
 });
-
+SimpleRouter::post('/guardarDeportista', function() use ($logger) {
+    $deportistaRepository = new DeportistaRepository();
+    $deportistaService = new DeportistaService($deportistaRepository);
+    $deportistaController = new DeportistaController($deportistaService, $logger);
+    $deportistaController->guardarDeportista();
+});
 // Ruta para registrar clientes (POST)
 SimpleRouter::post('/registrarcliente', function() use ($logger) {
     $usuarioRepository = new UsuarioRepository();

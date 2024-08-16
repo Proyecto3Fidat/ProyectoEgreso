@@ -14,15 +14,16 @@ class UsuarioRepository  extends Database {
         $this->database = new Database();
     }
     public function comprobarUsuario($nroDocumento) {
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);  
         $stmt->execute();
         $stmt->store_result();
         $num_of_rows = $stmt->num_rows;
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
     
         if ($num_of_rows > 0) {
             return true;
@@ -31,9 +32,10 @@ class UsuarioRepository  extends Database {
         }
     }
     public function comprobarToken($documento, $token){
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();
         if($stmt->error){
@@ -42,7 +44,7 @@ class UsuarioRepository  extends Database {
         $stmt->bind_result($etoken);
         $stmt->fetch();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
         if ($etoken == $token && $etoken != null){
             return true;
         }else{
@@ -50,7 +52,8 @@ class UsuarioRepository  extends Database {
         }
     }
     public function guardar(UsuarioModel $usuarioModel){
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
                 VALUES (?,?,?,?)";
         
@@ -58,7 +61,7 @@ class UsuarioRepository  extends Database {
         $rol = $usuarioModel->getRol();
         $passwd = $usuarioModel->getPasswd();    
         $token = $usuarioModel->getToken();
-        $stmt = $this->database->getConnection()->prepare($sql);
+        $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
             "ssss",
             $nroDocumento,
@@ -68,7 +71,7 @@ class UsuarioRepository  extends Database {
         );
         $stmt->execute();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
     }
     public function guardarEntrenador(UsuarioModel $usuarioModel){
         $database = Database::getInstance();
@@ -95,7 +98,8 @@ class UsuarioRepository  extends Database {
     }
     
     public function autenticar($nroDocumento, $passwd): array{
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
@@ -106,7 +110,7 @@ class UsuarioRepository  extends Database {
         $stmt->bind_result($epasswd, $edocumento, $rol);
         $stmt->fetch();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
         if (password_verify($passwd, $epasswd)){
             return [
                 'nombre' => $this->nombreCliente($edocumento),
@@ -120,7 +124,8 @@ class UsuarioRepository  extends Database {
         }
     }
     public function nombreCliente($documento){
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $documento);
@@ -131,12 +136,13 @@ class UsuarioRepository  extends Database {
         $stmt->bind_result($nombre);
         $stmt->fetch();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
         return $nombre;
     }
 
     public function devolverToken($documento){
-        $this->database->connect();
+        $database = Database::getInstance();
+        $database->connect();
         $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
         $stmt = $this->database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
@@ -147,7 +153,7 @@ class UsuarioRepository  extends Database {
         $stmt->bind_result($token);
         $stmt->fetch();
         $stmt->close();
-        $this->database->disconnect();
+        $database->disconnect();
         return $token;
     }
 }
