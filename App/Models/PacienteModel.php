@@ -1,40 +1,50 @@
 <?php
 namespace App\Models;
-Class PacienteModel{
+class PacienteModel
+{
     private $nroDocumento;
     private $tipoDocumento;
     private $fisioterapia;
     private $estado;
 
-    public function __construct($nroDocumento, $tipoDocumento, $fisioterapia, $estado) {
-        $this->nroDocumento = $nroDocumento;    
+    public function __construct($nroDocumento, $tipoDocumento, $fisioterapia, $estado)
+    {
+        $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
         $this->fisioterapia = $fisioterapia;
         $this->estado = $estado;
     }
-    public function getNroDocumento() {
+    public function getNroDocumento()
+    {
         return $this->nroDocumento;
     }
-    public function setNroDocumento($nroDocumento) {
+    public function setNroDocumento($nroDocumento)
+    {
         $this->nroDocumento = $nroDocumento;
     }
-    public function getTipoDocumento() {
+    public function getTipoDocumento()
+    {
         return $this->tipoDocumento;
     }
-    public function setTipoDocumento($tipoDocumento) {
+    public function setTipoDocumento($tipoDocumento)
+    {
         $this->tipoDocumento = $tipoDocumento;
     }
-    public function getFisioterapia() {
+    public function getFisioterapia()
+    {
         return $this->fisioterapia;
     }
-    public function setFisioterapia($fisioterapia) {
+    public function setFisioterapia($fisioterapia)
+    {
         $this->fisioterapia = $fisioterapia;
     }
-    public function getEstado() {
+    public function getEstado()
+    {
         return $this->estado;
     }
-    public function setEstado($estado) {
+    public function setEstado($estado)
+    {
         $this->estado = $estado;
     }
-    
+
 }
