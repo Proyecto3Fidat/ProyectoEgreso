@@ -114,7 +114,7 @@ if (
                 <td><?php echo htmlspecialchars(isset($calificacion['flexibilidad']) ? $calificacion['flexibilidad'] : ''); ?></td>
                 <td><?php echo htmlspecialchars(isset($calificacion['cumplAgenda']) ? $calificacion['cumplAgenda'] : ''); ?></td>
                 <td><?php echo htmlspecialchars(isset($calificacion['resMonotonia']) ? $calificacion['resMonotonia'] : ''); ?></td>
-                <td><button id="printButton" class="btn-detalles" onclick="window.location.href='/imprimirNota?id=<?php echo $calificacion['id'] ?>';">Imprimir</button></td>
+                <td><button id="printButton" class="btn-detalles" onclick="window.location.href='/imprimirNota?id=<?php echo $calificacion['id'] ?>';">PDF</button></td>
             </tr>
         <?php endforeach; ?>
     </table>
