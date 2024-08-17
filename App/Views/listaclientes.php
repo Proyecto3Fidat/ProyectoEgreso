@@ -79,6 +79,9 @@
                         <td><?php echo htmlspecialchars($cliente['nombre'])." ". htmlspecialchars($cliente['apellido']); ?></td>
                         <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
                         <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
+                        <td>
+                                <button class="btnfichatecnica">Ficha tecnica</button>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
@@ -94,4 +97,4 @@
     <script src="../../Public/js/script.js"></script>
 </body>
 </html>
-<?php } ?>
+<?php } ?>       
