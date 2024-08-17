@@ -115,66 +115,8 @@ class ClienteController
             return $this->clienteService->listarClientes();
         }
     }
-    public function imprimirNota()
-    {
-        $datos = [
-            [
-                'fecha' => '12/10/2021',
-                'puntuacionTotal' => 100,
-                'fuerzaMuscular' => 50,
-                'resistenciaMuscular' => 54,
-                'resistenciaAnaerobica' => 23,
-                'resiliencia' => 22,
-                'flexibilidad' => 10,
-                'cumplimientoAgenda' => 10,
-                'resistenciaMonotonia' => 10,
-            ],
-        ];
-
-        $pdf = new TCPDF();
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('SIGEN');
-        $pdf->SetTitle('Calificación');
-        $pdf->SetSubject('Calificación');
-        $pdf->SetKeywords('TCPDF, PDF, calificación');
-
-        $pdf->AddPage();
-        $pdf->SetFont('helvetica', '', 12);
-
-        $html = '<h1>Calificación</h1>';
-        $html .= '<table border="1" cellpadding="5">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Puntuacion Total</th>
-                            <th>Fuerza Muscular</th>
-                            <th>Resistencia Muscular</th>
-                            <th>Resistencia Anaerobica</th>
-                            <th>Resiliencia</th>
-                            <th>Flexibilidad</th>
-                            <th>Cumplimiento de Agenda</th>
-                            <th>Resistencia a la Monotonia</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-
-        foreach ($datos as $dato) {
-            $html .= '<tr>
-                        <td>' . htmlspecialchars($dato['fecha']) . '</td>
-                        <td>' . htmlspecialchars($dato['puntuacionTotal']) . '</td>
-                        <td>' . htmlspecialchars($dato['fuerzaMuscular']) . '</td>
-                        <td>' . htmlspecialchars($dato['resistenciaMuscular']) . '</td>
-                        <td>' . htmlspecialchars($dato['resistenciaAnaerobica']) . '</td>
-                        <td>' . htmlspecialchars($dato['resiliencia']) . '</td>
-                        <td>' . htmlspecialchars($dato['flexibilidad']) . '</td>
-                        <td>' . htmlspecialchars($dato['cumplimientoAgenda']) . '</td>
-                        <td>' . htmlspecialchars($dato['resistenciaMonotonia']) . '</td>
-                      </tr>';
-        }
-
-        $html .= '</tbody></table>';
-
-        $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output('calificacion.pdf', 'I'); // 'I' para visualizar en el navegador, 'D' para forzar descarga
+    public function imprimirNota(){
+        $this->logger->info('Se intento imprimir la nota');
+        $this->clienteService->imprimirNota($_GET['id']);
     }
-}
+}   

@@ -17,4 +17,7 @@ Class ObtieneService{
     public function obtenerCalificaciones($nroDocumento){
         return $this->obtieneRepository->obtenerCalificaciones($nroDocumento);
     }
+    public function obtenerCalificacionesXId($id){
+        return $this->obtieneRepository->obtenerCalificacionesXId($id);
+    }
 }

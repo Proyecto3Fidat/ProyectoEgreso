@@ -48,4 +48,25 @@ class ObtieneRepository extends Database
         $database->disconnect();
         return $calificaciones;
     }
+    public function obtenerCalificacionesXId($id)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT puntObtenido, fecha FROM Obtiene WHERE id = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $calificaciones = [];
+        $stmt->bind_result( $puntObtenido, $fecha);
+        $calificaciones = array();
+        while ($stmt->fetch()) {
+            $calificaciones [] = array(
+                'puntObtenido' => $puntObtenido,
+                'fecha' => $fecha
+            );
+        }
+        $stmt->close();
+        $database->disconnect();
+        return $calificaciones;
+    }
 }
