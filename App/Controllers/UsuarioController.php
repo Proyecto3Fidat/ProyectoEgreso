@@ -39,64 +39,10 @@ class UsuarioController
         $this->usuarioService->crearUsuario($usuario);
     }
 
-    public function autenticar()
-    {
+   public function autenticar(){
         $this->logger->info('Se intento autenticar el usuario: ' . $_POST['documento']);
-        $resultadoAutenticacion = $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']);
-        $resultado = $resultadoAutenticacion['resultado'];
-        if ($resultado == false) {
-            header("Location: ../../App/Views/loginusuario.html?error=true");
-            $this->logger->info('El usuario: ' . $_POST['documento'] . " no se autentico correctamente");
-        } else {
-            $this->logger->info('El usuario: ' . $_POST['documento'] . " se autentico correctamente");
-            $rol = $resultadoAutenticacion['rol'];
-            $nombre = $resultadoAutenticacion['nombre'];
-            $token = $resultadoAutenticacion['token'];
-            $documento = $resultadoAutenticacion['documento'];
-            switch ($rol) {
-                case "entrenador":
-                    $_SESSION['token'] = $token;
-                    $_SESSION['documento'] = $documento;
-                    $_SESSION['nombre'] = $nombre;
-                    $_SESSION['rol'] = $rol;
-                    $_SESSION['sesion'] = true;
-                    echo "<script>
-                            localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/entrenador.php'; 
-                            </script>";
-                case "cliente":
-                    $_SESSION['token'] = $token;
-                    $_SESSION['documento'] = $documento;
-                    $_SESSION['nombre'] = $nombre;
-                    $_SESSION['rol'] = $rol;
-                    $_SESSION['sesion'] = true;
-                    echo "<script>
-                            localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../Public/inicio.html'; 
-                            </script>";
-                case "deportista":
-                    $_SESSION['token'] = $token;
-                    $_SESSION['documento'] = $documento;
-                    $_SESSION['nombre'] = $nombre;
-                    $_SESSION['rol'] = $rol;
-                    $_SESSION['sesion'] = true;
-                    echo "<script>
-                            localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/Calificaciones.php'; 
-                            </script>";
-                case "paciente":
-                    $_SESSION['token'] = $token;
-                    $_SESSION['documento'] = $documento;
-                    $_SESSION['nombre'] = $nombre;
-                    $_SESSION['rol'] = $rol;
-                    $_SESSION['sesion'] = true;
-                    echo "<script>
-                        localStorage.setItem('nombre', '" . $nombre . "');
-                        window.location.href = '../../App/Views/Calificaciones.php'; 
-                        </script>";
-            }
-        }
-    }
+        $this->usuarioService->autenticar($_POST['documento'], $_POST['passwd']);
+   }
 
     public function crearEntrenador()
     {
@@ -120,17 +66,7 @@ class UsuarioController
         $this->logger->info('Se intento guardar el entrenador: ' . $_POST['nroDocumento']);
         $this->usuarioService->guardarPaciente($_POST['nroDocumento']);
     }
-    public function logout()
-    {
-        $this->logger->info('Se deslogeo ' . $_GET['nombre']);
-        session_unset();
-        session_destroy();
-        echo "<script>
-            localStorage.removeItem('nombre');
-            window.location.href = '../../Public/inicio.html';
-            </script>";
-        exit();
-    }
+   
     public function comprobarToken()
     {
         $this->logger->info('Se intento comprobar el token: ' . $_SESSION['documento']);
@@ -140,6 +76,11 @@ class UsuarioController
     public function comprobarDeportistaOPaciente($usuarios)
     {
          return $this->usuarioService->comprobarDeportistaOPaciente($usuarios);
+    }
+    public function logout()
+    {
+        $this->logger->info('Se intento cerrar sesion');
+        $this->usuarioService->logout();
     }
 }
 

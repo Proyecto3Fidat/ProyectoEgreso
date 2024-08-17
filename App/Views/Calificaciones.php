@@ -6,12 +6,26 @@ if (session_status() == PHP_SESSION_NONE) {
 use App\Controllers\UsuarioController;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
+use App\Controllers\ObtieneController;
+use App\Services\ObtieneService;
+use App\Repositories\ObtieneRepository;
+use App\Controllers\CalificacionController;
+use App\Services\CalificacionService;
+use App\Repositories\CalificacionRepository;
+
 $config = require __DIR__ . '/../../Config/monolog.php';
 $logger = $config['logger']();
 $usuarioRepository = new UsuarioRepository();
 $usuarioService = new UsuarioService($usuarioRepository);
 $usuarioController = new UsuarioController($usuarioService, $logger);
+$obtieneRepository = new ObtieneRepository();
+$obtieneService = new ObtieneService($obtieneRepository);
+$obtieneController = new ObtieneController($obtieneService, $logger);
+$calificacionRepository = new CalificacionRepository();
+$calificacionService = new CalificacionService($calificacionRepository);
+$calificacionController = new CalificacionController($calificacionService, $logger);
 $token = $usuarioController->comprobarToken();
+
 if (
     $_SESSION['sesion'] == false ||
     $_SESSION['sesion'] == null ||
@@ -26,19 +40,7 @@ if (
         </script>";
     exit();
 } else {
-    $datos = [
-        [
-            'fecha' => '12/10/2021',
-            'puntuacionTotal' => 100,
-            'fuerzaMuscular' => 50,
-            'resistenciaMuscular' => 54,
-            'resistenciaAnaerobica' => 23,
-            'resiliencia' => 22,
-            'flexibilidad' => 10,
-            'cumplimientoAgenda' => 10,
-            'resistenciaMonotonia' => 10,
-        ],
-    ];
+    $resultado = $obtieneController->obtenerCalificaciones();
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -75,87 +77,49 @@ if (
             </nav>
         </header>
         <section class="agendaCliente">
-        <h1>Calificación</h1>
-        <table class="horariosCliente">
-            <tr>
-                <th>Fecha</th>
-                <th>Puntuacion Total</th>
-                <th>Fuerza Muscular</th>
-                <th>Resistencia Muscular</th>
-                <th>Resistencia Anaerobica</th>
-                <th>Resiliencia</th>
-                <th>Flexibilidad</th>
-                <th>Cumplimiento de Agenda</th>
-                <th>Resistencia a la Monotonia</th>
-                <th>Imprimir</th>
-            </tr>
-            <?php foreach ($datos as $dato): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($dato['fecha']); ?></td>
-                <td><?php echo htmlspecialchars($dato['puntuacionTotal']); ?></td>
-                <td><?php echo htmlspecialchars($dato['fuerzaMuscular']); ?></td>
-                <td><?php echo htmlspecialchars($dato['resistenciaMuscular']); ?></td>
-                <td><?php echo htmlspecialchars($dato['resistenciaAnaerobica']); ?></td>
-                <td><?php echo htmlspecialchars($dato['resiliencia']); ?></td>
-                <td><?php echo htmlspecialchars($dato['flexibilidad']); ?></td>
-                <td><?php echo htmlspecialchars($dato['cumplimientoAgenda']); ?></td>
-                <td><?php echo htmlspecialchars($dato['resistenciaMonotonia']); ?></td>
-                <td><button id="printButton" class="btn-detalles" onclick="window.location.href='/imprimirNota';">Imprimir</button></td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    </section>
-
-        <script>
-    document.getElementById('printButton').addEventListener('click', function() {
-        console.log('Botón presionado'); // Verifica en la consola del navegador
-
-        const table = document.getElementById('calificacionTable');
-        const rows = table.querySelectorAll('tr');
-        const data = [];
-
-        rows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            if (cells.length) {
-                const rowData = Array.from(cells).map(cell => cell.textContent);
-                data.push(rowData);
+    <h1>Calificación</h1>
+    <table class="horariosCliente">
+        <tr>
+            <th>Fecha</th>
+            <th>Puntuacion Total</th>
+            <th>Fuerza Muscular</th>
+            <th>Resistencia Muscular</th>
+            <th>Resistencia Anaerobica</th>
+            <th>Resiliencia</th>
+            <th>Flexibilidad</th>
+            <th>Cumplimiento de Agenda</th>
+            <th>Resistencia a la Monotonia</th>
+            <th>Imprimir</th>
+        </tr>
+        <?php foreach ($resultado as $resultados): ?>
+            <?php
+            // Obtener calificaciones
+            $calificacion = $calificacionController->obtenerPuntuaciones($resultados['id']);
+            
+            // Asegúrate de que $calificacion no esté vacío y sea un array
+            if (is_array($calificacion) && !empty($calificacion)) {
+                $calificacion = $calificacion[0]; // Accede al primer elemento del array
+            } else {
+                $calificacion = []; // Definir $calificacion como un array vacío si no hay datos
             }
-        });
+            ?>
 
-        console.log(data); // Verifica en la consola del navegador
-
-        fetch('/imprimirNota', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-            body: JSON.stringify({
-                fecha: data[1][0], // Primera fila de datos, primera columna
-                puntuacionTotal: data[1][1],
-                fuerzaMuscular: data[1][2],
-                resistenciaMuscular: data[1][3],
-                resistenciaAnaerobica: data[1][4],
-                resiliencia: data[1][5],
-                flexibilidad: data[1][6],
-                cumplimientoAgenda: data[1][7],
-                resistenciaMonotonia: data[1][8],
-            }),
-        })
-        .then(response => response.blob()) // Convertir la respuesta a blob
-        .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'calificacion.pdf';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        })
-        .catch(error => console.error('Error:', error));
-    });
-</script>
-
+            <tr>
+                <td><?php echo htmlspecialchars($resultados['fecha']); ?></td>
+                <td><?php echo htmlspecialchars($resultados['puntObtenido']); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['fuerzaMusc']) ? $calificacion['fuerzaMusc'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['resMusc']) ? $calificacion['resMusc'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['resAnaerobica']) ? $calificacion['resAnaerobica'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['resiliencia']) ? $calificacion['resiliencia'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['flexibilidad']) ? $calificacion['flexibilidad'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['cumplAgenda']) ? $calificacion['cumplAgenda'] : ''); ?></td>
+                <td><?php echo htmlspecialchars(isset($calificacion['resMonotonia']) ? $calificacion['resMonotonia'] : ''); ?></td>
+                <td><button id="printButton" class="btn-detalles" onclick="window.location.href='/imprimirNota?id=<?php echo $calificacion['id'] ?>';">PDF</button></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</section>
+        
 
         <script src="../../Public/js/script.js"></script>
     </body>

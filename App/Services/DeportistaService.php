@@ -17,5 +17,4 @@ class DeportistaService
     {
         return $this->deportistaRepository->comprobarDeportista($nroDocumento);
     }
-    
 }
