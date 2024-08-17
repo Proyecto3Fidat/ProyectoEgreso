@@ -40,7 +40,7 @@ class ClienteRepository extends Database
 
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
-            "ssiisissssss",
+            "ssdisissssss",
             $nroDocumento,
             $tipoDocumento,
             $altura,
@@ -322,17 +322,21 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, nroDocumento, apellido FROM Cliente";
+        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($nombre, $nroDocumento, $apellido);
+        $stmt->bind_result($nombre, $nroDocumento, $apellido, $altura, $peso, $patologia, $email);
         $clientes = array();
         while ($stmt->fetch()) {
             $clientes[] = array(
                 'nombre' => $nombre,
                 'nroDocumento' => $nroDocumento,
-                'apellido' => $apellido
+                'apellido' => $apellido,
+                'altura' => $altura,
+                'peso' => $peso,
+                'patologia' => $patologia,
+                'email' => $email
             );
         }
         $stmt->close();
