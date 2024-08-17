@@ -32,7 +32,6 @@ class ObtieneController
         if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']) == false) {
             session_unset();
             session_destroy();
-            
             echo "<script>
             localStorage.removeItem('nombre');
             alert('Alerta de seguridad: Token invalido');
