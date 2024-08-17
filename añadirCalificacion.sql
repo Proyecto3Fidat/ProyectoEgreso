@@ -27,6 +27,6 @@ ADD
 ALTER TABLE
     Obtiene
 ADD
-    FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+    FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 CREATE INDEX idx_calificacion_id ON Calificacion(id);
