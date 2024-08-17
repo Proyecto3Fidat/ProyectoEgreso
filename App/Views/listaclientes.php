@@ -92,8 +92,32 @@
         </table>
     </section>
 
+<section class="fichatecn">
+    <tr id="fichatec">
+        <td>
+        <h4>Ficha tecnica de *Nombre del cliente*</h4>
+            <div class="divficha">
+                <p>Documento:</p>
+                <p>Edad:</p>
+                <p>Email:</p>
+                <p>Teléfono:</p>
+                <p>Dirección:</p>
+            </div>
+            <div class="divficha2">
+                <p>Patologias:</p>
+                <p>Altura:</p>
+                <p>Peso:</p>
+            </div>
+        </td>
+    </tr>
 
-
+<section>
+    <div class="btnficha">
+        <button class="adejerci">Añadir ejercicio</but>
+        <button class="adrut">Añadir rutina</button>
+    </div>
+</section>
+</section>
     <script src="../../Public/js/script.js"></script>
 </body>
 </html>
