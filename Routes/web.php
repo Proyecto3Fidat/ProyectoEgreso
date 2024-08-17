@@ -7,15 +7,21 @@ use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
 use App\Controllers\UsuarioController;
 use App\Controllers\DeportistaController;
+use App\Controllers\PacienteController;
+use App\Controllers\ObtieneController;
+use App\Controllers\CalificacionController;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
 use App\Services\DeportistaService;
+use App\Services\PacienteService;
+use App\Services\ObtieneService;
+use App\Services\CalificacionService;
 use App\Repositories\ClienteRepository;
 use App\Repositories\UsuarioRepository;
 use App\Repositories\DeportistaRepository;
-use App\Controllers\PacienteController;
-use App\Services\PacienteService;
 use App\Repositories\PacienteRepository;
+use App\Repositories\ObtieneRepository;
+use App\Repositories\CalificacionRepository;
 
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
@@ -23,7 +29,8 @@ $logger = $config['logger']();
 
 // Ruta para el inicio
 SimpleRouter::get('/', [HomeController::class, 'index']);
-SimpleRouter::get('/inicio', function() {
+
+SimpleRouter::get('/inicio', function () {
     header('Location: Public/inicio.html');
 });
 
@@ -84,6 +91,31 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
         }
     }
 });
+SimpleRouter::post('/asignarPuntuacion', function () use ($logger) {
+    $obtieneRepository = new ObtieneRepository();
+    $obtieneService = new ObtieneService($obtieneRepository);
+    $obtieneController = new ObtieneController($obtieneService, $logger);
+    $obtieneController->asignarPuntuacion();
+    echo "<script>
+                alert('Calificacion Creada con éxito');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    exit();
+
+});
+
+SimpleRouter::post('/asignarCalificacion', function () use ($logger) {
+    $calificacionRepository = new CalificacionRepository();
+    $calificacionService = new CalificacionService($calificacionRepository);
+    $calificacionController = new CalificacionController($calificacionService, $logger);
+    $calificacionController->asignarPuntuacion();
+    echo "<script>
+                alert('Calificacion Creada con éxito');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    exit();
+
+});
 
 SimpleRouter::post('/guardarPaciente', function () use ($logger) {
     $pacienteRepository = new PacienteRepository();
@@ -130,6 +162,7 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
                 alert('Usuario creado con éxito');
                 window.location.href = '../../Public/inicio.html'; 
               </script>";
+              exit();
     } else {
         echo "<script>
                 alert('El usuario ya existe');
