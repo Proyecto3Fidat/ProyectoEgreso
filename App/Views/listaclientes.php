@@ -93,23 +93,21 @@
     </section>
 
 <section class="fichatecn">
-    <tr id="fichatec">
-        <td>
-        <h4>Ficha tecnica de *Nombre del cliente*</h4>
-            <div class="divficha">
-                <p>Documento:</p>
-                <p>Edad:</p>
-                <p>Email:</p>
-                <p>Teléfono:</p>
-                <p>Dirección:</p>
-            </div>
-            <div class="divficha2">
-                <p>Patologias:</p>
-                <p>Altura:</p>
-                <p>Peso:</p>
-            </div>
-        </td>
-    </tr>
+<h4>Ficha técnica de *Nombre del cliente*</h4>
+    <div class="divficha-container">
+        <div class="divficha">
+            <p>Documento:</p>
+            <p>Edad:</p>
+            <p>Email:</p>
+            <p>Teléfono:</p>
+            <p>Dirección:</p>
+        </div>
+        <div class="divficha2">
+            <p>Patologías:</p>
+            <p>Altura:</p>
+            <p>Peso:</p>
+        </div>
+    </div>
 
 <section>
     <div class="btnficha">
