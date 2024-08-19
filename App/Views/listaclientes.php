@@ -31,7 +31,7 @@
     }else {
     $usuarios = $clienteController->listarClientes();
     $clientes = $usuarioController->comprobarDeportistaOPaciente($usuarios);
-    
+    var_dump($clientes);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,19 +93,21 @@
     </section>
 
 <section class="fichatecn">
+<?php if (is_array($clientes) || is_object($clientes)) : ?>
+    <?php foreach ($clientes as $cliente) : ?>
 <h4>Ficha técnica de *Nombre del cliente*</h4>
     <div class="divficha-container">
         <div class="divficha">
-            <p>Documento:</p>
+            <p>Documento: <?php echo htmlspecialchars($cliente['nroDocumento']); ?> </p>
             <p>Edad:</p>
-            <p>Email:</p>
-            <p>Teléfono:</p>
+            <p>Email: <?php echo htmlspecialchars($cliente['email']); ?></p>
+            <p>Teléfono: </p>
             <p>Dirección:</p>
         </div>
         <div class="divficha2">
-            <p>Patologías:</p>
-            <p>Altura:</p>
-            <p>Peso:</p>
+            <p>Patologías: <?php echo htmlspecialchars($cliente['patologia']); ?> </p>
+            <p>Altura: <?php echo htmlspecialchars($cliente['altura']); ?> </p>
+            <p>Peso: <?php echo htmlspecialchars($cliente['peso']); ?> </p>
         </div>
     </div>
 
@@ -113,7 +115,14 @@
     <div class="btnficha">
         <button class="adejerci">Añadir ejercicio</but>
         <button class="adrut">Añadir rutina</button>
+        <button class="adrut">Calificar</button>
     </div>
+    <?php endforeach; ?>
+    <?php else : ?>
+        <tr>
+                    <td colspan="2">No hay clientes disponibles.</td>
+                </tr>
+            <?php endif; ?>
 </section>
 </section>
     <script src="../../Public/js/script.js"></script>

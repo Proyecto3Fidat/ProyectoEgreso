@@ -109,7 +109,7 @@ class UsuarioService
                             </script>";
                         exit();
                     case "paciente":
-                        $_SESSION['token'] = $token;
+                        $_SESSION['token'] = 3;
                         $_SESSION['documento'] = $documento;
                         $_SESSION['nombre'] = $nombre;
                         $_SESSION['rol'] = $rol;

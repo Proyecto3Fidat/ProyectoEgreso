@@ -45,6 +45,7 @@ Class CalificacionController{
             $calificacionObtenida
         ));
     }
+
     public function obtenerPuntuaciones($id){
       
         return $this->calificacionService->obtenerPuntuaciones($id);
