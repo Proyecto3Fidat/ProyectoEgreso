@@ -1,55 +1,57 @@
 <?php
-    require __DIR__ . '/../../vendor/autoload.php';
-    use App\Controllers\ClienteController;   
-    use App\Services\ClienteService;
-    use App\Repositories\ClienteRepository;
-    use App\Controllers\UsuarioController;
-    use App\Services\UsuarioService;
-    use App\Repositories\UsuarioRepository;
+require __DIR__ . '/../../vendor/autoload.php';
+use App\Controllers\ClienteController;
+use App\Services\ClienteService;
+use App\Repositories\ClienteRepository;
+use App\Controllers\UsuarioController;
+use App\Services\UsuarioService;
+use App\Repositories\UsuarioRepository;
 
-    $config = require __DIR__ . '/../../Config/monolog.php';
-    $logger = $config['logger']();
+$config = require __DIR__ . '/../../Config/monolog.php';
+$logger = $config['logger']();
 
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $usuarioController = new UsuarioController(new UsuarioService(new UsuarioRepository()), $logger);
+$clienteRepository = new ClienteRepository();
+$clienteService = new ClienteService($clienteRepository);
+$clienteController = new ClienteController($clienteService, $logger);
+$usuarioController = new UsuarioController(new UsuarioService(new UsuarioRepository()), $logger);
 
-    if (
-        $_SESSION['sesion'] == false ||
-        $_SESSION['sesion'] == null ||
-        $_SESSION['rol'] == null ||
-        ($_SESSION['rol'] != "entrenador"&& $usuarioController->comprobarToken() == false)
-    ){
-        $redireccion = "loginusuario.html"; 
-    
-        echo "<script>
+if (
+    $_SESSION['sesion'] == false ||
+    $_SESSION['sesion'] == null ||
+    $_SESSION['rol'] == null ||
+    ($_SESSION['rol'] != "entrenador" && $usuarioController->comprobarToken() == false)
+) {
+    $redireccion = "loginusuario.html";
+
+    echo "<script>
                 alert('No tiene permisos para ver esta página');
                 window.location.href = '$redireccion';
             </script>";
-        exit(); 
-    }else {
+    exit();
+} else {
     $usuarios = $clienteController->listarClientes();
     $clientes = $usuarioController->comprobarDeportistaOPaciente($usuarios);
-    var_dump($clientes);
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Public/css/styleentrenador.css">
-    <link rel="stylesheet" href="../../Public/css/responsive.css">
-    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
-    <title>Lista de Clientes</title>
-</head>
-<body>
-    <header>
-        <section class="navhead">
-            <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
-        </section>
-        <nav class="navbar" id="nav">
-            <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../Public/css/styleentrenador.css">
+        <link rel="stylesheet" href="../../Public/css/responsive.css">
+        <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+        <title>Lista de Clientes</title>
+    </head>
+
+    <body>
+        <header>
+            <section class="navhead">
+                <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
+            </section>
+            <nav class="navbar" id="nav">
+                <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"
+                        style="color: #ffffff;"></i></button>
                 <div class="menu1">
                     <ul class="listmenu1">
                         <li><a href="/" class="inicioa">Inicio</a></li>
@@ -62,70 +64,71 @@
                     <ul class="listmenu2" id="welcome-message">
                     </ul>
                 </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <section class="listaclientes">
-        <table class="lista-clientes">
-            <tr>
-            <th>Nombre de Cliente</th>
-                <th>Documento</th>
-                <th>Rol</th>
-                <!--<th><a href="#"><button class="btn-detalles">Detalles</button></a></th>-->
-            </tr>
-            <?php if (is_array($clientes) || is_object($clientes)) : ?>
-                <?php foreach ($clientes as $cliente) : ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($cliente['nombre'])." ". htmlspecialchars($cliente['apellido']); ?></td>
-                        <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
-                        <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
-                        <td>
-                                <button class="btnfichatecnica">Ficha tecnica</button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else : ?>
+        <section class="listaclientes">
+            <table class="lista-clientes">
                 <tr>
-                    <td colspan="2">No hay clientes disponibles.</td>
+                    <th>Nombre de Cliente</th>
+                    <th>Documento</th>
+                    <th>Rol</th>
+                    <!--<th><a href="#"><button class="btn-detalles">Detalles</button></a></th>-->
                 </tr>
-            <?php endif; ?>
-        </table>
-    </section>
+                <?php if (is_array($clientes) || is_object($clientes)): ?>
+                    <?php foreach ($clientes as $cliente): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($cliente['nombre']) . " " . htmlspecialchars($cliente['apellido']); ?></td>
+                            <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
+                            <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
+                            <td>
+                                <button class="btnfichatecnica">Ficha tecnica</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <tr>
+                        <td colspan="2">No hay clientes disponibles.</td>
+                    </tr>
+                <?php endif; ?>
+            </table>
+        </section>
 
-<section class="fichatecn">
-<?php if (is_array($clientes) || is_object($clientes)) : ?>
-    <?php foreach ($clientes as $cliente) : ?>
-<h4>Ficha técnica de *Nombre del cliente*</h4>
-    <div class="divficha-container">
-        <div class="divficha">
-            <p>Documento: <?php echo htmlspecialchars($cliente['nroDocumento']); ?> </p>
-            <p>Edad:</p>
-            <p>Email: <?php echo htmlspecialchars($cliente['email']); ?></p>
-            <p>Teléfono: </p>
-            <p>Dirección:</p>
-        </div>
-        <div class="divficha2">
-            <p>Patologías: <?php echo htmlspecialchars($cliente['patologia']); ?> </p>
-            <p>Altura: <?php echo htmlspecialchars($cliente['altura']); ?> </p>
-            <p>Peso: <?php echo htmlspecialchars($cliente['peso']); ?> </p>
-        </div>
-    </div>
+        <?php if (is_array($clientes) || is_object($clientes)): ?>
+            <?php foreach ($clientes as $cliente): ?>
+                <section class="fichatecn">
+                    <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre'])." ".$cliente['apellido']; ?></h4>
+                    <div class="divficha-container">
+                        <div class="divficha">
+                            <p>Documento: <?php echo htmlspecialchars($cliente['nroDocumento']); ?> </p>
+                            <p>Edad:</p>
+                            <p>Email: <?php echo htmlspecialchars($cliente['email']); ?></p>
+                            <p>Teléfono: </p>
+                            <p>Dirección:</p>
+                        </div>
+                        <div class="divficha2">
+                            <p>Patologías: <?php echo htmlspecialchars($cliente['patologia']); ?> </p>
+                            <p>Altura: <?php echo htmlspecialchars($cliente['altura']); ?> </p>
+                            <p>Peso: <?php echo htmlspecialchars($cliente['peso']); ?> </p>
+                        </div>
+                    </div>
 
-<section>
-    <div class="btnficha">
-        <button class="adejerci">Añadir ejercicio</but>
-        <button class="adrut">Añadir rutina</button>
-        <button class="adrut">Calificar</button>
-    </div>
-    <?php endforeach; ?>
-    <?php else : ?>
-        <tr>
-                    <td colspan="2">No hay clientes disponibles.</td>
-                </tr>
-            <?php endif; ?>
-</section>
-</section>
-    <script src="../../Public/js/script.js"></script>
-</body>
-</html>
-<?php } ?>       
+                    <section>
+                        <div class="btnficha">
+                            <button class="adejerci">Añadir ejercicio</but>
+                                <button class="adrut">Añadir rutina</button>
+                                <button class="adrut">Calificar</button>
+                        </div>
+                    </section>
+                </section>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="2">No hay clientes disponibles.</td>
+            </tr>
+        <?php endif; ?>
+        <script src="../../Public/js/script.js"></script>
+    </body>
+
+    </html>
+<?php } ?>
