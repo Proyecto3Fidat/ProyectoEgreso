@@ -115,7 +115,7 @@ if (
 
                     <section>
                         <div class="btnficha">
-                            <button class="adejerci">Añadir ejercicio</but>
+                            <button class="adejerci">Añadir ejercicio</button>
                                 <button class="adrut">Añadir rutina</button>
                                 <button class="adrut">Calificar</button>
                         </div>
