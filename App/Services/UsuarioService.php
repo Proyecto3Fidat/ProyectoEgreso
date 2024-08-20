@@ -12,7 +12,17 @@ class UsuarioService
     {
         $this->usuarioRepository = $usuarioRepository;
     }
+    public function tokenInvalido()
+    {session_unset();
+        session_destroy();
+        echo "<script>
+        localStorage.removeItem('nombre');
+        alert('Alerta de seguridad: Token invalido');
+        window.location.href = '../../Public/inicio.html'; 
+        </script>";
+        exit();
 
+    }
     public function comprobarUsuario($documento)
     {
         return $this->usuarioRepository->comprobarUsuario($documento);

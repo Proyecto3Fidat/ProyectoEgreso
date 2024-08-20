@@ -30,15 +30,7 @@ class ObtieneController
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
         if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']) == false) {
-            session_unset();
-            session_destroy();
-            echo "<script>
-            localStorage.removeItem('nombre');
-            alert('Alerta de seguridad: Token invalido');
-            window.location.href = '../../Public/inicio.html'; 
-            </script>";
-            exit();
-
+            $usuarioService->tokenInvalido();
         } else
             return $this->obtieneService->obtenerCalificaciones($nroDocumento);
     }

@@ -107,10 +107,7 @@ class ClienteController
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
         if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token']) == false) {
-            echo "<script>
-            alert('Alerta de seguridad: Token invalido');
-            window.location.href = '../../Public/inicio.html'; 
-          </script>";
+            $usuarioService->tokenInvalido();
         } else {
             return $this->clienteService->listarClientes();
         }
