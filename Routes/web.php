@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;

@@ -24,7 +24,6 @@ class UsuarioRepository  extends Database {
         $num_of_rows = $stmt->num_rows;
         $stmt->close();
         $database->disconnect();
-    
         if ($num_of_rows > 0) {
             return true;
         } else {

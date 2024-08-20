@@ -20,4 +20,7 @@ Class ObtieneService{
     public function obtenerCalificacionesXId($id){
         return $this->obtieneRepository->obtenerCalificacionesXId($id);
     }
+    public function comprobarId($nroDocumento){
+        return $this->obtieneRepository->comprobarId($nroDocumento);
+    }
 }

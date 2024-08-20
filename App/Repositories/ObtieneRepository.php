@@ -8,6 +8,23 @@ class ObtieneRepository extends Database
 {
     private $obtieneModel;
 
+    public function comprobarId($nroDocumento){
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT id FROM obtiene WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);   
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        $stmt->store_result();
+        $num_of_rows = $stmt->num_rows;
+        $stmt->close();
+        $database->disconnect();
+        if ($num_of_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function asignarPuntuacion(ObtieneModel $obtieneModel)
     {
         $database = Database::getInstance();
