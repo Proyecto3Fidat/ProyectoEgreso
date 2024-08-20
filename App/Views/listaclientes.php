@@ -78,8 +78,7 @@ if (
                 <?php if (is_array($clientes) || is_object($clientes)): ?>
                     <?php foreach ($clientes as $cliente): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($cliente['nombre']) . " " . htmlspecialchars($cliente['apellido']); ?>
-                            </td>
+                            <td><?php echo htmlspecialchars($cliente['nombre']) . " " . htmlspecialchars($cliente['apellido']); ?></td>
                             <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
                             <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
                             <td>
@@ -98,7 +97,7 @@ if (
         <?php if (is_array($clientes) || is_object($clientes)): ?>
             <?php foreach ($clientes as $cliente): ?>
                 <section class="fichatecn">
-                    <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre']) . " " . $cliente['apellido']; ?></h4>
+                    <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre'])." ".$cliente['apellido']; ?></h4>
                     <div class="divficha-container">
                         <div class="divficha">
                             <p>Documento: <?php echo htmlspecialchars($cliente['nroDocumento']); ?> </p>
@@ -117,11 +116,8 @@ if (
                     <section>
                         <div class="btnficha">
                             <button class="adejerci">Añadir ejercicio</button>
-                            <button class="adrut">Añadir rutina</button>
-                            <form method="POST" action="calificar.php">
-                                <input type="hidden" name="cliente_id" value="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
-                                <button type="submit" class="adrut">Calificar</button>
-                            </form>
+                                <button class="adrut">Añadir rutina</button>
+                                <button class="adrut">Calificar</button>
                         </div>
                     </section>
                 </section>
