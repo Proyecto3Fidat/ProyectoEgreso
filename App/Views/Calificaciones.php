@@ -122,6 +122,7 @@ if (
         
 
         <script src="../../Public/js/script.js"></script>
+        <script src="../../Public/js/responsive.js"></script>
     </body>
 
     </html>

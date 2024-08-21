@@ -36,10 +36,6 @@ nav a:hover {
     color: #6f41bb;
 }
 
-.listaclientes{
-    display: none;
-}
-
 .menu1 {
     display: flex;
     margin-right: auto;
@@ -94,6 +90,10 @@ nav a:hover {
     
 }
 
+.listaclientes{
+    display: flex;
+}
+
 .clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
     transform: scale(1.2);
 }
@@ -116,6 +116,7 @@ button {
 }
 
 .lista-clientes {
+    display: flex;
     margin: 0 auto; 
     padding: 0;
     width: 90%; 

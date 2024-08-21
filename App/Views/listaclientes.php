@@ -83,7 +83,7 @@ if (
                             <td><?php echo htmlspecialchars($cliente['nroDocumento']); ?></td>
                             <td><?php echo htmlspecialchars($cliente['rol']); ?></td>
                             <td>
-                                <button class="btnfichatecnica">Ficha tecnica</button>
+                                <button class="btnfichatecnica" data-cliente-id="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">Ficha técnica</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -97,7 +97,7 @@ if (
 
         <?php if (is_array($clientes) || is_object($clientes)): ?>
             <?php foreach ($clientes as $cliente): ?>
-                <div class="fichagnrl">
+                <div class="fichagnrl" id="ficha-<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
                         <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre']) . " " . $cliente['apellido']; ?></h4>
                         <button class="cerrarficha" id="cerrarficha"><i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i></button>
                     <div class="divficha-container">
@@ -133,6 +133,7 @@ if (
             </tr>
         <?php endif; ?>
         <script src="../../Public/js/script.js"></script>
+        <script src="../../Public/js/responsive.js"></script>
     </body>
 
     </html>

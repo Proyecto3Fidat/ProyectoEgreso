@@ -102,16 +102,27 @@ const urlParams = new URLSearchParams(window.location.search);
         document.getElementById('error-message').textContent = 'El usuario o la contraseña es incorrecto.';
     }
 }
-/*Script responsive*/
-const nav = document.querySelector("#nav");
-const abrir = document.querySelector("#abrir");
-const cerrar = document.querySelector("#cerrar");
 
-abrir.addEventListener("click", () => {
-    nav.classList.add("visible");
-})
 
-cerrar.addEventListener("click", () => {
-    nav.classList.remove("visible");
-})
-/*Fin script responsive*/
+    	//Incio botones de ficha tecnica
+    //Abrir ficha
+document.querySelectorAll('.btnfichatecnica').forEach(button => {
+    button.addEventListener('click', function() {
+        const clienteId = this.getAttribute('data-cliente-id');
+        const ficha = document.getElementById('ficha-' + clienteId);
+
+        // Despliega la ficha técnica correspondiente
+        ficha.style.display = 'block';
+    });
+});
+
+        //Cerrar ficha
+document.querySelectorAll('.cerrarficha').forEach(button => {
+    button.addEventListener('click', function() {
+        const clienteId = this.getAttribute('data-cliente-id');
+        const ficha = document.getElementById('ficha-' + clienteId);
+
+        // Oculta la ficha técnica correspondiente
+        ficha.style.display = 'none';
+    });
+});
