@@ -97,7 +97,7 @@ if (
 
         <?php if (is_array($clientes) || is_object($clientes)): ?>
             <?php foreach ($clientes as $cliente): ?>
-                <div class="fichagnrl" id="ficha-<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
+                <div class="fichagnrl" id="fichagnl<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
                         <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre']) . " " . $cliente['apellido']; ?></h4>
                         <button class="cerrarficha" id="cerrarficha"><i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i></button>
                     <div class="divficha-container">

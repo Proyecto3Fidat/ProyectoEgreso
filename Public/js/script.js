@@ -104,25 +104,32 @@ const urlParams = new URLSearchParams(window.location.search);
 }
 
 
-    	//Incio botones de ficha tecnica
-    //Abrir ficha
-document.querySelectorAll('.btnfichatecnica').forEach(button => {
-    button.addEventListener('click', function() {
-        const clienteId = this.getAttribute('data-cliente-id');
-        const ficha = document.getElementById('ficha-' + clienteId);
+document.addEventListener('DOMContentLoaded', () => {
+    // Selecciona todos los botones de "Ficha técnica"
+    const btnFichaTecnica = document.querySelectorAll('.btnfichatecnica');
 
-        // Despliega la ficha técnica correspondiente
-        ficha.style.display = 'block';
+    // Añade un evento de clic a cada botón de "Ficha técnica"
+    btnFichaTecnica.forEach(button => {
+        button.addEventListener('click', function() {
+            const clienteId = this.getAttribute('data-cliente-id');
+            const ficha = document.getElementById('fichagnl' + clienteId);
+
+            // Despliega la ficha técnica correspondiente
+            ficha.style.display = 'block';
+        });
     });
-});
 
-        //Cerrar ficha
-document.querySelectorAll('.cerrarficha').forEach(button => {
-    button.addEventListener('click', function() {
-        const clienteId = this.getAttribute('data-cliente-id');
-        const ficha = document.getElementById('ficha-' + clienteId);
+    // Selecciona todos los botones de "Cerrar ficha"
+    const btnCerrarFicha = document.querySelectorAll('.cerrarficha');
 
-        // Oculta la ficha técnica correspondiente
-        ficha.style.display = 'none';
+    // Añade un evento de clic a cada botón de "Cerrar ficha"
+    btnCerrarFicha.forEach(button => {
+        button.addEventListener('click', function() {
+            const clienteId = this.getAttribute('data-cliente-id');
+            const ficha = document.getElementById('fichagnl' + clienteId);
+
+            // Oculta la ficha técnica correspondiente
+            ficha.style.display = 'none';
+        });
     });
 });
