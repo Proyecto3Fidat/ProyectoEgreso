@@ -1,4 +1,4 @@
-<?php
+<?php/*
 namespace App\Views;
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -127,4 +127,4 @@ if (
 
     </html>
     <?php
-}
+}*/?>

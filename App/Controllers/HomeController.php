@@ -12,7 +12,7 @@ class HomeController {
             exit();
         }else if($_SESSION['rol'] == "deportista" || $_SESSION['rol'] == "paciente" && $_SESSION['rol'] != null)
         {
-            header("Location: ../../App/Views/Calificaciones.php");
+            header("Location: ../../App/Views/Calificaciones.html");
             exit();
         }else {
             header("Location: ../../Public/inicio.html");

@@ -48,6 +48,18 @@ SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
 });
 
+Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger){
+    $calificacionRepository = new CalificacionRepository();
+    $calificacionService = new CalificacionService($calificacionRepository);
+    $calificacionController = new CalificacionController($calificacionService, $logger);
+    $calificacionController->obtenerPuntuacionesAjax();
+    exit();
+});
+
+SimpleRouter::post('/calificar', function () {
+    header('Location: App/Views/calificacion.html');
+});
+
 // Ruta para los horarios
 SimpleRouter::get('/horarios', function () {
     header('Location: App/Views/agenda.html');

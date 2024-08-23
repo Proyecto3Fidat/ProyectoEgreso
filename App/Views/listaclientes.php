@@ -1,4 +1,6 @@
 <?php
+
+
 require __DIR__ . '/../../vendor/autoload.php';
 use App\Controllers\ClienteController;
 use App\Services\ClienteService;
@@ -119,9 +121,9 @@ if (
                         <div class="btnficha">
                             <button class="adejerci">Añadir ejercicio</button>
                             <button class="adrut">Añadir rutina</button>
-                            <form method="POST" action="/calificacion">
+                            <form method="POST" action="/calificar">
                                 <input type="hidden" name="cliente_id" value="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
-                                <button type="submit" class="adrut" href="/calificacion">Calificar</button>
+                                <button type="submit" class="adrut" href="/calificar">Calificar</button>
                             </form>
                         </div>
                     </section>

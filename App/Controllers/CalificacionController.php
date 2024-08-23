@@ -12,14 +12,17 @@ use App\Repositories\UsuarioRepository;
 use App\Services\UsuarioService;
 
 use Monolog\Logger;
-Class CalificacionController{
+class CalificacionController
+{
     private $calificacionService;
     private $logger;
-    public function __construct(CalificacionService $calificacionService, Logger $logger){
+    public function __construct(CalificacionService $calificacionService, Logger $logger)
+    {
         $this->calificacionService = $calificacionService;
         $this->logger = $logger;
     }
-    public function asignarPuntuacion(){
+    public function asignarPuntuacion()
+    {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
         $calificacion = new CalificacionModel(
@@ -48,16 +51,58 @@ Class CalificacionController{
         ));
     }
 
-    public function obtenerPuntuaciones($id){ 
+    public function obtenerPuntuaciones($id)
+    {
         return $this->calificacionService->obtenerPuntuaciones($id);
     }
 
-    public function obtenerPuntuacionesAjax(){
+    public function obtenerPuntuacionesAjax()
+{
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    
+    if(!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true){
+        header('HTTP/1.1 403 Forbidden');
+        echo json_encode(['error' => 'No tiene permisos para ver esta página']);
+        exit();
+    }
+    if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
         $obtieneRepository = new ObtieneRepository();
         $obtieneService = new ObtieneService($obtieneRepository);
-        
-        $resultados = $obtieneService->obtenerCalificaciones($_SESSION['documento']);
+        $resultado = $obtieneService->obtenerCalificaciones($_SESSION['documento']);
+
+        $calificaciones = [];
+
+        foreach ($resultado as $resultados) {
+            $calificacion = $this->calificacionService->obtenerPuntuaciones($resultados['id']);
+
+            // Verificar si $calificacion tiene datos y tomar el primer elemento
+            if (is_array($calificacion) && !empty($calificacion)) {
+                $calificacion = $calificacion[0]; // Usar solo el primer elemento
+            } else {
+                $calificacion = []; // Array vacío si no hay datos
+            }
+
+            $calificaciones[] = [
+                'id' => $resultados['id'],
+                'puntObtenido' => $resultados['puntObtenido'],
+                'fecha' => $resultados['fecha'],
+                'fuerzaMusc' => $calificacion['fuerzaMusc'] ?? '',
+                'resMusc' => $calificacion['resMusc'] ?? '',
+                'resAnaerobica' => $calificacion['resAnaerobica'] ?? '',
+                'resiliencia' => $calificacion['resiliencia'] ?? '',
+                'flexibilidad' => $calificacion['flexibilidad'] ?? '',
+                'cumplAgenda' => $calificacion['cumplAgenda'] ?? '',
+                'resMonotonia' => $calificacion['resMonotonia'] ?? ''
+            ];
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($calificaciones);
+    } else {
+        header('HTTP/1.1 403 Forbidden');
+        echo json_encode(['error' => 'Token inválido o sesión expirada']);
     }
-
-
 }
+}
+
