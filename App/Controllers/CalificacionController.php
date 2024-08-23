@@ -7,7 +7,9 @@ use App\Controllers\ObtieneController;
 use App\Services\ObtieneService;
 use App\Models\ObtieneModel;
 use App\Repositories\ObtieneRepository;
-
+use App\Models\UsuarioModel;
+use App\Repositories\UsuarioRepository;
+use App\Services\UsuarioService;
 
 use Monolog\Logger;
 Class CalificacionController{
@@ -46,9 +48,15 @@ Class CalificacionController{
         ));
     }
 
-    public function obtenerPuntuaciones($id){
-      
+    public function obtenerPuntuaciones($id){ 
         return $this->calificacionService->obtenerPuntuaciones($id);
+    }
+
+    public function obtenerPuntuacionesAjax(){
+        $obtieneRepository = new ObtieneRepository();
+        $obtieneService = new ObtieneService($obtieneRepository);
+        
+        $resultados = $obtieneService->obtenerCalificaciones($_SESSION['documento']);
     }
 
 
