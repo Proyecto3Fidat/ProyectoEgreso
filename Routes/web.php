@@ -42,12 +42,7 @@ SimpleRouter::get('/favicon.ico', function () {
 SimpleRouter::get('/login', function () {
     header('Location: App/Views/loginusuario.html');
 });
-SimpleRouter::get('/calificacion', function () {
-    header('Location: App/Views/calificacion.html');
-});
-SimpleRouter::post('/calificacion', function () {
-    header('Location: App/Views/calificacion.html');
-});
+
 // Ruta para el registro de clientes
 SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
@@ -97,20 +92,9 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
         }
     }
 });
-SimpleRouter::post('/asignarPuntuacion', function () use ($logger) {
-    $obtieneRepository = new ObtieneRepository();
-    $obtieneService = new ObtieneService($obtieneRepository);
-    $obtieneController = new ObtieneController($obtieneService, $logger);
-    $obtieneController->asignarPuntuacion();
-    echo "<script>
-                alert('Calificacion Creada con éxito');
-                window.location.href = '../../Public/inicio.html'; 
-              </script>";
-    exit();
 
-});
-
-SimpleRouter::post('/asignarCalificacion', function () use ($logger) {
+//funcion post para Calificar
+SimpleRouter::post('/calificacion', function () use ($logger) {
     $calificacionRepository = new CalificacionRepository();
     $calificacionService = new CalificacionService($calificacionRepository);
     $calificacionController = new CalificacionController($calificacionService, $logger);
@@ -210,5 +194,6 @@ SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
         exit();
     }
 });
+
 // Iniciar el enrutador
 SimpleRouter::start();
