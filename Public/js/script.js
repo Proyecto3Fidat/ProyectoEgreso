@@ -103,33 +103,44 @@ const urlParams = new URLSearchParams(window.location.search);
     }
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Selecciona todos los botones de "Ficha técnica"
-    const btnFichaTecnica = document.querySelectorAll('.btnfichatecnica');
-
-    // Añade un evento de clic a cada botón de "Ficha técnica"
-    btnFichaTecnica.forEach(button => {
-        button.addEventListener('click', function() {
-            const clienteId = this.getAttribute('data-cliente-id');
-            const ficha = document.getElementById('fichagnl' + clienteId);
-
-            // Despliega la ficha técnica correspondiente
-            ficha.style.display = 'block';
+    //Inicio funcion de botones para ficha tecnica
+const btnfichaTecnica = document.querySelectorAll(".btnfichatecnica");
+const cerrarFichas = document.querySelectorAll(".cerrarficha");
+const listaclientes = document.querySelector(".lista-clientes");
+    //ForEach para abrir la ficha tecnica
+    btnfichaTecnica.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Obtener el ID del cliente desde el atributo data-cliente-id
+            const clienteId = button.getAttribute("data-cliente-id");
+            
+            // Seleccionar la ficha técnica correspondiente
+            const fichaGnl = document.querySelector(`#fichagnl${clienteId}`);
+    
+            // Ocultar la lista de clientes y mostrar la ficha técnica
+            if (fichaGnl && listaclientes) {
+                listaclientes.style.display = "none"; // Ocultar lista de clientes
+                fichaGnl.style.display = "block"; // Mostrar la ficha técnica
+            } else {
+                console.error("No se encontró el elemento correspondiente.");
+            }
         });
     });
-
-    // Selecciona todos los botones de "Cerrar ficha"
-    const btnCerrarFicha = document.querySelectorAll('.cerrarficha');
-
-    // Añade un evento de clic a cada botón de "Cerrar ficha"
-    btnCerrarFicha.forEach(button => {
-        button.addEventListener('click', function() {
-            const clienteId = this.getAttribute('data-cliente-id');
-            const ficha = document.getElementById('fichagnl' + clienteId);
-
-            // Oculta la ficha técnica correspondiente
-            ficha.style.display = 'none';
+    
+    // Añadir evento a cada botón de cerrar la ficha técnica
+    cerrarFichas.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Obtener el ID del cliente desde el atributo data-cliente-id
+            const clienteId = button.getAttribute("data-cliente-id");
+            
+            // Seleccionar la ficha técnica correspondiente
+            const fichaGnl = document.querySelector(`#fichagnl${clienteId}`);
+    
+            // Mostrar la lista de clientes y ocultar la ficha técnica
+            if (fichaGnl && listaclientes) {
+                listaclientes.style.display = "block"; // Mostrar lista de clientes
+                fichaGnl.style.display = "none"; // Ocultar la ficha técnica
+            } else {
+                console.error("No se encontró el elemento correspondiente.");
+            }
         });
     });
-});

@@ -99,7 +99,7 @@ if (
             <?php foreach ($clientes as $cliente): ?>
                 <div class="fichagnrl" id="fichagnl<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
                         <h4>Ficha técnica de <?php echo htmlspecialchars($cliente['nombre']) . " " . $cliente['apellido']; ?></h4>
-                        <button class="cerrarficha" id="cerrarficha"><i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i></button>
+                        <button class="cerrarficha" id="cerrarficha" data-cliente-id="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>"><i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i></button>
                     <div class="divficha-container">
                         <div class="divficha">
                             <p>Documento: <?php echo htmlspecialchars($cliente['nroDocumento']); ?> </p>
@@ -121,7 +121,7 @@ if (
                             <button class="adrut">Añadir rutina</button>
                             <form method="POST" action="calificar.php">
                                 <input type="hidden" name="cliente_id" value="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
-                                <button type="submit" class="adrut">Calificar</button>
+                                <button type="submit" class="adrut" href="/calificacion.html">Calificar</button>
                             </form>
                         </div>
                     </section>

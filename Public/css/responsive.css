@@ -51,11 +51,7 @@
     }
     /* fin de nav y menu desplegable */
 
-    #planes {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
+    
     
     .footer{
         display: flex;
@@ -80,6 +76,13 @@
         margin: 8rem;
         gap: 1px;
         margin-top: 2rem;
+    }
+
+    /*Inicio de aplicacion responsive apartado de planes*/
+    #planes {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     .horarios{

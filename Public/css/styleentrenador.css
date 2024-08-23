@@ -137,6 +137,10 @@ button {
     gap: 2rem;
 }
 
+.lista-clientes.visible {
+    display: block;
+}
+
 .btn-detalles { 
     border-radius: 10px;
     background-color: black;
@@ -144,6 +148,10 @@ button {
 
 .fichagnrl{
     display: none;
+}
+
+.fichagnrl.visible{
+    display: block;
 }
 
 .fichatecn {
@@ -195,7 +203,6 @@ h4 {
     padding: 10px 20px;
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
 }
@@ -203,3 +210,6 @@ h4 {
 .adejerci:hover, .adrut:hover {
     transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
 }
+
+
+
