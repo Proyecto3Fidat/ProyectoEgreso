@@ -119,9 +119,9 @@ if (
                         <div class="btnficha">
                             <button class="adejerci">Añadir ejercicio</button>
                             <button class="adrut">Añadir rutina</button>
-                            <form method="POST" action="calificar.php">
+                            <form method="POST" action="/calificacion">
                                 <input type="hidden" name="cliente_id" value="<?php echo htmlspecialchars($cliente['nroDocumento']); ?>">
-                                <button type="submit" class="adrut" href="/calificacion.html">Calificar</button>
+                                <button type="submit" class="adrut" href="/calificacion">Calificar</button>
                             </form>
                         </div>
                     </section>

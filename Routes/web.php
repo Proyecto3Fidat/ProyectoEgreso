@@ -42,7 +42,12 @@ SimpleRouter::get('/favicon.ico', function () {
 SimpleRouter::get('/login', function () {
     header('Location: App/Views/loginusuario.html');
 });
-
+SimpleRouter::get('/calificacion', function () {
+    header('Location: App/Views/calificacion.html');
+});
+SimpleRouter::post('/calificacion', function () {
+    header('Location: App/Views/calificacion.html');
+});
 // Ruta para el registro de clientes
 SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
