@@ -1,26 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Cargar la lista de clientes
     fetch('/usuario/obtenerListaClientesAjax')
-        .then(response => response.json())
+        .then(response => {
+            // Verificar el código de estado de la respuesta
+            if (response.status === 403) {
+                // Mostrar una alerta si el estado es 403
+                alert('No tiene permisos para ver esta página.');
+                window.location.href = '/login'; // Cambiar a la URL adecuada para la página de inicio o login
+                return; // Detener la ejecución
+            }
+            return response.json();
+        })
         .then(data => {
-            // Crear una nueva sección para la lista de clientes
-            const section = document.createElement('section');
-            section.className = 'listaclientes';
+            if (data.error) {
+                // Manejar errores específicos si están presentes en el JSON
+                console.error(data.error);
+                alert('Hubo un problema al cargar la lista de clientes.');
+                return;
+            }
 
-            // Crear una nueva tabla dentro de la sección
-            const tabla = document.createElement('table');
-            tabla.className = 'lista-clientes';
-
-            // Crear y agregar el encabezado de la tabla
-            tabla.innerHTML = `
-                <tr>
-                    <th>Nombre de Cliente</th>
-                    <th>Documento</th>
-                    <th>Rol</th>
-                </tr>
-            `;
-
-            // Llenar la tabla con los datos de los clientes
+            const tbody = document.querySelector('#tablaClientes tbody');
             data.forEach(cliente => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -29,14 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${cliente.rol}</td>
                     <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Ficha técnica</button></td>
                 `;
-                tabla.appendChild(row);
+                tbody.appendChild(row);
             });
-
-            // Agregar la tabla a la nueva sección
-            section.appendChild(tabla);
-
-            // Agregar la nueva sección al DOM
-            document.body.appendChild(section);
         })
         .catch(error => {
             console.error('Error al cargar la lista de clientes:', error);
@@ -44,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
 
-    // Función para cargar la ficha técnica del cliente
+
+// Función para cargar la ficha técnica del cliente
    /* function cargarFichaTecnica(clienteId) {
         fetch(`/usuario/obtenerFichaTecnicaAjax?clienteId=${clienteId}`)
             .then(response => response.json())

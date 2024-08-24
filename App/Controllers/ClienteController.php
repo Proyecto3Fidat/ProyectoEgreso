@@ -120,6 +120,12 @@ class ClienteController
     public function obtenerListaClientesAjax(){
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
+        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true) {
+            header('HTTP/1.1 403 Forbidden');
+            echo json_encode(['error' => 'No tiene permisos para ver esta página']);
+            exit();
+        }
+        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
         $lista = $this->clienteService->listarClientes();
         $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
         $resultado = [];
@@ -131,5 +137,9 @@ class ClienteController
             ];
         }
         echo json_encode($resultado);
+        } else {
+            header('HTTP/1.1 403 Forbidden');
+            echo json_encode(['error' => 'Token inválido o sesión expirada']);
+        }
     }
 }   

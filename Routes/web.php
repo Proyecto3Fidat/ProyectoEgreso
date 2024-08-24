@@ -35,6 +35,16 @@ SimpleRouter::get('/inicio', function () {
     header('Location: Public/inicio.html');
 });
 
+SimpleRouter::get('/verificar-sesion', function () {
+    header('Content-Type: application/json');
+    if(isset($_SESSION['session'])){
+    echo json_encode([
+        'authenticated' => $_SESSION['session']
+    ]);
+    }
+});
+
+
 //Funcion get favicon.ico para resolver error del navegador
 SimpleRouter::get('/favicon.ico', function () {
 });

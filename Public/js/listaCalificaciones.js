@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json().then(data => {
                     alert(data.error);
                     window.location.href = '/login'; // Cambia esto a la URL adecuada para la página de inicio o login
+                    return;
                 });
             }
             if (!response.ok) {

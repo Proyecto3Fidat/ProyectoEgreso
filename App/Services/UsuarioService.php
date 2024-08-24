@@ -93,7 +93,7 @@ class UsuarioService
                         $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/entrenador.php'; 
+                            window.location.href = '../Views/entrenador.html'; 
                             </script>";
                         exit();
                     case "cliente":
