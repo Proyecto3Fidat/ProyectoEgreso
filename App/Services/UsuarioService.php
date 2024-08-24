@@ -93,7 +93,7 @@ class UsuarioService
                         $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../Views/entrenador.html'; 
+                            window.location.href = '../../App/Views/entrenador.html'; 
                             </script>";
                         exit();
                     case "cliente":
@@ -115,7 +115,7 @@ class UsuarioService
                         $_SESSION['sesion'] = true;
                         echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/Calificaciones.html'; 
+                            window.location.href = '../Views/calificaciones.html'; 
                             </script>";
                         exit();
                     case "paciente":

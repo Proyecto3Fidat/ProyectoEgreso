@@ -36,11 +36,11 @@ SimpleRouter::get('/inicio', function () {
 });
 
 SimpleRouter::get('/verificar-sesion', function () {
-    header('Content-Type: application/json');
-    if(isset($_SESSION['session'])){
+    if(isset($_SESSION['sesion'])){
     echo json_encode([
-        'authenticated' => $_SESSION['session']
+        'authenticated' => $_SESSION['sesion']
     ]);
+    exit();
     }
 });
 

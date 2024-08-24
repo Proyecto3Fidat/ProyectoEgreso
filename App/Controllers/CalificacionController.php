@@ -101,7 +101,7 @@ class CalificacionController
                     'resMonotonia' => $calificacion['resMonotonia'] ?? ''
                 ];
             }
-
+            var_dump($calificaciones);
             header('Content-Type: application/json');
             echo json_encode($calificaciones);
         } else {

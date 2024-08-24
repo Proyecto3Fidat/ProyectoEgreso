@@ -155,7 +155,11 @@ class ClienteController
                 $resultado[] = [
                     'nombre' => $cliente['nombre'],
                     'nroDocumento' => $cliente['nroDocumento'],
-                    'rol' => $cliente['rol']
+                    'rol' => $cliente['rol'],
+                    'altura' => $cliente['altura'],
+                    'peso' => $cliente['peso'],
+                    'patologias' => $cliente['patologia'],
+                    'email' => $cliente['email'],
                 ];
             }
             echo json_encode($resultado);
