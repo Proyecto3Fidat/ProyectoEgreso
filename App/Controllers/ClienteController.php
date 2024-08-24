@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controllers;
+
 use App\Repositories\ClienteRepository;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
@@ -12,6 +14,7 @@ class ClienteController
 {
     private $clienteService;
     private $logger;
+
     public function __construct(ClienteService $clienteService, Logger $logger)
     {
         $this->clienteService = $clienteService;
@@ -81,6 +84,7 @@ class ClienteController
         );
         $this->clienteService->modificarNombre($nroDocumento, $cliente);
     }
+
     public function modificarApellido($nroDocumento, $apellido)
     {
         $cliente = new ClienteModel(
@@ -99,10 +103,12 @@ class ClienteController
         );
         $this->clienteService->modificarApellido($nroDocumento, $cliente);
     }
+
     public function comprobarCliente()
     {
         return $this->clienteService->comprobarCliente($_POST['nroDocumento']);
     }
+
     public function listarClientes()
     {
         $usuarioRepo = new UsuarioRepository();
@@ -113,11 +119,27 @@ class ClienteController
             return $this->clienteService->listarClientes();
         }
     }
-    public function imprimirNota(){
+
+    public function imprimirNota()
+    {
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
         $this->logger->info('Se intento imprimir la nota');
-        $this->clienteService->imprimirNota($_GET['id']);
+        if(isset($_SESSION['sesion']) && $_SESSION['sesion'] === true) {
+        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
+            $usuarioService->tokenInvalido();
+            $this->clienteService->imprimirNota($_GET['id']);
+        }
+        }else{
+            echo "<script>
+                alert('No tiene permisos para ver esta página');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+        }
     }
-    public function obtenerListaClientesAjax(){
+
+    public function obtenerListaClientesAjax()
+    {
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
         if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true) {
@@ -126,17 +148,17 @@ class ClienteController
             exit();
         }
         if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
-        $lista = $this->clienteService->listarClientes();
-        $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
-        $resultado = [];
-        foreach ($clientes as $cliente) {
-            $resultado[]= [
-                'nombre' => $cliente['nombre'],
-                'nroDocumento' => $cliente['nroDocumento'],
-                'rol' => $cliente['rol']
-            ];
-        }
-        echo json_encode($resultado);
+            $lista = $this->clienteService->listarClientes();
+            $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
+            $resultado = [];
+            foreach ($clientes as $cliente) {
+                $resultado[] = [
+                    'nombre' => $cliente['nombre'],
+                    'nroDocumento' => $cliente['nroDocumento'],
+                    'rol' => $cliente['rol']
+                ];
+            }
+            echo json_encode($resultado);
         } else {
             header('HTTP/1.1 403 Forbidden');
             echo json_encode(['error' => 'Token inválido o sesión expirada']);
