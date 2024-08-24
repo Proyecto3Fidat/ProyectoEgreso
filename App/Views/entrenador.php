@@ -65,7 +65,7 @@ if (
         
         <section>
             <div class="btnent">
-               <a href="../Views/listaclientes.php"><button class="clienteslist">Lista de clientes</button></a> 
+               <a href="listaclientes.html"><button class="clienteslist">Lista de clientes</button></a>
                 <a href="#"><button class="ejerciciolist">Lista de ejercicios</button></a>
                 <a href="#"><button class="rutinaslist">Lista de rutinas</button></a>
             </div>

@@ -47,7 +47,13 @@ SimpleRouter::get('/login', function () {
 SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
 });
-
+SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $clienteController->obtenerListaClientesAjax();
+    exit();
+});
 Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger){
     $calificacionRepository = new CalificacionRepository();
     $calificacionService = new CalificacionService($calificacionRepository);

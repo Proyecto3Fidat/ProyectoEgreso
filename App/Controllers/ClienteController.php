@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Repositories\ClienteRepository;
 use App\Services\ClienteService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
@@ -115,5 +116,20 @@ class ClienteController
     public function imprimirNota(){
         $this->logger->info('Se intento imprimir la nota');
         $this->clienteService->imprimirNota($_GET['id']);
+    }
+    public function obtenerListaClientesAjax(){
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+        $lista = $this->clienteService->listarClientes();
+        $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
+        $resultado = [];
+        foreach ($clientes as $cliente) {
+            $resultado[]= [
+                'nombre' => $cliente['nombre'],
+                'nroDocumento' => $cliente['nroDocumento'],
+                'rol' => $cliente['rol']
+            ];
+        }
+        echo json_encode($resultado);
     }
 }   
