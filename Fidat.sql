@@ -27,7 +27,7 @@ CREATE TABLE Usuario(
 CREATE TABLE Cliente_Telefono(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    telefono INT,
+    telefono VARCHAR(25),
     PRIMARY KEY(nroDocumento, tipoDocumento, telefono)
 );
 
