@@ -23,7 +23,10 @@ use App\Repositories\DeportistaRepository;
 use App\Repositories\PacienteRepository;
 use App\Repositories\ObtieneRepository;
 use App\Repositories\CalificacionRepository;
-
+use App\Controllers\ClientelefonoController;
+use App\Models\ClientelefonoModel;
+use App\Services\ClientetelefonoService;
+use App\Repositories\ClientetelefonoRepository;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -52,7 +55,9 @@ SimpleRouter::get('/favicon.ico', function () {
 SimpleRouter::get('/login', function () {
     header('Location: App/Views/loginusuario.html');
 });
-
+SimpleRouter::get('/ClienteCalificacion', function(){
+   header('Location: App/Views/calificaciones.html');
+});
 // Ruta para el registro de clientes
 SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
@@ -92,6 +97,9 @@ SimpleRouter::get('/imprimirNota', function () use ($logger) {
     $clienteController = new ClienteController($clienteService, $logger);
     $clienteController->imprimirNota();
 });
+SimpleRouter::get('/listaUsuarios', function () {
+    header('Location: App/Views/listaclientes.html');
+});
 SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     $deportistaRepository = new DeportistaRepository();
     $deportistaService = new DeportistaService($deportistaRepository);
@@ -121,6 +129,13 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     }
 });
 
+SimpleRouter::post('/guardarTelefono', function () use ($logger){
+    $clientetelefonoRepository = new ClientetelefonoRepository();
+    $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
+    $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
+    $clientetelefonoController->guardarTelefono();
+    exit();
+});
 //funcion post para Calificar
 SimpleRouter::post('/calificacion', function () use ($logger) {
     $calificacionRepository = new CalificacionRepository();
@@ -129,7 +144,7 @@ SimpleRouter::post('/calificacion', function () use ($logger) {
     $calificacionController->asignarPuntuacion();
     echo "<script>
                 alert('Calificacion Creada con éxito');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '/listaUsuarios'; 
               </script>";
     exit();
 

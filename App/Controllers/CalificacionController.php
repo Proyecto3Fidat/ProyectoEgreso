@@ -12,6 +12,8 @@ use App\Repositories\ObtieneRepository;
 use App\Models\UsuarioModel;
 use App\Repositories\UsuarioRepository;
 use App\Services\UsuarioService;
+use App\Services\ClienteService;
+use App\Repositories\ClienteRepository;
 
 use Monolog\Logger;
 
@@ -30,31 +32,62 @@ class CalificacionController
     {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
+
+        // Validar y convertir datos de $_POST
+        $puntMaxima = filter_input(INPUT_POST, 'puntMaxima', FILTER_VALIDATE_INT);
+        $fuerzaMusc = filter_input(INPUT_POST, 'fuerzaMusc', FILTER_VALIDATE_FLOAT);
+        $resMusc = filter_input(INPUT_POST, 'resMusc', FILTER_VALIDATE_FLOAT);
+        $resAnaerobica = filter_input(INPUT_POST, 'resAnaerobica', FILTER_VALIDATE_FLOAT);
+        $resiliencia = filter_input(INPUT_POST, 'resiliencia', FILTER_VALIDATE_FLOAT);
+        $flexibilidad = filter_input(INPUT_POST, 'flexibilidad', FILTER_VALIDATE_FLOAT);
+        $cumplAgenda = filter_input(INPUT_POST, 'cumplAgenda', FILTER_VALIDATE_FLOAT);
+        $resMonotonia = filter_input(INPUT_POST, 'resMonotonia', FILTER_VALIDATE_FLOAT);
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_STRING);
+        $puntuacionEsperado = filter_input(INPUT_POST, 'puntuacionEsperado', FILTER_VALIDATE_FLOAT);
+
+        // Comprobar si las conversiones son válidas
+        if ($puntMaxima === false || $fuerzaMusc === false || $resMusc === false || $resAnaerobica === false ||
+            $resiliencia === false || $flexibilidad === false || $cumplAgenda === false || $resMonotonia === false ||
+            $nroDocumento === false || $puntuacionEsperado === false) {
+            // Manejar error si alguno de los datos no es válido
+            $this->logger->error('Error en los datos de entrada.');
+            echo "<script>
+            alert('Error en los datos de entrada.'); 
+            window.location.href = '/calificar';
+            </script>";
+            exit();
+        }
+
         $calificacion = new CalificacionModel(
             null,
-            $_POST['puntMaxima'],
-            $_POST['fuerzaMusc'],
-            $_POST['resMusc'],
-            $_POST['resAnaerobica'],
-            $_POST['resiliencia'],
-            $_POST['flexibilidad'],
-            $_POST['cumplAgenda'],
-            $_POST['resMonotonia']
+            $puntMaxima,
+            $fuerzaMusc,
+            $resMusc,
+            $resAnaerobica,
+            $resiliencia,
+            $flexibilidad,
+            $cumplAgenda,
+            $resMonotonia
         );
+
         $id = $calificacionService->asignarPuntuacion($calificacion);
         $obtieneRepository = new ObtieneRepository();
         $obtieneService = new ObtieneService($obtieneRepository);
         $obtiene = new ObtieneController($obtieneService, $this->logger);
         $calificacionObtenida = $calificacionService->obtenerCalificacion($calificacion);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $tipoDocumento = $usuarioService->obtenerTipoDocumento($nroDocumento);
         $obtiene->asignarPuntuacion(new ObtieneModel(
-            $_POST['nroDocumento'],
-            $_POST['tipoDocumento'],
+            $nroDocumento,
+            $tipoDocumento,
             $id,
             date('Y-m-d H:i:s'),
-            $_POST['puntuacionEsperado'],
+            $puntuacionEsperado,
             $calificacionObtenida
         ));
     }
+
 
     public function obtenerPuntuaciones($id)
     {
@@ -101,7 +134,6 @@ class CalificacionController
                     'resMonotonia' => $calificacion['resMonotonia'] ?? ''
                 ];
             }
-            var_dump($calificaciones);
             header('Content-Type: application/json');
             echo json_encode($calificaciones);
         } else {

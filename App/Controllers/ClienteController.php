@@ -127,10 +127,11 @@ class ClienteController
         $this->logger->info('Se intento imprimir la nota');
         if(isset($_SESSION['sesion']) && $_SESSION['sesion'] === true) {
         if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
-            $usuarioService->tokenInvalido();
+
             $this->clienteService->imprimirNota($_GET['id']);
         }
         }else{
+            $usuarioService->tokenInvalido();
             echo "<script>
                 alert('No tiene permisos para ver esta página');
                 window.location.href = '../../Public/inicio.html'; 
@@ -152,6 +153,8 @@ class ClienteController
             $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
             $resultado = [];
             foreach ($clientes as $cliente) {
+                $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+                $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
                 $resultado[] = [
                     'nombre' => $cliente['nombre'],
                     'nroDocumento' => $cliente['nroDocumento'],
@@ -160,6 +163,8 @@ class ClienteController
                     'peso' => $cliente['peso'],
                     'patologias' => $cliente['patologia'],
                     'email' => $cliente['email'],
+                    'edad' => $edad,
+                    'direccion' => $direccion,
                 ];
             }
             echo json_encode($resultado);

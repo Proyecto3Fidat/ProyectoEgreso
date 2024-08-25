@@ -9,6 +9,7 @@ use App\Services\CalificacionService;
 use App\Repositories\CalificacionRepository;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
+use DateTime;
 use TCPDF;
 class ClienteService
 {
@@ -132,5 +133,13 @@ class ClienteService
     public function listarClientes()
     {
         return $this->clienteRepository->listarClientes();
+    }
+
+    public function calcularEdad($fechaNacimiento)
+    {
+        $fechaNacimiento = new DateTime($fechaNacimiento);
+        $hoy = new DateTime();
+        $edad = $hoy->diff($fechaNacimiento);
+        return $edad->y;
     }
 }

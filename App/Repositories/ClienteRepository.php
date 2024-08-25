@@ -322,11 +322,11 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email FROM Cliente";
+        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($nombre, $nroDocumento, $apellido, $altura, $peso, $patologia, $email);
+        $stmt->bind_result($nombre, $nroDocumento, $apellido, $altura, $peso, $patologia, $email, $fechaNacimiento, $calle, $numero, $esquina);
         $clientes = array();
         while ($stmt->fetch()) {
             $clientes[] = array(
@@ -336,7 +336,11 @@ class ClienteRepository extends Database
                 'altura' => $altura,
                 'peso' => $peso,
                 'patologia' => $patologia,
-                'email' => $email
+                'email' => $email,
+                'fechaNacimiento' => $fechaNacimiento,
+                'calle' => $calle,
+                'numero' => $numero,
+                'esquina' => $esquina
             );
         }
         $stmt->close();
