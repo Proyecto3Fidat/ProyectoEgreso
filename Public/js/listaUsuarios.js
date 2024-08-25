@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Variable para almacenar la lista de clientes
     let clientes = [];
+
     // Cargar la lista de clientes
     fetch('/usuario/obtenerListaClientesAjax')
         .then(response => {
@@ -38,7 +39,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.addEventListener('click', function () {
                     const clienteId = this.getAttribute('data-cliente-id');
                     abrirFichaTecnica(clienteId);
-
                 });
             });
         })
@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
 
             // Configurar el valor del formulario oculto para calificar
-            document.querySelector('form input[name="cliente_id"]').value = clienteId;
+            const form = document.querySelector('form');
+            form.action = `calificacion.html?documento=${clienteId}`;
+            form.querySelector('input[name="documento"]').value = clienteId;
         } else {
             console.error('Cliente no encontrado.');
             alert('No se encontraron los datos del cliente.');
@@ -80,6 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Agregar evento para cerrar la ficha técnica
     document.getElementById('cerrarficha').addEventListener('click', function () {
         document.getElementById('fichagnl').style.display = 'none';
+        document.getElementById("tablaClientes").style.display = "block";
     });
 });
-

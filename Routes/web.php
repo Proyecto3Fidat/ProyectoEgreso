@@ -72,7 +72,7 @@ Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger
     exit();
 });
 
-SimpleRouter::post('/calificar', function () {
+SimpleRouter::get('/calificar', function () {
     header('Location: App/Views/calificacion.html');
 });
 
