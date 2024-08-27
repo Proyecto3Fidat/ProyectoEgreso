@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../Public/css/styleentrenador.css">
+    <link rel="stylesheet" href="../../Public/css/listaejercicio.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Lista de ejercicios</title>
 </head>
-<body>        
+<body>    
     <header>
         <section class="navhead">
             <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
@@ -36,62 +37,62 @@
     <h2>Pectoral</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Press banca plano</td>
-            <td>1 serie de calentamiento y 3 series de trabajo</td>
-            <td>14, 12, 10</td>
+            <td data-label="Ejercicio">Press banca plano</td>
+            <td data-label="Series">1 serie de calentamiento y 3 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
+        </tr> 
+        <tr>
+            <td data-label="Ejercicio">Press banca inclinado</td>
+            <td data-label="Series">Idem banco plano</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
         </tr>
         <tr>
-            <td>Press banca inclinado</td>
-            <td>Idem banco plano</td>
-            <td>14, 12, 10</td>
+            <td data-label="Ejercicio">Aperturas con mancuerna y banco plano</td>
+            <td data-label="Series">1 serie de calentamiento y 3 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
         </tr>
         <tr>
-            <td>Aperturas con mancuerna y banco plano</td>
-            <td>1 serie de calentamiento y 3 series de trabajo</td>
-            <td>14, 12, 10</td>
-        </tr>
-        <tr>
-            <td>Aperturas con mancuerna y banco inclinado</td>
-            <td>Idem aperturas inclinadas</td>
-            <td>14, 12, 10</td>
+            <td data-label="Ejercicio">Aperturas con mancuerna y banco inclinado</td>
+            <td data-label="Series" data-label="Series">Idem aperturas inclinadas</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
         </tr>
     </table>
 
     <h2>Hombro</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Elevaciones laterales</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Elevaciones laterales</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
     </table>
 
     <h2>Tríceps</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+           <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Extensión de tríceps en polea</td>
-            <td>3 series de trabajo</td>
+            <td data-label="Ejercicio">Extensión de tríceps en polea</td>
+            <td data-label="Series">3 series de trabajo</td>
             <td>16, 14, 12</td>
         </tr>
         <tr>
-            <td>Press francés en banco y barra Z</td>
-            <td>3 series de trabajo</td>
-            <td>14, 12, 10</td>
+            <td data-label="Ejercicio">Press francés en banco y barra Z</td>
+            <td data-label="Series">3 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
         </tr>
     </table>
 
@@ -99,62 +100,62 @@
     <h2>Espalda</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Empujes en polea alta</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Empujes en polea alta</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
         <tr>
-            <td>Empujes en polea baja</td>
-            <td>Idem polea alta</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Empujes en polea baja</td>
+            <td data-label="Series">Idem polea alta</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
         <tr>
-            <td>Hiperextensiones</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>10, 10, 10, 10</td>
+            <td data-label="Ejercicio">Hiperextensiones</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">10, 10, 10, 10</td>
         </tr>
     </table>
 
     <h2>Hombro</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Press en multipower</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Press en multipower</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
         <tr>
-            <td>Elevaciones frontales</td>
-            <td>3 series de trabajo</td>
-            <td>14, 12, 10</td>
+            <td data-label="Ejercicio">Elevaciones frontales</td>
+            <td data-label="Series">3 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10</td>
         </tr>
     </table>
 
     <h2>Bíceps</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Curl en barra</td>
-            <td>4 series de trabajo</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Curl en barra</td>
+            <td data-label="Series">4 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
         <tr>
-            <td>Curl de martillo con mancuerna</td>
-            <td>3 series de trabajo</td>
-            <td>12, 10, 8</td>
+            <td data-label="Ejercicio">Curl de martillo con mancuerna</td>
+            <td data-label="Series">3 series de trabajo</td>
+            <td data-label="Repeticiones">12, 10, 8</td>
         </tr>
     </table>
 
@@ -162,47 +163,47 @@
     <h2>Cuádriceps</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Sentadilla</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>16, 14, 12, 10</td>
+            <td data-label="Ejercicio">Sentadilla</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">16, 14, 12, 10</td>
         </tr>
         <tr>
-            <td>Extensiones</td>
-            <td>4 series de trabajo</td>
-            <td>10, 10, 10, 10</td>
+            <td data-label="Ejercicio">Extensiones</td>
+            <td data-label="Series">4 series de trabajo</td>
+            <td data-label="Repeticiones">10, 10, 10, 10</td>
         </tr>
     </table>
 
     <h2>Femoral</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Curl de femoral en banco</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>14, 12, 10, 8</td>
+            <td data-label="Ejercicio">Curl de femoral en banco</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">14, 12, 10, 8</td>
         </tr>
     </table>
 
     <h2>Gemelo</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Series</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Elevaciones de pie</td>
-            <td>1 serie de calentamiento y 4 series de trabajo</td>
-            <td>16, 14, 12, 10</td>
+            <td data-label="Ejercicio">Elevaciones de pie</td>
+            <td data-label="Series">1 serie de calentamiento y 4 series de trabajo</td>
+            <td data-label="Repeticiones">16, 14, 12, 10</td>
         </tr>
     </table>
 
@@ -210,87 +211,91 @@
     <h2>Flexibilidad</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Descripción</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>La foca (The seal)</td>
-            <td>Mantener la postura entre 20 a 30 segundos</td>
-            <td>5-8</td>
+            <td data-label="Ejercicio">La foca (The seal)</td>
+            <td data-label="Series">Mantener la postura entre 20 a 30 segundos</td>
+            <td data-label="Repeticiones">5-8</td>
         </tr>
         <tr>
-            <td>Estiramiento de columna (Spine stretch)</td>
-            <td>Estirar la espalda y brazos hacia adelante, volver a la posición inicial</td>
-            <td>2-4</td>
+            <td data-label="Ejercicio">Estiramiento de columna (Spine stretch)</td>
+            <td data-label="Series">Estirar la espalda y brazos hacia adelante, volver a la posición inicial</td>
+            <td data-label="Repeticiones">2-4</td>
         </tr>
         <tr>
-            <td>La sierra (The saw)</td>
-            <td>Inclinar la columna hacia un lado, luego al otro</td>
-            <td>Por lado</td>
+            <td data-label="Ejercicio">La sierra (The saw)</td>
+            <td data-label="Series">Inclinar la columna hacia un lado, luego al otro</td>
+            <td data-label="Repeticiones">Por lado</td>
         </tr>
     </table>
 
     <h2>Resistencia</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Descripción</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Cisne (Swan)</td>
-            <td>Levantar el torso y mantener la posición</td>
-            <td>5-8</td>
+            <td data-label="Ejercicio">Cisne (Swan)</td>
+            <td data-label="Series">Levantar el torso y mantener la posición</td>
+            <td data-label="Repeticiones">5-8</td>
         </tr>
         <tr>
-            <td>Flexiones de rodilla (Knee folds)</td>
-            <td>Levantar una pierna en ángulo de 90º, luego la otra</td>
-            <td>5-8 por pierna</td>
+            <td data-label="Ejercicio">Flexiones de rodilla (Knee folds)</td>
+            <td data-label="Series">Levantar una pierna en ángulo de 90º, luego la otra</td>
+            <td data-label="Repeticiones">5-8 por pierna</td>
         </tr>
     </table>
 
     <h2>Equilibrio</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Descripción</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>El cien (The hundred)</td>
-            <td>Elevar las piernas y mantener el torso recto mientras se realizan 100 movimientos rápidos con los brazos</td>
-            <td>100</td>
+            <td data-label="Ejercicio">El cien (The hundred)</td>
+            <td data-label="Series">Elevar las piernas y mantener el torso recto mientras se realizan 100 movimientos rápidos con los brazos</td>
+            <td data-label="Repeticiones">100</td>
         </tr>
     </table>
 
     <h2>Fortalecimiento Muscular</h2>
     <table>
         <tr>
-            <th>Ejercicio</th>
-            <th>Descripción</th>
-            <th>Repeticiones</th>
+            <th data-label="Ejercicio">Ejercicio</th>
+            <th data-label="Series">Series</th>
+            <th data-label="Repeticiones">Repeticiones</th>
         </tr>
         <tr>
-            <td>Círculos con una pierna (Leg circle)</td>
-            <td>Hacer círculos con una pierna levantada mientras se mantiene la otra en el suelo</td>
-            <td>4 por pierna</td>
+            <td data-label="Ejercicio">Círculos con una pierna (Leg circle)</td>
+            <td data-label="Series">Hacer círculos con una pierna levantada mientras se mantiene la otra en el suelo</td>
+            <td data-label="Repeticiones">4 por pierna</td>
         </tr>
         <tr>
-            <td>Estiramiento de gato (Cat)</td>
-            <td>En posición cuadrúpeda, arquear la espalda hacia arriba y luego hacia abajo</td>
-            <td>4</td>
+            <td data-label="Ejercicio">Estiramiento de gato (Cat)</td>
+            <td data-label="Series">En posición cuadrúpeda, arquear la espalda hacia arriba y luego hacia abajo</td>
+            <td data-label="Repeticiones">4</td>
         </tr>
         <tr>
-            <td>El puente (Shoulder Bridge)</td>
-            <td>Elevar la cadera mientras los hombros permanecen en el suelo</td>
-            <td>Mantener por 5 respiraciones, repetir</td>
+            <td data-label="Ejercicio">El puente (Shoulder Bridge)</td>
+            <td data-label="Series">Elevar la cadera mientras los hombros permanecen en el suelo</td>
+            <td data-label="Repeticiones">Mantener por 5 respiraciones, repetir</td>
         </tr>
         <tr>
-            <td>Patada lateral (The side kick)</td>
-            <td>En posición lateral, elevar y bajar la pierna libremente</td>
-            <td>6-8 por pierna</td>
+            <td data-label="Ejercicio">Patada lateral (The side kick)</td>
+            <td data-label="Series">En posición lateral, elevar y bajar la pierna libremente</td>
+            <td data-label="Repeticiones">6-8 por pierna</td>
         </tr>
     </table>
+
+    <script src="../../Public/js/script.js"></script>
+    <script src="../../Public/js/responsive.js"></script>
+
 </body>
 </html>

@@ -143,3 +143,58 @@ h1 {
   .horariosCliente td:hover{
     background-color: #555;
   }
+
+  .listaEjercicio {
+    margin: 2rem auto;
+    padding: 0;
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    background-color: #000;
+    color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.listaEjercicio th, .listaEjercicio td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+.listaEjercicio th {
+    background-color: #6f41bb;
+    color: black;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.listaEjercicio td {
+    border-bottom: 1px solid #fff;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.listaEjercicio tr:nth-child(even) {
+    background-color: #222;
+}
+
+.listaEjercicio tr:nth-child(odd) {
+    background-color: #333;
+}
+
+.listaEjercicio td:hover {
+    background-color: #555;
+    cursor: pointer;
+    color: #6f41bb;
+}
+
+.listaEjercicio caption {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #6f41bb;
+}

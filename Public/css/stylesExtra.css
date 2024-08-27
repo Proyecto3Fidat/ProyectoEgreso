@@ -87,6 +87,9 @@ margin-top: 1rem;
    
 }
 
+.diasagenda{
+    color: white;
+}
 
 .horarios {
     margin: 0 auto; 
@@ -107,7 +110,7 @@ margin-top: 1rem;
 
 .horarios th {
     background-color: #6f41bb; 
-    color: black; 
+    color: white; 
     font-size: 1rem; 
 }
 

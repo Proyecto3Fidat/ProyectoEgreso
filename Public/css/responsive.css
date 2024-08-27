@@ -85,14 +85,14 @@
         gap: 2rem;
     }
 
-    .horarios{
-        width:auto;
-        cursor: pointer;
+    #diasagenda{
+        display: none;
     }
 
     .horarios, .horarios thead, .horarios tbody, .horarios th, .horarios td, .horarios tr {
         display: block;
         width: 100%;
+        cursor: pointer;
     }
 
     .horarios thead tr {
@@ -119,7 +119,34 @@
         text-align: left;
     }
 
-    #diasagenda{
+    .listaejercicio, .listaejercicio thead, .listaejercicio tbody, .listaejercicio th, .listaejercicio td, .listaejercicio tr {
+        display: block;
+        width: 100%;
+    }
+
+    .listaejercicio thead tr {
         display: none;
     }
+
+    .listaejercicio tr {
+        margin-bottom: 15px;
+    }
+
+    .listaejercicio td, .listaejercicio th {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    
+    .listaejercicio td::before, .listaejercicio th::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45% auto;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    
 }
