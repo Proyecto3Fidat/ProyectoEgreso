@@ -66,53 +66,31 @@ nav a:hover {
 }
 /*Fin del nav*/
 
-.agenda{
+h4 {
+    text-align: center; 
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.califidepo {
     display: flex;
-    justify-content: center;
-    margin: 1rem;
     flex-direction: column;
     gap: 1rem;
-    
-}
-
-.tituloent{
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-    cursor: default;
-    margin-top: 5rem;
-}
-
-.btnent {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    gap: 3rem;
-    
-}
-
-.listaclientes{
-    display: flex;
-}
-
-.clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
-    transform: scale(1.2);
-}
-
-.clienteslist, .ejerciciolist, .rutinaslist{
-    transition: transform 0.8s ease-in-out; /*Metodo que logra detalle de animacion tipo "progresion"*/
-}
-
-button { 
+    background-color: #1e1c1f;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    max-width: 50%;
+    margin: 1rem auto 40px;
+}   
+    .califidepo input {
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        border-radius: .5rem;
+        font-size: 1rem;
+        border: none;
+        }
+form .button {
     cursor: pointer;
-    font-size: 1.2rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    padding: 1rem;
-    border-radius: 20px;
-    color: white;
-    border-color: transparent;
-    background-color: #6f41bb;
-    border: 0;
 }

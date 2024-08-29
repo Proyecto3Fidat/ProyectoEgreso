@@ -2,7 +2,7 @@
     /* Nav y menu desplegable */
     .cerrarmenu {
         display: block;
-        background-color: #100e0f;
+        background-color: transparent;
         border: 0;
         font-size: 1.5rem;
         cursor: pointer;
@@ -10,7 +10,7 @@
 
     .abrirmenu {
         display: block;
-        background-color: #100e0f;
+        background-color: transparent;
         font-size: 2rem;
         cursor: pointer;
         border: 0;
