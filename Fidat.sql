@@ -272,7 +272,7 @@ ALTER TABLE Recibe
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Recibe
-ADD FOREIGN KEY (iDEstado) REFERENCES Estado(iDEstado);
+ADD FOREIGN KEY (id_Estado) REFERENCES Estado(id_Estado);
 
 ALTER TABLE Cumple
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
