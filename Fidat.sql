@@ -181,6 +181,7 @@ CREATE TABLE Cumple(
 );
 
 CREATE TABLE Compone(
+    idRutina INT,
     nombreCombo INT,
     id_Ejercicio INT,
     PRIMARY KEY (idRutina,nombreCombo, id_Ejercicio)
