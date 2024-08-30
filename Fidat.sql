@@ -280,7 +280,7 @@ ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, t
 ALTER TABLE Cumple
 ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
-ALTER TABLE Se Agenda
+ALTER TABLE SeAgenda
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento);
 
 ALTER TABLE Conforma
