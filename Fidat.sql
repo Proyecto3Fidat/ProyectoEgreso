@@ -58,7 +58,7 @@ CREATE TABLE Deporte(
 );
 
 CREATE TABLE Calificacion(
-    idItem INT ,
+    idItem INT,
     nombreItem VARCHAR (50),
     PRIMARY KEY (idItem)
 );
@@ -158,13 +158,13 @@ CREATE TABLE Contiene(
 );
 
 CREATE TABLE Recibe(
-    nroDocumento VARCHAR (3O) NOT NULL,
-    tipoDocumento VARCHAR (16) NOT NULL,
+    nroDocumento VARCHAR (30) NOT NULL,
+    tipoDocumento VARCHAR (16),
     id_Estado INT,
     fechaInicio DATE,
     fechaFin DATE,
     PRIMARY KEY (nroDocumento,tipoDocumento)
-)
+);
 
 CREATE TABLE Tiene(
     idDeporte INT,
@@ -174,9 +174,9 @@ CREATE TABLE Tiene(
 );
 
 CREATE TABLE Cumple(
-    nroDocumento VARCHAR (3O) NOT NULL,
-    tipoDocumento VARCHAR (16) NOT NULL,
-|   id_Ejercicio INT,
+    nroDocumento VARCHAR (30) NOT NULL,
+    tipoDocumento VARCHAR (16),
+    id_Ejercicio INT,
     PRIMARY KEY (nroDocumento,tipoDocumento, id_Ejercicio)
 );
 
@@ -194,8 +194,8 @@ CREATE TABLE Agenda (
 );
 
 CREATE TABLE SeAgenda (
-    nroDocumento VARCHAR (3O) NOT NULL,
-    tipoDocumento VARCHAR (16) NOT NULL,
+    nroDocumento VARCHAR (30) NOT NULL,
+    tipoDocumento VARCHAR (16),
     dia VARCHAR (10),
     fecha DATE,
     asistencia varchar (5),
@@ -210,7 +210,7 @@ CREATE TABLE Conforma(
 
 /* Claves Foráneas con ON DELETE CASCADE */
 ALTER TABLE Cliente_Telefono
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Deportista
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
