@@ -116,12 +116,12 @@ CREATE TABLE ComboEjercicio_idEjercicio(
 );
 
 CREATE TABLE Ejercicio(
-    id_Ejercicio INT,
+    idEjercicio INT,
     nombre VARCHAR(20) NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     tipoEjercicio VARCHAR(20) NOT NULL,
     grupoMuscular VARCHAR(20) NOT NULL,
-    PRIMARY KEY (id_Ejercicio)
+    PRIMARY KEY (idEjercicio)
 );
 
 CREATE TABLE Elige (
@@ -153,8 +153,8 @@ CREATE TABLE Practica(
 
 CREATE TABLE Contiene(
     nombreCombo INT,
-    id_Ejercicio INT,
-    PRIMARY KEY (nombreCombo, id_Ejercicio)
+    idEjercicio INT,
+    PRIMARY KEY (nombreCombo, idEjercicio)
 );
 
 CREATE TABLE Recibe(
@@ -169,22 +169,22 @@ CREATE TABLE Recibe(
 CREATE TABLE Tiene(
     idDeporte INT,
     nombreCombo INT,
-    id_Ejercicio INT,
-    PRIMARY KEY (idDeporte, nombreCombo, id_Ejercicio)
+    idEjercicio INT,
+    PRIMARY KEY (idDeporte, nombreCombo, idEjercicio)
 );
 
 CREATE TABLE Cumple(
     nroDocumento VARCHAR (30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    id_Ejercicio INT,
-    PRIMARY KEY (nroDocumento,tipoDocumento, id_Ejercicio)
+    idEjercicio INT,
+    PRIMARY KEY (nroDocumento,tipoDocumento, idEjercicio)
 );
 
 CREATE TABLE Compone(
     idRutina INT,
     nombreCombo INT,
-    id_Ejercicio INT,
-    PRIMARY KEY (idRutina,nombreCombo, id_Ejercicio)
+    idEjercicio INT,
+    PRIMARY KEY (idRutina,nombreCombo, idEjercicio)
 );
 
 CREATE TABLE Agenda (
@@ -254,13 +254,13 @@ ALTER TABLE Tiene
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
 
 ALTER TABLE Tiene
-ADD FOREIGN KEY (id_Ejercicio) REFERENCES Ejercicio(id_Ejercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
 ALTER TABLE Compone
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
 
 ALTER TABLE Compone
-ADD FOREIGN KEY (id_Ejercicio) REFERENCES Ejercicio(id_Ejercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
 ALTER TABLE Obtiene
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
@@ -278,7 +278,7 @@ ALTER TABLE Cumple
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Cumple
-ADD FOREIGN KEY (id_Ejercicio) REFERENCES Ejercicio(id_Ejercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
 ALTER TABLE Se Agenda
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento);
