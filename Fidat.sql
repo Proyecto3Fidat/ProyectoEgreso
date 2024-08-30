@@ -288,3 +288,9 @@ ADD FOREIGN KEY (Dia) REFERENCES Agenda (Dia);
 
 ALTER TABLE Conforma
 ADD FOREIGN KEY (Nombre) REFERENCES Localgym (Nombre);
+
+ALTER TABLE Contiene
+ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo);
+
+ALTER TABLE Contiene
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio (idEjercicio);
