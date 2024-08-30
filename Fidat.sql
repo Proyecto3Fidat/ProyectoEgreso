@@ -191,7 +191,7 @@ CREATE TABLE Agenda (
     dia VARCHAR (10),
     horaInicio TIME,
     horaFin TIME,
-    PRIMARY KEY (dia);
+    PRIMARY KEY (dia)
 );
 
 CREATE TABLE SeAgenda (
