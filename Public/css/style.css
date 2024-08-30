@@ -7,6 +7,18 @@
     list-style: none;
 }
 
+/*Style generales para los botones*/
+button { 
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 20px;
+    color: white;
+    border-color: transparent;
+    background-color: #6f41bb;
+    border: 0;
+}
+
 body {
     background-color: #100e0f;
     font-family: 'Poppins', sans-serif;
@@ -54,10 +66,6 @@ nav a:hover {
     display: none;
 }
 
-
-
-
-
 .inicioa{
     margin-right: 1rem;
 }
@@ -98,8 +106,6 @@ nav a:hover {
 }
 
 #planes { 
-    padding: 5rem;
-    gap: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -111,9 +117,11 @@ nav a:hover {
 .plan { 
     border: 1px solid white;
     padding: 10rem;
+    margin: 3rem;
     border-radius: 20px;
     cursor: pointer;
     transition: color 0.3s, background-color 0.3s;
+    transition: transform 0.5s ease-in-out;
 }
 
 .plan a {
@@ -135,6 +143,7 @@ nav a:hover {
 
 .plan:hover { 
     background-color: #6f41bb;
+    transform: scale(1.2);
 }
 
 .plan p {

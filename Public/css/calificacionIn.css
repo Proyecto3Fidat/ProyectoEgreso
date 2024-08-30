@@ -72,6 +72,7 @@ h4 {
     font-size: 2rem;
 }
 
+/*Inicio form de calificacion*/
 .califidepo {
     display: flex;
     flex-direction: column;
@@ -94,3 +95,47 @@ h4 {
 form .button {
     cursor: pointer;
 }
+/*Fin form de calificacion*/
+
+/*Inicio de footer*/
+footer {
+    background-color: #181718;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+footer h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #6f41bb;
+}
+
+footer h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+footer h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+footer .redes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .redes a {
+    color: white;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+footer .redes a:hover {
+    color: #6f41bb;
+}
+/*Fin de footer*/

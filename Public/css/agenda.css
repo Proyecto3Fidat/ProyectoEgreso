@@ -29,7 +29,7 @@ button {
     border: 0;
 }
 
-/*Inicio nav*/
+/*Inicio de Nav*/
 .navbar {
     display: flex;
 }
@@ -76,31 +76,7 @@ nav a:hover {
 .login-btn:hover, .sign-in-btn:hover {
     color: #6f41bb;
 }
-/*Fin del nav*/
-
-.tituloent{
-    display: flex;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
-    cursor: default;
-    margin-top: 5rem;
-}
-
-.btnent {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-    gap: 2rem;   
-}
-
-.clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
-    transform: scale(1.2);
-}
-
-.clienteslist, .ejerciciolist, .rutinaslist{
-    transition: transform 0.8s ease-in-out; /*Metodo que logra detalle de animacion tipo "progresion"*/
-}
+/*Fin de Nav*/
 
 /*Inicio de tabla horarios*/
 .agenda {
@@ -108,8 +84,6 @@ nav a:hover {
     padding: 0;
     font-size: 20px;
     text-align: center;
-    margin: 1rem;
-    gap: 1rem;
 }
 
 .agenda h1 {
@@ -171,13 +145,13 @@ nav a:hover {
 }
 /*Fin tabla horarios*/
 
-
 /*Inicio de footer*/
 footer {
     background-color: #181718;
     padding: 20px;
     text-align: center;
     color: white;
+    margin-top: 8%;
 }
 
 footer h1 {

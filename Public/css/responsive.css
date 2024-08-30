@@ -41,10 +41,6 @@
         visibility: visible;
     }
 
-    .navhead {
-        padding:3rem;
-    }
-
     .listmenu1, .listmenu2{
         flex-direction: column;
     }
@@ -54,12 +50,17 @@
     }
     /* fin de nav y menu desplegable */
 
+    .footer{
+        display: flex;
+        flex-direction: column;
+    }
+
     /* Titulo de bienvenida a entrenador*/
     .tituloent{
         display: flex;
         justify-content: center;
         color: white;
-        font-size: 1rem;
+        font-size: 1.5rem;
         cursor: default;
     }
 
@@ -70,18 +71,27 @@
         flex-direction: column;
         text-align: center;
         margin: 2rem auto;
-        gap: 1px;
         margin-top: 2rem;
+        gap: 2rem;
         width: 70%;
     }
 
-    /*Inicio de aplicacion responsive apartado de planes*/
+    /*Propiedad carrusel*/
+    .slide{
+        margin-top: 4rem;
+    }
 
+    /*Inicio de aplicacion responsive apartado de planes*/
     #planes {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
     }
+        .plan{
+            text-align: center;
+            font-size: .5rem;
+            padding: 5rem;
+            margin: 2rem;
+        }
 
     #diasagenda{
         display: none;
@@ -117,7 +127,30 @@
         font-weight: bold;
         text-align: left;
     }
-    /*Inicio de responsive horarios*/
+    /*Fin de responsive horarios*/
+
+    /*Inicio vista admin*/
+    .tituloadmin{
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: .9rem;
+    }
+
+    .btadmin{
+        flex-direction: column;
+        text-align: center;
+    }
+    /*Fin vista admin*/
+
+    
+
+
+
+
+
+
+
 
     /*Inicio de responsive lista de ejercicio 
     .listaejercicio, .listaejercicio thead, .listaejercicio tbody, .listaejercicio th, .listaejercicio td, .listaejercicio tr {
@@ -149,11 +182,4 @@
         text-align: left;
     }
     /*Fin de responsive lista de ejercicio */
-
-
-
-    .footer{
-        display: flex;
-        flex-direction: column;
-    }
 }
