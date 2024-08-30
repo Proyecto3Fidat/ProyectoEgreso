@@ -200,7 +200,7 @@ CREATE TABLE SeAgenda (
     dia VARCHAR (10),
     fecha DATE,
     asistencia varchar (5),
-    PRIMARY KEY (nroDocumento, tipoDocumento)
+    PRIMARY KEY (nroDocumento, tipoDocumento, dia)
 );
 
 CREATE TABLE Conforma(
@@ -285,6 +285,9 @@ ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
 ALTER TABLE SeAgenda
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento);
+
+ALTER TABLE SeAgenda
+ADD FOREIGN KEY (dia) REFERENCES Agenda(dia);
 
 ALTER TABLE Conforma
 ADD FOREIGN KEY (Dia) REFERENCES Agenda (Dia);
