@@ -240,9 +240,6 @@ ADD FOREIGN KEY (idDeporte) REFERENCES Deporte(idDeporte);
 ALTER TABLE Practica
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
-ALTER TABLE Practica
-ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina);
-
 ALTER TABLE ComboEjercicio_idEjercicio
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
 
