@@ -262,6 +262,9 @@ ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
 ALTER TABLE Compone
 ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
+ALTER TABLE Compone
+ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina);
+
 ALTER TABLE Obtiene
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
