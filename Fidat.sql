@@ -191,7 +191,8 @@ CREATE TABLE Agenda (
     dia VARCHAR (10),
     horaInicio TIME,
     horaFin TIME,
-    PRIMARY KEY (dia)
+    agendados VARCHAR (20),
+    PRIMARY KEY (dia,horaInicio,horaFin)
 );
 
 CREATE TABLE SeAgenda (
@@ -287,10 +288,10 @@ ALTER TABLE SeAgenda
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento);
 
 ALTER TABLE SeAgenda
-ADD FOREIGN KEY (dia) REFERENCES Agenda(dia);
+ADD FOREIGN KEY (dia,horaInicio,horaFin) REFERENCES Agenda(dia,horaInicio,horaFin);
 
 ALTER TABLE Conforma
-ADD FOREIGN KEY (Dia) REFERENCES Agenda (Dia);
+ADD FOREIGN KEY (Dia,horaInicio,horaFin) REFERENCES Agenda (Dia,horaInicio,horaFin);
 
 ALTER TABLE Conforma
 ADD FOREIGN KEY (Nombre) REFERENCES Localgym (Nombre);
