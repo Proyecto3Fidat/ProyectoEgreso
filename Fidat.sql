@@ -199,6 +199,8 @@ CREATE TABLE SeAgenda (
     nroDocumento VARCHAR (30) NOT NULL,
     tipoDocumento VARCHAR (16),
     dia VARCHAR (10),
+    horaInicio TIME,
+    horaFin TIME,
     fecha DATE,
     asistencia varchar (5),
     PRIMARY KEY (nroDocumento, tipoDocumento, dia)
