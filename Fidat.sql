@@ -51,9 +51,8 @@ CREATE TABLE Paciente(
 );
 
 CREATE TABLE Deporte(
-    idDeporte INT,
-    nombre VARCHAR (20) NOT NULL,
-    PRIMARY KEY(idDeporte)
+    nombre VARCHAR (20),
+    PRIMARY KEY(nombre)
 );
 
 CREATE TABLE Calificacion(
@@ -138,10 +137,10 @@ CREATE TABLE Realiza(
 );
 
 CREATE TABLE Entrena(
-    idDeporte INT,
+    nombre VARCHAR(20),
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    PRIMARY KEY (idDeporte)
+    PRIMARY KEY (nombre)
 );
 
 CREATE TABLE Practica(
@@ -166,10 +165,10 @@ CREATE TABLE Recibe(
 );
 
 CREATE TABLE Tiene(
-    idDeporte INT,
+    nombre VARCHAR(20),
     nombreCombo INT,
     idEjercicio INT,
-    PRIMARY KEY (idDeporte, nombreCombo, idEjercicio)
+    PRIMARY KEY (nombre, nombreCombo, idEjercicio)
 );
 
 CREATE TABLE Cumple(
@@ -239,7 +238,7 @@ ALTER TABLE Entrena
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Entrena
-ADD FOREIGN KEY (idDeporte) REFERENCES Deporte(idDeporte);
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre);
 
 ALTER TABLE Practica
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
@@ -252,7 +251,7 @@ ALTER TABLE ComboEjercicio_idEjercicio
 ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
 
 ALTER TABLE Tiene
-ADD FOREIGN KEY (idDeporte) REFERENCES Deporte(idDeporte);
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre);
 
 ALTER TABLE Tiene
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
