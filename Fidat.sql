@@ -74,10 +74,10 @@ CREATE TABLE Obtiene(
 );
 
 CREATE TABLE PlanPago(
-    nombre VARCHAR(12),
+    nombrePlan VARCHAR(12),
     descripcion VARCHAR(50) NOT NULL,
     tipoPlan VARCHAR(12) NOT NULL,
-    PRIMARY KEY(nombre)
+    PRIMARY KEY(nombrePlan)
 );
 
 CREATE TABLE Pago(
@@ -125,16 +125,16 @@ CREATE TABLE Ejercicio(
 );
 
 CREATE TABLE Elige (
-    nombre VARCHAR(12),
+    nombrePlan VARCHAR(12),
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    PRIMARY KEY (nombre)
+    PRIMARY KEY (nombrePlan)
 );
 
 CREATE TABLE Realiza(
     fechaPago DATE,
     idPago INT,
-    nombre VARCHAR(12),
+    nombrePlan VARCHAR(12),
     PRIMARY KEY(fechaPago, idPago)
 );
 
@@ -228,13 +228,13 @@ ALTER TABLE Elige
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Elige
-ADD FOREIGN KEY (nombre) REFERENCES PlanPago(nombre);
+ADD FOREIGN KEY (nombrePlan) REFERENCES PlanPago(nombrePlan);
 
 ALTER TABLE Realiza
 ADD FOREIGN KEY (idPago) REFERENCES Pago(idPago);
 
 ALTER TABLE Realiza
-ADD FOREIGN KEY (nombre) REFERENCES PlanPago(nombre);
+ADD FOREIGN KEY (nombrePlan) REFERENCES PlanPago(nombrePlan);
 
 ALTER TABLE Entrena
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
