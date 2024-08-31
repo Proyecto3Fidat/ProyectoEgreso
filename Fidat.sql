@@ -34,7 +34,6 @@ CREATE TABLE Cliente_Telefono(
 CREATE TABLE Deportista(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    deporte VARCHAR(15) NOT NULL,
     posicion VARCHAR(15) NOT NULL,
     PRIMARY KEY(nroDocumento, tipoDocumento)
 );
@@ -203,7 +202,7 @@ CREATE TABLE SeAgenda (
     horaFin TIME,
     fecha DATE,
     asistencia varchar (5),
-    PRIMARY KEY (nroDocumento, tipoDocumento, dia)
+    PRIMARY KEY (nroDocumento, tipoDocumento, dia,horaInicio, horaFin)
 );
 
 CREATE TABLE Conforma(
