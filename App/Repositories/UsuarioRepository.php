@@ -81,30 +81,7 @@ class UsuarioRepository extends Database
         $database->disconnect();
     }
 
-    public function guardarEntrenador(UsuarioModel $usuarioModel)
-    {
-        $database = Database::getInstance();
-        $database->connect();
-        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
-                VALUES (?,?, ?, ?)";
 
-        $nroDocumento = $usuarioModel->getNroDocumento();
-        $rol = $usuarioModel->getRol();
-        $passwd = $usuarioModel->getPasswd();
-        $token = $usuarioModel->getToken();
-
-        $stmt = $database->getConnection()->prepare($sql);
-        $stmt->bind_param(
-            "ssss",
-            $nroDocumento,
-            $rol,
-            $passwd,
-            $token
-        );
-        $stmt->execute();
-        $stmt->close();
-        $database->disconnect();
-    }
 
     public function guardarDeportista($cedula)
     {

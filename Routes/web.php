@@ -229,11 +229,27 @@ SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
     if ($clienteController->comprobarCliente() == "false") {
-        $clienteController->crearEntrenador();
+        $clienteController->crearConPrivilegios();
         $usuarioController->crearEntrenador();
         exit();
     } else {
         $usuarioController->crearEntrenador();
+        exit();
+    }
+});
+SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        $clienteController->crearConPrivilegios();
+        $usuarioController->crearAdministrativo();
+        exit();
+    } else {
+        $usuarioController->crearAdministrativo();
         exit();
     }
 });

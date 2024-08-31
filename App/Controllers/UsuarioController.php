@@ -56,6 +56,18 @@ class UsuarioController
         $this->usuarioService->crearEntrenador($usuario);
     }
 
+    public function crearAdministrativo()
+    {
+        $this->logger->info('Se intento crear el administrativo: ' . $_POST['nroDocumento']);
+        $usuario = new UsuarioModel(
+            $_POST['nroDocumento'] . "@" . "administrativo",
+            'administrativo',
+            $_POST['passwd'],
+            $this->usuarioService->generarToken()
+        );
+        $this->usuarioService->crearAdministrativo($usuario);
+    }
+
     public function guardarDeportista()
     {
         $this->logger->info('Se intento guardar el entrenador: ' . $_POST['nroDocumento']);
