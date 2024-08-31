@@ -151,7 +151,7 @@ CREATE TABLE Practica(
 );
 
 CREATE TABLE Contiene(
-    nombreCombo INT,
+    nombreCombo VARCHAR (20),
     idEjercicio INT,
     PRIMARY KEY (nombreCombo, idEjercicio)
 );
@@ -167,7 +167,7 @@ CREATE TABLE Recibe(
 
 CREATE TABLE Tiene(
     nombre VARCHAR(20),
-    nombreCombo INT,
+    nombreCombo VARCHAR (20),
     idEjercicio INT,
     PRIMARY KEY (nombre, nombreCombo, idEjercicio)
 );
@@ -181,7 +181,7 @@ CREATE TABLE Cumple(
 
 CREATE TABLE Compone(
     idRutina INT,
-    nombreCombo INT,
+    nombreCombo VARCHAR (20),
     idEjercicio INT,
     PRIMARY KEY (idRutina,nombreCombo, idEjercicio)
 );
@@ -190,7 +190,7 @@ CREATE TABLE Agenda (
     dia VARCHAR (10),
     horaInicio TIME,
     horaFin TIME,
-    agendados VARCHAR (20),
+    agendados VARCHAR (30),
     PRIMARY KEY (dia,horaInicio,horaFin)
 );
 
