@@ -102,13 +102,13 @@ CREATE TABLE Rutina(
 );
 
 CREATE TABLE ComboEjercicio(
-    nombreCombo INT,
+    nombreCombo VARCHAR (20),
     cantEjercicios INT NOT NULL,
     PRIMARY KEY (nombreCombo)
 );
 
 CREATE TABLE ComboEjercicio_idEjercicio(
-    nombreCombo INT,
+    nombreCombo VARCHAR (20),
     idEjercicio INT,
     PRIMARY KEY (nombreCombo, idEjercicio)
 );
@@ -144,9 +144,10 @@ CREATE TABLE Entrena(
 );
 
 CREATE TABLE Practica(
-    nroDocumento VARCHAR(30) NOT NULL,
+    nroDocumento VARCHAR(30),
     tipoDocumento VARCHAR (16),
-    PRIMARY KEY (nroDocumento, tipoDocumento)
+    idRutina int,
+    PRIMARY KEY (nroDocumento, tipoDocumento, idRutina)
 );
 
 CREATE TABLE Contiene(
@@ -242,6 +243,9 @@ ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre);
 
 ALTER TABLE Practica
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+
+ALTER TABLE Practica
+ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina);
 
 ALTER TABLE ComboEjercicio_idEjercicio
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
