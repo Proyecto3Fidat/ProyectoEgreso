@@ -65,10 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Email: ${cliente.email}`;
             document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Teléfono: ${cliente.telefono || 'N/A'}`;
             document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `Dirección: ${cliente.direccion || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Nombre de plan: ${cliente.nombrePlan || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Nombre de plan: ${cliente.nombrePlan || 'N/A'}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Tipo de plan: ${cliente.tipoPlan || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Id de pago: ${cliente.idPago || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Ultimo mes abonado: ${cliente.ultimoMesAbonado || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Id de pago: ${cliente.idPago || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(4)').textContent = `Ultimo mes abonado: ${cliente.ultimoMesAbonado || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(1)').textContent = `Fecha de agenda: ${cliente.fecha || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(2)').textContent = `Dia de la agenda: ${cliente.dia || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(3)').textContent = `Hora de inicio: ${cliente.horaInicio || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(4)').textContent = `Hora de finalizacion: ${cliente.horaFin || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(5)').textContent = `Verificacion de asistencia: ${cliente.asistencia || 'N/A'}`;
 
             // Configurar el valor del formulario oculto para calificar
             const form = document.querySelector('form');

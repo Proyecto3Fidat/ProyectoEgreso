@@ -76,6 +76,15 @@ nav a:hover {
     color: #6f41bb;
 }
 
+.tituloadmin {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    cursor: default;
+    margin-top: 5rem;
+}
+
 .listaclientes{
     display: flex;
 }
@@ -91,6 +100,7 @@ nav a:hover {
 .lista-clientes {
     display: flex;
     margin: 0 auto; 
+    margin-top: 2%;
     padding: 0;
     width: 90%; 
     border-collapse: collapse; 
@@ -111,7 +121,7 @@ nav a:hover {
 }
 
 .lista-clientes.visible {
-    display: block;
+    display: flex;
 }
 
 .btn-detalles { 
@@ -124,7 +134,7 @@ nav a:hover {
 }
 
 .fichagnrl.visible{
-    display: block;
+    display: flex;
 }
 
 .fichatecn {
@@ -159,7 +169,7 @@ h4 {
     margin-bottom: 2rem; 
 }
 
-.divficha, .divficha2 {
+.divficha, .divficha2, .divficha3 {
     text-align: center;
     padding: 1rem;
     gap: 1rem;
