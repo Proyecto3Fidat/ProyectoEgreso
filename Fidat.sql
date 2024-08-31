@@ -209,7 +209,9 @@ CREATE TABLE SeAgenda (
 CREATE TABLE Conforma(
     nombre VARCHAR(20),
     dia VARCHAR (10),
-    PRIMARY KEY (nombre, dia)
+    horaInicio TIME,
+    horaFin TIME,
+    PRIMARY KEY (nombre, dia, horaInicio, horaFin)
 );
 
 /* Claves Foráneas con ON DELETE CASCADE */
