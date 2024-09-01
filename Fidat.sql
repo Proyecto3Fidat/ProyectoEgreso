@@ -18,7 +18,7 @@ CREATE TABLE Cliente(
 
 CREATE TABLE Usuario(
     nroDocumento VARCHAR(30) NOT NULL,
-    rol VARCHAR(22),
+    rol VARCHAR(35),
     passwd VARCHAR(255) NOT NULL,
     token VARCHAR(255) NOT NULL,
     PRIMARY KEY(nroDocumento)
