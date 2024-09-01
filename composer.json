@@ -1,0 +1,23 @@
+{
+    "name": "ismael/proyecto-egreso",
+    "description": "proyecto de egreso",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ismael Begara",
+            "email": "isbergara1@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "pecee/simple-router": "^5.4",
+        "monolog/monolog": "^3.7",
+        "tecnickcom/tcpdf": "^6.7"
+    }
+}

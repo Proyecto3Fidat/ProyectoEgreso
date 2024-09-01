@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error al procesar la solicitud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+        h1 {
+            color: #FF0000;
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+    </style>
+    <script>
+        let countdown = 20;
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.textContent = countdown;
+            if (countdown > 0) {
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                window.location.href = "/";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCountdown();
+        });
+    </script>
+</head>
+<body>
+    <h1>Error al procesar la solicitud</h1>
+    <p>Lo sentimos, no se pudo procesar su solicitud en este momento.</p>
+    <p>Será redirigido a la página principal en <span id="countdown">20</span> segundos.</p>
+    <p>Si la redirección no funciona, haga clic en el siguiente enlace:</p>
+    <a href="/">Volver a la página principal</a>
+</body>
+</html>
