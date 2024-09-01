@@ -144,7 +144,7 @@ class ClienteController
     {
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
-        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || $_SESSION['rol'] != 'entrenador' || $_SESSION['rol'] != 'administrativo') {
+        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
             header('HTTP/1.1 403 Forbidden');
             echo json_encode(['error' => 'No tiene permisos para ver esta página']);
             exit();
