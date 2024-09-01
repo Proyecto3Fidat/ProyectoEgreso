@@ -81,7 +81,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Agregar evento para cerrar la ficha técnica
     document.getElementById('cerrarficha').addEventListener('click', function () {
+        const listaclientes = document.getElementById("lista-clientes");
         document.getElementById('fichagnl').style.display = 'none';
         document.getElementById("tablaClientes").style.display = "block";
+        document.getElementById("tablaClientes").style.alignItems = "center";
     });
 });
