@@ -51,11 +51,12 @@ class DatabaseLoader {
     }
 
     public function loadSQLFile($sqlFilePath) {
-        if (!file_exists($sqlFilePath)) {
-            die("Archivo no encontrado.");
+        $fullPath = realpath($sqlFilePath);
+        if (!$fullPath || !file_exists($fullPath)) {
+            die("Archivo no encontrado en la ruta: $fullPath.\n");
         }
 
-        $sql = file_get_contents($sqlFilePath);
+        $sql = file_get_contents($fullPath);
         try {
             $this->pdo->exec($sql);
             echo "Archivo SQL cargado exitosamente.\n";
