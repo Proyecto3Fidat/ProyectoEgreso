@@ -69,7 +69,7 @@ class DatabaseLoader {
         $dbLoader = new DatabaseLoader('127.0.0.1', 'admin', 'admin');
         $dbLoader->createDatabaseIfNotExists('FidatBD');
         $dbLoader->connectToDatabase('FidatBD');
-        $sqlFilePath = '../../Config/BaseDeDatos.sql';
+        $sqlFilePath = __DIR__ . '/../../Config/BaseDeDatos.sql';
         $dbLoader->loadSQLFile($sqlFilePath);
     }
 }
