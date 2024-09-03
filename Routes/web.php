@@ -28,6 +28,7 @@ use App\Models\ClientelefonoModel;
 use App\Services\ClientetelefonoService;
 use App\Utilities\DataSeeder;
 use App\Repositories\ClientetelefonoRepository;
+use App\Utilities\DatabaseLoader;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -50,6 +51,8 @@ SimpleRouter::get('/verificar-sesion', function () {
 
 SimpleRouter::get('/cargarDatos', function (){
     $dataSeeder = new DataSeeder();
+    $dataLoader = new DatabaseLoader();
+    $dataLoader->crearBD();
     $dataSeeder->seedCliente(55852111,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
     $dataSeeder->seedCliente(55852112,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
     $dataSeeder->seedCliente(55852113,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
