@@ -61,8 +61,8 @@ SimpleRouter::get('/cargarDatos', function (){
     $dataSeeder->seedUsuario('55852111@entrenador','1234','entrenador');
     $dataSeeder->seedUsuario('55852112@entrenador','1234','entrenador');
     $dataSeeder->seedUsuario('55852113@entrenador','1234','entrenador');
-    $dataSeeder->seedUsuario('55852114@administrativo','1234','entrenador');
-    $dataSeeder->seedUsuario('55852115@administrativo','1234','entrenador');
+    $dataSeeder->seedUsuario('55852114@administrativo','1234','administrativo');
+    $dataSeeder->seedUsuario('55852115@administrativo','1234','administrativo');
     $dataSeeder->seedDeportista(55852116,'ci','futbol','delantero','activo');
     $dataSeeder->seedDeportista(55852117,'ci','futbol','delantero','activo');
     $dataSeeder->seedDeportista(55852118,'ci','futbol','delantero','activo');
