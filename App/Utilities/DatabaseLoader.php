@@ -13,6 +13,17 @@ class DatabaseLoader {
         $this->username = $username;
         $this->password = $password;
     }
+    private function connectToServer() {
+        $dsn = "mysql:host=$this->host;charset=utf8mb4";
+        try {
+            $this->pdo = new PDO($dsn, $this->username, $this->password, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            ]);
+        } catch (PDOException $e) {
+            die("Error connecting to the server: " . $e->getMessage());
+        }
+    }
     public function createDatabaseIfNotExists($dbname) {
         $this->connectToServer();
         $sql = "CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci";
