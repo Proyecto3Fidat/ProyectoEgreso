@@ -26,6 +26,7 @@ use App\Repositories\CalificacionRepository;
 use App\Controllers\ClientelefonoController;
 use App\Models\ClientelefonoModel;
 use App\Services\ClientetelefonoService;
+use App\Utilities\DataSeeder;
 use App\Repositories\ClientetelefonoRepository;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
@@ -47,6 +48,35 @@ SimpleRouter::get('/verificar-sesion', function () {
     }
 });
 
+SimpleRouter::get('/cargarDatos', function (){
+    $dataSeeder = new DataSeeder();
+    $dataSeeder->seedCliente(55852111,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852112,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852113,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852114,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852115,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852116,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852117,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedCliente(55852118,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
+    $dataSeeder->seedUsuario('55852111@entrenador','1234','entrenador');
+    $dataSeeder->seedUsuario('55852112@entrenador','1234','entrenador');
+    $dataSeeder->seedUsuario('55852113@entrenador','1234','entrenador');
+    $dataSeeder->seedUsuario('55852114@administrativo','1234','entrenador');
+    $dataSeeder->seedUsuario('55852115@administrativo','1234','entrenador');
+    $dataSeeder->seedDeportista(55852116,'ci','futbol','delantero','activo');
+    $dataSeeder->seedDeportista(55852117,'ci','futbol','delantero','activo');
+    $dataSeeder->seedDeportista(55852118,'ci','futbol','delantero','activo');
+    $dataSeeder->seedObtiene(55852116,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedObtiene(55852116,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedObtiene(55852117,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedObtiene(55852117,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedObtiene(55852118,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedObtiene(55852118,'ci',100,200,20,20,5,20,20,20,20);
+    $dataSeeder->seedUsuario('55852116','1234','deportista');
+    $dataSeeder->seedUsuario('55852117','1234','deportista');
+    $dataSeeder->seedUsuario('55852118','1234','deportista');
+    exit();
+});
 
 //Funcion get favicon.ico para resolver error del navegador
 SimpleRouter::get('/favicon.ico', function () {
