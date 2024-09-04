@@ -47,7 +47,7 @@ class ClienteController
         $this->clienteService->emailBienvenida($email);
     }
 
-    public function crearEntrenador()
+    public function crearConPrivilegios()
     {
         $cliente = new ClienteModel(
             $_POST['nroDocumento'],
@@ -106,6 +106,7 @@ class ClienteController
 
     public function comprobarCliente()
     {
+
         return $this->clienteService->comprobarCliente($_POST['nroDocumento']);
     }
 
@@ -143,7 +144,7 @@ class ClienteController
     {
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
-        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true) {
+        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
             header('HTTP/1.1 403 Forbidden');
             echo json_encode(['error' => 'No tiene permisos para ver esta página']);
             exit();

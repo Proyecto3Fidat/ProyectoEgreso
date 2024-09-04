@@ -39,9 +39,12 @@ class UsuarioService
 
     public function crearEntrenador(UsuarioModel $usuarioModel)
     {
-        $this->usuarioRepository->guardarEntrenador($usuarioModel);
+        $this->usuarioRepository->guardar($usuarioModel);
     }
-
+    public function crearAdministrativo(UsuarioModel $usuarioModel)
+    {
+        $this->usuarioRepository->guardar($usuarioModel);
+    }
     public function generarToken()
     {
         return bin2hex(random_bytes(16));
@@ -106,7 +109,7 @@ class UsuarioService
                     $_SESSION['sesion'] = true;
                     echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../App/Views/entrenador.html'; 
+                            window.location.href = '/'; 
                             </script>";
                     exit();
                 case "cliente":
@@ -117,7 +120,7 @@ class UsuarioService
                     $_SESSION['sesion'] = true;
                     echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '../../Public/inicio.html'; 
+                            window.location.href = '/'; 
                             </script>";
                     exit();
                 case "deportista":
@@ -128,7 +131,7 @@ class UsuarioService
                     $_SESSION['sesion'] = true;
                     echo "<script>
                             localStorage.setItem('nombre', '" . $nombre . "');
-                            window.location.href = '/ClienteCalificacion'; 
+                            window.location.href = '/'; 
                             </script>";
                     exit();
                 case "paciente":
@@ -139,7 +142,18 @@ class UsuarioService
                     $_SESSION['sesion'] = true;
                     echo "<script>
                         localStorage.setItem('nombre', '" . $nombre . "');
-                        window.location.href = '/ClienteCalificacion'; 
+                        window.location.href = '/'; 
+                        </script>";
+                    exit();
+                case "administrativo":
+                    $_SESSION['token'] = $token;
+                    $_SESSION['documento'] = $documento;
+                    $_SESSION['nombre'] = $nombre;
+                    $_SESSION['rol'] = $rol;
+                    $_SESSION['sesion'] = true;
+                    echo "<script>
+                        localStorage.setItem('nombre', '" . $nombre . "');
+                        window.location.href = '/'; 
                         </script>";
                     exit();
             }

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td>${cliente.nombre}</td>
                     <td>${cliente.nroDocumento}</td>
                     <td>${cliente.rol}</td>
-                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Ficha técnica</button></td>
+                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Detalles</button></td>
                 `;
                 tbody.appendChild(row);
             });
@@ -65,9 +65,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Email: ${cliente.email}`;
             document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Teléfono: ${cliente.telefono || 'N/A'}`;
             document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `Dirección: ${cliente.direccion || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Patologías: ${cliente.patologias}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Altura: ${cliente.altura}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Nombre de plan: ${cliente.nombrePlan || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Tipo de plan: ${cliente.tipoPlan || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Ultimo mes abonado: ${cliente.ultimoMesAbonado || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(1)').textContent = `Fecha de agenda: ${cliente.fecha || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(2)').textContent = `Dia de la agenda: ${cliente.dia || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(3)').textContent = `Hora de inicio: ${cliente.horaInicio || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(4)').textContent = `Hora de finalizacion: ${cliente.horaFin || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha3 p:nth-child(5)').textContent = `Verificacion de asistencia: ${cliente.asistencia || 'N/A'}`;
 
             // Configurar el valor del formulario oculto para calificar
             const form = document.querySelector('form');
@@ -81,9 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Agregar evento para cerrar la ficha técnica
     document.getElementById('cerrarficha').addEventListener('click', function () {
-        const listaclientes = document.getElementById("lista-clientes");
         document.getElementById('fichagnl').style.display = 'none';
         document.getElementById("tablaClientes").style.display = "block";
-        document.getElementById("tablaClientes").style.alignItems = "center";
     });
 });
