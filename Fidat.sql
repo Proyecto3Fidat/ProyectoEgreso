@@ -13,6 +13,7 @@ CREATE TABLE Cliente(
     email VARCHAR(40),
     patologias VARCHAR(25),
     fechaNacimiento DATE,
+    activo BOOLEAN,
     PRIMARY KEY(nroDocumento, tipoDocumento)
 );
 
