@@ -301,7 +301,7 @@ ALTER TABLE Conforma
 ADD FOREIGN KEY (Dia,horaInicio,horaFin) REFERENCES Agenda (Dia,horaInicio,horaFin);
 
 ALTER TABLE Conforma
-ADD FOREIGN KEY (Nombre) REFERENCES Localgym (Nombre);
+ADD FOREIGN KEY (Nombre) REFERENCES LocalGym (Nombre);
 
 ALTER TABLE Contiene
 ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo);
