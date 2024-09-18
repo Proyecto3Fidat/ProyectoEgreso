@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Public/css/listaclientes.css">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+    <title>Lista de Clientes</title>
+</head>
+
+<body>
+<header>
+    <section class="navhead">
+        <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
+    </section>
+    <nav class="navbar" id="nav">
+        <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"
+                                                  style="color: #ffffff;"></i></button>
+        <div class="menu1">
+            <ul class="listmenu1">
+                <li><a href="/" class="inicioa">Inicio</a></li>
+                <li><a href="/horarios" class="inicioa">Horarios</a></li>
+                <li><a href="/planes" class="inicioa">Planes</a></li>
+                <li><a href="/">Nosotros</a></li>
+            </ul>
+        </div>
+        <div class="menu2">
+            <ul class="listmenu2" id="welcome-message">
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<section class="listaclientes">
+    <table class="lista-clientes" id="tablaClientes">
+        <tbody>
+
+        <tr>
+            <th> Nombre de Cliente </th>
+            <th> Documento </th>
+            <th> Rol </th>
+            <th> Ficha </th>
+        </tr>
+        <!-- Las filas se añadirán aquí -->
+        </tbody>
+    </table>
+</section>
+<div class="fichagnrl" id="fichagnl">
+    <h4>Ficha técnica de </h4>
+    <button class="cerrarficha" id="cerrarficha"
+            data-cliente-id=""><i
+            class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i></button>
+    <div class="divficha-container">
+        <div class="divficha">
+            <p>Documento: </p>
+            <p>Edad:</p>
+            <p>Email: </p>
+            <p>Teléfono: </p>
+            <p>Dirección:</p>
+        </div>
+        <div class="divficha2">
+            <p>Patologías: </p>
+            <p>Altura: </p>
+            <p>Peso: </p>
+        </div>
+    </div>
+
+    <section>
+        <div class="btnficha">
+            <form method="get" action="calificacion.html">
+                <input type="hidden" name="documento" value="">
+                <button type="submit" class="adrut">Calificar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="../../Public/js/listaUsuarios.js"></script>
+<script src="../../Public/js/script.js"></script>
+<script src="../../Public/js/responsive.js"></script>
+</body>
+
+</html>
