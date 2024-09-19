@@ -21,7 +21,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
+        $sql = "INSERT INTO cliente (nroDocumento, tipoDocumento, altura, peso, calle, numero, esquina, email, patologias, fechaNacimiento, nombre, apellido) 
                 VALUES (?,?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?)";
 
         $nroDocumento = $clienteModel->getNroDocumento();
@@ -62,7 +62,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Cliente (nroDocumento, tipoDocumento, email, nombre, apellido) 
+        $sql = "INSERT INTO cliente (nroDocumento, tipoDocumento, email, nombre, apellido) 
                 VALUES (?,?, ?, ?, ?)";
 
         $nroDocumento = $clienteModel->getNroDocumento();
@@ -90,7 +90,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET nombre = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET nombre = ? WHERE nroDocumento = ?";
 
         $nombre = $cliente->getNombre();
         $stmt = $database->getConnection()->prepare($sql);
@@ -110,7 +110,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET apellido = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET apellido = ? WHERE nroDocumento = ?";
 
         $apellido = $cliente->getApellido();
         $stmt = $database->getConnection()->prepare($sql);
@@ -130,7 +130,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET fechaNacimiento = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET fechaNacimiento = ? WHERE nroDocumento = ?";
 
         $fecha = $cliente->getFechaNacimiento();
         $stmt = $database->getConnection()->prepare($sql);
@@ -150,7 +150,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET patologias = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET patologias = ? WHERE nroDocumento = ?";
 
         $patologias = $cliente->getPatologias();
         $stmt = $database->getConnection()->prepare($sql);
@@ -170,7 +170,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET email = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET email = ? WHERE nroDocumento = ?";
 
         $email = $cliente->getEmail();
         $stmt = $database->getConnection()->prepare($sql);
@@ -190,7 +190,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET esquina = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET esquina = ? WHERE nroDocumento = ?";
 
         $esquina = $cliente->getEsquina();
         $stmt = $database->getConnection()->prepare($sql);
@@ -210,7 +210,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET numero = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET numero = ? WHERE nroDocumento = ?";
 
         $numero = $cliente->getNumero();
         $stmt = $database->getConnection()->prepare($sql);
@@ -230,7 +230,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET calle = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET calle = ? WHERE nroDocumento = ?";
 
         $calle = $cliente->getCalle();
         $stmt = $database->getConnection()->prepare($sql);
@@ -248,7 +248,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET peso = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET peso = ? WHERE nroDocumento = ?";
 
         $peso = $cliente->getPeso();
         $stmt = $database->getConnection()->prepare($sql);
@@ -266,7 +266,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Cliente SET altura = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE cliente SET altura = ? WHERE nroDocumento = ?";
 
         $altura = $cliente->getAltura();
         $stmt = $database->getConnection()->prepare($sql);
@@ -284,7 +284,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE Usuario SET passwd = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE usuario SET passwd = ? WHERE nroDocumento = ?";
 
         $passwd = $cliente->getPasswd();
         $stmt = $database->getConnection()->prepare($sql);
@@ -303,7 +303,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nroDocumento FROM Cliente WHERE nroDocumento = ?";
+        $sql = "SELECT nroDocumento FROM cliente WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
@@ -322,7 +322,7 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
+        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();

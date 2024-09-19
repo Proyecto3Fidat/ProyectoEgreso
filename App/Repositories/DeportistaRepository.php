@@ -10,7 +10,7 @@ class DeportistaRepository extends Database{
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nroDocumento FROM Deportista WHERE nroDocumento = ?";
+        $sql = "SELECT nroDocumento FROM deportista WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
@@ -27,7 +27,7 @@ class DeportistaRepository extends Database{
     public function guardarDeportista(DeportistaModel $deportistaModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Deportista (nroDocumento, tipoDocumento, deporte, posicion, estado) 
+        $sql = "INSERT INTO deportista (nroDocumento, tipoDocumento, deporte, posicion, estado) 
                 VALUES (?,?,?,?,?)";
         
         $nroDocumento = $deportistaModel->getNroDocumento();

@@ -7,7 +7,7 @@ Class PacienteRepository extends Database{
     public function guardarPaciente(PacienteModel $pacienteModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Paciente (nroDocumento, tipoDocumento, fisioterapia, estado) 
+        $sql = "INSERT INTO paciente (nroDocumento, tipoDocumento, fisioterapia, estado) 
                 VALUES (?,?,?,?)";
         
         $nroDocumento = $pacienteModel->getNroDocumento();

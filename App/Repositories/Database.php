@@ -13,7 +13,7 @@ class Database {
     private $conn;
     private static $instance = null;
 
-    public function __construct($servername = "localhost", $username = "admin", $password = "admin", $dbname = "fidatbd") {
+    public function __construct($servername = "fidat.uy", $username = "root", $password = "root", $dbname = "FidatBD") {
         $this->servername = $servername;
         $this->username = $username;
         $this->password = $password;

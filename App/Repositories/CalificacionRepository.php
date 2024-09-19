@@ -27,7 +27,7 @@ Class CalificacionRepository extends Database{
     public function obtenerPuntuaciones($id){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT id , puntMaxima , fuerzaMusc , resMusc , resAnaerobica , resilicencia , flexibilidad , cumpAgenda , resMonotonia  FROM Calificacion where id = ?";
+        $sql = "SELECT id , puntMaxima , fuerzaMusc , resMusc , resAnaerobica , resilicencia , flexibilidad , cumpAgenda , resMonotonia  FROM calificacion where id = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
