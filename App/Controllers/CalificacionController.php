@@ -42,7 +42,7 @@ class CalificacionController
         $flexibilidad = filter_input(INPUT_POST, 'flexibilidad', FILTER_VALIDATE_FLOAT);
         $cumplAgenda = filter_input(INPUT_POST, 'cumplAgenda', FILTER_VALIDATE_FLOAT);
         $resMonotonia = filter_input(INPUT_POST, 'resMonotonia', FILTER_VALIDATE_FLOAT);
-        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_STRING);
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
         $puntuacionEsperado = filter_input(INPUT_POST, 'puntuacionEsperado', FILTER_VALIDATE_FLOAT);
 
         // Comprobar si las conversiones son válidas
