@@ -6,7 +6,7 @@ Class CalificacionRepository extends Database{
     public function asignarPuntuacion($calificacionModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Calificacion (puntMaxima, fuerzaMusc, resMusc, resAnaerobica, resilicencia, flexibilidad, cumpAgenda, resMonotonia) 
+        $sql = "INSERT INTO calificacion (puntMaxima, fuerzaMusc, resMusc, resAnaerobica, resilicencia, flexibilidad, cumpAgenda, resMonotonia) 
                 VALUES (?,?,?,?,?,?,?,?)";
         $stmt = $database->getConnection()->prepare($sql);
         $puntMaxima = $calificacionModel->getPuntMaxima();

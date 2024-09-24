@@ -261,6 +261,7 @@ SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
+ 
     if ($clienteController->comprobarCliente() == "false") {
         $clienteController->crearConPrivilegios();
         $usuarioController->crearEntrenador();
