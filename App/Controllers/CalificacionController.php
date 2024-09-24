@@ -14,6 +14,10 @@ use App\Repositories\UsuarioRepository;
 use App\Services\UsuarioService;
 use App\Services\ClienteService;
 use App\Repositories\ClienteRepository;
+use App\Controllers\ClientelefonoController;
+use App\Services\ClientetelefonoService;
+use App\Repositories\ClientetelefonoRepository;
+
 
 use Monolog\Logger;
 
@@ -108,7 +112,6 @@ class CalificacionController
             $obtieneRepository = new ObtieneRepository();
             $obtieneService = new ObtieneService($obtieneRepository);
             $resultado = $obtieneService->obtenerCalificaciones($_SESSION['documento']);
-
             $calificaciones = [];
 
             foreach ($resultado as $resultados) {

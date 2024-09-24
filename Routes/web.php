@@ -146,7 +146,7 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     if ($clienteController->comprobarCliente() == "false") {
         echo "<script>
                 alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '/'; 
               </script>";
     } else {
         if ($deportistaController->comprobarDeportista() == "false") {
@@ -156,19 +156,13 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
         } else {
             echo "<script>
                     alert('El Deportista ya esta registrado');
-                    window.location.href = '../../Public/inicio.html'; 
+                    window.location.href = '/'; 
                   </script>";
         }
     }
 });
 
-SimpleRouter::post('/guardarTelefono', function () use ($logger){
-    $clientetelefonoRepository = new ClientetelefonoRepository();
-    $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
-    $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
-    $clientetelefonoController->guardarTelefono();
-    exit();
-});
+
 //funcion post para Calificar
 SimpleRouter::post('/calificacion', function () use ($logger) {
     $calificacionRepository = new CalificacionRepository();
@@ -211,6 +205,15 @@ SimpleRouter::post('/guardarPaciente', function () use ($logger) {
         }
     }
 });
+
+SimpleRouter::post('/guardarTelefono', function () use ($logger){
+    $clientetelefonoRepository = new ClientetelefonoRepository();
+    $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
+    $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
+    $clientetelefonoController->guardarTelefono();
+    exit();
+});
+
 // Ruta para registrar clientes (POST)
 SimpleRouter::post('/registrarcliente', function () use ($logger) {
     $usuarioRepository = new UsuarioRepository();
@@ -223,6 +226,40 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
         $clienteController->crearCliente();
         $usuarioController->crearUsuario();
         $clienteController->emailBienvenida($_POST['email']);
+        $telefono = $_POST['telefono'];
+        $nroDocumento = $_POST['nroDocumento'];
+        $tipoDocumento = $_POST['tipoDocumento'];
+        echo "
+    <script>
+        // Datos que deseas enviar en la solicitud POST
+        const telefono = '$telefono';
+        const nroDocumento = '$nroDocumento';
+        const tipoDocumento = '$tipoDocumento';
+        
+        const data = {
+            telefono: telefono,
+            nroDocumento: nroDocumento,
+            tipoDocumento: tipoDocumento
+        };
+
+        fetch('/guardarTelefono', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Indica que estás enviando datos en formato JSON
+            },
+            body: JSON.stringify(data) // Convierte el objeto `data` en una cadena JSON para enviarlo
+        })
+        .then(response => response.json()) // Cambia a .text() si esperas una respuesta de texto
+        .then(data => {
+            console.log('Respuesta del servidor:', data);
+            // Aquí puedes manejar la respuesta como necesites
+        })
+        .catch(error => {
+            console.error('Error durante la solicitud:', error);
+        });
+    </script>
+";
+
 
         echo "<script>
                 alert('Usuario creado con éxito');

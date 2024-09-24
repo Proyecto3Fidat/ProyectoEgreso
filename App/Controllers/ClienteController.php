@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Repositories\ClienteRepository;
+use App\Repositories\ClientetelefonoRepository;
 use App\Services\ClienteService;
+use App\Services\ClientetelefonoService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
@@ -142,6 +144,9 @@ class ClienteController
 
     public function obtenerListaClientesAjax()
     {
+
+        $clienteTelefonoRepository = new ClientetelefonoRepository();
+        $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
         if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
@@ -166,6 +171,7 @@ class ClienteController
                     'email' => $cliente['email'],
                     'edad' => $edad,
                     'direccion' => $direccion,
+                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
                 ];
             }
             echo json_encode($resultado);

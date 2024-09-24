@@ -24,4 +24,17 @@ class ClientetelefonoRepository extends Database
         $stmt->close();
         $database->disconnect();
     }
+    public function traerTelefono($nroDocumento){
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT telefono FROM cliente_telefono WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        $stmt->bind_result($telefono);
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        return $telefono;
+    }
 }

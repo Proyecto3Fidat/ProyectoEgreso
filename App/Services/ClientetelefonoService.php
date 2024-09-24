@@ -10,7 +10,9 @@ Class ClientetelefonoService{
     public function guardarClienteTelefono($clienteTelefono){
         $this->clienteTelefonoRepository->guardarTelefono($clienteTelefono);
     }
-
+    public function traerClienteTelefono($nroDocumento){
+        return $this->clienteTelefonoRepository->traerTelefono($nroDocumento);
+    }
     public function comprobarClienteTelefono($nroDocumento){
         return $this->clienteTelefonoRepository->comprobarClienteTelefono($nroDocumento);
     }
