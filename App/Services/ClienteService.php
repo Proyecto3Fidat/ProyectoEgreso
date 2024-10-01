@@ -37,62 +37,89 @@ class ClienteService
         $obtenerService = new ObtieneService($obtenerRepository);
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
+
         if (isset($_SESSION['documento']) && isset($_SESSION['token']) && $usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
             if ($obtenerService->comprobarId($_SESSION['documento'])) {
                 $calificacion = $obtenerService->obtenerCalificacionesXID($id);
                 $puntuacion = $calificacionService->obtenerPuntuaciones($id);
-                $pdf = new TCPDF();
+                $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
                 $pdf->SetCreator(PDF_CREATOR);
                 $pdf->SetAuthor('SIGEN');
                 $pdf->SetTitle('Calificación ' . $calificacion[0]['fecha']);
                 $pdf->SetSubject('Calificación');
                 $pdf->SetKeywords('TCPDF, PDF, calificación');
+                $pdf->SetMargins(15, 15, 15);
+                $pdf->AddPage(); // Asegúrate de añadir una nueva página
 
-                $pdf->AddPage();
-                $pdf->SetFont('helvetica', '', 12);
+                // Agregar ícono
+                /*$iconFile = __DIR__ . '/../../images/1344134.png'; // Ruta absoluta
 
-                $html = '<h1>Calificación</h1>';
-                $html .= '<table border="1" cellpadding="5">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Puntuacion Total</th>
-                            <th>Fuerza Muscular</th>
-                            <th>Resistencia Muscular</th>
-                            <th>Resistencia Anaerobica</th>
-                            <th>Resiliencia</th>
-                            <th>Flexibilidad</th>
-                            <th>Cumplimiento de Agenda</th>
-                            <th>Resistencia a la Monotonia</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
+                // Verificar si el archivo de ícono existe
+                if (!file_exists($iconFile)) {
+                    echo "El archivo de ícono no se encontró.";
+                    die();
+                }
 
-                $html .= '<tr>
-                                <td>' . htmlspecialchars($calificacion[0]['fecha']) . '</td>
-                                <td>' . htmlspecialchars($calificacion[0]['puntObtenido']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['fuerzaMusc']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['resMusc']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['resAnaerobica']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['resiliencia']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['flexibilidad']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['cumplAgenda']) . '</td>
-                                <td>' . htmlspecialchars($puntuacion[0]['resMonotonia']) . '</td>
-                              </tr>';
+                $pdf->Image($iconFile, 15, 15, 20, 20, 'PNG', '', '', false, 300, '', false, false, 0, false, false, false); // Ajusta las coordenadas y dimensiones
+*/
+                $pdf->SetFont('helvetica', 'B', 16);
+                $pdf->Cell(0, 10, 'Calificación', 0, 1, 'C');
+                $pdf->Ln(10); // Espacio adicional
+
+                // Estilo de la tabla
+                $html = '<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">';
+                $html .= '<thead>
+                <tr style="background-color: #007BFF; color: #ffffff;">
+                    <th style="text-align: center;">Fecha</th>
+                    <th style="text-align: center;">Puntuacion Total</th>
+                    <th style="text-align: center;">Fuerza Muscular</th>
+                    <th style="text-align: center;">Resistencia Muscular</th>
+                    <th style="text-align: center;">Resistencia Anaerobica</th>
+                    <th style="text-align: center;">Resiliencia</th>
+                    <th style="text-align: center;">Flexibilidad</th>
+                    <th style="text-align: center;">Cumplimiento de Agenda</th>
+                    <th style="text-align: center;">Resistencia a la Monotonia</th>
+                </tr>
+              </thead>
+              <tbody>';
+
+                // Añadir datos
+                if (!empty($calificacion) && !empty($puntuacion)) {
+                    $html .= '<tr style="background-color: #f2f2f2;">
+                        <td style="text-align: center;">' . htmlspecialchars($calificacion[0]['fecha']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($calificacion[0]['puntObtenido']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['fuerzaMusc']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resMusc']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resAnaerobica']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resiliencia']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['flexibilidad']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['cumplAgenda']) . '</td>
+                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resMonotonia']) . '</td>
+                      </tr>';
+                } else {
+                    $html .= '<tr>
+                        <td colspan="9" style="text-align: center;">No hay datos disponibles</td>
+                      </tr>';
+                }
 
                 $html .= '</tbody></table>';
+
                 $pdf->writeHTML($html, true, false, true, false, '');
                 $nombreArchivo = 'calificacion_' . $calificacion[0]['fecha'] . '.pdf';
                 $pdf->Output($nombreArchivo, 'I'); // 'I' para visualizar en el navegador, 'D' para forzar descarga
-            } else {echo "<script>
-        alert('Accesso Denegado');
-        window.location.href = '../../Public/inicio.html'; 
+            } else {
+                echo "<script>
+            alert('Acceso Denegado');
+            window.location.href = '../../Public/inicio.html'; 
         </script>";
             }
         } else {
             $usuarioService->tokenInvalido();
         }
     }
+
+
+
 
     public function emailBienvenida($email)
     {
