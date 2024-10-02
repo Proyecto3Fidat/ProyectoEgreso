@@ -57,19 +57,26 @@ CREATE TABLE Deporte(
 );
 
 CREATE TABLE Calificacion(
-    idItem INT,
-    nombreItem VARCHAR (50),
-    PRIMARY KEY (idItem)
+    id INT AUTO_INCREMENT,
+    puntMaxima INT,
+    fuerzaMusc INT,
+    resMusc INT,
+    resAnaerobica INT,
+    resilicencia INT,
+    flexibilidad INT,
+    cumpAgenda INT,
+    resMonotonia INT,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE Obtiene(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    idItem INT,
+    id INT,
     fecha DATE,
     puntEsperado INT,
     puntObtenido INT,
-    PRIMARY KEY(nroDocumento, tipoDocumento, idItem)
+    PRIMARY KEY(nroDocumento, tipoDocumento, id)
 );
 
 CREATE TABLE PlanPago(
@@ -275,7 +282,7 @@ ALTER TABLE Obtiene
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
 ALTER TABLE Obtiene
-ADD FOREIGN KEY (IdItem) REFERENCES Calificacion(IdItem);
+ADD FOREIGN KEY (Id) REFERENCES Calificacion(Id);
 
 ALTER TABLE Recibe
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
