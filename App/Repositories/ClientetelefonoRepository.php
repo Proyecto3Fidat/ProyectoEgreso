@@ -13,7 +13,7 @@ class ClientetelefonoRepository extends Database
     public  function guardarTelefono($clientetelefonoModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO cliente_telefono (nroDocumento, tipoDocumento, telefono) 
+        $sql = "INSERT INTO Cliente_Telefono (nroDocumento, tipoDocumento, telefono) 
                 VALUES (?,?,?)";
         $nroDocumento = $clientetelefonoModel->getNroDocumento();
         $tipoDocumento = $clientetelefonoModel->getTipoDocumento();
@@ -27,7 +27,7 @@ class ClientetelefonoRepository extends Database
     public function traerTelefono($nroDocumento){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT telefono FROM cliente_telefono WHERE nroDocumento = ?";
+        $sql = "SELECT telefono FROM Cliente_Telefono WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();

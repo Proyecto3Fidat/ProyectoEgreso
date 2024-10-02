@@ -39,7 +39,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT token FROM usuario WHERE nroDocumento = ?";
+        $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();
@@ -61,7 +61,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO usuario (nroDocumento, rol, passwd, token) 
+        $sql = "INSERT INTO Usuario (nroDocumento, rol, passwd, token) 
                 VALUES (?,?,?,?)";
 
         $nroDocumento = $usuarioModel->getNroDocumento();
@@ -87,7 +87,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE usuario SET rol = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE Usuario SET rol = ? WHERE nroDocumento = ?";
         $deportista = "deportista";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -104,7 +104,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "UPDATE usuario SET rol = ? WHERE nroDocumento = ?";
+        $sql = "UPDATE Usuario SET rol = ? WHERE nroDocumento = ?";
         $paciente = "paciente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param(
@@ -121,7 +121,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT passwd , nroDocumento, rol FROM usuario WHERE nroDocumento = ?";
+        $sql = "SELECT passwd , nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
@@ -149,7 +149,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre  FROM cliente WHERE nroDocumento = ?";
+        $sql = "SELECT nombre  FROM Cliente WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("i", $documento);
         $stmt->execute();
@@ -167,7 +167,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT token FROM usuario WHERE nroDocumento = ?";
+        $sql = "SELECT token FROM Usuario WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();
@@ -185,7 +185,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT rol FROM usuario WHERE nroDocumento = ?";
+        $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();
@@ -202,7 +202,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT tipoDocumento FROM cliente WHERE nroDocumento = ?";
+        $sql = "SELECT tipoDocumento FROM Cliente WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();

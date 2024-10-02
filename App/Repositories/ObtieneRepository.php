@@ -11,7 +11,7 @@ class ObtieneRepository extends Database
     public function comprobarId($nroDocumento){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT id FROM obtiene WHERE nroDocumento = ?";
+        $sql = "SELECT id FROM Obtiene WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);   
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
@@ -29,7 +29,7 @@ class ObtieneRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO obtiene (nroDocumento, tipoDocumento, id, fecha, puntEsperado, puntObtenido) 
+        $sql = "INSERT INTO Obtiene (nroDocumento, tipoDocumento, id, fecha, puntEsperado, puntObtenido) 
                 VALUES (?,?,?,?,?,?)";
         $stmt = $database->getConnection()->prepare($sql);
         $nroDocumento = $obtieneModel->getNroDocumento();
@@ -47,7 +47,7 @@ class ObtieneRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT id , puntObtenido, fecha FROM obtiene WHERE nroDocumento = ?";
+        $sql = "SELECT id , puntObtenido, fecha FROM Obtiene WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
@@ -69,7 +69,7 @@ class ObtieneRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT puntObtenido, fecha FROM obtiene WHERE id = ?";
+        $sql = "SELECT puntObtenido, fecha FROM Obtiene WHERE id = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $id);
         $stmt->execute();

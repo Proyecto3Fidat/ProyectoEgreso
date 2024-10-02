@@ -7,7 +7,7 @@ Class PacienteRepository extends Database{
     public function guardarPaciente(PacienteModel $pacienteModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO paciente (nroDocumento, tipoDocumento, fisioterapia, estado) 
+        $sql = "INSERT INTO Paciente (nroDocumento, tipoDocumento, fisioterapia, estado) 
                 VALUES (?,?,?,?)";
         
         $nroDocumento = $pacienteModel->getNroDocumento();
@@ -25,7 +25,7 @@ Class PacienteRepository extends Database{
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nroDocumento FROM paciente WHERE nroDocumento = ?";
+        $sql = "SELECT nroDocumento FROM Paciente WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
