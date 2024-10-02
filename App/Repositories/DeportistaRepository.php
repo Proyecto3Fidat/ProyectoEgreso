@@ -27,8 +27,8 @@ class DeportistaRepository extends Database{
     public function guardarDeportista(DeportistaModel $deportistaModel){
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO deportista (nroDocumento, tipoDocumento, posicion) 
-                VALUES (?,?,?)";
+        $sql = "INSERT INTO deportista (nroDocumento, tipoDocumento, deporte, posicion, estado) 
+                VALUES (?,?,?,?,?)";
         
         $nroDocumento = $deportistaModel->getNroDocumento();
         $tipoDocumento = $deportistaModel->getTipoDocumento();
@@ -37,7 +37,7 @@ class DeportistaRepository extends Database{
         $estado = $deportistaModel->getEstado();
         
         $stmt = $database->getConnection()->prepare($sql);
-        $stmt->bind_param("sss", $nroDocumento, $tipoDocumento, $posicion);
+        $stmt->bind_param("sssss", $nroDocumento, $tipoDocumento, $deporte, $posicion, $estado);
         $stmt->execute();
         $stmt->close();
         $database->disconnect();

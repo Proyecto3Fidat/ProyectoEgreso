@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: db
--- Tiempo de generación: 02-10-2024 a las 01:14:13
--- Versión del servidor: 8.0.32
--- Versión de PHP: 8.2.8
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-09-2024 a las 03:00:50
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,664 +18,642 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `FidatBD`
+-- Base de datos: `fidatbd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Agenda`
+-- Estructura de tabla para la tabla `arma`
 --
 
-CREATE TABLE `Agenda` (
-  `dia` varchar(10) NOT NULL,
-  `horaInicio` time NOT NULL,
-  `horaFin` time NOT NULL,
-  `agendados` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Calificacion`
---
-
-CREATE TABLE `Calificacion` (
-  `idItem` int NOT NULL,
-  `nombreItem` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Cliente`
---
-
-CREATE TABLE `Cliente` (
+CREATE TABLE `arma` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `nombre` varchar(30) DEFAULT NULL,
-  `apellido` varchar(30) DEFAULT NULL,
+  `fecha` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `calificacion`
+--
+
+CREATE TABLE `calificacion` (
+  `id` int(11) NOT NULL,
+  `puntMaxima` int(11) DEFAULT NULL,
+  `fuerzaMusc` int(11) DEFAULT NULL,
+  `resMusc` int(11) DEFAULT NULL,
+  `resAnaerobica` int(11) DEFAULT NULL,
+  `resilicencia` int(11) DEFAULT NULL,
+  `flexibilidad` int(11) DEFAULT NULL,
+  `cumpAgenda` int(11) DEFAULT NULL,
+  `resMonotonia` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `nroDocumento` varchar(30) NOT NULL,
+  `tipoDocumento` varchar(16) NOT NULL,
   `altura` double DEFAULT NULL,
-  `peso` int DEFAULT NULL,
+  `peso` int(11) DEFAULT NULL,
   `calle` varchar(100) DEFAULT NULL,
-  `numero` int DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
   `esquina` varchar(100) DEFAULT NULL,
   `email` varchar(40) DEFAULT NULL,
   `patologias` varchar(25) DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  `activo` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nombre` varchar(30) DEFAULT NULL,
+  `apellido` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Cliente_Telefono`
+-- Estructura de tabla para la tabla `cliente_telefono`
 --
 
-CREATE TABLE `Cliente_Telefono` (
+CREATE TABLE `cliente_telefono` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `telefono` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `telefono` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ComboEjercicio`
+-- Estructura de tabla para la tabla `comboejercicio`
 --
 
-CREATE TABLE `ComboEjercicio` (
-  `nombreCombo` varchar(20) NOT NULL,
-  `cantEjercicios` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `comboejercicio` (
+  `nombreCombo` int(11) NOT NULL,
+  `cantEjercicios` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ComboEjercicio_idEjercicio`
+-- Estructura de tabla para la tabla `comboejercicio_idejercicio`
 --
 
-CREATE TABLE `ComboEjercicio_idEjercicio` (
-  `nombreCombo` varchar(20) NOT NULL,
-  `idEjercicio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `comboejercicio_idejercicio` (
+  `nombreCombo` int(11) NOT NULL,
+  `idEjercicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Compone`
+-- Estructura de tabla para la tabla `compone`
 --
 
-CREATE TABLE `Compone` (
-  `idRutina` int NOT NULL,
-  `nombreCombo` varchar(20) NOT NULL,
-  `idEjercicio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `compone` (
+  `nombreCombo` int(11) NOT NULL,
+  `id_Ejercicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Conforma`
+-- Estructura de tabla para la tabla `conserva`
 --
 
-CREATE TABLE `Conforma` (
-  `nombre` varchar(20) NOT NULL,
-  `dia` varchar(10) NOT NULL,
-  `horaInicio` time NOT NULL,
-  `horaFin` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Contiene`
---
-
-CREATE TABLE `Contiene` (
-  `nombreCombo` varchar(20) NOT NULL,
-  `idEjercicio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Cumple`
---
-
-CREATE TABLE `Cumple` (
+CREATE TABLE `conserva` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `idEjercicio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_Estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Deporte`
+-- Estructura de tabla para la tabla `contiene`
 --
 
-CREATE TABLE `Deporte` (
+CREATE TABLE `contiene` (
+  `nombreCombo` int(11) NOT NULL,
+  `id_Ejercicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `deporte`
+--
+
+CREATE TABLE `deporte` (
+  `idDeporte` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Deportista`
+-- Estructura de tabla para la tabla `deportista`
 --
 
-CREATE TABLE `Deportista` (
+CREATE TABLE `deportista` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `posicion` varchar(15) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `deporte` varchar(15) NOT NULL,
+  `posicion` varchar(15) NOT NULL,
+  `estado` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Ejercicio`
+-- Estructura de tabla para la tabla `ejercicio`
 --
 
-CREATE TABLE `Ejercicio` (
-  `idEjercicio` int NOT NULL,
+CREATE TABLE `ejercicio` (
+  `id_Ejercicio` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `tipoEjercicio` varchar(20) NOT NULL,
   `grupoMuscular` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Elige`
+-- Estructura de tabla para la tabla `elige`
 --
 
-CREATE TABLE `Elige` (
-  `fechaPago` date DEFAULT NULL,
-  `idPago` int DEFAULT NULL,
-  `nombrePlan` varchar(12) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Entrena`
---
-
-CREATE TABLE `Entrena` (
-  `nombre` varchar(20) NOT NULL,
+CREATE TABLE `elige` (
+  `nombre` varchar(12) NOT NULL,
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Estado`
+-- Estructura de tabla para la tabla `entrena`
 --
 
-CREATE TABLE `Estado` (
-  `id_Estado` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `entrena` (
+  `idDeporte` int(11) NOT NULL,
+  `nroDocumento` varchar(30) NOT NULL,
+  `tipoDocumento` varchar(16) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `LocalGym`
+-- Estructura de tabla para la tabla `estado`
 --
 
-CREATE TABLE `LocalGym` (
+CREATE TABLE `estado` (
+  `id_Estado` int(11) NOT NULL,
+  `fechaInicio` date DEFAULT NULL,
+  `fechaFin` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `localgym`
+--
+
+CREATE TABLE `localgym` (
   `nombre` varchar(20) NOT NULL,
-  `capXturno` int DEFAULT NULL,
   `calle` varchar(25) NOT NULL,
   `nroPuerta` varchar(4) NOT NULL,
   `esquina` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Obtiene`
+-- Estructura de tabla para la tabla `obtiene`
 --
 
-CREATE TABLE `Obtiene` (
+CREATE TABLE `obtiene` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `idItem` int NOT NULL,
+  `id` int(11) NOT NULL,
   `fecha` date DEFAULT NULL,
-  `puntEsperado` int DEFAULT NULL,
-  `puntObtenido` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `puntEsperado` int(11) DEFAULT NULL,
+  `puntObtenido` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Paciente`
+-- Estructura de tabla para la tabla `paciente`
 --
 
-CREATE TABLE `Paciente` (
+CREATE TABLE `paciente` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `fisioterapia` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `fisioterapia` varchar(2) NOT NULL,
+  `estado` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Pago`
+-- Estructura de tabla para la tabla `pago`
 --
 
-CREATE TABLE `Pago` (
-  `idPago` int NOT NULL,
+CREATE TABLE `pago` (
+  `idPago` int(11) NOT NULL,
   `ultimoMesAbonado` varchar(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `PlanPago`
+-- Estructura de tabla para la tabla `planpago`
 --
 
-CREATE TABLE `PlanPago` (
-  `nombrePlan` varchar(12) NOT NULL,
+CREATE TABLE `planpago` (
+  `nombre` varchar(12) NOT NULL,
   `descripcion` varchar(50) NOT NULL,
   `tipoPlan` varchar(12) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Practica`
+-- Estructura de tabla para la tabla `posee`
 --
 
-CREATE TABLE `Practica` (
+CREATE TABLE `posee` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `idRutina` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id_Estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Realiza`
+-- Estructura de tabla para la tabla `practica`
 --
 
-CREATE TABLE `Realiza` (
+CREATE TABLE `practica` (
+  `nroDocumento` varchar(30) NOT NULL,
+  `tipoDocumento` varchar(16) NOT NULL,
+  `idRutina` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `realiza`
+--
+
+CREATE TABLE `realiza` (
   `fechaPago` date NOT NULL,
-  `idPago` int NOT NULL,
-  `nombrePlan` varchar(12) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `idPago` int(11) NOT NULL,
+  `nombre` varchar(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Recibe`
+-- Estructura de tabla para la tabla `rutina`
 --
 
-CREATE TABLE `Recibe` (
-  `nroDocumento` varchar(30) NOT NULL,
-  `tipoDocumento` varchar(16) NOT NULL,
-  `id_Estado` int DEFAULT NULL,
-  `fechaInicio` date DEFAULT NULL,
-  `fechaFin` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Rutina`
---
-
-CREATE TABLE `Rutina` (
-  `idRutina` int NOT NULL,
-  `series` int NOT NULL,
-  `repeticiones` int NOT NULL,
+CREATE TABLE `rutina` (
+  `idRutina` int(11) NOT NULL,
+  `series` int(11) NOT NULL,
+  `repeticiones` int(11) NOT NULL,
   `dia` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `SeAgenda`
+-- Estructura de tabla para la tabla `selecciona`
 --
 
-CREATE TABLE `SeAgenda` (
+CREATE TABLE `selecciona` (
   `nroDocumento` varchar(30) NOT NULL,
   `tipoDocumento` varchar(16) NOT NULL,
-  `dia` varchar(10) NOT NULL,
-  `horaInicio` time NOT NULL,
-  `horaFin` time NOT NULL,
-  `fecha` date DEFAULT NULL,
-  `asistencia` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `nombre` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Tiene`
+-- Estructura de tabla para la tabla `tiene`
 --
 
-CREATE TABLE `Tiene` (
-  `nombre` varchar(20) NOT NULL,
-  `nombreCombo` varchar(20) NOT NULL,
-  `idEjercicio` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `tiene` (
+  `idDeporte` int(11) NOT NULL,
+  `nombreCombo` int(11) NOT NULL,
+  `id_Ejercicio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
-CREATE TABLE `Usuario` (
+CREATE TABLE `usuario` (
   `nroDocumento` varchar(30) NOT NULL,
-  `rol` varchar(35) DEFAULT NULL,
+  `rol` varchar(22) NOT NULL,
   `passwd` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `token` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `Agenda`
+-- Indices de la tabla `arma`
 --
-ALTER TABLE `Agenda`
-  ADD PRIMARY KEY (`dia`,`horaInicio`,`horaFin`);
-
---
--- Indices de la tabla `Calificacion`
---
-ALTER TABLE `Calificacion`
-  ADD PRIMARY KEY (`idItem`);
-
---
--- Indices de la tabla `Cliente`
---
-ALTER TABLE `Cliente`
+ALTER TABLE `arma`
   ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`);
 
 --
--- Indices de la tabla `Cliente_Telefono`
+-- Indices de la tabla `calificacion`
 --
-ALTER TABLE `Cliente_Telefono`
+ALTER TABLE `calificacion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_calificacion_id` (`id`);
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`);
+
+--
+-- Indices de la tabla `cliente_telefono`
+--
+ALTER TABLE `cliente_telefono`
   ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`telefono`);
 
 --
--- Indices de la tabla `ComboEjercicio`
+-- Indices de la tabla `comboejercicio`
 --
-ALTER TABLE `ComboEjercicio`
+ALTER TABLE `comboejercicio`
   ADD PRIMARY KEY (`nombreCombo`);
 
 --
--- Indices de la tabla `ComboEjercicio_idEjercicio`
+-- Indices de la tabla `comboejercicio_idejercicio`
 --
-ALTER TABLE `ComboEjercicio_idEjercicio`
-  ADD PRIMARY KEY (`nombreCombo`,`idEjercicio`),
-  ADD KEY `idEjercicio` (`idEjercicio`);
+ALTER TABLE `comboejercicio_idejercicio`
+  ADD PRIMARY KEY (`nombreCombo`,`idEjercicio`);
 
 --
--- Indices de la tabla `Compone`
+-- Indices de la tabla `compone`
 --
-ALTER TABLE `Compone`
-  ADD PRIMARY KEY (`idRutina`,`nombreCombo`,`idEjercicio`),
-  ADD KEY `nombreCombo` (`nombreCombo`),
-  ADD KEY `idEjercicio` (`idEjercicio`);
+ALTER TABLE `compone`
+  ADD PRIMARY KEY (`nombreCombo`,`id_Ejercicio`),
+  ADD KEY `id_Ejercicio` (`id_Ejercicio`);
 
 --
--- Indices de la tabla `Conforma`
+-- Indices de la tabla `conserva`
 --
-ALTER TABLE `Conforma`
-  ADD PRIMARY KEY (`nombre`,`dia`,`horaInicio`,`horaFin`),
-  ADD KEY `dia` (`dia`,`horaInicio`,`horaFin`);
+ALTER TABLE `conserva`
+  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`id_Estado`),
+  ADD KEY `id_Estado` (`id_Estado`);
 
 --
--- Indices de la tabla `Contiene`
+-- Indices de la tabla `contiene`
 --
-ALTER TABLE `Contiene`
-  ADD PRIMARY KEY (`nombreCombo`,`idEjercicio`),
-  ADD KEY `idEjercicio` (`idEjercicio`);
+ALTER TABLE `contiene`
+  ADD PRIMARY KEY (`nombreCombo`,`id_Ejercicio`),
+  ADD KEY `id_Ejercicio` (`id_Ejercicio`);
 
 --
--- Indices de la tabla `Cumple`
+-- Indices de la tabla `deporte`
 --
-ALTER TABLE `Cumple`
-  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`idEjercicio`),
-  ADD KEY `idEjercicio` (`idEjercicio`);
+ALTER TABLE `deporte`
+  ADD PRIMARY KEY (`idDeporte`);
 
 --
--- Indices de la tabla `Deporte`
+-- Indices de la tabla `deportista`
 --
-ALTER TABLE `Deporte`
-  ADD PRIMARY KEY (`nombre`);
-
---
--- Indices de la tabla `Deportista`
---
-ALTER TABLE `Deportista`
+ALTER TABLE `deportista`
   ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`);
 
 --
--- Indices de la tabla `Ejercicio`
+-- Indices de la tabla `ejercicio`
 --
-ALTER TABLE `Ejercicio`
-  ADD PRIMARY KEY (`idEjercicio`);
+ALTER TABLE `ejercicio`
+  ADD PRIMARY KEY (`id_Ejercicio`);
 
 --
--- Indices de la tabla `Elige`
+-- Indices de la tabla `elige`
 --
-ALTER TABLE `Elige`
-  ADD KEY `fechaPago` (`fechaPago`,`nombrePlan`,`idPago`);
-
---
--- Indices de la tabla `Entrena`
---
-ALTER TABLE `Entrena`
+ALTER TABLE `elige`
   ADD PRIMARY KEY (`nombre`),
   ADD KEY `nroDocumento` (`nroDocumento`,`tipoDocumento`);
 
 --
--- Indices de la tabla `Estado`
+-- Indices de la tabla `entrena`
 --
-ALTER TABLE `Estado`
+ALTER TABLE `entrena`
+  ADD PRIMARY KEY (`idDeporte`),
+  ADD KEY `nroDocumento` (`nroDocumento`,`tipoDocumento`);
+
+--
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
   ADD PRIMARY KEY (`id_Estado`);
 
 --
--- Indices de la tabla `LocalGym`
+-- Indices de la tabla `localgym`
 --
-ALTER TABLE `LocalGym`
+ALTER TABLE `localgym`
   ADD PRIMARY KEY (`nombre`);
 
 --
--- Indices de la tabla `Obtiene`
+-- Indices de la tabla `obtiene`
 --
-ALTER TABLE `Obtiene`
-  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`idItem`),
-  ADD KEY `idItem` (`idItem`);
+ALTER TABLE `obtiene`
+  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`id`),
+  ADD KEY `id` (`id`);
 
 --
--- Indices de la tabla `Paciente`
+-- Indices de la tabla `paciente`
 --
-ALTER TABLE `Paciente`
+ALTER TABLE `paciente`
   ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`);
 
 --
--- Indices de la tabla `Pago`
+-- Indices de la tabla `pago`
 --
-ALTER TABLE `Pago`
+ALTER TABLE `pago`
   ADD PRIMARY KEY (`idPago`);
 
 --
--- Indices de la tabla `PlanPago`
+-- Indices de la tabla `planpago`
 --
-ALTER TABLE `PlanPago`
-  ADD PRIMARY KEY (`nombrePlan`);
+ALTER TABLE `planpago`
+  ADD PRIMARY KEY (`nombre`);
 
 --
--- Indices de la tabla `Practica`
+-- Indices de la tabla `posee`
 --
-ALTER TABLE `Practica`
+ALTER TABLE `posee`
+  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`id_Estado`),
+  ADD KEY `id_Estado` (`id_Estado`);
+
+--
+-- Indices de la tabla `practica`
+--
+ALTER TABLE `practica`
   ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`idRutina`),
   ADD KEY `idRutina` (`idRutina`);
 
 --
--- Indices de la tabla `Realiza`
+-- Indices de la tabla `realiza`
 --
-ALTER TABLE `Realiza`
+ALTER TABLE `realiza`
   ADD PRIMARY KEY (`fechaPago`,`idPago`),
-  ADD KEY `idx_realiza` (`fechaPago`,`nombrePlan`,`idPago`),
   ADD KEY `idPago` (`idPago`),
-  ADD KEY `nombrePlan` (`nombrePlan`);
+  ADD KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `Recibe`
+-- Indices de la tabla `rutina`
 --
-ALTER TABLE `Recibe`
-  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`),
-  ADD KEY `id_Estado` (`id_Estado`);
-
---
--- Indices de la tabla `Rutina`
---
-ALTER TABLE `Rutina`
+ALTER TABLE `rutina`
   ADD PRIMARY KEY (`idRutina`);
 
 --
--- Indices de la tabla `SeAgenda`
+-- Indices de la tabla `selecciona`
 --
-ALTER TABLE `SeAgenda`
-  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`,`dia`,`horaInicio`,`horaFin`),
-  ADD KEY `dia` (`dia`,`horaInicio`,`horaFin`);
+ALTER TABLE `selecciona`
+  ADD PRIMARY KEY (`nroDocumento`,`tipoDocumento`),
+  ADD KEY `nombre` (`nombre`);
 
 --
--- Indices de la tabla `Tiene`
+-- Indices de la tabla `tiene`
 --
-ALTER TABLE `Tiene`
-  ADD PRIMARY KEY (`nombre`,`nombreCombo`,`idEjercicio`),
+ALTER TABLE `tiene`
+  ADD PRIMARY KEY (`idDeporte`,`nombreCombo`,`id_Ejercicio`),
   ADD KEY `nombreCombo` (`nombreCombo`),
-  ADD KEY `idEjercicio` (`idEjercicio`);
+  ADD KEY `id_Ejercicio` (`id_Ejercicio`);
 
 --
--- Indices de la tabla `Usuario`
+-- Indices de la tabla `usuario`
 --
-ALTER TABLE `Usuario`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`nroDocumento`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `calificacion`
+--
+ALTER TABLE `calificacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Cliente_Telefono`
+-- Filtros para la tabla `cliente_telefono`
 --
-ALTER TABLE `Cliente_Telefono`
-  ADD CONSTRAINT `Cliente_Telefono_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`);
+ALTER TABLE `cliente_telefono`
+  ADD CONSTRAINT `cliente_telefono_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`);
 
 --
--- Filtros para la tabla `ComboEjercicio_idEjercicio`
+-- Filtros para la tabla `compone`
 --
-ALTER TABLE `ComboEjercicio_idEjercicio`
-  ADD CONSTRAINT `ComboEjercicio_idEjercicio_ibfk_1` FOREIGN KEY (`nombreCombo`) REFERENCES `ComboEjercicio` (`nombreCombo`),
-  ADD CONSTRAINT `ComboEjercicio_idEjercicio_ibfk_2` FOREIGN KEY (`idEjercicio`) REFERENCES `Ejercicio` (`idEjercicio`);
+ALTER TABLE `compone`
+  ADD CONSTRAINT `compone_ibfk_1` FOREIGN KEY (`nombreCombo`) REFERENCES `comboejercicio` (`nombreCombo`),
+  ADD CONSTRAINT `compone_ibfk_2` FOREIGN KEY (`id_Ejercicio`) REFERENCES `ejercicio` (`id_Ejercicio`);
 
 --
--- Filtros para la tabla `Compone`
+-- Filtros para la tabla `conserva`
 --
-ALTER TABLE `Compone`
-  ADD CONSTRAINT `Compone_ibfk_1` FOREIGN KEY (`nombreCombo`) REFERENCES `ComboEjercicio` (`nombreCombo`),
-  ADD CONSTRAINT `Compone_ibfk_2` FOREIGN KEY (`idEjercicio`) REFERENCES `Ejercicio` (`idEjercicio`),
-  ADD CONSTRAINT `Compone_ibfk_3` FOREIGN KEY (`idRutina`) REFERENCES `Rutina` (`idRutina`);
+ALTER TABLE `conserva`
+  ADD CONSTRAINT `conserva_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `deportista` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `conserva_ibfk_2` FOREIGN KEY (`id_Estado`) REFERENCES `estado` (`id_Estado`);
 
 --
--- Filtros para la tabla `Conforma`
+-- Filtros para la tabla `contiene`
 --
-ALTER TABLE `Conforma`
-  ADD CONSTRAINT `Conforma_ibfk_1` FOREIGN KEY (`dia`,`horaInicio`,`horaFin`) REFERENCES `Agenda` (`dia`, `horaInicio`, `horaFin`),
-  ADD CONSTRAINT `Conforma_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `LocalGym` (`nombre`);
+ALTER TABLE `contiene`
+  ADD CONSTRAINT `contiene_ibfk_1` FOREIGN KEY (`nombreCombo`) REFERENCES `comboejercicio` (`nombreCombo`),
+  ADD CONSTRAINT `contiene_ibfk_2` FOREIGN KEY (`id_Ejercicio`) REFERENCES `ejercicio` (`id_Ejercicio`);
 
 --
--- Filtros para la tabla `Contiene`
+-- Filtros para la tabla `deportista`
 --
-ALTER TABLE `Contiene`
-  ADD CONSTRAINT `Contiene_ibfk_1` FOREIGN KEY (`nombreCombo`) REFERENCES `ComboEjercicio` (`nombreCombo`),
-  ADD CONSTRAINT `Contiene_ibfk_2` FOREIGN KEY (`idEjercicio`) REFERENCES `Ejercicio` (`idEjercicio`);
+ALTER TABLE `deportista`
+  ADD CONSTRAINT `deportista_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`);
 
 --
--- Filtros para la tabla `Cumple`
+-- Filtros para la tabla `elige`
 --
-ALTER TABLE `Cumple`
-  ADD CONSTRAINT `Cumple_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `Cumple_ibfk_2` FOREIGN KEY (`idEjercicio`) REFERENCES `Ejercicio` (`idEjercicio`);
+ALTER TABLE `elige`
+  ADD CONSTRAINT `elige_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `elige_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `planpago` (`nombre`);
 
 --
--- Filtros para la tabla `Deportista`
+-- Filtros para la tabla `entrena`
 --
-ALTER TABLE `Deportista`
-  ADD CONSTRAINT `Deportista_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`);
+ALTER TABLE `entrena`
+  ADD CONSTRAINT `entrena_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `entrena_ibfk_2` FOREIGN KEY (`idDeporte`) REFERENCES `deporte` (`idDeporte`);
 
 --
--- Filtros para la tabla `Elige`
+-- Filtros para la tabla `obtiene`
 --
-ALTER TABLE `Elige`
-  ADD CONSTRAINT `Elige_ibfk_1` FOREIGN KEY (`fechaPago`,`nombrePlan`,`idPago`) REFERENCES `Realiza` (`fechaPago`, `nombrePlan`, `idPago`);
+ALTER TABLE `obtiene`
+  ADD CONSTRAINT `obtiene_ibfk_1` FOREIGN KEY (`id`) REFERENCES `calificacion` (`id`),
+  ADD CONSTRAINT `obtiene_ibfk_2` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`) ON DELETE CASCADE;
 
 --
--- Filtros para la tabla `Entrena`
+-- Filtros para la tabla `paciente`
 --
-ALTER TABLE `Entrena`
-  ADD CONSTRAINT `Entrena_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `Entrena_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `Deporte` (`nombre`);
+ALTER TABLE `paciente`
+  ADD CONSTRAINT `paciente_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`);
 
 --
--- Filtros para la tabla `Obtiene`
+-- Filtros para la tabla `posee`
 --
-ALTER TABLE `Obtiene`
-  ADD CONSTRAINT `Obtiene_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `Obtiene_ibfk_2` FOREIGN KEY (`idItem`) REFERENCES `Calificacion` (`idItem`);
+ALTER TABLE `posee`
+  ADD CONSTRAINT `posee_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `deportista` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `posee_ibfk_2` FOREIGN KEY (`id_Estado`) REFERENCES `estado` (`id_Estado`);
 
 --
--- Filtros para la tabla `Paciente`
+-- Filtros para la tabla `practica`
 --
-ALTER TABLE `Paciente`
-  ADD CONSTRAINT `Paciente_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`);
+ALTER TABLE `practica`
+  ADD CONSTRAINT `practica_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `practica_ibfk_2` FOREIGN KEY (`idRutina`) REFERENCES `rutina` (`idRutina`);
 
 --
--- Filtros para la tabla `Practica`
+-- Filtros para la tabla `realiza`
 --
-ALTER TABLE `Practica`
-  ADD CONSTRAINT `Practica_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `Practica_ibfk_2` FOREIGN KEY (`idRutina`) REFERENCES `Rutina` (`idRutina`);
+ALTER TABLE `realiza`
+  ADD CONSTRAINT `realiza_ibfk_1` FOREIGN KEY (`idPago`) REFERENCES `pago` (`idPago`),
+  ADD CONSTRAINT `realiza_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `planpago` (`nombre`);
 
 --
--- Filtros para la tabla `Realiza`
+-- Filtros para la tabla `selecciona`
 --
-ALTER TABLE `Realiza`
-  ADD CONSTRAINT `Realiza_ibfk_1` FOREIGN KEY (`idPago`) REFERENCES `Pago` (`idPago`),
-  ADD CONSTRAINT `Realiza_ibfk_2` FOREIGN KEY (`nombrePlan`) REFERENCES `PlanPago` (`nombrePlan`);
+ALTER TABLE `selecciona`
+  ADD CONSTRAINT `selecciona_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `cliente` (`nroDocumento`, `tipoDocumento`),
+  ADD CONSTRAINT `selecciona_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `localgym` (`nombre`);
 
 --
--- Filtros para la tabla `Recibe`
+-- Filtros para la tabla `tiene`
 --
-ALTER TABLE `Recibe`
-  ADD CONSTRAINT `Recibe_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `Recibe_ibfk_2` FOREIGN KEY (`id_Estado`) REFERENCES `Estado` (`id_Estado`);
-
---
--- Filtros para la tabla `SeAgenda`
---
-ALTER TABLE `SeAgenda`
-  ADD CONSTRAINT `SeAgenda_ibfk_1` FOREIGN KEY (`nroDocumento`,`tipoDocumento`) REFERENCES `Cliente` (`nroDocumento`, `tipoDocumento`),
-  ADD CONSTRAINT `SeAgenda_ibfk_2` FOREIGN KEY (`dia`,`horaInicio`,`horaFin`) REFERENCES `Agenda` (`dia`, `horaInicio`, `horaFin`);
-
---
--- Filtros para la tabla `Tiene`
---
-ALTER TABLE `Tiene`
-  ADD CONSTRAINT `Tiene_ibfk_1` FOREIGN KEY (`nombre`) REFERENCES `Deporte` (`nombre`),
-  ADD CONSTRAINT `Tiene_ibfk_2` FOREIGN KEY (`nombreCombo`) REFERENCES `ComboEjercicio` (`nombreCombo`),
-  ADD CONSTRAINT `Tiene_ibfk_3` FOREIGN KEY (`idEjercicio`) REFERENCES `Ejercicio` (`idEjercicio`);
+ALTER TABLE `tiene`
+  ADD CONSTRAINT `tiene_ibfk_1` FOREIGN KEY (`idDeporte`) REFERENCES `deporte` (`idDeporte`),
+  ADD CONSTRAINT `tiene_ibfk_2` FOREIGN KEY (`nombreCombo`) REFERENCES `comboejercicio` (`nombreCombo`),
+  ADD CONSTRAINT `tiene_ibfk_3` FOREIGN KEY (`id_Ejercicio`) REFERENCES `ejercicio` (`id_Ejercicio`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
