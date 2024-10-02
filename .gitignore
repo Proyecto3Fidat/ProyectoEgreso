@@ -1,3 +1,4 @@
 /vendor/
 Config/logs/app.log
 .idea/
+/.idea
