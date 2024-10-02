@@ -124,10 +124,9 @@ CREATE TABLE Ejercicio(
 );
 
 CREATE TABLE Elige (
-    nombrePlan VARCHAR(12),
-    nroDocumento VARCHAR(30) NOT NULL,
-    tipoDocumento VARCHAR (16),
-    PRIMARY KEY (nombrePlan)
+    fechaPago DATE,
+    idPago INT,
+    nombrePlan VARCHAR(12)
 );
 
 CREATE TABLE Realiza(
@@ -224,9 +223,7 @@ ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, t
 ALTER TABLE Paciente
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
 
-ALTER TABLE Elige
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
-
+CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago);
 
 ALTER TABLE Elige
 ADD FOREIGN KEY (fechaPago, nombrePlan, idPago) REFERENCES Realiza(fechaPago, nombrePlan, idPago);
