@@ -233,6 +233,9 @@ ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, t
 CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago);
 
 ALTER TABLE Elige
+ADD FOREIGN KEY (nroDocumento,tipoDocumento) REFERENCES Cliente(nroDocumento,tipoDocumento);
+
+ALTER TABLE Elige
 ADD FOREIGN KEY (fechaPago, nombrePlan, idPago) REFERENCES Realiza(fechaPago, nombrePlan, idPago);
 
 ALTER TABLE Realiza
