@@ -87,7 +87,7 @@ CREATE TABLE PlanPago(
 );
 
 CREATE TABLE Pago(
-    idPago INT,
+    idPago INT AUTO_INCREMENT,
     ultimoMesAbonado VARCHAR(12) NOT NULL,
     PRIMARY KEY(idPago)
 );
@@ -133,7 +133,9 @@ CREATE TABLE Ejercicio(
 CREATE TABLE Elige (
     fechaPago DATE,
     idPago INT,
-    nombrePlan VARCHAR(12)
+    nombrePlan VARCHAR(12),
+    nroDocumento VARCHAR(30) NOT NULL,
+    tipoDocumento VARCHAR(16)
 );
 
 CREATE TABLE Realiza(
