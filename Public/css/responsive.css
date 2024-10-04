@@ -143,9 +143,39 @@
     }
     /*Fin vista admin*/
 
-    
 
 
+
+
+    /*Form loginUsuario*/
+    form {
+        max-width: 600px;
+        margin: 10rem auto 40px;
+        display: flex;
+        flex-direction: column;
+    }
+        form h2 {
+            color: #ffffff;
+            font-weight: 400;
+            margin: auto;
+            font-size: 1.5rem;
+        }
+    form input, select {
+        width: 70%;
+        margin: .5rem auto;
+        border-radius: 10px;
+        border: none;
+        font-size: 1rem;
+    }    
+    form .button {
+        cursor: pointer;
+        width: 70% auto;
+        margin-top: 1rem;
+    }
+        .button:hover {
+            background-color: #6f41bb;
+        }
+    /*Fin LoginUsuario*/
 
 
 
