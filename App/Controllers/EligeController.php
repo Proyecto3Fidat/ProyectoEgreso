@@ -25,7 +25,6 @@ class EligeController
         $resultado = $eligeService->actualizarPago($PlanPago, $realiza, $pago,$nroDocumento,$tipoDocumento);
         header('Content-Type: application/json');
 
-
         if($resultado === "plan"){
             echo json_encode([
                 'redirect' => true,
@@ -40,5 +39,9 @@ class EligeController
             ]);
             exit();
         }
+        echo json_encode([
+            'success' => true,
+            'message' => 'Pago actualizado correctamente'
+        ]);
     }
 }

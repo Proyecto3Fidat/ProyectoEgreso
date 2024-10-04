@@ -149,12 +149,10 @@ class ClienteController
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
-        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
             header('HTTP/1.1 403 Forbidden');
             echo json_encode(['error' => 'No tiene permisos para ver esta página']);
             exit();
-        }
-        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
+
             $lista = $this->clienteService->listarClientes();
             $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
             $resultado = [];
@@ -175,10 +173,7 @@ class ClienteController
                 ];
             }
             echo json_encode($resultado);
-        } else {
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'Token inválido o sesión expirada']);
-        }
+
     }
     public function obtenerListaClientesAdmin()
     {
@@ -186,13 +181,8 @@ class ClienteController
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
-        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'No tiene permisos para ver esta página']);
-            exit();
-        }
-        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
-            $clientes = $this->clienteService->listarClientes();
+            $lista = $this->clienteService->listarClientes();
+            $clientes = $usuarioService->comprobarClientes($lista);
             $resultado = [];
             foreach ($clientes as $cliente) {
                 $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
@@ -203,6 +193,7 @@ class ClienteController
                     'tipoDocumento' => $cliente['tipoDocumento'],
                     'altura' => $cliente['altura'],
                     'peso' => $cliente['peso'],
+                    'rol' => $cliente['rol'],
                     'patologias' => $cliente['patologia'],
                     'email' => $cliente['email'],
                     'edad' => $edad,
@@ -211,9 +202,5 @@ class ClienteController
                 ];
             }
             echo json_encode($resultado);
-        } else {
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'Token inválido o sesión expirada']);
-        }
     }
 }   

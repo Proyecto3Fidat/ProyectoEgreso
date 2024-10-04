@@ -11,12 +11,12 @@ document.querySelector('form').addEventListener('submit', function(event) {
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
-            return response.json(); // Solo se analiza si la respuesta es correcta
+            return response.json();
         })
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                window.location.href = '/pagina-de-exito';
+                window.location.href = '/';
             } else if (data.error === "token") {
                 alert(data.message);
             } else if (data.error === "documento") {

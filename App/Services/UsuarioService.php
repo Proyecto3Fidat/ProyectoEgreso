@@ -24,7 +24,6 @@ class UsuarioService
         window.location.href = '../../Public/inicio.html'; 
         </script>";
         exit();
-
     }
 
     public function comprobarUsuario($documento)
@@ -77,7 +76,18 @@ class UsuarioService
         }
         return $resultados;
     }
-
+    public function comprobarClientes($usuarios)
+    {
+        $resultados = array();
+        foreach ($usuarios as $usuario) {
+            $rol = $this->usuarioRepository->comprobarRol($usuario['nroDocumento']);
+            if ($rol == "deportista" || $rol == "paciente" || $rol == "cliente") {
+                $usuario['rol'] = $rol;
+                $resultados[] = $usuario;
+            }
+        }
+        return $resultados;
+    }
     public function logout()
     {
         session_unset();

@@ -24,10 +24,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const tbody = document.querySelector('#tablaClientes tbody');
             clientes.forEach(cliente => {
+                console.log(cliente.rol);
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${cliente.nombre}</td>
                     <td>${cliente.nroDocumento}</td>
+                    <td>${cliente.rol}</td>
                     <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Detalles</button></td>
                 `;
                 tbody.appendChild(row);

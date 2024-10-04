@@ -6,6 +6,9 @@
     text-decoration: none;
     list-style: none;
 }
+.content {
+    display: none;
+}
 
 body {
     background-color: #100e0f;
