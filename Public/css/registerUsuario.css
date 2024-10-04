@@ -24,9 +24,6 @@ body {
     font-family: 'Poppins', sans-serif;
     color: white;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
  
 .loginContainer {
@@ -91,7 +88,6 @@ nav a:hover {
 
     /*Inicio formulario*/
     form {
-        width: 30%;
         margin: 1rem auto 2rem;
         display: flex;
         flex-direction: column;
@@ -124,6 +120,12 @@ nav a:hover {
         .button:hover {
             background-color: #6f41bb;
         }
+    fieldset{
+        display: flex;
+        flex-direction: column;
+        max-width: 50% auto;
+        width: 50%;
+    }
     /*Fin formulario*/
 
 

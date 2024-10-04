@@ -149,7 +149,7 @@
 
     /*Form loginUsuario*/
     form {
-        max-width: 600px;
+        width: 70%;
         margin: 10rem auto 40px;
         display: flex;
         flex-direction: column;
