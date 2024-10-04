@@ -70,12 +70,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         exit();
     });
 
-    SimpleRouter::get('/tiposDePlan', function () use ($logger) {
-        $planes = new App\Controllers\PlanPagoController();
-        $planes->obtenerPlanes();
-        exit();
-    });
-
     SimpleRouter::post('/crearPlan', function () use ($logger) {
         $planes = new App\Controllers\PlanPagoController();
         $planes->crearPlan();
@@ -99,6 +93,11 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         exit();
     });
 
+    SimpleRouter::get('/tiposDePlan', function () use ($logger) {
+        $planes = new App\Controllers\PlanPagoController();
+        $planes->obtenerPlanes();
+        exit();
+    });
 });
 
 SimpleRouter::get('/inicio', function () {
