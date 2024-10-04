@@ -4,6 +4,11 @@ namespace App\Services;
 use App\Repositories\PlanPagoRepository;
 class PlanPagoService
 {
+    public function insertarPlan($nombre, $descripcion, $tipo)
+    {
+        $planPagoRepository = new PlanPagoRepository();
+        $planPagoRepository->insertarPlan($nombre, $descripcion, $tipo);
+    }
     public function actualizarPago($planPago)
     {
         $planPagoRepository = new PlanPagoRepository();
@@ -13,5 +18,10 @@ class PlanPagoService
         }else {
             return false;
         }
+    }
+    public function obtenerPlanes()
+    {
+        $planPagoRepository = new PlanPagoRepository();
+        return $planPagoRepository->obtenerPlanes();
     }
 }

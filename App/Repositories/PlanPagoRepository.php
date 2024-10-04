@@ -24,7 +24,6 @@ class PlanPagoRepository extends Database
                 "descripcion" => $descripcion,
                 "tipoPlan" => $tipoPlan
             );
-
            return $clientes;
         }else {
              $clientes = array(
@@ -34,11 +33,8 @@ class PlanPagoRepository extends Database
             return $clientes;
         }
     }
-    public function insertarPlan($planPago)
+    public function insertarPlan($nombre, $descripcion, $tipo)
     {
-        $nombre = $planPago->getNombrePlan();
-        $descripcion = $planPago->getDescripcion();
-        $tipo = $planPago->getTipoPlan();
         $database = Database::getInstance();
         $database->connect();
         $sql = "INSERT INTO PlanPago (nombrePlan, descripcion, tipoPlan) VALUES (?, ?, ?)";
@@ -47,5 +43,26 @@ class PlanPagoRepository extends Database
         $stmt->execute();
         $stmt->close();
         $database->disconnect();
+    }
+    public function obtenerPlanes()
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT nombrePlan, descripcion, tipoPlan FROM PlanPago";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($nombrePlan, $descripcion, $tipoPlan);
+        $planes = array();
+        while ($stmt->fetch()) {
+            $planes[] = array(
+                "nombrePlan" => $nombrePlan,
+                "descripcion" => $descripcion,
+                "tipoPlan" => $tipoPlan
+            );
+        }
+        $stmt->close();
+        $database->disconnect();
+        return $planes;
     }
 }

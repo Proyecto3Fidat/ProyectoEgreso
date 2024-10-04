@@ -180,4 +180,40 @@ class ClienteController
             echo json_encode(['error' => 'Token inválido o sesión expirada']);
         }
     }
+    public function obtenerListaClientesAdmin()
+    {
+        $clienteTelefonoRepository = new ClientetelefonoRepository();
+        $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true || ($_SESSION['rol'] != 'entrenador' && $_SESSION['rol'] != 'administrativo')) {
+            header('HTTP/1.1 403 Forbidden');
+            echo json_encode(['error' => 'No tiene permisos para ver esta página']);
+            exit();
+        }
+        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
+            $clientes = $this->clienteService->listarClientes();
+            $resultado = [];
+            foreach ($clientes as $cliente) {
+                $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+                $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+                $resultado[] = [
+                    'nombre' => $cliente['nombre'],
+                    'nroDocumento' => $cliente['nroDocumento'],
+                    'tipoDocumento' => $cliente['tipoDocumento'],
+                    'altura' => $cliente['altura'],
+                    'peso' => $cliente['peso'],
+                    'patologias' => $cliente['patologia'],
+                    'email' => $cliente['email'],
+                    'edad' => $edad,
+                    'direccion' => $direccion,
+                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
+                ];
+            }
+            echo json_encode($resultado);
+        } else {
+            header('HTTP/1.1 403 Forbidden');
+            echo json_encode(['error' => 'Token inválido o sesión expirada']);
+        }
+    }
 }   

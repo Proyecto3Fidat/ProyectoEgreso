@@ -322,16 +322,17 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, nroDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
+        $sql = "SELECT nombre, nroDocumento, tipoDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($nombre, $nroDocumento, $apellido, $altura, $peso, $patologia, $email, $fechaNacimiento, $calle, $numero, $esquina);
+        $stmt->bind_result($nombre, $nroDocumento, $tipoDocumento, $apellido, $altura, $peso, $patologia, $email, $fechaNacimiento, $calle, $numero, $esquina);
         $clientes = array();
         while ($stmt->fetch()) {
             $clientes[] = array(
                 'nombre' => $nombre,
                 'nroDocumento' => $nroDocumento,
+                'tipoDocumento' => $tipoDocumento,
                 'apellido' => $apellido,
                 'altura' => $altura,
                 'peso' => $peso,

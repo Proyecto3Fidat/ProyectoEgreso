@@ -9,6 +9,6 @@ class PagoService
     public function actualizarPago($pago)
     {
         $pagoRepository = new PagoRepository();
-        $pagoRepository->actualizarPago($pago);
+        return $pagoRepository->actualizarPago($pago);
     }
 }

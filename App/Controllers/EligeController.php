@@ -11,18 +11,32 @@ class EligeController
 {
     public function actualizarPago()
     {
+        $nombrePlan = filter_input(INPUT_POST, 'nombrePlan', FILTER_SANITIZE_SPECIAL_CHARS);
+        $descripcion = filter_input(INPUT_POST, 'descripcion', FILTER_SANITIZE_SPECIAL_CHARS);
+        $tipoPlan = filter_input(INPUT_POST, 'tipoPlan', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fechaPago = filter_input(INPUT_POST, 'fechaPago', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $tipoDocumento = filter_input(INPUT_POST, 'tipoDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $ultimoMesAbonado = filter_input(INPUT_POST, 'ultimoMesAbonado', FILTER_SANITIZE_SPECIAL_CHARS);
         $eligeService = new EligeService();
-        $elige = new EligeModel($_POST['nroDocumento'], $_POST['tipoDocumento'], $_POST['fechaPago'], $_POST['nombrePlan']);
-        $PlanPago = new PlanPagoModel($_POST['nombrePlan'], $_POST['descripcion'], $_POST['tipoPlan']);
-        $realiza = new RealizaModel($_POST['fechaPago'], $_POST['nombrePlan']);
-        $pago = new PagoModel($_POST['idPago'], $_POST['ultimoMesAbonado']);
-        $resultado = $eligeService->actualizarPago($elige, $PlanPago, $realiza, $pago);
+        $PlanPago = new PlanPagoModel($nombrePlan,$descripcion, $tipoPlan);
+        $realiza = new RealizaModel($fechaPago,$nombrePlan);
+        $pago = new PagoModel( $ultimoMesAbonado);
+        $resultado = $eligeService->actualizarPago($PlanPago, $realiza, $pago,$nroDocumento,$tipoDocumento);
         header('Content-Type: application/json');
-        if(!$resultado){
+
+
+        if($resultado === "plan"){
             echo json_encode([
                 'redirect' => true,
                 'url' => '/crearPlan',
                 'message' => 'El plan no existe, desea crearlo?'
+            ]);
+            exit();
+        }else if($resultado === "documento"){
+            echo json_encode([
+                'error' => "documento",
+                'message' => 'El usuario seleccionado no existe'
             ]);
             exit();
         }

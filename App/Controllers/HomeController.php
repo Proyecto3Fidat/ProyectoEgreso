@@ -6,6 +6,11 @@ class HomeController
 {
     public function index()
     {
+        $existe = isset($_SESSION['rol']);
+        if (!$existe) {
+            header("Location: ../../Public/inicio.html");
+            exit();
+        } else
         if ($_SESSION['rol'] == "cliente" && $_SESSION['rol'] != null) {
             header("Location: ../../Public/inicio.html");
             exit();

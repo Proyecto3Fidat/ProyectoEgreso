@@ -39,11 +39,9 @@
     <table class="lista-clientes" id="tablaClientes">
         <tbody>
         <tr>
-            <th> Nombre de Cliente </th>
-            <th> Documento </th>
-            <th> Rol </th>
+            <th> Nombre de Cliente</th>
+            <th> Documento</th>
         </tr>
-        <!-- Las filas se añadirán aquí -->
         </tbody>
     </table>
 </section>
@@ -55,6 +53,7 @@
     <div class="divficha-container">
         <div class="divficha">
             <p>Documento: </p>
+            <p>Tipo de Documento: </p>
             <p>Edad:</p>
             <p>Email: </p>
             <p>Teléfono: </p>
@@ -72,9 +71,17 @@
             <p>Hora de finalizacion: </p>
             <p>Verificacion de asistencia: </p>
         </div>
+        <section>
+            <div class="btnpago">
+                <form method="get" action="pago.html">
+                    <input type="hidden" name="documento" value="">
+                    <button type="submit" class="adrut">Ingresar Pago</button>
+                </form>
+            </div>
+            </div>
+        </section>
     </div>
 </div>
-</section>
 
 <script src="../../Public/js/listaUsuariosAdmin.js"></script>
 <script src="../../Public/js/script.js"></script>

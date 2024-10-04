@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Altura: ${cliente.altura}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
 
-            // Configurar el valor del formulario oculto para calificar
             const form = document.querySelector('form');
             form.action = `calificacion.html?documento=${clienteId}`;
             form.querySelector('input[name="documento"]').value = clienteId;

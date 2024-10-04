@@ -20,7 +20,7 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nroDocumento FROM usuario WHERE nroDocumento = ?";
+        $sql = "SELECT nroDocumento FROM Usuario WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();

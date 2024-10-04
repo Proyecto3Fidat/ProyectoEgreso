@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let clientes = [];
 
     // Cargar la lista de clientes
-    fetch('/usuario/obtenerListaClientesAjax')
+    fetch('/usuario/obtenerListaClientesAdmin')
         .then(response => {
             if (response.status === 403) {
                 alert('No tiene permisos para ver esta página.');
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 row.innerHTML = `
                     <td>${cliente.nombre}</td>
                     <td>${cliente.nroDocumento}</td>
-                    <td>${cliente.rol}</td>
                     <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Detalles</button></td>
                 `;
                 tbody.appendChild(row);
@@ -61,10 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
             // Actualizar los elementos de la ficha técnica con los datos del cliente
             document.querySelector('.fichagnrl h4').textContent = `Ficha técnica de ${cliente.nombre}`;
             document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `Documento: ${cliente.nroDocumento}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `Edad: ${cliente.edad || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Email: ${cliente.email}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Teléfono: ${cliente.telefono || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `Dirección: ${cliente.direccion || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `Tipo de Documento: ${cliente.tipoDocumento}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Edad: ${cliente.edad || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Email: ${cliente.email}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `Teléfono: ${cliente.telefono || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(6)').textContent = `Dirección: ${cliente.direccion || 'N/A'}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Nombre de plan: ${cliente.nombrePlan || 'N/A'}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Tipo de plan: ${cliente.tipoPlan || 'N/A'}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Ultimo mes abonado: ${cliente.ultimoMesAbonado || 'N/A'}`;
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Configurar el valor del formulario oculto para calificar
             const form = document.querySelector('form');
-            form.action = `calificacion.html?documento=${clienteId}`;
+            form.action = `pago.html?documento=${clienteId}`;
             form.querySelector('input[name="documento"]').value = clienteId;
         } else {
             console.error('Cliente no encontrado.');

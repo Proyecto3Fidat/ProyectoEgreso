@@ -7,9 +7,8 @@ class PagoModel
     private $idPago;
     private $ultimoMesAbonado;
 
-    public function __construct($idPago, $ultimoMesAbonado)
+    public function __construct($ultimoMesAbonado)
     {
-        $this->idPago = $idPago;
         $this->ultimoMesAbonado = $ultimoMesAbonado;
     }
     public function getIdPago()

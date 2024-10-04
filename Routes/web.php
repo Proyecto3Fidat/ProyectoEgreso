@@ -103,6 +103,13 @@ SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger)
     $clienteController->obtenerListaClientesAjax();
     exit();
 });
+SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $clienteController->obtenerListaClientesAdmin();
+    exit();
+});
 Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger){
     $calificacionRepository = new CalificacionRepository();
     $calificacionService = new CalificacionService($calificacionRepository);
@@ -232,28 +239,24 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
         $tipoDocumento = $_POST['tipoDocumento'];
         echo "
     <script>
-        // Datos que deseas enviar en la solicitud POST
         const telefono = '$telefono';
         const nroDocumento = '$nroDocumento';
-        const tipoDocumento = '$tipoDocumento';
-        
+        const tipoDocumento = '$tipoDocumento';    
         const data = {
             telefono: telefono,
             nroDocumento: nroDocumento,
             tipoDocumento: tipoDocumento
         };
-
         fetch('/guardarTelefono', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json' // Indica que estás enviando datos en formato JSON
+                'Content-Type': 'application/json' 
             },
-            body: JSON.stringify(data) // Convierte el objeto `data` en una cadena JSON para enviarlo
+            body: JSON.stringify(data) 
         })
-        .then(response => response.json()) // Cambia a .text() si esperas una respuesta de texto
+        .then(response => response.json())
         .then(data => {
-            console.log('Respuesta del servidor:', data);
-            // Aquí puedes manejar la respuesta como necesites
+            console.log('Respuesta del servidor:', data);    
         })
         .catch(error => {
             console.error('Error durante la solicitud:', error);
@@ -330,5 +333,16 @@ SimpleRouter::post('/actualizarPago', function() use ($logger) {
     $pago->actualizarPago();
     exit();
 });
+SimpleRouter::get('/tiposDePlan', function () use ($logger) {
+    $planes = new App\Controllers\PlanPagoController();
+    $planes->obtenerPlanes();
+    exit();
+});
+SimpleRouter::post('/crearPlan', function () use ($logger) {
+    $planes = new App\Controllers\PlanPagoController();
+    $planes->crearPlan();
+    exit();
+});
+
 // Iniciar el enrutador
 SimpleRouter::start();
