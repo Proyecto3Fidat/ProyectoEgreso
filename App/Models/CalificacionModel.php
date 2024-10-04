@@ -12,8 +12,7 @@ CLass CalificacionModel{
     private $cumplAgenda;
     private $resMonotonia;
     
-    public function __construct($id = null, $puntMaxima, $fuerzaMusc, $resMusc, $resAnaerobica, $resiliencia, $flexibilidad, $cumplAgenda, $resMonotonia){ 
-        $this->id = $id;
+    public function __construct($id = null, $puntMaxima, $fuerzaMusc, $resMusc, $resAnaerobica, $resiliencia, $flexibilidad, $cumplAgenda, $resMonotonia){
         $this->puntMaxima = $puntMaxima;
         $this->fuerzaMusc = $fuerzaMusc;
         $this->resMusc = $resMusc;

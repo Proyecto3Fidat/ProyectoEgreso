@@ -9,10 +9,9 @@ class RealizaModel
     private $nombrePlan;
 
 
-    public function __construct($fechaPago, $idPago, $nombrePlan)
+    public function __construct($fechaPago, $nombrePlan)
     {
         $this->fechaPago = $fechaPago;
-        $this->idPago = $idPago;
         $this->nombrePlan = $nombrePlan;
     }
     public function getFechaPago()

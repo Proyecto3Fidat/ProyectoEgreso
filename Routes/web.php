@@ -326,7 +326,9 @@ SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
     }
 });
 SimpleRouter::post('/actualizarPago', function() use ($logger) {
-
+    $pago = new \App\Controllers\EligeController();
+    $pago->actualizarPago();
+    exit();
 });
 // Iniciar el enrutador
 SimpleRouter::start();
