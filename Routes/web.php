@@ -29,6 +29,7 @@ use App\Services\ClientetelefonoService;
 use App\Utilities\DataSeeder;
 use App\Repositories\ClientetelefonoRepository;
 use App\Utilities\DatabaseLoader;
+
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -324,6 +325,8 @@ SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
         exit();
     }
 });
+SimpleRouter::post('/actualizarPago', function() use ($logger) {
 
+});
 // Iniciar el enrutador
 SimpleRouter::start();
