@@ -34,6 +34,7 @@ class CalificacionController
 
     public function asignarPuntuacion()
     {
+
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
 
@@ -73,7 +74,6 @@ class CalificacionController
             $cumplAgenda,
             $resMonotonia
         );
-
         $id = $calificacionService->asignarPuntuacion($calificacion);
         $obtieneRepository = new ObtieneRepository();
         $obtieneService = new ObtieneService($obtieneRepository);

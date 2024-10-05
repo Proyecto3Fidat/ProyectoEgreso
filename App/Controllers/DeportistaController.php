@@ -24,9 +24,7 @@ class DeportistaController
         $deportista = new DeportistaModel(
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],
-            $_POST['deporte'],
             $_POST['posicion'],
-            $_POST['estado']
         );
         $this->deportistaService->guardarDeportista($deportista);
     }

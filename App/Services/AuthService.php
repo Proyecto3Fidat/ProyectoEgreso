@@ -17,11 +17,10 @@ class AuthService
 
         return true;
     }
-
     // Comprobar si el token es válido
     public function comprobarToken(): bool {
         if (!isset($_SESSION['token'], $_SESSION['documento'])) {
-            $this->handleForbiddenError('No tienes permisos para ver esta pagina');
+            $this->handleForbiddenError('Token Invalido');
         }
 
         $usuarioRepo = new UsuarioRepository();
@@ -30,7 +29,7 @@ class AuthService
         if (!$usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
             session_unset();
             session_destroy();
-            $this->handleForbiddenError('No tienes permisos para ver esta pagina');
+            $this->handleForbiddenError('Token Invalido');
         }
 
         return true;

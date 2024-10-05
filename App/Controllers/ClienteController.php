@@ -150,9 +150,7 @@ class ClienteController
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'No tiene permisos para ver esta página']);
-            exit();
+
 
             $lista = $this->clienteService->listarClientes();
             $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);

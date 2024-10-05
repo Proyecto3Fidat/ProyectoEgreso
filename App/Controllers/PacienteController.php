@@ -21,7 +21,6 @@ class PacienteController
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],
             $_POST['fisioterapia'],
-            $_POST['estado']
         );
         $this->pacienteService->guardarPaciente($paciente);
     }
