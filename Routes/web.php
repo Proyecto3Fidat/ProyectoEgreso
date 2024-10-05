@@ -53,6 +53,27 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
 
+SimpleRouter::post('/calificacion', function () use ($logger) {
+    $calificacionRepository = new CalificacionRepository();
+    $calificacionService = new CalificacionService($calificacionRepository);
+    $calificacionController = new CalificacionController($calificacionService, $logger);
+
+    try {
+        $calificacionController->asignarPuntuacion();
+        echo json_encode([
+            'success' => true,
+            'message' => 'Calificación creada con éxito'
+        ]);
+    } catch (Exception $e) {
+        echo json_encode([
+            'success' => false,
+            'error' => 'Error al crear la calificación: ' . $e->getMessage()
+        ]);
+    }
+
+    exit();
+});
+
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
@@ -64,17 +85,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
-    SimpleRouter::post('/calificacion', function () use ($logger) {
-        $calificacionRepository = new CalificacionRepository();
-        $calificacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calificacionService, $logger);
-        $calificacionController->asignarPuntuacion();
-        echo "<script>
-                alert('Calificacion Creada con éxito');
-                window.location.href = '/listaUsuarios'; 
-              </script>";
-        exit();
-    });
     });
 
     SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
