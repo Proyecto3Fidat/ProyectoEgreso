@@ -44,4 +44,15 @@ class EligeController
             'message' => 'Pago actualizado correctamente'
         ]);
     }
+
+    public function obtenerPagosPorDocumento()
+    {
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $eligeService = new EligeService();
+        $pagos = $eligeService->obtenerPagosPorDocumento($nroDocumento);
+        header('Content-Type: application/json');
+        echo json_encode($pagos);
+    }
+
+
 }

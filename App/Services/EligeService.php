@@ -34,5 +34,14 @@ class EligeService
 
         return true;
     }
-
+    public function obtenerPagosPorDocumento($nroDocumento)
+    {
+        $eligeRepository = new EligeRepository();
+        return $eligeRepository->obtenerPagosPorDocumento($nroDocumento);
+    }
+    public function eliminarPagosPorDocumento($nroDocumento)
+    {
+        $eligeRepository = new EligeRepository();
+        $eligeRepository->eliminarPagosPorDocumento($nroDocumento);
+    }
 }

@@ -49,17 +49,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     function abrirFichaTecnica(clienteId) {
-        // Mostrar la ficha técnica
         const ficha = document.getElementById('fichagnl');
         const listaclientes = document.getElementById("tablaClientes");
         ficha.style.display = 'block';
         listaclientes.style.display = "none";
 
-        // Encontrar el cliente correspondiente en la lista
         const cliente = clientes.find(c => c.nroDocumento === clienteId);
 
         if (cliente) {
-            // Actualizar los elementos de la ficha técnica con los datos del cliente
             document.querySelector('.fichagnrl h4').textContent = `Ficha técnica de ${cliente.nombre}`;
             document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `Documento: ${cliente.nroDocumento}`;
             document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `Tipo de Documento: ${cliente.tipoDocumento}`;

@@ -56,13 +56,6 @@ CREATE TABLE `Calificacion` (
 -- Volcado de datos para la tabla `Calificacion`
 --
 
-INSERT INTO `Calificacion` (`id`, `puntMaxima`, `fuerzaMusc`, `resMusc`, `resAnaerobica`, `resilicencia`, `flexibilidad`, `cumpAgenda`, `resMonotonia`) VALUES
-(1, 200, 20, 20, 5, 20, 20, 20, 20),
-(2, 200, 20, 20, 5, 20, 20, 20, 20),
-(3, 200, 20, 20, 5, 20, 20, 20, 20),
-(4, 200, 20, 20, 5, 20, 20, 20, 20),
-(5, 200, 20, 20, 5, 20, 20, 20, 20),
-(6, 200, 20, 20, 5, 20, 20, 20, 20);
 
 -- --------------------------------------------------------
 
@@ -90,15 +83,6 @@ CREATE TABLE `Cliente` (
 -- Volcado de datos para la tabla `Cliente`
 --
 
-INSERT INTO `Cliente` (`nroDocumento`, `tipoDocumento`, `nombre`, `apellido`, `altura`, `peso`, `calle`, `numero`, `esquina`, `email`, `patologias`, `fechaNacimiento`, `activo`) VALUES
-('55852111', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852112', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852113', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852114', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852115', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852116', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852117', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL),
-('55852118', 'ci', 'nombre', 'apellido', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -208,10 +192,6 @@ CREATE TABLE `Deportista` (
 -- Volcado de datos para la tabla `Deportista`
 --
 
-INSERT INTO `Deportista` (`nroDocumento`, `tipoDocumento`, `posicion`) VALUES
-('55852116', 'ci', 'delantero'),
-('55852117', 'ci', 'delantero'),
-('55852118', 'ci', 'delantero');
 
 -- --------------------------------------------------------
 
@@ -432,16 +412,6 @@ CREATE TABLE `Usuario` (
 --
 -- Volcado de datos para la tabla `Usuario`
 --
-
-INSERT INTO `Usuario` (`nroDocumento`, `rol`, `passwd`, `token`) VALUES
-('55852111@entrenador', 'entrenador', '$2y$10$JpbLFOubd/FHi86KgxbJeuHX9dAzB6S22Pw51ziWpihZ5gI.BITZa', '6a9acfc44654399f21180ac9e2572383'),
-('55852112@entrenador', 'entrenador', '$2y$10$8Ge/CG9MtnWfe9YTYQ.OvOKG5xTDMbLfKy2x4kg55Q7SpPhEmGWtq', '8282450c6b09b8aecc7f483460b0306f'),
-('55852113@entrenador', 'entrenador', '$2y$10$R1W2TB97Nw9KbwJ2TgdgU.xtfiBy7aLV2ZldXRk/Lue4gSdij7SHK', '37204ce9bf69b92b6b05ce36cded66b8'),
-('55852114@administrativo', 'administrativo', '$2y$10$BV9ObtxQ56B8Myk/qq8LBe6RJv.I70v9WgkqyoBBi1iJYsN1K3TCq', '44c02244d0aac54b48b0c5b6bebc98d7'),
-('55852115@administrativo', 'administrativo', '$2y$10$0Gy6r7ZzQ4ghjEOgV4Z1bOLN2GYBiwH.y3UqScqU28MgXBW8dO0X6', '6dda221d8b4a0614d995b4cb5b3df982'),
-('55852116', 'deportista', '$2y$10$9deunljMe1VZDn8c16aNPebFU9SAxrRS4RMRn6jp9N546GnfKg8ou', '82086d7836f93e9c8bcd442ba941de53'),
-('55852117', 'deportista', '$2y$10$KFi4u.yHw64CLq4m6kl67OYVAhaLTLH9JAQz510RTdBKpeXWbJrmq', 'd83b68f82b9116c4896de31830493aa2'),
-('55852118', 'deportista', '$2y$10$LPp0sXH8SI7d2AMFs2nbW.VgUdasgJWXfBlFoFa8KL5S7sNZTea8a', '38d28e3d43350362d3dc7f80a03f608c');
 
 --
 -- Índices para tablas volcadas

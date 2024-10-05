@@ -37,6 +37,11 @@ $logger = $config['logger']();
 
 // Ruta para el inicio
 SimpleRouter::get('/', [HomeController::class, 'index']);
+SimpleRouter::post('/pagos', function () use ($logger) {
+    $elige = new App\Controllers\EligeController();
+    $elige->obtenerPagosPorDocumento();
+    exit();
+});
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($logger) {
 
@@ -69,6 +74,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         $pago->actualizarPago();
         exit();
     });
+
 
     SimpleRouter::post('/crearPlan', function () use ($logger) {
         $planes = new App\Controllers\PlanPagoController();
@@ -335,7 +341,7 @@ SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
     $clienteRepository = new ClienteRepository();
     $clienteService = new ClienteService($clienteRepository);
     $clienteController = new ClienteController($clienteService, $logger);
- 
+
     if ($clienteController->comprobarCliente() == "false") {
         $clienteController->crearConPrivilegios();
         $usuarioController->crearEntrenador();
@@ -362,8 +368,6 @@ SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
         exit();
     }
 });
-
-
 
 
 // Iniciar el enrutador
