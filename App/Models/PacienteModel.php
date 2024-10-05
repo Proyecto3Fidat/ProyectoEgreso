@@ -5,14 +5,13 @@ class PacienteModel
     private $nroDocumento;
     private $tipoDocumento;
     private $fisioterapia;
-    private $estado;
 
-    public function __construct($nroDocumento, $tipoDocumento, $fisioterapia, $estado)
+
+    public function __construct($nroDocumento, $tipoDocumento, $fisioterapia)
     {
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
         $this->fisioterapia = $fisioterapia;
-        $this->estado = $estado;
     }
     public function getNroDocumento()
     {

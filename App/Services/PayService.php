@@ -24,10 +24,12 @@ class PayService
         if ($fechaVencimiento > $fechaActual && $rol == 'cliente') {
             $intervalo = $fechaActual->diff($fechaVencimiento);
             $diasRestantes = $intervalo->days;
-            echo $twig->render('carga.html.twig');
+            $datos = [
+                'documento' => $_SESSION['documento'],
+            ];
+            echo $twig->render('carga.html.twig', $datos);
             exit();
         } else {
-            echo "El pago está vencido. Fecha de vencimiento: " . $fechaVencimiento->format('Y-m-d');
         }
 
        // exit();

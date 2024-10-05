@@ -1,0 +1,122 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+body {
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(0, 0, 0, 0.8) 100%) no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+}
+h1 {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 2.5rem;
+}
+#formulario {
+    display: none;
+    background-color: #1e1c1f;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    max-width: 50%;
+    margin: 2rem auto;
+}
+#formulario label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+#formulario input[type="text"],
+#formulario input[type="email"],
+#formulario input[type="tel"] {
+    width: 100%;
+    padding: 1rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    border: none;
+    margin-bottom: 1rem;
+    background-color: #2c2a2d;
+    color: white;
+}
+#formulario input[type="submit"] {
+    padding: 1rem;
+    border-radius: .5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: #6f41bb;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#formulario input[type="submit"]:hover {
+    background-color: #5a3299;
+}
+select {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #6f41bb;
+    background-color: #1e1c1f;
+    color: white;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1.5 5a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5z"/><path fill-rule="evenodd" d="M1.5 8a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5z"/><path fill-rule="evenodd" d="M1.5 11a.5.5 0 0 1 .5-.5h12a.5.5 0 0 1 0 1H2a.5.5 0 0 1-.5-.5z"/></svg>'), linear-gradient(to bottom, #1e1c1f, #1e1c1f); /* Flecha personalizada */
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+select:focus {
+    outline: none;
+    border-color: #6f41bb;
+    background-color: #2c2a2d;
+}
+
+
+select option {
+    background-color: #1e1c1f;
+    color: white;
+}
+
+
+select option:checked {
+    background-color: #6f41bb;
+    color: white;
+}
+footer {
+    background-color: #181718;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    margin-top: 2rem;
+    border-top: 1px solid #6f41bb;
+}
+
+footer h1, footer h2, footer h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+footer .redes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+}
+
+footer .redes a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+footer .redes a:hover {
+    color: #6f41bb;
+}

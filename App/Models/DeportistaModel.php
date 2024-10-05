@@ -3,16 +3,13 @@ namespace App\Models;
 Class DeportistaModel{
     private $nroDocumento;
     private $tipoDocumento;
-    private $deporte;
     private $posicion;  
-    private $estado;
 
-    public function __construct($nroDocumento, $tipoDocumento, $deporte, $posicion, $estado) {
+
+    public function __construct($nroDocumento, $tipoDocumento, $posicion) {
         $this->nroDocumento = $nroDocumento;    
         $this->tipoDocumento = $tipoDocumento;
-        $this->deporte = $deporte;
         $this->posicion = $posicion;
-        $this->estado = $estado;
     }
     public function getNroDocumento() {
         return $this->nroDocumento;

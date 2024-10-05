@@ -193,6 +193,7 @@ SimpleRouter::get('/imprimirNota', function () use ($logger) {
 SimpleRouter::get('/listaUsuarios', function () {
     header('Location: App/Views/listaclientes.html');
 });
+
 SimpleRouter::post('/guardarDeportista', function () use ($logger) {
     $deportistaRepository = new DeportistaRepository();
     $deportistaService = new DeportistaService($deportistaRepository);
@@ -242,6 +243,71 @@ SimpleRouter::post('/guardarPaciente', function () use ($logger) {
         if ($pacienteController->comprobarPaciente() == "false") {
             $usuarioController->guardarPaciente();
             $pacienteController->guardarPaciente();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Paciente ya esta registrado');
+                    window.location.href = '../../Public/inicio.html'; 
+                  </script>";
+        }
+    }
+});
+
+SimpleRouter::post('/twig/guardarDeportista', function () use ($logger) {
+    $deportistaRepository = new DeportistaRepository();
+    $deportistaService = new DeportistaService($deportistaRepository);
+    $deportistaController = new DeportistaController($deportistaService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '/'; 
+              </script>";
+    } else {
+        if ($deportistaController->comprobarDeportista() == "false") {
+            $usuarioController->guardarDeportista();
+            $deportistaController->guardarDeportista();
+            $_SESSION['rol'] = 'deportista';
+            $home = new HomeController();
+            $home->index();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Deportista ya esta registrado');
+                    window.location.href = '/'; 
+                  </script>";
+        }
+    }
+});
+
+
+SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
+    $pacienteRepository = new PacienteRepository();
+    $pacienteService = new PacienteService($pacienteRepository);
+    $pacienteController = new PacienteController($pacienteService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../../Public/inicio.html'; 
+              </script>";
+    } else {
+        if ($pacienteController->comprobarPaciente() == "false") {
+            $usuarioController->guardarPaciente();
+            $pacienteController->guardarPaciente();
+            $_SESSION['rol'] = 'paciente';
+            $home = new HomeController();
+            $home->index();
             exit();
         } else {
             echo "<script>
