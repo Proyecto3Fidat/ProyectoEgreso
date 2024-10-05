@@ -37,49 +37,65 @@ class EligeRepository
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param('s', $nroDocumento);
         $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->store_result();
+        $stmt->bind_result($nombrePlan, $descripcion, $tipoPlan, $fechaPago, $idPago, $fechaVencimiento, $fechaPagoElige, $idPagoElige);
 
         $pagos = [];
-        while ($row = $result->fetch_assoc()) {
-            $pagos[] = $row;
+        while ($stmt->fetch()) {
+            $pagos[] = array(
+                'nombrePlan' => $nombrePlan,
+                'descripcion' => $descripcion,
+                'tipoPlan' => $tipoPlan,
+                'fechaPago' => $fechaPago,
+                'idPago' => $idPago,
+                'fechaVencimiento' => $fechaVencimiento,
+                'fechaPagoElige' => $fechaPagoElige,
+                'idPagoElige' => $idPagoElige
+            );
         }
 
         $stmt->close();
         $database->disconnect();
-
         return $pagos;
     }
-    public function eliminarPagosPorDocumento($nroDocumento)
+
+    public function obtenerPagoMasLejanoPorDocumento($nroDocumento)
     {
         $database = Database::getInstance();
         $database->connect();
 
-        $sqlElige = "DELETE FROM Elige WHERE nroDocumento = ?";
-        $stmtElige = $database->getConnection()->prepare($sqlElige);
-        $stmtElige->bind_param('s', $nroDocumento);
-        $stmtElige->execute();
-        $stmtElige->close();
+        $sql = "SELECT pp.nombrePlan, pp.descripcion, pp.tipoPlan, r.fechaPago, r.idPago, p.fechaVencimiento, e.fechaPago AS fechaPagoElige, e.idPago AS idPagoElige
+            FROM PlanPago pp
+            JOIN Realiza r ON pp.nombrePlan = r.nombrePlan
+            JOIN Pago p ON r.idPago = p.idPago
+            JOIN Elige e ON r.fechaPago = e.fechaPago AND r.idPago = e.idPago
+            WHERE e.nroDocumento = ?
+            ORDER BY p.fechaVencimiento DESC
+            LIMIT 1";
 
-        $sqlRealiza = "DELETE r FROM Realiza r
-                   JOIN Elige e ON r.fechaPago = e.fechaPago AND r.idPago = e.idPago
-                   WHERE e.nroDocumento = ?";
-        $stmtRealiza = $database->getConnection()->prepare($sqlRealiza);
-        $stmtRealiza->bind_param('s', $nroDocumento);
-        $stmtRealiza->execute();
-        $stmtRealiza->close();
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('s', $nroDocumento);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($nombrePlan, $descripcion, $tipoPlan, $fechaPago, $idPago, $fechaVencimiento, $fechaPagoElige, $idPagoElige);
 
-        $sqlPago = "DELETE p FROM Pago p
-                JOIN Realiza r ON p.idPago = r.idPago
-                JOIN Elige e ON r.fechaPago = e.fechaPago AND r.idPago = e.idPago
-                WHERE e.nroDocumento = ?";
-        $stmtPago = $database->getConnection()->prepare($sqlPago);
-        $stmtPago->bind_param('s', $nroDocumento);
-        $stmtPago->execute();
-        $stmtPago->close();
+        $pago = null;
+        if ($stmt->fetch()) {
+            $pago = array(
+                'nombrePlan' => $nombrePlan,
+                'descripcion' => $descripcion,
+                'tipoPlan' => $tipoPlan,
+                'fechaPago' => $fechaPago,
+                'idPago' => $idPago,
+                'fechaVencimiento' => $fechaVencimiento,
+                'fechaPagoElige' => $fechaPagoElige,
+                'idPagoElige' => $idPagoElige
+            );
+        }
 
+        $stmt->close();
         $database->disconnect();
-
-        return true;
+        return $pago;
     }
 
     public function eliminarPagosPorId($idPago)

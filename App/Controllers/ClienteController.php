@@ -6,6 +6,7 @@ use App\Repositories\ClienteRepository;
 use App\Repositories\ClientetelefonoRepository;
 use App\Services\ClienteService;
 use App\Services\ClientetelefonoService;
+use App\Services\EligeService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
@@ -180,13 +181,18 @@ class ClienteController
         $clienteTelefonoRepository = new ClientetelefonoRepository();
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
+        $eligeService = new EligeService();
         $usuarioService = new UsuarioService($usuarioRepo);
-            $lista = $this->clienteService->listarClientes();
-            $clientes = $usuarioService->comprobarClientes($lista);
-            $resultado = [];
-            foreach ($clientes as $cliente) {
-                $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
-                $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+        $lista = $this->clienteService->listarClientes();
+        $clientes = $usuarioService->comprobarClientes($lista);
+        $resultado = [];
+        foreach ($clientes as $cliente) {
+            $pago = $eligeService->obtenerPagosPorDocumento($cliente['nroDocumento']);
+            $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+            $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+
+            // Verificar si $pago es null
+            if ($pago !== null) {
                 $resultado[] = [
                     'nombre' => $cliente['nombre'],
                     'nroDocumento' => $cliente['nroDocumento'],
@@ -198,9 +204,33 @@ class ClienteController
                     'email' => $cliente['email'],
                     'edad' => $edad,
                     'direccion' => $direccion,
-                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
+                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento']),
+                    'nombrePlan' => $pago['nombrePlan'],
+                    'tipoPlan' => $pago['tipoPlan'],
+                    'fechaVencimiento' => $pago['fechaVencimiento']
+                ];
+            } else {
+                // En caso de que $pago sea null
+                $resultado[] = [
+                    'nombre' => $cliente['nombre'],
+                    'nroDocumento' => $cliente['nroDocumento'],
+                    'tipoDocumento' => $cliente['tipoDocumento'],
+                    'altura' => $cliente['altura'],
+                    'peso' => $cliente['peso'],
+                    'rol' => $cliente['rol'],
+                    'patologias' => $cliente['patologia'],
+                    'email' => $cliente['email'],
+                    'edad' => $edad,
+                    'direccion' => $direccion,
+                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento']),
+                    'nombrePlan' => null,
+                    'tipoPlan' => null,
+                    'fechaVencimiento' => null
                 ];
             }
-            echo json_encode($resultado);
+        }
+        echo json_encode($resultado);
     }
+
+
 }   

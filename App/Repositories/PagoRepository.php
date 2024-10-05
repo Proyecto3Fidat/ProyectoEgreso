@@ -10,7 +10,7 @@ class PagoRepository extends Database
         $ultimoMesAbonado = $pago->getUltimoMesAbonado();
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO Pago (ultimoMesAbonado) VALUES (?)";
+        $sql = "INSERT INTO Pago (fechaVencimiento) VALUES (?)";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param('s', $ultimoMesAbonado);
         $stmt->execute();

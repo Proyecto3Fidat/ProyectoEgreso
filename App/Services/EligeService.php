@@ -37,11 +37,11 @@ class EligeService
     public function obtenerPagosPorDocumento($nroDocumento)
     {
         $eligeRepository = new EligeRepository();
-        return $eligeRepository->obtenerPagosPorDocumento($nroDocumento);
+        return $eligeRepository->obtenerPagoMasLejanoPorDocumento($nroDocumento);
     }
     public function eliminarPagosPorDocumento($nroDocumento)
     {
         $eligeRepository = new EligeRepository();
-        $eligeRepository->eliminarPagosPorDocumento($nroDocumento);
+        $eligeRepository->eliminarPagosPorId($nroDocumento);
     }
 }

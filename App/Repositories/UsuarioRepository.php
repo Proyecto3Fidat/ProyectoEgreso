@@ -162,6 +162,24 @@ class UsuarioRepository extends Database
         $database->disconnect();
         return $nombre;
     }
+    public function obtenerRol($documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $documento);
+        $stmt->execute();
+        if ($stmt->error) {
+            echo "error";
+        }
+        $stmt->bind_result($rol);
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        return $rol;
+    }
+
 
     public function devolverToken($documento)
     {

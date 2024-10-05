@@ -30,20 +30,27 @@ use App\Utilities\DataSeeder;
 use App\Repositories\ClientetelefonoRepository;
 use App\Utilities\DatabaseLoader;
 use App\Controllers\AuthMiddleware;
-
+use \App\Controllers\PagoMiddleware;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
 
 // Ruta para el inicio
-SimpleRouter::get('/', [HomeController::class, 'index']);
 SimpleRouter::post('/pagos', function () use ($logger) {
     $elige = new App\Controllers\EligeController();
     $elige->obtenerPagosPorDocumento();
     exit();
 });
+SimpleRouter::post('planes', function () use ($logger) {
+    $planes = new App\Controllers\EligeController();
+    $planes->obtenerPagosPorDocumento();
+    exit();
+});
 
-SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($logger) {
+SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
+    SimpleRouter::get('/', [HomeController::class, 'index']);
+});
+SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
 
     SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
         $clienteRepository = new ClienteRepository();
@@ -61,7 +68,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         exit();
     });
 
-    Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger){
+    Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
         $calificacionController = new CalificacionController($calificacionService, $logger);
@@ -69,7 +76,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         exit();
     });
 
-    SimpleRouter::post('/actualizarPago', function() use ($logger) {
+    SimpleRouter::post('/actualizarPago', function () use ($logger) {
         $pago = new \App\Controllers\EligeController();
         $pago->actualizarPago();
         exit();
@@ -104,50 +111,46 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function() use ($lo
         $planes->obtenerPlanes();
         exit();
     });
+    SimpleRouter::post('/eliminar', function () use ($logger) {
+        $planes = new App\Controllers\EligeController();
+        $planes->eliminarPorDocumento();
+        exit();
+    });
 });
-
 SimpleRouter::get('/inicio', function () {
     header('Location: Public/inicio.html');
 });
 
-SimpleRouter::get('/verificar-sesion', function () {
-    if(isset($_SESSION['sesion'])){
-    echo json_encode([
-        'authenticated' => $_SESSION['sesion']
-    ]);
-    exit();
-    }
-});
 
-SimpleRouter::get('/cargarDatos', function (){
+SimpleRouter::get('/cargarDatos', function () {
     $dataSeeder = new DataSeeder();
     $dataLoader = new DatabaseLoader();
     $dataLoader->crearBD();
-    $dataSeeder->seedCliente(55852111,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852112,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852113,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852114,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852115,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852116,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852117,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedCliente(55852118,'ci',1.72,70,'calle',123,'esquina','email','patologias','1999-01-01','nombre','apellido','telefono','masculino',55852117);
-    $dataSeeder->seedUsuario('55852111@entrenador','1234','entrenador');
-    $dataSeeder->seedUsuario('55852112@entrenador','1234','entrenador');
-    $dataSeeder->seedUsuario('55852113@entrenador','1234','entrenador');
-    $dataSeeder->seedUsuario('55852114@administrativo','1234','administrativo');
-    $dataSeeder->seedUsuario('55852115@administrativo','1234','administrativo');
-    $dataSeeder->seedDeportista(55852116,'ci','futbol','delantero','activo');
-    $dataSeeder->seedDeportista(55852117,'ci','futbol','delantero','activo');
-    $dataSeeder->seedDeportista(55852118,'ci','futbol','delantero','activo');
-    $dataSeeder->seedObtiene(55852116,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedObtiene(55852116,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedObtiene(55852117,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedObtiene(55852117,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedObtiene(55852118,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedObtiene(55852118,'ci',100,200,20,20,5,20,20,20,20);
-    $dataSeeder->seedUsuario('55852116','1234','deportista');
-    $dataSeeder->seedUsuario('55852117','1234','deportista');
-    $dataSeeder->seedUsuario('55852118','1234','deportista');
+    $dataSeeder->seedCliente(55852111, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852112, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852113, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852114, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852115, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852116, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852117, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedCliente(55852118, 'ci', 1.72, 70, 'calle', 123, 'esquina', 'email', 'patologias', '1999-01-01', 'nombre', 'apellido', 'telefono', 'masculino', 55852117);
+    $dataSeeder->seedUsuario('55852111@entrenador', '1234', 'entrenador');
+    $dataSeeder->seedUsuario('55852112@entrenador', '1234', 'entrenador');
+    $dataSeeder->seedUsuario('55852113@entrenador', '1234', 'entrenador');
+    $dataSeeder->seedUsuario('55852114@administrativo', '1234', 'administrativo');
+    $dataSeeder->seedUsuario('55852115@administrativo', '1234', 'administrativo');
+    $dataSeeder->seedDeportista(55852116, 'ci', 'futbol', 'delantero', 'activo');
+    $dataSeeder->seedDeportista(55852117, 'ci', 'futbol', 'delantero', 'activo');
+    $dataSeeder->seedDeportista(55852118, 'ci', 'futbol', 'delantero', 'activo');
+    $dataSeeder->seedObtiene(55852116, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedObtiene(55852116, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedObtiene(55852117, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedObtiene(55852117, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedObtiene(55852118, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedObtiene(55852118, 'ci', 100, 200, 20, 20, 5, 20, 20, 20, 20);
+    $dataSeeder->seedUsuario('55852116', '1234', 'deportista');
+    $dataSeeder->seedUsuario('55852117', '1234', 'deportista');
+    $dataSeeder->seedUsuario('55852118', '1234', 'deportista');
     exit();
 });
 
@@ -158,15 +161,13 @@ SimpleRouter::get('/favicon.ico', function () {
 SimpleRouter::get('/login', function () {
     header('Location: App/Views/loginusuario.html');
 });
-SimpleRouter::get('/ClienteCalificacion', function(){
-   header('Location: App/Views/calificaciones.html');
+SimpleRouter::get('/ClienteCalificacion', function () {
+    header('Location: App/Views/calificaciones.html');
 });
 // Ruta para el registro de clientes
 SimpleRouter::get('/registrarcliente', function () {
     header('Location: App/Views/crearUsuario.html');
 });
-
-
 
 
 SimpleRouter::get('/calificar', function () {
@@ -222,8 +223,6 @@ SimpleRouter::post('/guardarDeportista', function () use ($logger) {
 });
 
 
-
-
 SimpleRouter::post('/guardarPaciente', function () use ($logger) {
     $pacienteRepository = new PacienteRepository();
     $pacienteService = new PacienteService($pacienteRepository);
@@ -253,7 +252,7 @@ SimpleRouter::post('/guardarPaciente', function () use ($logger) {
     }
 });
 
-SimpleRouter::post('/guardarTelefono', function () use ($logger){
+SimpleRouter::post('/guardarTelefono', function () use ($logger) {
     $clientetelefonoRepository = new ClientetelefonoRepository();
     $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
     $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
@@ -308,7 +307,7 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
                 alert('Usuario creado con éxito');
                 window.location.href = '../../Public/inicio.html'; 
               </script>";
-              exit();
+        exit();
     } else {
         echo "<script>
                 alert('El usuario ya existe');

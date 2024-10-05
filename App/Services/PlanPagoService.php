@@ -19,6 +19,7 @@ class PlanPagoService
             return false;
         }
     }
+
     public function obtenerPlanes()
     {
         $planPagoRepository = new PlanPagoRepository();

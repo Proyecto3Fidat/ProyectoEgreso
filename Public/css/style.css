@@ -124,31 +124,69 @@ nav a:hover {
     transition: transform 0.5s ease-in-out;
 }
 
-.plan a {
-    font-size: 1rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    text-align: center;
-    color: white;
-    transition: color 0.3s, background-color 0.3s;
+.plan {
+    color: #f0f0f0;
+    border: 1px solid #6f41bb;
+    border-radius: 20px;
+    padding: 2rem;
+    background: linear-gradient(145deg, #282626, #1c1a1a);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(50, 50, 50, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
-.plan a:hover {
-    color: black;
-}
-
-.plan a::selection {
-    color: black;
-}
-
-.plan:hover { 
+.plan:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(111, 65, 187, 0.8);
     background-color: #6f41bb;
-    transform: scale(1.2);
+}
+
+.plan h1 {
+    font-size: 1.5rem;
+    color: #9c6aec;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .plan p {
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.plan a {
+    display: block;
     text-align: center;
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: #f0f0f0;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.plan a:hover {
+    color: #9c6aec;
+}
+
+@media (max-width: 768px) {
+    .planes {
+        padding: 3rem;
+    }
+
+    .plan {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .plan h1 {
+        font-size: 1.2rem;
+    }
+
+    .plan p {
+        font-size: 0.9rem;
+    }
 }
 
 .empresa {

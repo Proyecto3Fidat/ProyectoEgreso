@@ -169,6 +169,10 @@ class UsuarioService
             }
         }
     }
+
+    public function obtenerRol($nroDocumento){
+        return $this->usuarioRepository->obtenerRol($nroDocumento);
+    }
     public  function obtenerTipoDocumento($documento)
     {
         return $this->usuarioRepository->obtenerTipoDocumento($documento);

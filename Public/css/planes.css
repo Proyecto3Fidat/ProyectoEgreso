@@ -78,52 +78,77 @@ nav a:hover {
 }
 /*Fin de Nav*/
 
-/*Inicio de planes*/
-.planes { 
-    padding: 7rem 2rem 15rem;
-    margin-top: 5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #100e0f;
-}
-
-.planes #plananual h2, #planmensual h2 {
-margin-top: 1rem;
-}
+/*Inicio de planes*/.planes {
+                        padding: 5rem 5%;
+                        margin-top: 2rem;
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                        gap: 3rem;
+                        background-color: #1a1818;
+                        border-radius: 20px;
+                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+                    }
 
 .planA {
-    color: black;
-    border: 1px solid white;
+    color: #f0f0f0;
+    border: 1px solid #6f41bb;
     border-radius: 20px;
     padding: 2rem;
-    background-color: rgb(223, 214, 214);
-    margin-left: 25px;
-    align-items: stretch;
-    height: 20rem;
+    background: linear-gradient(145deg, #282626, #1c1a1a);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(50, 50, 50, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.planA h1, .plan h1 {
-    font-size: 1.2rem;
-    color: #6f41bb;
+.planA:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(111, 65, 187, 0.8);
+}
+
+.planA h1 {
+    font-size: 1.5rem;
+    color: #9c6aec;
     text-align: center;
+    margin-bottom: 1rem;
+}
+
+.planA p {
+    font-weight: 400;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: justify;
 }
 
 .planA a h2 {
     padding: 0;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     text-align: center;
     color: #6f41bb;
-    cursor: default;
-}
-
-.planA  a h2 span:hover {
-    color: #9c6aec;
     cursor: pointer;
 }
-.planA p, .plan p {
-    font-weight: 600;
+
+.planA a h2 span:hover {
+    color: #9c6aec;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .planes {
+        padding: 3rem;
+    }
+
+    .planA {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .planA h1 {
+        font-size: 1.2rem;
+    }
+
+    .planA p {
+        font-size: 0.9rem;
+    }
 }
 /*Fin de planes*/
 

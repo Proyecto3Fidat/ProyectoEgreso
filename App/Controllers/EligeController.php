@@ -7,6 +7,9 @@ use App\Models\RealizaModel;
 use App\Models\PlanPagoModel;
 use App\Models\PagoModel;
 use App\Services\EligeService;
+use App\Services\PagoService;
+use App\Services\PlanPagoService;
+
 class EligeController
 {
     public function actualizarPago()
@@ -17,11 +20,12 @@ class EligeController
         $fechaPago = filter_input(INPUT_POST, 'fechaPago', FILTER_SANITIZE_SPECIAL_CHARS);
         $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
         $tipoDocumento = filter_input(INPUT_POST, 'tipoDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
-        $ultimoMesAbonado = filter_input(INPUT_POST, 'ultimoMesAbonado', FILTER_SANITIZE_SPECIAL_CHARS);
+        $pagoService = new PagoService();
+        $fechaVencimiento = $pagoService->calcularFechaVencimiento($fechaPago, $tipoPlan);
         $eligeService = new EligeService();
         $PlanPago = new PlanPagoModel($nombrePlan,$descripcion, $tipoPlan);
         $realiza = new RealizaModel($fechaPago,$nombrePlan);
-        $pago = new PagoModel( $ultimoMesAbonado);
+        $pago = new PagoModel( $fechaVencimiento);
         $resultado = $eligeService->actualizarPago($PlanPago, $realiza, $pago,$nroDocumento,$tipoDocumento);
         header('Content-Type: application/json');
 
@@ -51,7 +55,17 @@ class EligeController
         $eligeService = new EligeService();
         $pagos = $eligeService->obtenerPagosPorDocumento($nroDocumento);
         header('Content-Type: application/json');
-        echo json_encode($pagos);
+        echo var_dump($pagos);
+    }
+    public function eliminarPorDocumento(){
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $eligeService = new EligeService();
+        $eligeService->eliminarPagosPorDocumento($nroDocumento);
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'message' => 'Pagos eliminados correctamente'
+        ]);
     }
 
 
