@@ -58,6 +58,10 @@ nav a:hover {
     margin-left: auto;
 }
 
+.listmenu1 {
+    gap: .5rem;
+}
+
 .listmenu1, .listmenu2{
     display: flex;
 }

@@ -10,7 +10,7 @@
 body { 
     font-family: 'Poppins', sans-serif;
     color: white;
-    background-color: #100e0f;
+    background-color: #131313;
 }
 header{
     background-color: #100e0f;
@@ -98,33 +98,43 @@ h1 {
     margin-top: 2rem;
 }
 
+.calificacionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+}
+
 .agendaCliente { 
     margin-top: 0;
     padding: 0;
+    margin: 3rem;
     font-size: 1rem;
     text-align: center;
   }
+  
   .horariosCliente {
+    display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 2rem; 
     padding: 0;
-    width: 100%;
     border-collapse: collapse; 
     background-color: black;
-    color: white;
-    border-radius: 10px; 
     overflow: hidden; 
+    border-radius: 1rem;
   }
   
   .horariosCliente th, .horariosCliente td {
     padding: 1rem; 
     text-align: center; 
-    border: 1px solid #fff; 
+    
   }
   
   .horariosCliente th {
-    background-color: #6f41bb; 
-    color: black; 
+    background: linear-gradient(135deg, #6f41bb, #a63dd2);
+    color: rgb(255, 255, 255); 
     font-size: 1rem; 
   }
   
