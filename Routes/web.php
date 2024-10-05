@@ -30,7 +30,9 @@ use App\Utilities\DataSeeder;
 use App\Repositories\ClientetelefonoRepository;
 use App\Utilities\DatabaseLoader;
 use App\Controllers\AuthMiddleware;
+use App\Controllers\EntrenadorMiddleware;
 use \App\Controllers\PagoMiddleware;
+
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -50,14 +52,29 @@ SimpleRouter::post('planes', function () use ($logger) {
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
+
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
 
-    SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $clienteController->obtenerListaClientesAjax();
+    SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
+        SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
+            $clienteRepository = new ClienteRepository();
+            $clienteService = new ClienteService($clienteRepository);
+            $clienteController = new ClienteController($clienteService, $logger);
+            $clienteController->obtenerListaClientesAjax();
+            exit();
+        });
+
+    SimpleRouter::post('/calificacion', function () use ($logger) {
+        $calificacionRepository = new CalificacionRepository();
+        $calificacionService = new CalificacionService($calificacionRepository);
+        $calificacionController = new CalificacionController($calificacionService, $logger);
+        $calificacionController->asignarPuntuacion();
+        echo "<script>
+                alert('Calificacion Creada con éxito');
+                window.location.href = '/listaUsuarios'; 
+              </script>";
         exit();
+    });
     });
 
     SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
@@ -88,23 +105,14 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         $planes->crearPlan();
         exit();
     });
+
     SimpleRouter::get('/verificarsesion', function () use ($logger) {
         echo json_encode([
             'authenticated' => $_SESSION['sesion']
         ]);
         exit();
     });
-    SimpleRouter::post('/calificacion', function () use ($logger) {
-        $calificacionRepository = new CalificacionRepository();
-        $calificacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calificacionService, $logger);
-        $calificacionController->asignarPuntuacion();
-        echo "<script>
-                alert('Calificacion Creada con éxito');
-                window.location.href = '/listaUsuarios'; 
-              </script>";
-        exit();
-    });
+
 
     SimpleRouter::get('/tiposDePlan', function () use ($logger) {
         $planes = new App\Controllers\PlanPagoController();
@@ -117,6 +125,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         exit();
     });
 });
+
 SimpleRouter::get('/inicio', function () {
     header('Location: Public/inicio.html');
 });

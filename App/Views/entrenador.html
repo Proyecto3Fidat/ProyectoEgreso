@@ -10,7 +10,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             // Verificar autenticación al cargar la página
-            fetch('/verificar-sesion')
+            fetch('/verificarsesion')
                 .then(response => response.json())
                 .then(data => {
                     if (!data.authenticated) {

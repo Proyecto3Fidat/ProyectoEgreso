@@ -9,6 +9,11 @@ use Pecee\Http\Request;
 class AuthMiddleware implements IMiddleware
 {
 
+    protected $authService;
+    public function __construct()
+    {
+        $this->authService = new AuthService();
+    }
     public function handle(Request $request): void
     {
         $authService = new AuthService();
@@ -16,4 +21,13 @@ class AuthMiddleware implements IMiddleware
         $authService->comprobarToken();
     }
 
+}
+
+class EntrenadorMiddleware implements IMiddleware
+{
+    public function handle(Request $request): void
+    {
+        $authService = new AuthService();
+        //$authService->comprobarEntrenador();
+    }
 }
