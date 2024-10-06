@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Repositories\UsuarioRepository;
 use App\Models\UsuarioModel;
-
+use App\Controllers\TemplateController;
 class UsuarioService
 {
     private $usuarioRepository;
@@ -21,7 +21,7 @@ class UsuarioService
         echo "<script>
         localStorage.removeItem('nombre');
         alert('Alerta de seguridad: Token invalido');
-        window.location.href = '../../Public/inicio.html'; 
+        window.location.href = '../../Public/inicio.html.twig'; 
         </script>";
         exit();
     }
@@ -90,12 +90,13 @@ class UsuarioService
     }
     public function logout()
     {
+        $templateController = new TemplateController();
         session_unset();
         session_destroy();
         echo "<script>
             localStorage.removeItem('nombre');
-            window.location.href = '../../Public/inicio.html';
             </script>";
+        $templateController->renderTemplate('inicio');
         exit();
     }
 

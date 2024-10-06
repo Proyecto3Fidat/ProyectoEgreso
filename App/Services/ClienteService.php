@@ -110,7 +110,7 @@ class ClienteService
             } else {
                 echo "<script>
             alert('Acceso Denegado');
-            window.location.href = '../../Public/inicio.html'; 
+            window.location.href = '../../Public/inicio.html.twig'; 
         </script>";
             }
         } else {

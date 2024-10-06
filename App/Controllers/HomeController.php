@@ -11,11 +11,11 @@ class HomeController
         $template = new TemplateController();
         $existe = isset($_SESSION['rol']);
         if (!$existe) {
-            header("Location: ../../Public/inicio.html");
+            $template->renderTemplate('inicio');
             exit();
         } else
         if ($_SESSION['rol'] == "cliente" && $_SESSION['rol'] != null) {
-            header("Location: ../../Public/inicio.html");
+            $template->renderTemplate('inicio');
             exit();
         } else if ($_SESSION['rol'] == "entrenador" && $_SESSION['rol'] != null) {
             $template->renderTemplate('entrenador');
@@ -24,10 +24,10 @@ class HomeController
             $template->renderTemplate('calificaciones');
             exit();
         }else if ($_SESSION['rol'] == "administrativo" && $_SESSION['rol'] != null) {
-            header("Location: ../../App/Views/listaClientesAdmin.html");
+            $template->renderTemplate("listaClientesAdmin");
             exit();
         } else {
-            header("Location: ../../Public/inicio.html");
+            $template->renderTemplate('inicio');
             exit();
         }
     }

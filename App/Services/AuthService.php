@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Repositories\UsuarioRepository;
+use App\Controllers\TemplateController;
 class AuthService
 {
     private function handleForbiddenError(string $message): void {
@@ -12,9 +13,10 @@ class AuthService
 
     public function comprobarSesion(): bool {
         if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] === false) {
+            $templateController = new TemplateController();
+            $templateController->renderTemplate('sesion');
             $this->handleForbiddenError('No tienes permisos para ver esta pagina');
         }
-
         return true;
     }
     // Comprobar si el token es válido
@@ -36,9 +38,23 @@ class AuthService
     }
     // Comprobar si el usuario es un entrenador
     public function comprobarEntrenador(): bool {
+
         if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'entrenador') {
+            $templateController = new TemplateController();
+            $templateController->renderTemplate('rol', ['rol' => 'entrenador']);
             $this->handleForbiddenError('Debes ser un Entrenador para realizar esta accion');
         }
         return true;
     }
+
+    public function comprobarAdministrativo(): bool {
+
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrativo') {
+            $templateController = new TemplateController();
+            $templateController->renderTemplate('rol', ['rol' => 'administrativo']);
+            $this->handleForbiddenError('Debes ser un Entrenador para realizar esta accion');
+        }
+        return true;
+    }
+
 }
