@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Configurar el valor del formulario oculto para calificar
             const form = document.querySelector('form');
-            form.action = `pago.html?documento=${clienteId}`;
+            form.action = `/pago?documento=${clienteId}`;
             form.querySelector('input[name="documento"]').value = clienteId;
         } else {
             console.error('Cliente no encontrado.');

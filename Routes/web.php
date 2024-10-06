@@ -31,8 +31,10 @@ use App\Repositories\ClientetelefonoRepository;
 use App\Utilities\DatabaseLoader;
 use App\Controllers\AuthMiddleware;
 use App\Controllers\EntrenadorMiddleware;
+use App\Controllers\AdministrativoMiddleware;
 use \App\Controllers\PagoMiddleware;
 use App\Controllers\TemplateController;
+
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -42,6 +44,11 @@ SimpleRouter::post('/pagos', function () use ($logger) {
     $elige = new App\Controllers\EligeController();
     $elige->obtenerPagosPorDocumento();
     exit();
+});
+
+SimpleRouter::get('/inicio', function () {
+    $template = new TemplateController();
+    $template->renderTemplate('inicio');
 });
 SimpleRouter::post('planes', function () use ($logger) {
     $planes = new App\Controllers\EligeController();
@@ -54,7 +61,13 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 });
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
-
+    Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
+        $calificacionRepository = new CalificacionRepository();
+        $calificacionService = new CalificacionService($calificacionRepository);
+        $calificacionController = new CalificacionController($calificacionService, $logger);
+        $calificacionController->obtenerPuntuacionesAjax();
+        exit();
+    });
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
 
@@ -103,39 +116,46 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
     });
+    SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger) {
 
-    SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $clienteController->obtenerListaClientesAdmin();
-        exit();
-    });
-
-    Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
-        $calificacionRepository = new CalificacionRepository();
-        $calificacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calificacionService, $logger);
-        $calificacionController->obtenerPuntuacionesAjax();
-        exit();
-    });
-
-    SimpleRouter::post('/actualizarPago', function () use ($logger) {
-        $pago = new \App\Controllers\EligeController();
-        $pago->actualizarPago();
-        exit();
-    });
-
-    SimpleRouter::get('/pago', function () use ($logger) {
-        $template = new TemplateController();
-        $template->renderTemplate('pago');
-    });
+        SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
+            $clienteRepository = new ClienteRepository();
+            $clienteService = new ClienteService($clienteRepository);
+            $clienteController = new ClienteController($clienteService, $logger);
+            $clienteController->obtenerListaClientesAdmin();
+            exit();
+        });
 
 
-    SimpleRouter::post('/crearPlan', function () use ($logger) {
-        $planes = new App\Controllers\PlanPagoController();
-        $planes->crearPlan();
-        exit();
+
+        SimpleRouter::post('/actualizarPago', function () use ($logger) {
+            $pago = new \App\Controllers\EligeController();
+            $pago->actualizarPago();
+            exit();
+        });
+
+        SimpleRouter::get('/pago', function () use ($logger) {
+            $template = new TemplateController();
+            $template->renderTemplate('pago');
+        });
+
+
+        SimpleRouter::post('/crearPlan', function () use ($logger) {
+            $planes = new App\Controllers\PlanPagoController();
+            $planes->crearPlan();
+            exit();
+        });
+        SimpleRouter::get('/tiposDePlan', function () use ($logger) {
+            $planes = new App\Controllers\PlanPagoController();
+            $planes->obtenerPlanes();
+            exit();
+        });
+        SimpleRouter::post('/eliminar', function () use ($logger) {
+            $planes = new App\Controllers\EligeController();
+            $planes->eliminarPorDocumento();
+            exit();
+        });
+
     });
 
     SimpleRouter::get('/verificarsesion', function () use ($logger) {
@@ -146,16 +166,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
     });
 
 
-    SimpleRouter::get('/tiposDePlan', function () use ($logger) {
-        $planes = new App\Controllers\PlanPagoController();
-        $planes->obtenerPlanes();
-        exit();
-    });
-    SimpleRouter::post('/eliminar', function () use ($logger) {
-        $planes = new App\Controllers\EligeController();
-        $planes->eliminarPorDocumento();
-        exit();
-    });
 });
 
 
@@ -194,6 +204,7 @@ SimpleRouter::get('/cargarDatos', function () {
 //Funcion get favicon.ico para resolver error del navegador
 SimpleRouter::get('/favicon.ico', function () {
 });
+
 // Ruta para el login de clientes
 SimpleRouter::get('/login', function () {
     $template = new TemplateController();
@@ -230,7 +241,8 @@ SimpleRouter::get('/imprimirNota', function () use ($logger) {
     $clienteController->imprimirNota();
 });
 SimpleRouter::get('/listaUsuarios', function () {
-    header('Location: App/Views/listaclientes.html.twig');
+    $template = new TemplateController();
+    $template->renderTemplate('listaclientes');
 });
 
 SimpleRouter::post('/guardarDeportista', function () use ($logger) {
@@ -276,7 +288,7 @@ SimpleRouter::post('/guardarPaciente', function () use ($logger) {
     if ($clienteController->comprobarCliente() == "false") {
         echo "<script>
                 alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '../Public/inicio.html.twig'; 
               </script>";
     } else {
         if ($pacienteController->comprobarPaciente() == "false") {
@@ -286,7 +298,7 @@ SimpleRouter::post('/guardarPaciente', function () use ($logger) {
         } else {
             echo "<script>
                     alert('El Paciente ya esta registrado');
-                    window.location.href = '../../Public/inicio.html'; 
+                    window.location.href = '../Public/inicio.html.twig'; 
                   </script>";
         }
     }
@@ -338,7 +350,7 @@ SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
     if ($clienteController->comprobarCliente() == "false") {
         echo "<script>
                 alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '../Public/inicio.html.twig'; 
               </script>";
     } else {
         if ($pacienteController->comprobarPaciente() == "false") {
@@ -351,7 +363,7 @@ SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
         } else {
             echo "<script>
                     alert('El Paciente ya esta registrado');
-                    window.location.href = '../../Public/inicio.html'; 
+                    window.location.href = '../Public/inicio.html.twig'; 
                   </script>";
         }
     }
@@ -410,7 +422,7 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
 
         echo "<script>
                 alert('Usuario creado con éxito');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '../Public/inicio.html.twig'; 
               </script>";
         exit();
     } else {

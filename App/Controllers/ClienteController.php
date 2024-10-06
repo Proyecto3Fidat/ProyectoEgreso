@@ -138,7 +138,7 @@ class ClienteController
             $usuarioService->tokenInvalido();
             echo "<script>
                 alert('No tiene permisos para ver esta página');
-                window.location.href = '../../Public/inicio.html'; 
+                window.location.href = '../../Public/inicio.html.twig'; 
               </script>";
         }
     }
