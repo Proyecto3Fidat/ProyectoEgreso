@@ -28,6 +28,6 @@ class EntrenadorMiddleware implements IMiddleware
     public function handle(Request $request): void
     {
         $authService = new AuthService();
-        //$authService->comprobarEntrenador();
+        $authService->comprobarEntrenador();
     }
 }

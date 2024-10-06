@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
 
             const form = document.querySelector('form');
-            form.action = `calificacion.html?documento=${clienteId}`;
+            form.action = `/calificacion?documento=${clienteId}`;
             form.querySelector('input[name="documento"]').value = clienteId;
         } else {
             console.error('Cliente no encontrado.');

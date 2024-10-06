@@ -16,13 +16,13 @@
                     if (!data.authenticated) {
                         // Mostrar mensaje de alerta y redirigir si no está autenticado
                         alert('No tiene permisos para ver esta página');
-                        window.location.href = 'loginusuario.html'; // Redirigir al usuario
+                        window.location.href = '/login'; // Redirigir al usuario
                     }
                 })
                 .catch(error => {
                     console.error('Error al verificar la sesión:', error);
                     alert('Hubo un problema al verificar la sesión.');
-                    window.location.href = 'loginusuario.html'; // Redirigir al usuario en caso de error
+                    window.location.href = '/login'; // Redirigir al usuario en caso de error
                 });
         });
     </script>
@@ -51,8 +51,8 @@
 
 <section>
     <div class="btnent">
-        <a href="listaclientes.html"><button class="clienteslist">Lista de clientes</button></a>
-        <a href="listaejercicios.html"><button class="ejerciciolist">Lista de ejercicios</button></a>
+        <a href="/listaclientes"><button class="clienteslist">Lista de clientes</button></a>
+        <a href="/listaejercicios"><button class="ejerciciolist">Lista de ejercicios</button></a>
     </div>
 </section>
 <section class="agenda">

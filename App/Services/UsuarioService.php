@@ -104,7 +104,7 @@ class UsuarioService
         $resultadoAutenticacion = $this->usuarioRepository->autenticar($documento, $passwd);
         $resultado = $resultadoAutenticacion['resultado'];
         if ($resultado == false) {
-            header("Location: ../../App/Views/loginusuario.html?error=true");
+            header("Location: /login?error=true");
         } else {
             $rol = $resultadoAutenticacion['rol'];
             $nombre = $resultadoAutenticacion['nombre'];

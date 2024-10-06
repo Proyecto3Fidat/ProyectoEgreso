@@ -34,4 +34,11 @@ class AuthService
 
         return true;
     }
+    // Comprobar si el usuario es un entrenador
+    public function comprobarEntrenador(): bool {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'entrenador') {
+            $this->handleForbiddenError('Debes ser un Entrenador para realizar esta accion');
+        }
+        return true;
+    }
 }

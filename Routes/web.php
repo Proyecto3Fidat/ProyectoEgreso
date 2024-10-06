@@ -32,7 +32,7 @@ use App\Utilities\DatabaseLoader;
 use App\Controllers\AuthMiddleware;
 use App\Controllers\EntrenadorMiddleware;
 use \App\Controllers\PagoMiddleware;
-
+use App\Controllers\TemplateController;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -53,35 +53,52 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
 
-SimpleRouter::post('/calificacion', function () use ($logger) {
-    $calificacionRepository = new CalificacionRepository();
-    $calificacionService = new CalificacionService($calificacionRepository);
-    $calificacionController = new CalificacionController($calificacionService, $logger);
-
-    try {
-        $calificacionController->asignarPuntuacion();
-        echo json_encode([
-            'success' => true,
-            'message' => 'Calificación creada con éxito'
-        ]);
-    } catch (Exception $e) {
-        echo json_encode([
-            'success' => false,
-            'error' => 'Error al crear la calificación: ' . $e->getMessage()
-        ]);
-    }
-
-    exit();
-});
-
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
 
+
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
+
+        SimpleRouter::get('/calificacion', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('calificacion');
+        });
+
+        SimpleRouter::get('/listaclientes', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('listaclientes');
+        });
+
+        SimpleRouter::get('/listaejercicios', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('listaejercicios');
+        });
+
         SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
             $clienteRepository = new ClienteRepository();
             $clienteService = new ClienteService($clienteRepository);
             $clienteController = new ClienteController($clienteService, $logger);
             $clienteController->obtenerListaClientesAjax();
+            exit();
+        });
+
+        SimpleRouter::post('/calificacion', function () use ($logger) {
+            $calificacionRepository = new CalificacionRepository();
+            $calificacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calificacionService, $logger);
+
+            try {
+                $calificacionController->asignarPuntuacion();
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Calificación creada con éxito'
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Error al crear la calificación: ' . $e->getMessage()
+                ]);
+            }
+
             exit();
         });
 
@@ -109,6 +126,11 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         exit();
     });
 
+    SimpleRouter::get('/pago', function () use ($logger) {
+        $template = new TemplateController();
+        $template->renderTemplate('pago');
+    });
+
 
     SimpleRouter::post('/crearPlan', function () use ($logger) {
         $planes = new App\Controllers\PlanPagoController();
@@ -134,10 +156,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         $planes->eliminarPorDocumento();
         exit();
     });
-});
-
-SimpleRouter::get('/inicio', function () {
-    header('Location: Public/inicio.html');
 });
 
 
@@ -178,29 +196,31 @@ SimpleRouter::get('/favicon.ico', function () {
 });
 // Ruta para el login de clientes
 SimpleRouter::get('/login', function () {
-    header('Location: App/Views/loginusuario.html');
+    $template = new TemplateController();
+    $template->renderTemplate('loginUsuario');
 });
-SimpleRouter::get('/ClienteCalificacion', function () {
-    header('Location: App/Views/calificaciones.html');
+SimpleRouter::get('/calificaciones', function () {
+    $template = new TemplateController();
+    $template->renderTemplate(calificaciones);
 });
-// Ruta para el registro de clientes
+
+
 SimpleRouter::get('/registrarcliente', function () {
-    header('Location: App/Views/crearUsuario.html');
+    $template = new TemplateController();
+    $template->renderTemplate('crearUsuario');
 });
 
-
-SimpleRouter::get('/calificar', function () {
-    header('Location: App/Views/calificacion.html');
-});
 
 // Ruta para los horarios
 SimpleRouter::get('/horarios', function () {
-    header('Location: App/Views/agenda.html');
+    $template = new TemplateController();
+    $template->renderTemplate('agenda');
 });
 
 // Ruta para los planes
 SimpleRouter::get('/planes', function () {
-    header('Location: App/Views/planes.html');
+    $template = new TemplateController();
+    $template->renderTemplate('planes');
 });
 
 SimpleRouter::get('/imprimirNota', function () use ($logger) {
@@ -210,7 +230,7 @@ SimpleRouter::get('/imprimirNota', function () use ($logger) {
     $clienteController->imprimirNota();
 });
 SimpleRouter::get('/listaUsuarios', function () {
-    header('Location: App/Views/listaclientes.html');
+    header('Location: App/Views/listaclientes.html.twig');
 });
 
 SimpleRouter::post('/guardarDeportista', function () use ($logger) {
@@ -396,7 +416,7 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
     } else {
         echo "<script>
                 alert('El usuario ya existe');
-                window.location.href = '../../App/Views/crearUsuario.html'; 
+                window.location.href = '../../App/Views/crearUsuario.html.twig'; 
               </script>";
         exit();
     }
