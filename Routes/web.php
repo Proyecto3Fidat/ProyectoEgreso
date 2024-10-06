@@ -127,6 +127,78 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
 
+        SimpleRouter::post('/logo', function () use ($logger) {
+            $template = new TemplateController();
+            if (isset($_FILES['logo'])) {
+                // Obtener información del archivo subido
+                $file = $_FILES['logo'];
+
+                // Comprobar si hay algún error durante la subida
+                if ($file['error'] !== 0) {
+                    $logger->error('Error al subir el archivo.');
+                    echo "Error al subir el archivo.";
+                    return;
+                }
+
+                // Verificar que el archivo subido sea una imagen
+                $validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+                if (!in_array($file['type'], $validImageTypes)) {
+                    $logger->error('Formato de archivo no soportado. Suba un PNG o JPEG.');
+                    echo "Formato de archivo no soportado. Suba un PNG o JPEG.";
+                    return;
+                }
+
+                // Ruta temporal del archivo
+                $tempFile = $file['tmp_name'];
+
+                // Crear imagen desde el archivo temporal dependiendo de su tipo
+                $image = null;
+                switch ($file['type']) {
+                    case 'image/png':
+                        $image = imagecreatefrompng($tempFile);
+                        break;
+                    case 'image/jpeg':
+                    case 'image/jpg':
+                        $image = imagecreatefromjpeg($tempFile);
+                        break;
+                }
+
+                if ($image === null) {
+                    $logger->error('Error al procesar la imagen.');
+                    echo "Error al procesar la imagen.";
+                    return;
+                }
+
+                // Cambiar tamaño de la imagen a 64x64 para favicon (estándar)
+                $faviconSize = 64;
+                $faviconImage = imagecreatetruecolor($faviconSize, $faviconSize);
+                imagecopyresampled($faviconImage, $image, 0, 0, 0, 0, $faviconSize, $faviconSize, imagesx($image), imagesy($image));
+
+                // Ruta donde guardar el archivo .ico (en la raíz)
+                $targetFile = $_SERVER['DOCUMENT_ROOT'] . '/favicon.ico';
+
+                // Eliminar el favicon actual si existe
+                if (file_exists($targetFile)) {
+                    unlink($targetFile);
+                }
+
+                // Guardar la imagen como .ico
+                if (imagepng($faviconImage, $targetFile)) {
+                    $logger->info('Favicon generado correctamente.');
+                    $template->renderTemplate('inicio');
+                } else {
+                    $logger->error('Error al guardar el favicon.');
+                    echo "Error al guardar el favicon.";
+                }
+
+                // Liberar memoria
+                imagedestroy($image);
+                imagedestroy($faviconImage);
+            } else {
+                echo "No se recibió ningún archivo.";
+            }
+        });
+
 
         SimpleRouter::post('/actualizarPago', function () use ($logger) {
             $pago = new \App\Controllers\EligeController();
