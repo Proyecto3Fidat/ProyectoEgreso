@@ -136,9 +136,9 @@ form .button {
     background-color: #573399;
 }
 
-
+/*Inicio de footer*/
 footer {
-    background-color: #181718;
+    background: radial-gradient(circle, rgba(24, 23, 24, 1) 0%, rgba(24, 23, 24, 0.9) 50%, rgba(0, 0, 0, 0.8) 100%),  no-repeat center center fixed;
     padding: 1rem;
     text-align: center;
     color: white;
@@ -168,3 +168,4 @@ footer .redes a {
 footer .redes a:hover {
     color: #6f41bb;
 }
+/*Fin de footer*/

@@ -77,7 +77,7 @@ nav a:hover {
 }
 button { 
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-top: 0;
     margin-bottom: 3rem;
     padding: 1rem;
@@ -95,6 +95,7 @@ button:hover {
 }
 h1 { 
     text-align: center;
+    font-size: 3rem;
     margin-top: 2rem;
 }
 
@@ -108,49 +109,53 @@ h1 {
 
 .agendaCliente { 
     margin-top: 0;
-    padding: 0;
-    margin: 3rem;
+    padding: 2rem;
+    margin: 2rem;
     font-size: 1rem;
     text-align: center;
   }
-  
-  .horariosCliente {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem; 
-    padding: 0;
-    border-collapse: collapse; 
-    background-color: black;
-    overflow: hidden; 
+
+  .tablaCliente {
+    background-color:#303030;
+    padding: 1rem;
+    padding-top: .5rem;
     border-radius: 1rem;
+    width: auto;
+  }
+
+  .clasCliente {
+    margin-top: 1rem;
+    border-collapse: collapse; 
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .3);
   }
   
-  .horariosCliente th, .horariosCliente td {
-    padding: 1rem; 
+  .clasCliente th, .clasCliente td {
+    padding: .7rem; 
     text-align: center; 
     
   }
   
-  .horariosCliente th {
+  .clasCliente th {
     background: linear-gradient(135deg, #6f41bb, #a63dd2);
     color: rgb(255, 255, 255); 
     font-size: 1rem; 
   }
   
-  .horariosCliente td {
+  .clasCliente td {
     border-bottom: 1px solid #fff; 
   }
   
-  .horariosCliente tr:nth-child(even) {
+  .clasCliente tr:nth-child(even) {
     background-color: #222; 
   }
   
-  .horariosCliente tr:nth-child(odd) {
+  .clasCliente tr:nth-child(odd) {
     background-color: #222; 
   }
   
-  .horariosCliente td:hover{
+  .clasCliente td:hover{
     background-color: #555;
   }
 
@@ -208,3 +213,5 @@ h1 {
     text-align: center;
     color: #6f41bb;
 }
+
+

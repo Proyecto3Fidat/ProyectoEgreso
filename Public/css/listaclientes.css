@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #100e0f;
+    background-color: #131313;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
@@ -91,10 +91,12 @@ nav a:hover {
 .lista-clientes {
     display: flex;
     margin: 0 auto; 
+    margin-top: 3rem;
     padding: 0;
-    width: 90%; 
+    width: 50% auto; 
     border-collapse: collapse; 
-    background-color: black;
+    background-color:#303030;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
     color: white;
     border-radius: 10px; 
     overflow: hidden; 
@@ -184,3 +186,37 @@ h4 {
 .adejerci:hover, .adrut:hover {
     transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
 }
+
+/*Inicio de footer*/
+footer {
+    background: radial-gradient(circle, rgba(24, 23, 24, 1) 0%, rgba(24, 23, 24, 0.9) 50%, rgba(0, 0, 0, 0.8) 100%),  no-repeat center center fixed;
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    margin-top: 2rem;
+    border-top: 1px solid #6f41bb;
+}
+
+footer h1, footer h2, footer h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+footer .redes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 0.5rem;
+}
+
+footer .redes a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+footer .redes a:hover {
+    color: #6f41bb;
+}
+/*Fin de footer*/
