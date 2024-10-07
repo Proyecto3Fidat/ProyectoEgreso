@@ -222,22 +222,22 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $planes->obtenerPlanes();
             exit();
         });
-        SimpleRouter::post('/eliminar', function () use ($logger) {
-            $planes = new App\Controllers\EligeController();
-            $planes->eliminarPorDocumento();
-            exit();
-        });
-
+        
     });
-
+    
     SimpleRouter::get('/verificarsesion', function () use ($logger) {
         echo json_encode([
             'authenticated' => $_SESSION['sesion']
         ]);
         exit();
     });
-
-
+    
+    
+});
+SimpleRouter::post('/eliminar', function () use ($logger) {
+    $planes = new App\Controllers\EligeController();
+    $planes->eliminarPorDocumento();
+    exit();
 });
 
 
