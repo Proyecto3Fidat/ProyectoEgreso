@@ -228,4 +228,24 @@ nav a:hover {
 .contacto span { 
     font-weight: 400;
 }
+footer {
+    background-color: #100e0f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto; /* Para empujar el footer al final */
+    width: 100%;
+}
+
+footer p {
+    color: #f0f0f0;
+    font-size: 1rem;
+}
+
+/* Ajusta el espacio para dispositivos móviles */
+@media (max-width: 768px) {
+    footer p {
+        font-size: 0.9rem;
+    }
+}
 

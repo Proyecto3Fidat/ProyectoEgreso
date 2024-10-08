@@ -3,6 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+use App\Controllers\ComboEjercicioController;
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
@@ -35,6 +36,7 @@ use App\Controllers\AdministrativoMiddleware;
 use \App\Controllers\PagoMiddleware;
 use App\Controllers\TemplateController;
 use App\Controllers\EjercicioController;
+
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -93,6 +95,17 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         SimpleRouter::get('/crearComboEjercicio', function () {
             $template = new TemplateController();
             $template->renderTemplate('crearComboEjercicio');
+        });
+        SimpleRouter::post('/crearComboEjercicio', function () {
+            $template = new TemplateController();
+            $combo = new ComboEjercicioController();
+            $combo->crearCombo();
+            $datos = [
+                'mensaje' => 'Combo creado con éxito',
+                'ruta' => 'crearComboEjercicio'
+            ];
+            $template->renderTemplate('alerta', $datos);
+            exit();
         });
 
         SimpleRouter::get('/calificacion', function () {

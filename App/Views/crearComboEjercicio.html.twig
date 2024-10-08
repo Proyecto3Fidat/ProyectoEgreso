@@ -3,17 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
     <title>Crear Ejercicio</title>
+    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
 </head>
+{% include 'header.html.twig' %}
 <body>
 <div id="formulario-crear-ejercicio" class="content oculto">
-    <form id="crear-ejercicio-form" action="/crearEjercicio" method="post" class="califidepo">
+    <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo">
+        <label for="nombre-combo">Nombre del Combo:</label>
+        <input type="text" id="nombre-combo" name="nombreCombo" required><br><br>
         <div id="ejercicios-seleccionados">
             <!-- Aquí se irán agregando los selects y los detalles correspondientes -->
         </div>
         <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
-        <input type="submit">
+        <input type="hidden" name="ejercicios" id="ejercicios-input">
+        <input type="submit" value="Enviar">
     </form>
 </div>
 
@@ -24,6 +29,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const ejerciciosSeleccionados = [];
+
         // Realizar la petición a la API para obtener los ejercicios
         fetch('/ejercicios')
             .then(response => response.json())
@@ -63,10 +70,13 @@
 
             // Llenar el select con las opciones de ejercicios
             data.forEach(ejercicio => {
-                const option = document.createElement('option');
-                option.value = JSON.stringify(ejercicio);
-                option.textContent = ejercicio.nombre;
-                nuevoSelect.appendChild(option);
+                // Verificar si el ejercicio ya ha sido seleccionado
+                if (!ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio)) {
+                    const option = document.createElement('option');
+                    option.value = JSON.stringify(ejercicio);
+                    option.textContent = ejercicio.nombre;
+                    nuevoSelect.appendChild(option);
+                }
             });
 
             // Agregar listener para mostrar detalles del ejercicio seleccionado
@@ -84,20 +94,60 @@
                     `;
                 // Agregar los detalles debajo del select correspondiente
                 detallesDiv.innerHTML = detalleHtml;
+
+                // Actualizar el array de ejercicios seleccionados
+                ejerciciosSeleccionados.push(ejercicio);
+                document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
+
+                // Deshabilitar la opción seleccionada en otros selects
+                actualizarOpcionesDisponibles();
             });
 
             // Crear un div para los detalles del ejercicio seleccionado
             const detallesDiv = document.createElement('div');
             detallesDiv.classList.add('detalle-ejercicio');
 
-            // Añadir el select y los detalles al contenedor del ejercicio
+            // Crear botón para eliminar la selección
+            const eliminarBtn = document.createElement('button');
+            eliminarBtn.type = 'button';
+            eliminarBtn.textContent = 'Eliminar ejercicio';
+            eliminarBtn.addEventListener('click', function () {
+                // Eliminar el contenedor del ejercicio
+                ejerciciosSeleccionadosDiv.removeChild(contenedorEjercicio);
+                // Actualizar el array de ejercicios seleccionados
+                const index = ejerciciosSeleccionados.findIndex(e => e.idEjercicio === JSON.parse(nuevoSelect.value).idEjercicio);
+                if (index > -1) {
+                    ejerciciosSeleccionados.splice(index, 1);
+                }
+                document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
+                // Actualizar las opciones disponibles en los selects restantes
+                actualizarOpcionesDisponibles();
+            });
+
+            // Añadir el select, los detalles y el botón de eliminar al contenedor del ejercicio
             contenedorEjercicio.appendChild(nuevoSelect);
             contenedorEjercicio.appendChild(detallesDiv);
+            contenedorEjercicio.appendChild(eliminarBtn);
 
             // Añadir el contenedor del ejercicio al formulario
             ejerciciosSeleccionadosDiv.appendChild(contenedorEjercicio);
         }
+
+        function actualizarOpcionesDisponibles() {
+            const selects = document.querySelectorAll('#ejercicios-seleccionados select');
+            selects.forEach(select => {
+                const opciones = select.querySelectorAll('option');
+                opciones.forEach(option => {
+                    const ejercicio = JSON.parse(option.value || null);
+                    if (ejercicio) {
+                        option.disabled = ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio);
+                    }
+                });
+            });
+        }
     });
 </script>
+
 </body>
+{% include 'footer.html.twig' %}
 </html>

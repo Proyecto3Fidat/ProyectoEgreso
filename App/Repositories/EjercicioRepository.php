@@ -28,7 +28,7 @@ class EjercicioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, descripcion, grupoMuscular, tipoEjercicio FROM Ejercicio";
+        $sql = "SELECT idEjercicio, nombre, descripcion, grupoMuscular, tipoEjercicio FROM Ejercicio";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();

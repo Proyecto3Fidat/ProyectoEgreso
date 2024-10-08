@@ -116,3 +116,7 @@ select option:checked {
         padding: 0.8rem;
     }
 }
+
+.ejercicios-lista{
+    display: none;
+}

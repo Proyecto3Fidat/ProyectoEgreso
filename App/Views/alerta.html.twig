@@ -12,7 +12,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         alert('{{ mensaje | e('js') }}');
-        window.location.href = '/';
+        window.location.href = '/{{ ruta | e('js') }}';
     });
 </script>
 </html>
