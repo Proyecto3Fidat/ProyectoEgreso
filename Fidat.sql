@@ -5,23 +5,15 @@ CREATE TABLE Cliente(
     tipoDocumento VARCHAR (16) NOT NULL,
     nombre VARCHAR(30),
     apellido VARCHAR(30),
-<<<<<<< Updated upstream
     altura DOUBLE,
     peso INT,
-=======
-    altura double,
-    peso int,
->>>>>>> Stashed changes
     calle VARCHAR(100),
     numero INT,
     esquina VARCHAR(100),
     email VARCHAR(40),
     patologias VARCHAR(25),
     fechaNacimiento DATE,
-<<<<<<< Updated upstream
     activo BOOLEAN,
-=======
->>>>>>> Stashed changes
     PRIMARY KEY(nroDocumento, tipoDocumento)
 );
 
@@ -60,33 +52,7 @@ CREATE TABLE Paciente(
 );
 
 CREATE TABLE Deporte(
-<<<<<<< Updated upstream
     nombre VARCHAR (20),
-=======
-    idDeporte int,
-    nombre VARCHAR (20) NOT NULL,
-    PRIMARY KEY(idDeporte)
-);
-CREATE TABLE Calificacion(
-    idItem int,
-    nombreItem VARCHAR (50),
-    PRIMARY KEY(idItem)
-);
-CREATE TABLE Obtiene(
-    nroDocumento varchar(30) NOT NULL,
-    tipoDocumento VARCHAR (16),
-    idItem int,
-    fecha DATE,
-    puntEsperado int,
-    puntObtenido int,
-    PRIMARY KEY(nroDocumento, tipoDocumento, idItem)
-);
-
-CREATE TABLE PlanPago(
-    nombre VARCHAR(12),
-    descripcion VARCHAR(50) NOT NULL,
-    tipoPlan VARCHAR(12) NOT NULL,
->>>>>>> Stashed changes
     PRIMARY KEY(nombre)
 );
 
@@ -122,7 +88,7 @@ CREATE TABLE PlanPago(
 
 CREATE TABLE Pago(
     idPago INT AUTO_INCREMENT,
-    ultimoMesAbonado VARCHAR(12) NOT NULL,
+    fechaVencimiento DATE,
     PRIMARY KEY(idPago)
 );
 
@@ -145,18 +111,11 @@ CREATE TABLE Rutina(
 
 CREATE TABLE ComboEjercicio(
     nombreCombo VARCHAR (20),
-    cantEjercicios INT NOT NULL,
     PRIMARY KEY (nombreCombo)
 );
 
-CREATE TABLE ComboEjercicio_idEjercicio(
-    nombreCombo VARCHAR (20),
-    idEjercicio INT,
-    PRIMARY KEY (nombreCombo, idEjercicio)
-);
-
 CREATE TABLE Ejercicio(
-    idEjercicio INT,
+    idEjercicio AUTO_INCREMENT,
     nombre VARCHAR(20) NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     tipoEjercicio VARCHAR(20) NOT NULL,
@@ -229,7 +188,6 @@ CREATE TABLE Compone(
     PRIMARY KEY (idRutina,nombreCombo, idEjercicio)
 );
 
-<<<<<<< Updated upstream
 CREATE TABLE Agenda (
     dia VARCHAR (10),
     horaInicio TIME,
@@ -237,24 +195,6 @@ CREATE TABLE Agenda (
     agendados VARCHAR (30),
     PRIMARY KEY (dia,horaInicio,horaFin)
 );
-=======
-CREATE TABLE Agenda(
-    dia VARCHAR (10),
-    horaInicio 
-)
-
-CREATE TABLE Conforma(
-    nombre VARCHAR(20)
-    dia VARCHAR (10),
-    PRIMARY KEY (nombre, dia)
-);
-
-/*Claves Foráneas*/
-ALTER TABLE
-    Cliente_Telefono
-ADD
-    FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
->>>>>>> Stashed changes
 
 CREATE TABLE SeAgenda (
     nroDocumento VARCHAR (30) NOT NULL,
@@ -277,97 +217,90 @@ CREATE TABLE Conforma(
 
 /* Claves Foráneas con ON DELETE CASCADE */
 ALTER TABLE Cliente_Telefono
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Deportista
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Paciente
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
-CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago);
-
-ALTER TABLE Elige
-ADD FOREIGN KEY (nroDocumento,tipoDocumento) REFERENCES Cliente(nroDocumento,tipoDocumento);
+CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago) ON DELETE CASCADE;
 
 ALTER TABLE Elige
-ADD FOREIGN KEY (fechaPago, nombrePlan, idPago) REFERENCES Realiza(fechaPago, nombrePlan, idPago);
+ADD FOREIGN KEY (nroDocumento,tipoDocumento) REFERENCES Cliente(nroDocumento,tipoDocumento) ON DELETE CASCADE;
+
+ALTER TABLE Elige
+ADD FOREIGN KEY (fechaPago, nombrePlan, idPago) REFERENCES Realiza(fechaPago, nombrePlan, idPago) ON DELETE CASCADE;
 
 ALTER TABLE Realiza
-ADD FOREIGN KEY (idPago) REFERENCES Pago(idPago);
+ADD FOREIGN KEY (idPago) REFERENCES Pago(idPago) ON DELETE CASCADE;
 
 ALTER TABLE Realiza
-ADD FOREIGN KEY (nombrePlan) REFERENCES PlanPago(nombrePlan);
+ADD FOREIGN KEY (nombrePlan) REFERENCES PlanPago(nombrePlan) ON DELETE CASCADE;
 
 ALTER TABLE Entrena
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Entrena
-ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre);
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
 
 ALTER TABLE Practica
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Practica
-ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina);
-
-ALTER TABLE ComboEjercicio_idEjercicio
-ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
-
-
-ALTER TABLE ComboEjercicio_idEjercicio
-ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
+ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina) ON DELETE CASCADE;
 
 ALTER TABLE Tiene
-ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre);
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
 
 ALTER TABLE Tiene
-ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
+ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo) ON DELETE CASCADE;
 
 ALTER TABLE Tiene
-ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio) ON DELETE CASCADE;
 
 ALTER TABLE Compone
-ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo);
+ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio(nombreCombo) ON DELETE CASCADE;
 
 ALTER TABLE Compone
-ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio) ON DELETE CASCADE;
 
 ALTER TABLE Compone
-ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina);
+ADD FOREIGN KEY (idRutina) REFERENCES Rutina(idRutina) ON DELETE CASCADE;
 
 ALTER TABLE Obtiene
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Obtiene
-ADD FOREIGN KEY (Id) REFERENCES Calificacion(Id);
+ADD FOREIGN KEY (Id) REFERENCES Calificacion(Id) ON DELETE CASCADE;
 
 ALTER TABLE Recibe
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Recibe
-ADD FOREIGN KEY (id_Estado) REFERENCES Estado(id_Estado);
+ADD FOREIGN KEY (id_Estado) REFERENCES Estado(id_Estado) ON DELETE CASCADE;
 
 ALTER TABLE Cumple
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Cumple
-ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio(idEjercicio) ON DELETE CASCADE;
 
 ALTER TABLE SeAgenda
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento);
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente (nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE SeAgenda
-ADD FOREIGN KEY (dia,horaInicio,horaFin) REFERENCES Agenda(dia,horaInicio,horaFin);
+ADD FOREIGN KEY (dia,horaInicio,horaFin) REFERENCES Agenda(dia,horaInicio,horaFin) ON DELETE CASCADE;
 
 ALTER TABLE Conforma
-ADD FOREIGN KEY (Dia,horaInicio,horaFin) REFERENCES Agenda (Dia,horaInicio,horaFin);
+ADD FOREIGN KEY (Dia,horaInicio,horaFin) REFERENCES Agenda (Dia,horaInicio,horaFin) ON DELETE CASCADE;
 
 ALTER TABLE Conforma
-ADD FOREIGN KEY (Nombre) REFERENCES LocalGym (Nombre);
+ADD FOREIGN KEY (Nombre) REFERENCES LocalGym (Nombre) ON DELETE CASCADE;
 
 ALTER TABLE Contiene
-ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo);
+ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo) ON DELETE CASCADE;
 
 ALTER TABLE Contiene
-ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio (idEjercicio);
+ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio (idEjercicio) ON DELETE CASCADE;
