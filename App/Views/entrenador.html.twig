@@ -9,91 +9,58 @@
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Entrenador</title>
     <style>
-        /* Estilo para el fondo del modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
 
-        /* Estilo del contenido del modal */
-        .modal-content {
-            background: transparent;
-            padding: 0;
-            border-radius: 15px;
-            border: 5px solid #007bff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Estilo del botón de cierre del modal */
-        .btn-close-modal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-close-modal:hover {
-            background-color: #c82333;
-        }
-
-        /* Estilo para los nuevos botones del modal */
-        .btn-modal-form {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            margin-top: 10px;
-        }
-
-        .btn-modal-form:hover {
-            background-color: #218838;
-        }
-
-        /* Ajuste del formulario para eliminar espacio superior e inferior */
-        #formulario-crear-ejercicio form {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
     </style>
 </head>
+<header>
+    <section class="navhead">
+        <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
+    </section>
+    <nav class="navbar" id="nav">
+        <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"style="color: #ffffff;"></i></button>
+        <div class="menu1">
+            <ul class="listmenu1">
+                <li><a href="/" class="inicioa">Inicio</a></li>
+                <li><a href="/horarios" class="inicioa">Horarios</a></li>
+                <li><a href="/planes" class="inicioa">Planes</a></li>
+                <li><a href="/">Nosotros</a></li>
+            </ul>
+        </div>
+        <div class="menu2">
+            <ul class="listmenu2" id="welcome-message">
+            </ul>
+        </div>
+    </nav>
+</header>
 <body>
-<!-- Resto del código existente -->
 <a class="tituloent" href="#">Bienvenido, Usuario</a>
 
 <div class="btnent">
     <a href="/listaclientes"><button class="clienteslist">Lista de clientes</button></a>
     <a href="/listaejercicios"><button class="ejerciciolist">Lista de ejercicios</button></a>
-    <button id="btn-crear-ejercicio" class="btn-modal">Crear Ejercicio</button>
+    <button id="btn-crear-ejercicio" class="ejerciciolist">Crear Ejercicio</button>
+    <button id="btn-crear-combo-ejercicio" class="ejerciciolist">Crear Combo Ejercicio</button>
 </div>
 
 <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
-        <button class="btn-close-modal">&times;</button>
+        <button class="modal-close-button">
+            <span class="X"></span>
+            <span class="Y"></span>
+            <div class="close">Close</div>
+        </button>
         <div id="formulario-crear-ejercicio"></div>
+    </div>
+</div>
+
+<div id="modal-overlay-combo" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-button">
+            <span class="X"></span>
+            <span class="Y"></span>
+            <div class="close">Close</div>
+        </button>
+        <div id="formulario-crear-combo-ejercicio"></div>
     </div>
 </div>
 
@@ -170,9 +137,12 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const btnCrearEjercicio = document.getElementById('btn-crear-ejercicio');
+        const btnCrearComboEjercicio = document.getElementById('btn-crear-combo-ejercicio');
         const modalOverlay = document.getElementById('modal-overlay');
-        const closeModalButton = document.querySelector('.btn-close-modal');
+        const modalOverlayCombo = document.getElementById('modal-overlay-combo');
+        const closeModalButtons = document.querySelectorAll('.modal-close-button');
         const contenedorFormulario = document.getElementById('formulario-crear-ejercicio');
+        const contenedorFormularioCombo = document.getElementById('formulario-crear-combo-ejercicio');
 
         btnCrearEjercicio.addEventListener('click', function () {
             fetch('/crearEjercicio')
@@ -198,14 +168,47 @@
                 });
         });
 
-        closeModalButton.addEventListener('click', function () {
-            modalOverlay.style.display = 'none'; // Ocultar el modal
+        btnCrearComboEjercicio.addEventListener('click', function () {
+            fetch('/crearComboEjercicio')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.text(); // Obtener el HTML como texto
+                })
+                .then(html => {
+                    contenedorFormularioCombo.innerHTML = html; // Insertar el HTML del formulario
+                    modalOverlayCombo.style.display = 'flex'; // Mostrar el modal
+
+                    // Agregar clase personalizada a los botones del formulario
+                    const formButtons = contenedorFormularioCombo.querySelectorAll('input[type="submit"]');
+                    formButtons.forEach(button => {
+                        button.classList.add('btn-modal-form');
+                    });
+                })
+                .catch(error => {
+                    console.error('Hubo un problema con la solicitud:', error);
+                    alert('Hubo un problema al cargar el formulario. Intente nuevamente.');
+                });
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                modalOverlay.style.display = 'none'; // Ocultar el modal
+                modalOverlayCombo.style.display = 'none'; // Ocultar el modal combo
+            });
         });
 
         // Cerrar el modal al hacer clic fuera del contenido
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
+            }
+        });
+
+        modalOverlayCombo.addEventListener('click', function (event) {
+            if (event.target === modalOverlayCombo) {
+                modalOverlayCombo.style.display = 'none';
             }
         });
     });

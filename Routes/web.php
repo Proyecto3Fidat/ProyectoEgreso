@@ -34,7 +34,7 @@ use App\Controllers\EntrenadorMiddleware;
 use App\Controllers\AdministrativoMiddleware;
 use \App\Controllers\PagoMiddleware;
 use App\Controllers\TemplateController;
-
+use App\Controllers\EjercicioController;
 // Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -56,7 +56,11 @@ SimpleRouter::post('planes', function () use ($logger) {
     $planes->obtenerPagosPorDocumento();
     exit();
 });
-
+SimpleRouter::get('/ejercicios', function () {
+    $ejer = new EjercicioController();
+    $ejer->obtenerEjercicios();
+    exit();
+});
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
@@ -71,6 +75,15 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
     });
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
+
+
+        SimpleRouter::post('/crearEjercicio', function () {
+            $template = new TemplateController();
+            $ejercicio = new EjercicioController();
+            $ejercicio->crearEjercicio();
+            $template->renderTemplate('alerta', ['mensaje' => 'Ejercicio creado con éxito']);
+            exit();
+        });
 
         SimpleRouter::get('/crearEjercicio', function () {
             $template = new TemplateController();
