@@ -48,8 +48,9 @@ SimpleRouter::post('/pagos', function () use ($logger) {
 
 SimpleRouter::get('/inicio', function () {
     $template = new TemplateController();
-    $template->renderTemplate('inicio');
+    $template->renderTemplate('inicio', ['calificacion'=>'<li><a href="/">Calificación</a></li>']);
 });
+
 SimpleRouter::post('planes', function () use ($logger) {
     $planes = new App\Controllers\EligeController();
     $planes->obtenerPagosPorDocumento();
@@ -71,6 +72,10 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
 
+        SimpleRouter::get('/crearEjercicio', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('crearEjercicio');
+        });
         SimpleRouter::get('/calificacion', function () {
             $template = new TemplateController();
             $template->renderTemplate('calificacion');

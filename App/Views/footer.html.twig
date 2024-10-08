@@ -1,63 +1,5 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../../Public/css/styleCliente.css">
-        <link rel="stylesheet" href="../../Public/css/responsive.css">
-        <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
-        <title>Calificación</title>
-    </head>
-    <body>
-        <div class="calificacionContainer">
-    <script src="../../Public/js/listaCalificaciones.js"></script>
-    <header>
-            <section class="navhead">
-                <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
-            </section>
-            <nav class="navbar" id="nav">
-                <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"
-                        style="color: #ffffff;"></i></button>
-                <div class="menu1">
-                    <ul class="listmenu1">
-                        <li><a href="/inicio" class="inicioa">Gym</a></li>
-                        <li><a href="/horarios" class="inicioa">Horarios</a></li>
-                        <li><a href="/planes" class="inicioa">Planes</a></li>
-                        {% if calificacion is defined and calificacion is not empty %}
-                            {{ calificacion|raw }}
-                        {% endif %}
-                    </ul>
-                </div>
-                <div class="menu2">
-                    <ul class="listmenu2" id="welcome-message">
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <h1>Calificación</h1>
-
-    <section class="agendaCliente">
-    <div class="tablaCliente">
-        <table class="clasCliente" id="tablaCalificaciones">
-            <tr>
-                <th>Fecha</th>
-                <th>Puntuacion Total</th>
-                <th>Fuerza Muscular</th>
-                <th>Resistencia Muscular</th>
-                <th>Resistencia Anaerobica</th>
-                <th>Resiliencia</th>
-                <th>Flexibilidad</th>
-                <th>Cumplimiento de Agenda</th>
-                <th>Resistencia a la Monotonia</th>
-                <th>Imprimir</th>
-            </tr>
-        </table>
-    </div>
-    </section>
-
-    <footer class="footer">
+<link rel="stylesheet" href="../../Public/css/footer.css">
+<footer class="footer">
     <h1>Gracias por elegirnos!</h1>
     <h2>Nuestras Redes</h2>
     <div class="redes">
@@ -74,10 +16,3 @@
     </div>
     <h4>Copyright <span>&copy</span> GYM 2024</h4>
 </footer>
-    
-    <script src="../../Public/js/script.js"></script>
-    <script src="../../Public/js/responsive.js"></script>
-    
-    </div>
-</body>
-</html>

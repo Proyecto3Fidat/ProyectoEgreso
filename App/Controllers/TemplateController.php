@@ -25,6 +25,9 @@ class TemplateController
             echo $this->twig->render($templateName . '.html.twig', $data);
             exit();
         } catch (\Twig\Error\LoaderError $e) {
+            $currentFilePath = __FILE__;
+
+            echo "La ruta actual del archivo es: " . $currentFilePath;
             echo "Error: Plantilla no encontrada.";
         } catch (\Twig\Error\RuntimeError $e) {
             echo "Error: Ocurrió un problema al renderizar la plantilla.";

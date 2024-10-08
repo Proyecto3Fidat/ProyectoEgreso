@@ -70,19 +70,19 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-
+        // Verificar autenticación al cargar la página
         fetch('/verificarsesion', {
             method: 'GET'
         })
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
-
+                    // Si hay un error de autenticación, redirigir al login
                     alert(data.error);
                     window.location.href = '/login';
                 } else {
-
-                    document.querySelector('.content').style.display = 'block';
+                    // Mostrar el formulario si está autenticado
+                    document.getElementById('formulario-crear-ejercicio').classList.remove('oculto');
                 }
             })
             .catch(error => {
@@ -91,6 +91,7 @@
                 window.location.href = '/login';
             });
 
+        // Manejar el envío del formulario de calificación
         document.querySelector('form.califidepo').addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -113,8 +114,15 @@
                     console.error('Error:', error);
                 });
         });
+
+        // Mostrar el formulario cuando se hace clic en un botón (opcional)
+        document.getElementById('abrir').addEventListener('click', function () {
+            const formulario = document.getElementById('formulario-crear-ejercicio');
+            formulario.classList.toggle('oculto');
+        });
     });
 </script>
+
 
 <script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>
