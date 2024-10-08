@@ -33,9 +33,10 @@ nav{
     background-color: #100e0f;
     padding: 20px;
 }
-    nav a:hover {
-        color: #6f41bb;
-    }
+
+nav a:hover {
+    color: #6f41bb;
+}
 
 .menu1 {
     display: flex;
@@ -65,9 +66,9 @@ nav{
 .login-btn {
     margin-right: 1rem;
 }
-    .login-btn:hover, .sign-in-btn:hover {
-        color: #6f41bb;
-    }
+.login-btn:hover, .sign-in-btn:hover {
+    color: #6f41bb;
+}
 
 
 button { 
