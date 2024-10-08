@@ -89,6 +89,12 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $template = new TemplateController();
             $template->renderTemplate('crearEjercicio');
         });
+
+        SimpleRouter::get('/crearComboEjercicio', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('crearComboEjercicio');
+        });
+
         SimpleRouter::get('/calificacion', function () {
             $template = new TemplateController();
             $template->renderTemplate('calificacion');

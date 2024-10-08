@@ -24,7 +24,7 @@ class EjercicioController
     {
         $service = new EjercicioService();
         $ejercicios = $service->obtenerEjercicios();
-        return $ejercicios;
+         echo json_encode($ejercicios);
     }
 
 }

@@ -1,21 +1,103 @@
-<link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+    <title>Crear Ejercicio</title>
+</head>
+<body>
 <div id="formulario-crear-ejercicio" class="content oculto">
-    <form action="/crearEjercicio" method="post" class="califidepo">
-        <input type="text" id="documento" name="nombre" placeholder="Nombre del Ejercicio" required>
-        <input type="text" id="documento" name="descripcion" placeholder="Descripcion" required>
-        <select id="tipoUsuario" name="grupoMuscular" onchange="toggleFields()" required>
-            <option value="" disabled selected>Seleccione una opción</option>
-            <option value="deportista">Pectoral, Hombro y Triceps</option>
-            <option value="deportista">Espalda, Hombro(pres) y Biceps</option>
-            <option value="deportista">Pierna</option>
-            <option value="deportista">Entrenamiento de pilates</option>
-        </select><br><br>
-        <select id="tipoUsuario" name="tipoEjercicio" onchange="toggleFields()" required>
-            <option value="" disabled selected>Tipo de Ejercicio</option>
-            <option value="deportista">Aeróbico</option>
-            <option value="deportista">Flexibilidad</option>
-            <option value="deportista">Fuerza o Resistencia</option>
-        </select><br><br>
+    <form id="crear-ejercicio-form" action="/crearEjercicio" method="post" class="califidepo">
+        <div id="ejercicios-seleccionados">
+            <!-- Aquí se irán agregando los selects y los detalles correspondientes -->
+        </div>
+        <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
         <input type="submit">
     </form>
 </div>
+
+<div id="ejercicios-lista" class="ejercicios-lista">
+    <h2>Lista de Ejercicios</h2>
+    <ul id="lista-ejercicios"></ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Realizar la petición a la API para obtener los ejercicios
+        fetch('/ejercicios')
+            .then(response => response.json())
+            .then(data => {
+                const listaEjercicios = document.getElementById('lista-ejercicios');
+
+                data.forEach(ejercicio => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Nombre: ${ejercicio.nombre}, Descripción: ${ejercicio.descripcion}, Grupo Muscular: ${ejercicio.grupoMuscular}, Tipo de Ejercicio: ${ejercicio.tipoEjercicio}`;
+                    listaEjercicios.appendChild(listItem);
+                });
+
+                // Manejar el botón para agregar más ejercicios
+                const agregarEjercicioBtn = document.getElementById('agregar-ejercicio');
+                agregarEjercicioBtn.addEventListener('click', function () {
+                    agregarNuevoEjercicio(data);
+                });
+
+                // Agregar el primer select automáticamente
+                agregarNuevoEjercicio(data);
+            })
+            .catch(error => {
+                console.error('Error al obtener los ejercicios:', error);
+            });
+
+        function agregarNuevoEjercicio(data) {
+            const ejerciciosSeleccionadosDiv = document.getElementById('ejercicios-seleccionados');
+
+            // Crear un nuevo contenedor para el select y sus detalles
+            const contenedorEjercicio = document.createElement('div');
+            contenedorEjercicio.classList.add('ejercicio-contenedor');
+
+            // Crear un nuevo select
+            const nuevoSelect = document.createElement('select');
+            nuevoSelect.required = true;
+            nuevoSelect.innerHTML = '<option value="" disabled selected>Seleccione un ejercicio</option>';
+
+            // Llenar el select con las opciones de ejercicios
+            data.forEach(ejercicio => {
+                const option = document.createElement('option');
+                option.value = JSON.stringify(ejercicio);
+                option.textContent = ejercicio.nombre;
+                nuevoSelect.appendChild(option);
+            });
+
+            // Agregar listener para mostrar detalles del ejercicio seleccionado
+            nuevoSelect.addEventListener('change', function () {
+                const ejercicio = JSON.parse(this.value);
+                const detalleHtml = `
+                        <div>
+                            <label>Descripción:</label>
+                            <input type="text" value="${ejercicio.descripcion}" readonly><br>
+                            <label>Grupo Muscular:</label>
+                            <input type="text" value="${ejercicio.grupoMuscular}" readonly><br>
+                            <label>Tipo de Ejercicio:</label>
+                            <input type="text" value="${ejercicio.tipoEjercicio}" readonly><br>
+                        </div>
+                    `;
+                // Agregar los detalles debajo del select correspondiente
+                detallesDiv.innerHTML = detalleHtml;
+            });
+
+            // Crear un div para los detalles del ejercicio seleccionado
+            const detallesDiv = document.createElement('div');
+            detallesDiv.classList.add('detalle-ejercicio');
+
+            // Añadir el select y los detalles al contenedor del ejercicio
+            contenedorEjercicio.appendChild(nuevoSelect);
+            contenedorEjercicio.appendChild(detallesDiv);
+
+            // Añadir el contenedor del ejercicio al formulario
+            ejerciciosSeleccionadosDiv.appendChild(contenedorEjercicio);
+        }
+    });
+</script>
+</body>
+</html>

@@ -17,7 +17,8 @@
         <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
     </section>
     <nav class="navbar" id="nav">
-        <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"style="color: #ffffff;"></i></button>
+        <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"
+                                                  style="color: #ffffff;"></i></button>
         <div class="menu1">
             <ul class="listmenu1">
                 <li><a href="/" class="inicioa">Inicio</a></li>
@@ -36,10 +37,14 @@
 <a class="tituloent" href="#">Bienvenido, Usuario</a>
 
 <div class="btnent">
-    <a href="/listaclientes"><button class="clienteslist">Lista de clientes</button></a>
-    <a href="/listaejercicios"><button class="ejerciciolist">Lista de ejercicios</button></a>
+    <a href="/listaclientes">
+        <button class="clienteslist">Lista de clientes</button>
+    </a>
+    <a href="/listaejercicios">
+        <button class="ejerciciolist">Lista de ejercicios</button>
+    </a>
     <button id="btn-crear-ejercicio" class="ejerciciolist">Crear Ejercicio</button>
-    <button id="btn-crear-combo-ejercicio" class="ejerciciolist">Crear Combo Ejercicio</button>
+    <button id="btn-crear-ejercicio" class="ejerciciolist">Crear Combo Ejercicio</button>
 </div>
 
 <div id="modal-overlay" class="modal-overlay">
@@ -50,17 +55,6 @@
             <div class="close">Close</div>
         </button>
         <div id="formulario-crear-ejercicio"></div>
-    </div>
-</div>
-
-<div id="modal-overlay-combo" class="modal-overlay">
-    <div class="modal-content">
-        <button class="modal-close-button">
-            <span class="X"></span>
-            <span class="Y"></span>
-            <div class="close">Close</div>
-        </button>
-        <div id="formulario-crear-combo-ejercicio"></div>
     </div>
 </div>
 
@@ -137,12 +131,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const btnCrearEjercicio = document.getElementById('btn-crear-ejercicio');
-        const btnCrearComboEjercicio = document.getElementById('btn-crear-combo-ejercicio');
         const modalOverlay = document.getElementById('modal-overlay');
-        const modalOverlayCombo = document.getElementById('modal-overlay-combo');
-        const closeModalButtons = document.querySelectorAll('.modal-close-button');
+        const closeModalButton = document.querySelector('.modal-close-button');
         const contenedorFormulario = document.getElementById('formulario-crear-ejercicio');
-        const contenedorFormularioCombo = document.getElementById('formulario-crear-combo-ejercicio');
 
         btnCrearEjercicio.addEventListener('click', function () {
             fetch('/crearEjercicio')
@@ -168,47 +159,14 @@
                 });
         });
 
-        btnCrearComboEjercicio.addEventListener('click', function () {
-            fetch('/crearComboEjercicio')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                    return response.text(); // Obtener el HTML como texto
-                })
-                .then(html => {
-                    contenedorFormularioCombo.innerHTML = html; // Insertar el HTML del formulario
-                    modalOverlayCombo.style.display = 'flex'; // Mostrar el modal
-
-                    // Agregar clase personalizada a los botones del formulario
-                    const formButtons = contenedorFormularioCombo.querySelectorAll('input[type="submit"]');
-                    formButtons.forEach(button => {
-                        button.classList.add('btn-modal-form');
-                    });
-                })
-                .catch(error => {
-                    console.error('Hubo un problema con la solicitud:', error);
-                    alert('Hubo un problema al cargar el formulario. Intente nuevamente.');
-                });
-        });
-
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                modalOverlay.style.display = 'none'; // Ocultar el modal
-                modalOverlayCombo.style.display = 'none'; // Ocultar el modal combo
-            });
+        closeModalButton.addEventListener('click', function () {
+            modalOverlay.style.display = 'none'; // Ocultar el modal
         });
 
         // Cerrar el modal al hacer clic fuera del contenido
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
-            }
-        });
-
-        modalOverlayCombo.addEventListener('click', function (event) {
-            if (event.target === modalOverlayCombo) {
-                modalOverlayCombo.style.display = 'none';
             }
         });
     });

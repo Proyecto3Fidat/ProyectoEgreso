@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\EjercicioModel;
 use App\Repositories\Database;
 
 class EjercicioRepository extends Database
@@ -27,16 +28,17 @@ class EjercicioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT * FROM Ejercicio";
-        $result = $database->getConnection()->query($sql);
+        $sql = "SELECT nombre, descripcion, grupoMuscular, tipoEjercicio FROM Ejercicio";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
         $ejercicios = [];
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $ejercicio = new EjercicioModel($row['nombre'], $row['descripcion'], $row['grupoMuscular'], $row['tipoEjercicio']);
-                $ejercicios[] = $ejercicio;
-            }
+        while ($row = $result->fetch_assoc()) {
+            $ejercicios[] = $row;
         }
+
         $database->disconnect();
         return $ejercicios;
     }
+
 }
