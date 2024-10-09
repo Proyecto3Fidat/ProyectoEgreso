@@ -17,6 +17,15 @@ header{
     background-color: #100e0f;
 }
 
+.ListaClientes-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}
+
 /*Style generales para los botones*/
 button { 
     cursor: pointer;
@@ -29,6 +38,7 @@ button {
     border: 0;
 }
 
+/*Inicio del nav*/
 .navbar {
     display: flex;
 }
@@ -75,6 +85,7 @@ nav a:hover {
 .login-btn:hover, .sign-in-btn:hover {
     color: #6f41bb;
 }
+/*Fin del nav*/
 
 .listaclientes{
     display: flex;
@@ -102,19 +113,17 @@ nav a:hover {
     overflow: hidden; 
     justify-content: center;
 }
-
-.lista-clientes th, .lista-clientes td {
-    padding: 1rem; 
-    text-align: center; 
-    border: 1px solid #fff; 
-    border-radius: 20px;
-    border: hidden;
-    gap: 2rem;
-}
-
-.lista-clientes.visible {
-    display: block;
-}
+    .lista-clientes th, .lista-clientes td {
+        padding: 1rem; 
+        text-align: center; 
+        border: 1px solid #fff; 
+        border-radius: 20px;
+        border: hidden;
+        gap: 2rem;
+    }
+    .lista-clientes.visible {
+        display: block;
+    }
 
 .btn-detalles { 
     border-radius: 10px;
@@ -123,52 +132,59 @@ nav a:hover {
 
 .fichagnrl{
     display: none;
+    background-color:#303030;
+    width:80%;
+    margin: 2rem auto;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
 }
-
 .fichagnrl.visible{
     display: block;
 }
+.fichaTecnica {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
 
-.fichatecn {
+.headFicha {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    position: relative;
+    text-align: center;
 }
-
-.cerrarficha{
-    background-color: transparent;
-    position: absolute;
-    right: 0;
-}
-
-h4 {
-    text-align: center; 
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
+    .cerrarficha{
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: transparent;
+        cursor: pointer;
+    }
+    h4 {
+        text-align: center; 
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+    
 .divficha-container {
     display: flex;
     text-align: center;
     justify-content: center; 
     margin-bottom: 2rem; 
 }
-
-.divficha, .divficha2 {
-    text-align: center;
-    padding: 1rem;
-    gap: 1rem;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
-    margin: 0 10px; 
-}
-
+    .imgCliente img {
+        width:40%;
+        height:auto;
+    }
+    .divficha, .divficha2 {
+        text-align: center;
+        padding: 1rem;
+        gap: 1rem;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+        margin: 0 10px; 
+    }
 .btnficha {
     display: flex;
     justify-content: center; 
@@ -184,9 +200,8 @@ h4 {
 }
 
 .adejerci:hover, .adrut:hover {
-    transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.2);
 }
-
 /*Inicio de footer*/
 footer {
     background: radial-gradient(circle, rgba(24, 23, 24, 1) 0%, rgba(24, 23, 24, 0.9) 50%, rgba(0, 0, 0, 0.8) 100%),  no-repeat center center fixed;
@@ -219,4 +234,5 @@ footer .redes a {
 footer .redes a:hover {
     color: #6f41bb;
 }
+    
 /*Fin de footer*/

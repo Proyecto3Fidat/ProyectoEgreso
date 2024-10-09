@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const listaclientes = document.getElementById("tablaClientes");
         ficha.style.display = 'block';
         listaclientes.style.display = "none";
+        
 
         // Encontrar el cliente correspondiente en la lista
         const cliente = clientes.find(c => c.nroDocumento === clienteId);
@@ -83,6 +84,5 @@ document.addEventListener('DOMContentLoaded', function () {
         const listaclientes = document.getElementById("lista-clientes");
         document.getElementById('fichagnl').style.display = 'none';
         document.getElementById("tablaClientes").style.display = "block";
-        document.getElementById("tablaClientes").style.alignItems = "center";
     });
 });

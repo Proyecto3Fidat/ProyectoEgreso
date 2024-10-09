@@ -9,18 +9,19 @@
 </head>
 {% include 'header.html.twig' %}
 <body>
-<div id="formulario-crear-ejercicio" class="content oculto">
-    <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo">
-        <label for="nombre-combo">Nombre del Combo:</label>
-        <input type="text" id="nombre-combo" name="nombreCombo" required><br><br>
-        <div id="ejercicios-seleccionados">
-            <!-- Aquí se irán agregando los selects y los detalles correspondientes -->
-        </div>
-        <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
-        <input type="hidden" name="ejercicios" id="ejercicios-input">
-        <input type="submit" value="Enviar">
-    </form>
-</div>
+<div class="crearEjercicio-Container">
+    <div id="formulario-crear-ejercicio" class="content oculto">
+        <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo">
+            <label for="nombre-combo">Nombre del Combo:</label>
+            <input type="text" id="nombre-combo" name="nombreCombo" required><br><br>
+            <div id="ejercicios-seleccionados">
+                <!-- Aquí se irán agregando los selects y los detalles correspondientes -->
+            </div>
+            <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
+            <input type="hidden" name="ejercicios" id="ejercicios-input">
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
 
 <div id="ejercicios-lista" class="ejercicios-lista">
     <h2>Lista de Ejercicios</h2>
@@ -147,7 +148,7 @@
         }
     });
 </script>
-
+    </div>
 </body>
 {% include 'footer.html.twig' %}
 </html>

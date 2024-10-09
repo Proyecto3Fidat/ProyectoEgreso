@@ -110,7 +110,6 @@ nav a:hover {
     background: linear-gradient(135deg, #303030, #160d1a);
     box-shadow: 2px 1px .5rem 1px rgba(111, 65, 187, 1);
     font-family: 'Poppins', sans-serif;
-    transition: transform 0.8s ease-in-out;
 }
     .clienteslist, .ejerciciolist, .rutinaslist:hover {
         transition: 600ms;

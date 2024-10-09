@@ -20,7 +20,7 @@ button {
 }
 
 body {
-    background-color: #100e0f;
+    background-color: #131313;
     font-family: 'Poppins', sans-serif;
     color: white;
 }
@@ -65,10 +65,6 @@ nav a:hover {
 .menu2 {
     display: flex;
     margin-left: auto;
-}
-
-.listmenu1 {
-    gap: .5rem;
 }
 
 .listmenu1, .listmenu2{
