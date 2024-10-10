@@ -39,6 +39,12 @@ CREATE TABLE Deportista(
     PRIMARY KEY(nroDocumento, tipoDocumento)
 );
 
+CREATE TABLE Club(
+    idClub AUTO_INCREMENT,
+    nombreClub VARCHAR (20),
+    PRIMARY KEY(idClub)
+);
+
 CREATE TABLE Estado(
     id_Estado INT,
     PRIMARY KEY(id_Estado)
@@ -143,6 +149,19 @@ CREATE TABLE Entrena(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
     PRIMARY KEY (nombre)
+);
+
+CREATE TABLE Pertenece(
+    idClub AUTO_INCREMENT,
+    nroDocumento VARCHAR(30) NOT NULL,
+    tipoDocumento VARCHAR (16),
+    PRIMARY KEY (nroDocumento, tipoDocumento, idClub)
+);
+
+CREATE TABLE Relacionado(
+    idClub AUTO_INCREMENT,
+    nombreClub VARCHAR(20),
+    PRIMARY KEY (idClub, nombreClub)
 );
 
 CREATE TABLE Practica(
@@ -304,3 +323,15 @@ ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo) ON DELETE 
 
 ALTER TABLE Contiene
 ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio (idEjercicio) ON DELETE CASCADE;
+
+ALTER TABLE Pertenece
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
+
+ALTER TABLE Pertenece
+ADD FOREIGN KEY (idClub) REFERENCES Club(idClub) ON DELETE CASCADE;
+
+ALTER TABLE Relacionado
+ADD FOREIGN KEY (idClub) REFERENCES Club(idClub) ON DELETE CASCADE;
+
+ALTER TABLE Relacionado
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
