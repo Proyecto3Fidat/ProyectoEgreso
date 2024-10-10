@@ -19,6 +19,7 @@
         "pecee/simple-router": "^5.4",
         "monolog/monolog": "^3.7",
         "tecnickcom/tcpdf": "^6.7",
-        "twig/twig": "^3.14"
+        "twig/twig": "^3.14",
+        "guzzlehttp/guzzle": "^7.9"
     }
 }

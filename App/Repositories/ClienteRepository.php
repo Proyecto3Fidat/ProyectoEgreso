@@ -349,4 +349,36 @@ class ClienteRepository extends Database
         return $clientes;
     }
 
+    public function obtenerInfoCliente($nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT nombre, apellido, fechaNacimiento, patologias, email, calle, numero, esquina, peso, altura FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($nombre, $apellido, $fechaNacimiento, $patologias, $email, $calle, $numero, $esquina, $peso, $altura);
+        $clientes = array();
+        echo $nombre;
+        while ($stmt->fetch()) {
+            $clientes[] = array(
+                'nombre' => $nombre,
+                'apellido' => $apellido,
+                'fechaNacimiento' => $fechaNacimiento,
+                'patologias' => $patologias,
+                'email' => $email,
+                'calle' => $calle,
+                'numero' => $numero,
+                'esquina' => $esquina,
+                'peso' => $peso,
+                'altura' => $altura
+            );
+        }
+        $stmt->close();
+        $database->disconnect();
+        return $clientes;
+
+    }
+
 }

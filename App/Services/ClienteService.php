@@ -169,4 +169,9 @@ class ClienteService
         $edad = $hoy->diff($fechaNacimiento);
         return $edad->y;
     }
+
+    public function obtenerinfoCliente($documento)
+    {
+        return $this->clienteRepository->obtenerInfoCliente($documento);
+    }
 }

@@ -37,11 +37,9 @@ use \App\Controllers\PagoMiddleware;
 use App\Controllers\TemplateController;
 use App\Controllers\EjercicioController;
 
-// Incluir el archivo de configuración del logger
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
 
-// Ruta para el inicio
 SimpleRouter::post('/pagos', function () use ($logger) {
     $elige = new App\Controllers\EligeController();
     $elige->obtenerPagosPorDocumento();
@@ -78,6 +76,36 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
 
+        Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
+            $calificacionRepository = new CalificacionRepository();
+            $calificacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calificacionService, $logger);
+            $calificacionController->obtenerPuntuacionesAjax();
+            exit();
+        });
+
+        SimpleRouter::post('/dashboard', function () use ($logger) {
+            $graficos = new App\Controllers\GraficosController();
+            $template = new TemplateController();
+            $calificacionRepository = new CalificacionRepository();
+            $calificacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calificacionService, $logger);
+            $clienteRepository = new ClienteRepository();
+            $clienteService = new ClienteService($clienteRepository);
+            $clienteController = new ClienteController($clienteService, $logger);
+            $usuario = $clienteController->obtenerInfoCliente();
+            $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
+            $grafico = $graficos->crearGrafico($calificaciones);
+
+            $template->renderTemplate('dashboardEntrenador', array_merge(['usuario' => $usuario], ['calificaciones' => $calificaciones], ['grafico' => $grafico]));
+            exit();
+        });
+
+        SimpleRouter::get('/dashboard', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('dashboardEntrenador');
+        });
+
 
         SimpleRouter::post('/crearEjercicio', function () {
             $template = new TemplateController();
@@ -111,6 +139,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         SimpleRouter::get('/calificacion', function () {
             $template = new TemplateController();
             $template->renderTemplate('calificacion');
+            exit();
         });
 
         SimpleRouter::get('/listaclientes', function () {
@@ -135,7 +164,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $calificacionRepository = new CalificacionRepository();
             $calificacionService = new CalificacionService($calificacionRepository);
             $calificacionController = new CalificacionController($calificacionService, $logger);
-
             try {
                 $calificacionController->asignarPuntuacion();
                 echo json_encode([
@@ -148,7 +176,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                     'error' => 'Error al crear la calificación: ' . $e->getMessage()
                 ]);
             }
-
             exit();
         });
 
@@ -167,17 +194,14 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         SimpleRouter::post('/logo', function () use ($logger) {
             $template = new TemplateController();
             if (isset($_FILES['logo'])) {
-                // Obtener información del archivo subido
                 $file = $_FILES['logo'];
 
-                // Comprobar si hay algún error durante la subida
                 if ($file['error'] !== 0) {
                     $logger->error('Error al subir el archivo.');
                     echo "Error al subir el archivo.";
                     return;
                 }
 
-                // Verificar que el archivo subido sea una imagen
                 $validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
                 if (!in_array($file['type'], $validImageTypes)) {
                     $logger->error('Formato de archivo no soportado. Suba un PNG o JPEG.');
@@ -185,10 +209,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                     return;
                 }
 
-                // Ruta temporal del archivo
                 $tempFile = $file['tmp_name'];
 
-                // Crear imagen desde el archivo temporal dependiendo de su tipo
                 $image = null;
                 switch ($file['type']) {
                     case 'image/png':
@@ -206,20 +228,16 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                     return;
                 }
 
-                // Cambiar tamaño de la imagen a 64x64 para favicon (estándar)
                 $faviconSize = 64;
                 $faviconImage = imagecreatetruecolor($faviconSize, $faviconSize);
                 imagecopyresampled($faviconImage, $image, 0, 0, 0, 0, $faviconSize, $faviconSize, imagesx($image), imagesy($image));
 
-                // Ruta donde guardar el archivo .ico (en la raíz)
                 $targetFile = $_SERVER['DOCUMENT_ROOT'] . '/favicon.ico';
 
-                // Eliminar el favicon actual si existe
                 if (file_exists($targetFile)) {
                     unlink($targetFile);
                 }
 
-                // Guardar la imagen como .ico
                 if (imagepng($faviconImage, $targetFile)) {
                     $logger->info('Favicon generado correctamente.');
                     $template->renderTemplate('inicio');
@@ -228,7 +246,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                     echo "Error al guardar el favicon.";
                 }
 
-                // Liberar memoria
                 imagedestroy($image);
                 imagedestroy($faviconImage);
             } else {
@@ -310,15 +327,12 @@ SimpleRouter::get('/cargarDatos', function () {
     exit();
 });
 
-//Funcion get favicon.ico para resolver error del navegador
-SimpleRouter::get('/favicon.ico', function () {
-});
 
-// Ruta para el login de clientes
 SimpleRouter::get('/login', function () {
     $template = new TemplateController();
     $template->renderTemplate('loginUsuario');
 });
+
 SimpleRouter::get('/calificaciones', function () {
     $template = new TemplateController();
     $template->renderTemplate(calificaciones);
@@ -331,13 +345,11 @@ SimpleRouter::get('/registrarcliente', function () {
 });
 
 
-// Ruta para los horarios
 SimpleRouter::get('/horarios', function () {
     $template = new TemplateController();
     $template->renderTemplate('agenda');
 });
 
-// Ruta para los planes
 SimpleRouter::get('/planes', function () {
     $template = new TemplateController();
     $template->renderTemplate('planes');

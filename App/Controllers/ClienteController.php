@@ -174,6 +174,23 @@ class ClienteController
             echo json_encode($resultado);
 
     }
+    public function obtenerInfoCliente()
+    {
+        $nroDocumento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $clienteTelefonoRepository = new ClientetelefonoRepository();
+        $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
+        $cliente = $this->clienteService->obtenerInfoCliente($nroDocumento);
+
+        if (is_array($cliente) && count($cliente) === 1) {
+            $cliente[0]['documento'] = $nroDocumento;
+            $cliente[0]['edad'] = $this->clienteService->calcularEdad($cliente[0]['fechaNacimiento']);
+
+            return $cliente[0];
+        }
+
+        return $cliente;
+    }
+
     public function obtenerListaClientesAdmin()
     {
         $clienteTelefonoRepository = new ClientetelefonoRepository();
@@ -189,7 +206,6 @@ class ClienteController
             $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
             $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
 
-            // Verificar si $pago es null
             if ($pago !== null) {
                 $resultado[] = [
                     'nombre' => $cliente['nombre'],

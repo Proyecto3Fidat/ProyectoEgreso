@@ -41,6 +41,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     abrirFichaTecnica(clienteId);
                 });
             });
+
+            // Agregar evento click a los botones de "Calificar"
+            document.querySelectorAll('.btncalificar').forEach(button => {
+                button.addEventListener('click', function () {
+                    const clienteId = this.getAttribute('data-cliente-id');
+                    window.location.href = `/calificarCliente?documento=${clienteId}`;
+                });
+            });
         })
         .catch(error => {
             console.error('Error al cargar la lista de clientes:', error);
@@ -70,9 +78,20 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Altura: ${cliente.altura}`;
             document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
 
+            // Actualizar el formulario para enviar una solicitud POST
             const form = document.querySelector('form');
-            form.action = `/calificacion?documento=${clienteId}`;
-            form.querySelector('input[name="documento"]').value = clienteId;
+            form.action = '/dashboard';
+            form.method = 'POST';
+
+            // Asignar valor al campo oculto del formulario para enviar el clienteId
+            let inputDocumento = form.querySelector('input[name="documento"]');
+            if (!inputDocumento) {
+                inputDocumento = document.createElement('input');
+                inputDocumento.type = 'hidden';
+                inputDocumento.name = 'documento';
+                form.appendChild(inputDocumento);
+            }
+            inputDocumento.value = clienteId;
         } else {
             console.error('Cliente no encontrado.');
             alert('No se encontraron los datos del cliente.');

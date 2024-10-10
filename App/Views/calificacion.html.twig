@@ -8,11 +8,6 @@
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Calificar</title>
 
-    <style>
-        .content {
-            display: none;
-        }
-    </style>
 </head>
 <header>
     <section class="navhead">
@@ -69,29 +64,6 @@
     });
 </script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Verificar autenticación al cargar la página
-        fetch('/verificarsesion', {
-            method: 'GET'
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    // Si hay un error de autenticación, redirigir al login
-                    alert(data.error);
-                    window.location.href = '/login';
-                } else {
-                    // Mostrar el formulario si está autenticado
-                    document.getElementById('formulario-crear-ejercicio').classList.remove('oculto');
-                }
-            })
-            .catch(error => {
-                alert('Error al verificar la sesión. Intente nuevamente.');
-                console.error('Error:', error);
-                window.location.href = '/login';
-            });
-
-        // Manejar el envío del formulario de calificación
         document.querySelector('form.califidepo').addEventListener('submit', function (event) {
             event.preventDefault();
 
@@ -120,7 +92,6 @@
             const formulario = document.getElementById('formulario-crear-ejercicio');
             formulario.classList.toggle('oculto');
         });
-    });
 </script>
 
 

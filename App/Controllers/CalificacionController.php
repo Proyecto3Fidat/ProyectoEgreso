@@ -103,12 +103,6 @@ class CalificacionController
         $usuarioRepository = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepository);
 
-        if (!isset($_SESSION['sesion']) || $_SESSION['sesion'] !== true) {
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'No tiene permisos para ver esta página']);
-            exit();
-        }
-        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
             $obtieneRepository = new ObtieneRepository();
             $obtieneService = new ObtieneService($obtieneRepository);
             $resultado = $obtieneService->obtenerCalificaciones($_SESSION['documento']);
@@ -117,11 +111,10 @@ class CalificacionController
             foreach ($resultado as $resultados) {
                 $calificacion = $this->calificacionService->obtenerPuntuaciones($resultados['id']);
 
-                // Verificar si $calificacion tiene datos y tomar el primer elemento
                 if (is_array($calificacion) && !empty($calificacion)) {
                     $calificacion = $calificacion[0]; // Usar solo el primer elemento
                 } else {
-                    $calificacion = []; // Array vacío si no hay datos
+                    $calificacion = [];
                 }
 
                 $calificaciones[] = [
@@ -139,10 +132,42 @@ class CalificacionController
             }
             header('Content-Type: application/json');
             echo json_encode($calificaciones);
-        } else {
-            header('HTTP/1.1 403 Forbidden');
-            echo json_encode(['error' => 'Token inválido o sesión expirada']);
-        }
     }
+    public function obtenerPuntuacionesCliente()
+    {
+        $obtieneRepository = new ObtieneRepository();
+        $obtieneService = new ObtieneService($obtieneRepository);
+        $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $calificaciones = $obtieneService->obtenerCalificaciones($documento);
+        $calificacionesR = [];
+        foreach ($calificaciones as $calificacion) {
+            $calificacionR = $this->calificacionService->obtenerPuntuaciones($calificacion['id']);
+
+            if (is_array($calificacionR) && !empty($calificacionR)) {
+
+                $calificacionR = $calificacionR[0];
+
+            } else {
+                $calificacionR = [];
+            }
+
+            $resultado = [
+                'id' => $calificacion['id'],
+                'puntObtenido' => $calificacion['puntObtenido'],
+                'fecha' => $calificacion['fecha'],
+                'fuerzaMusc' => $calificacionR['fuerzaMusc'] ?? '',
+                'resMusc' => $calificacionR['resMusc'] ?? '',
+                'resAnaerobica' => $calificacionR['resAnaerobica'] ?? '',
+                'resiliencia' => $calificacionR['resiliencia'] ?? '',
+                'flexibilidad' => $calificacionR['flexibilidad'] ?? '',
+                'cumplAgenda' => $calificacionR['cumplAgenda'] ?? '',
+                'resMonotonia' => $calificacionR['resMonotonia'] ?? ''
+            ];
+            $calificacionesR[] = $resultado;
+
+        }
+        return $calificacionesR;
+    }
+
 }
 

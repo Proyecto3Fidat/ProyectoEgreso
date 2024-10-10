@@ -47,24 +47,26 @@ class ObtieneRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT id , puntObtenido, fecha FROM Obtiene WHERE nroDocumento = ?";
+        $sql = "SELECT id , puntObtenido, fecha , puntEsperado FROM Obtiene WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         $calificaciones = [];
-        $stmt->bind_result($id, $puntObtenido, $fecha);
+        $stmt->bind_result($id, $puntObtenido, $fecha, $puntEsperado);
         $calificaciones = array();
         while ($stmt->fetch()) {
             $calificaciones [] = array(
                 'id' => $id,
                 'puntObtenido' => $puntObtenido,
-                'fecha' => $fecha
+                'fecha' => $fecha,
+                'puntEsperado' => $puntEsperado
             );
         }
         $stmt->close();
         $database->disconnect();
         return $calificaciones;
     }
+
     public function obtenerCalificacionesXId($id)
     {
         $database = Database::getInstance();

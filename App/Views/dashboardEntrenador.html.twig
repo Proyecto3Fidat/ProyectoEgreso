@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+    <title>Dashboard del Usuario</title>
+</head>
+<body>
+<div class="dashboardContainer">
+    <script src="../../Public/js/listaCalificaciones.js"></script>
+
+
+    <h1>Bienvenido al Dashboard del Usuario {{ usuario.nombre }} {{ usuario.apellido }}</h1>
+
+    <!-- Seccion de Informacion del Usuario -->
+    <section class="informacionUsuario">
+        <h2>Información del Usuario</h2>
+        <div class="usuarioInfo">
+            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+            <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+            <p><strong>Altura:</strong> {{ usuario.altura }}</p>
+            <p><strong>Peso:</strong> {{ usuario.peso }}</p>
+            <p><strong>Documento:</strong> {{ usuario.documento }}</p>
+        </div>
+    </section>
+
+    <section class="calificaciones">
+        <h2>Calificaciones</h2>
+        <div class="tablaCliente">
+            <table class="clasCliente" id="tablaCalificaciones">
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Puntuación Total</th>
+                    <th>Fuerza Muscular</th>
+                    <th>Resistencia Muscular</th>
+                    <th>Flexibilidad</th>
+                    <th>Imprimir</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for calificacion in calificaciones %}
+                    <tr>
+                        <td>{{ calificacion.fecha }}</td>
+                        <td>{{ calificacion.puntObtenido }}</td>
+                        <td>{{ calificacion.fuerzaMusc }}</td>
+                        <td>{{ calificacion.resMusc }}</td>
+                        <td>{{ calificacion.flexibilidad }}</td>
+                        <td>
+                            <button onclick="/imprimirCalificacion?id=({{ calificacion.id }})">
+                                <i class="fas fa-print"></i> Imprimir
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="6">No hay calificaciones disponibles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </section>
+
+
+    <section class="rutina">
+        <h2>Rutina</h2>
+        <div class="tablaRutina">
+            <table class="clasRutina" id="tablaRutina">
+                <tr>
+                    <th>Día</th>
+                    <th>Ejercicio</th>
+                    <th>Series</th>
+                    <th>Repeticiones</th>
+                    <th>Descanso</th>
+                </tr>
+                <tr>
+                    <td>Lunes</td>
+                    <td>Press de Banca</td>
+                    <td>4</td>
+                    <td>12</td>
+                    <td>90 seg</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="evolucion">
+        <h2>Evolución</h2>
+        <div class="graficaEvolucion">
+            <p>Aquí podrás ver tu evolución física a lo largo del tiempo.</p>
+            <img src="{{ grafico }}" alt="Gráfica de Evolución">
+        </div>
+    </section>
+</div>
+
+</body>
+
+</html>
