@@ -32,4 +32,29 @@ class ContieneRepository extends Database
             return false;
         }
     }
+
+    public function obtenerEjercicios()
+    {
+        $database = Database::getInstance();
+        $database->connect();
+
+        // Consulta con JOIN para obtener la información de los ejercicios y sus combos
+        $sql = "
+        SELECT Contiene.nombreCombo, Ejercicio.idEjercicio, Ejercicio.nombre, Ejercicio.descripcion, Ejercicio.tipoEjercicio, Ejercicio.grupoMuscular
+        FROM Contiene
+        INNER JOIN Ejercicio ON Contiene.idEjercicio = Ejercicio.idEjercicio
+    ";
+
+        $result = $database->getConnection()->query($sql);
+        $ejercicios = [];
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $ejercicios[] = $row;
+            }
+        }
+
+        $database->disconnect();
+        return $ejercicios;
+    }
 }

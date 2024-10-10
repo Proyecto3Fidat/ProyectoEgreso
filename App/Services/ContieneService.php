@@ -20,4 +20,10 @@ class ContieneService
         }
         $repository->crearContiene($nombreCombo, $idEjercicio);
     }
+
+    public function obtenerEjercicios()
+    {
+        $repository = new ContieneRepository();
+        return $repository->obtenerEjercicios();
+    }
 }

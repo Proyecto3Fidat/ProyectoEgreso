@@ -8,9 +8,6 @@
     <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Entrenador</title>
-    <style>
-
-    </style>
 </head>
 <header>
     <section class="navhead">
@@ -44,12 +41,11 @@
         <button class="ejerciciolist">Lista de ejercicios</button>
     </a>
     <button id="btn-crear-ejercicio" class="ejerciciolist">Crear Ejercicio</button>
-    <a href="/crearComboEjercicio">
-        <button class="ejerciciolist">Crear Combo Ejercicio</button>
-    </a>
-
+    <button id="btn-crear-combo-ejercicio" class="ejerciciolist">Crear Combo Ejercicio</button>
+    <button id="btn-crear-rutina" class="ejerciciolist">Crear Rutina</button>
 </div>
 
+<!-- Modal para Mostrar Formularios dentro de un Iframe -->
 <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
         <button class="modal-close-button">
@@ -57,9 +53,10 @@
             <span class="Y"></span>
             <div class="close">Close</div>
         </button>
-        <div id="formulario-crear-ejercicio"></div>
+        <iframe id="form-iframe" src="" frameborder="0" width="100%" height="500px"></iframe>
     </div>
 </div>
+
 
 <section class="agenda">
     <h1>HORARIOS</h1>
@@ -134,42 +131,41 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const btnCrearEjercicio = document.getElementById('btn-crear-ejercicio');
+        const btnCrearComboEjercicio = document.getElementById('btn-crear-combo-ejercicio');
+        const btnCrearRutina = document.getElementById('btn-crear-rutina');
         const modalOverlay = document.getElementById('modal-overlay');
         const closeModalButton = document.querySelector('.modal-close-button');
-        const contenedorFormulario = document.getElementById('formulario-crear-ejercicio');
+        const iframe = document.getElementById('form-iframe');
 
+        // Evento para abrir el modal de Crear Ejercicio y cargar el formulario en el iframe
         btnCrearEjercicio.addEventListener('click', function () {
-            fetch('/crearEjercicio')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error en la respuesta del servidor');
-                    }
-                    return response.text(); // Obtener el HTML como texto
-                })
-                .then(html => {
-                    contenedorFormulario.innerHTML = html; // Insertar el HTML del formulario
-                    modalOverlay.style.display = 'flex'; // Mostrar el modal
-
-                    // Agregar clase personalizada a los botones del formulario
-                    const formButtons = contenedorFormulario.querySelectorAll('input[type="submit"]');
-                    formButtons.forEach(button => {
-                        button.classList.add('btn-modal-form');
-                    });
-                })
-                .catch(error => {
-                    console.error('Hubo un problema con la solicitud:', error);
-                    alert('Hubo un problema al cargar el formulario. Intente nuevamente.');
-                });
+            iframe.src = '/crearEjercicio'; // URL del formulario de Crear Ejercicio
+            modalOverlay.style.display = 'flex'; // Mostrar el modal
         });
 
+        // Evento para abrir el modal de Crear Combo Ejercicio y cargar el formulario en el iframe
+        btnCrearComboEjercicio.addEventListener('click', function () {
+            iframe.src = '/crearComboEjercicio'; // URL del formulario de Crear Combo Ejercicio
+            modalOverlay.style.display = 'flex'; // Mostrar el modal
+        });
+
+        // Evento para abrir el modal de Crear Rutina y cargar el formulario en el iframe
+        btnCrearRutina.addEventListener('click', function () {
+            iframe.src = '/obtenerComboEjercicios'; // URL del formulario de Crear Rutina
+            modalOverlay.style.display = 'flex'; // Mostrar el modal
+        });
+
+        // Evento para cerrar el modal
         closeModalButton.addEventListener('click', function () {
             modalOverlay.style.display = 'none'; // Ocultar el modal
+            iframe.src = ''; // Limpiar la URL del iframe
         });
 
         // Cerrar el modal al hacer clic fuera del contenido
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
+                iframe.src = ''; // Limpiar la URL del iframe
             }
         });
     });

@@ -90,6 +90,7 @@ class CalificacionController
             $puntuacionEsperado,
             $calificacionObtenida
         ));
+        $this->logger->info('Puntuación del usuario '.$nroDocumento.' asignada correctamente. '.$id);
     }
 
 

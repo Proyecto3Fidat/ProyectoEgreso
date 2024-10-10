@@ -3,3 +3,4 @@ Config/logs/app.log
 .idea/
 /.idea
 qodana.yaml
+/Config/logs/usuario.log

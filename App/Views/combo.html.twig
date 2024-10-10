@@ -1,0 +1,157 @@
+
+    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
+    <h1>Crear Rutina</h1>
+    <form id="formCrearRutina" method="post" action="/crearRutina">
+        <div id="combosContainer">
+            <label for="comboSelect">Selecciona un Combo:</label>
+            <select id="comboSelect" name="combos[]" class="combo-select">
+                <option value="">-- Selecciona un combo --</option>
+                {% set agregados = [] %} {# Array para almacenar los nombres ya agregados #}
+                {% for combo in combos %}
+                    {% if combo.nombreCombo not in agregados %}
+                        <option value="{{ combo.nombreCombo }}" data-combo='{{ combo | json_encode() | raw }}'>{{ combo.nombreCombo }}</option>
+                        {% set agregados = agregados | merge([combo.nombreCombo]) %}
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <button type="button" id="agregarCombo">Agregar Combo</button>
+        </div>
+
+        <!-- Contenedor para mostrar la información del combo seleccionado -->
+        <div id="comboInfo">
+            <h3>Información del Combo</h3>
+            <p id="comboNombre">Nombre: <span></span></p>
+            <p id="comboDescripcion">Descripción: <span></span></p>
+            <p id="comboTipo">Tipo: <span></span></p>
+            <p id="comboGrupo">Grupo Muscular: <span></span></p>
+        </div>
+
+        <div id="ejerciciosContainer">
+            <h3>Ejercicios Seleccionados</h3>
+            <!-- Los ejercicios seleccionados aparecerán aquí -->
+        </div>
+
+        <!-- Campo oculto para almacenar los combos seleccionados -->
+        <input type="hidden" id="combosSeleccionados" name="combosSeleccionados">
+
+        <button type="submit">Crear Rutina</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const comboSelect = document.getElementById('comboSelect');
+            const comboNombre = document.getElementById('comboNombre').querySelector('span');
+            const comboDescripcion = document.getElementById('comboDescripcion').querySelector('span');
+            const comboTipo = document.getElementById('comboTipo').querySelector('span');
+            const comboGrupo = document.getElementById('comboGrupo').querySelector('span');
+            const agregarComboButton = document.getElementById('agregarCombo');
+            const ejerciciosContainer = document.getElementById('ejerciciosContainer');
+            const combosSeleccionadosInput = document.getElementById('combosSeleccionados');
+
+            // Map para almacenar los combos seleccionados y evitar duplicados
+            let combosSeleccionados = new Map();
+
+            comboSelect.addEventListener('change', function () {
+                const selectedOption = comboSelect.options[comboSelect.selectedIndex];
+                const comboData = selectedOption.dataset.combo;
+
+                if (comboData) {
+                    // Parsear el JSON almacenado en el atributo data-combo
+                    const combo = JSON.parse(comboData);
+
+                    // Mostrar la información del combo
+                    comboNombre.textContent = combo.nombreCombo;
+                    comboDescripcion.textContent = combo.descripcion;
+                    comboTipo.textContent = combo.tipoEjercicio;
+                    comboGrupo.textContent = combo.grupoMuscular;
+                } else {
+                    // Si no se ha seleccionado un combo válido, limpiar la información mostrada
+                    comboNombre.textContent = '';
+                    comboDescripcion.textContent = '';
+                    comboTipo.textContent = '';
+                    comboGrupo.textContent = '';
+                }
+            });
+
+            agregarComboButton.addEventListener('click', function () {
+                const selectedOption = comboSelect.options[comboSelect.selectedIndex];
+                const comboData = selectedOption.dataset.combo;
+
+                if (comboData) {
+                    // Parsear el JSON almacenado en el atributo data-combo
+                    const combo = JSON.parse(comboData);
+
+                    // Verificar si ya existe un combo con el mismo nombre en el mapa de combos seleccionados
+                    if (combosSeleccionados.has(combo.nombreCombo)) {
+                        alert('Este combo ya ha sido seleccionado.');
+                    } else {
+                        // Añadir el combo al mapa de combos seleccionados
+                        combosSeleccionados.set(combo.nombreCombo, combo);
+                        actualizarCampoOculto();
+
+                        // Crear un elemento para mostrar el combo seleccionado
+                        const comboDiv = document.createElement('div');
+                        comboDiv.classList.add('combo-item');
+                        comboDiv.innerHTML = `
+                            <p><strong>Nombre:</strong> ${combo.nombreCombo}</p>
+                            <p><strong>Descripción:</strong> ${combo.descripcion}</p>
+                            <p><strong>Tipo:</strong> ${combo.tipoEjercicio}</p>
+                            <p><strong>Grupo Muscular:</strong> ${combo.grupoMuscular}</p>
+                            <h4>Ejercicios del Combo:</h4>
+                        `;
+                        comboDiv.dataset.nombreCombo = combo.nombreCombo;
+
+                        // Añadir la información de los ejercicios al combo seleccionado
+                        if (combo.ejercicios && Array.isArray(combo.ejercicios)) {
+                            const ejerciciosList = document.createElement('ul');
+                            combo.ejercicios.forEach(ejercicio => {
+                                const ejercicioItem = document.createElement('li');
+                                ejercicioItem.innerHTML = `
+                                    <p><strong>Nombre:</strong> ${ejercicio.nombre}</p>
+                                    <p><strong>Descripción:</strong> ${ejercicio.descripcion}</p>
+                                    <p><strong>Tipo:</strong> ${ejercicio.tipo}</p>
+                                    <p><strong>Grupo Muscular:</strong> ${ejercicio.grupoMuscular}</p>
+                                `;
+                                ejerciciosList.appendChild(ejercicioItem);
+                            });
+                            comboDiv.appendChild(ejerciciosList);
+                        }
+
+                        // Añadir botón para eliminar el combo
+                        const eliminarButton = document.createElement('button');
+                        eliminarButton.type = 'button';
+                        eliminarButton.classList.add('eliminarCombo');
+                        eliminarButton.textContent = 'Eliminar';
+                        comboDiv.appendChild(eliminarButton);
+
+                        // Añadir el combo seleccionado al contenedor de ejercicios
+                        ejerciciosContainer.appendChild(comboDiv);
+
+                        // Eliminar la opción seleccionada del combo select
+                        comboSelect.removeChild(selectedOption);
+
+                        // Añadir funcionalidad para eliminar el combo agregado
+                        eliminarButton.addEventListener('click', function () {
+                            ejerciciosContainer.removeChild(comboDiv);
+                            // Eliminar el combo del mapa de combos seleccionados
+                            combosSeleccionados.delete(combo.nombreCombo);
+                            actualizarCampoOculto();
+
+                            // Volver a agregar la opción al select
+                            const newOption = document.createElement('option');
+                            newOption.value = combo.nombreCombo;
+                            newOption.dataset.combo = JSON.stringify(combo);
+                            newOption.textContent = combo.nombreCombo;
+                            comboSelect.appendChild(newOption);
+                        });
+                    }
+                }
+            });
+
+            // Función para actualizar el campo oculto con los combos seleccionados
+            function actualizarCampoOculto() {
+                combosSeleccionadosInput.value = JSON.stringify(Array.from(combosSeleccionados.values()));
+            }
+        });
+    </script>

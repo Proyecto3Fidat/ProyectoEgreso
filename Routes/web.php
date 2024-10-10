@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 use App\Controllers\ComboEjercicioController;
+use App\Controllers\ContieneController;
 use Pecee\SimpleRouter\SimpleRouter;
 use App\Controllers\HomeController;
 use App\Controllers\ClienteController;
@@ -40,6 +41,10 @@ use App\Controllers\EjercicioController;
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
 
+$usuarioLog = require __DIR__ . '/../Config/usuarioLogger.php';
+$loggerU = $usuarioLog['logger']();
+
+
 SimpleRouter::post('/pagos', function () use ($logger) {
     $elige = new App\Controllers\EligeController();
     $elige->obtenerPagosPorDocumento();
@@ -64,6 +69,43 @@ SimpleRouter::get('/ejercicios', function () {
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
+SimpleRouter::get('/obtenerComboEjercicios', function () {
+    $template = new TemplateController();
+    $ejer = new ContieneController();
+    $calificaciones = $ejer->obtenerEjercicios();
+
+    $template->renderTemplate('combo', ['combos' => $calificaciones]);
+    exit();
+});
+
+SimpleRouter::post('/crearRutina', function () {
+    $combosSeleccionadosJson = $_POST['combosSeleccionados'];
+
+    $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
+
+    if (is_array($combosSeleccionados)) {
+
+        $nombresCombos = [];
+
+        foreach ($combosSeleccionados as $combo) {
+
+            $nombreCombo = $combo['nombreCombo'];
+            $idEjercicio = $combo['idEjercicio'];
+            $nombreEjercicio = $combo['nombre'];
+            $descripcion = $combo['descripcion'];
+            $tipoEjercicio = $combo['tipoEjercicio'];
+            $grupoMuscular = $combo['grupoMuscular'];
+
+            $nombresCombos[] = $nombreCombo;
+
+        }
+
+
+        print_r($nombresCombos);
+
+    }
+    exit();
+});
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
     Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
@@ -76,6 +118,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
 
+        global $loggerU;
         Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
             $calificacionRepository = new CalificacionRepository();
             $calificacionService = new CalificacionService($calificacionRepository);
@@ -84,19 +127,19 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
-        SimpleRouter::post('/dashboard', function () use ($logger) {
+        SimpleRouter::post('/dashboard', function () use ($loggerU) {
             $graficos = new App\Controllers\GraficosController();
             $template = new TemplateController();
             $calificacionRepository = new CalificacionRepository();
             $calificacionService = new CalificacionService($calificacionRepository);
-            $calificacionController = new CalificacionController($calificacionService, $logger);
+            $calificacionController = new CalificacionController($calificacionService, $loggerU);
             $clienteRepository = new ClienteRepository();
             $clienteService = new ClienteService($clienteRepository);
-            $clienteController = new ClienteController($clienteService, $logger);
+            $clienteController = new ClienteController($clienteService, $loggerU);
             $usuario = $clienteController->obtenerInfoCliente();
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
-            $grafico = $graficos->crearGrafico($calificaciones);
-
+            $grafico = $graficos->crearGrafico($_POST['documento'],$calificaciones, $loggerU);
+            $loggerU->info('Dashboard del entrenador');
             $template->renderTemplate('dashboardEntrenador', array_merge(['usuario' => $usuario], ['calificaciones' => $calificaciones], ['grafico' => $grafico]));
             exit();
         });
@@ -160,10 +203,10 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
-        SimpleRouter::post('/calificacion', function () use ($logger) {
+        SimpleRouter::post('/calificacion', function () use ($loggerU) {
             $calificacionRepository = new CalificacionRepository();
             $calificacionService = new CalificacionService($calificacionRepository);
-            $calificacionController = new CalificacionController($calificacionService, $logger);
+            $calificacionController = new CalificacionController($calificacionService, $loggerU);
             try {
                 $calificacionController->asignarPuntuacion();
                 echo json_encode([
@@ -288,6 +331,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
     
     
 });
+
 SimpleRouter::post('/eliminar', function () use ($logger) {
     $planes = new App\Controllers\EligeController();
     $planes->eliminarPorDocumento();
