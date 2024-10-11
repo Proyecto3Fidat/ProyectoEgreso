@@ -40,10 +40,11 @@ CREATE TABLE Deportista(
 );
 
 CREATE TABLE Club(
-    idClub AUTO_INCREMENT,
+    idClub INT AUTO_INCREMENT,
     nombreClub VARCHAR (20),
     PRIMARY KEY(idClub)
 );
+
 
 CREATE TABLE Estado(
     id_Estado INT,
@@ -121,7 +122,7 @@ CREATE TABLE ComboEjercicio(
 );
 
 CREATE TABLE Ejercicio(
-    idEjercicio AUTO_INCREMENT,
+    idEjercicio INT AUTO_INCREMENT NOT NULL,
     nombre VARCHAR(20) NOT NULL,
     descripcion VARCHAR(100) NOT NULL,
     tipoEjercicio VARCHAR(20) NOT NULL,
@@ -152,10 +153,10 @@ CREATE TABLE Entrena(
 );
 
 CREATE TABLE Relacionado(
-    idClub AUTO_INCREMENT,
-    nombre VARCHAR (20),
+    idClub INT,
+    nombre VARCHAR(20),
     nroDocumento VARCHAR(30) NOT NULL,
-    tipoDocumento VARCHAR (16),
+    tipoDocumento VARCHAR(16),
     PRIMARY KEY (idClub, nombre, nroDocumento, tipoDocumento)
 );
 
@@ -239,7 +240,7 @@ ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, t
 ALTER TABLE Paciente
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
-CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago) ON DELETE CASCADE;
+CREATE INDEX idx_realiza ON Realiza(fechaPago, nombrePlan, idPago);
 
 ALTER TABLE Elige
 ADD FOREIGN KEY (nroDocumento,tipoDocumento) REFERENCES Cliente(nroDocumento,tipoDocumento) ON DELETE CASCADE;
@@ -308,7 +309,7 @@ ALTER TABLE SeAgenda
 ADD FOREIGN KEY (dia,horaInicio,horaFin) REFERENCES Agenda(dia,horaInicio,horaFin) ON DELETE CASCADE;
 
 ALTER TABLE Conforma
-ADD FOREIGN KEY (Dia,horaInicio,horaFin) REFERENCES Agenda (Dia,horaInicio,horaFin) ON DELETE CASCADE;
+ADD FOREIGN KEY (dia, horaInicio, horaFin) REFERENCES Agenda(dia, horaInicio, horaFin) ON DELETE CASCADE;
 
 ALTER TABLE Conforma
 ADD FOREIGN KEY (Nombre) REFERENCES LocalGym (Nombre) ON DELETE CASCADE;
@@ -323,4 +324,7 @@ ALTER TABLE Relacionado
 ADD FOREIGN KEY (idClub) REFERENCES Club(idClub) ON DELETE CASCADE;
 
 ALTER TABLE Relacionado
-ADD FOREIGN KEY (nombre,nroDocumento, tipoDocumento) REFERENCES Entrena(nombre,nroDocumento, tipoDocumento) ON DELETE CASCADE;
+ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
+
+ALTER TABLE Relacionado
+ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
