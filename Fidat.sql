@@ -64,7 +64,7 @@ CREATE TABLE Deporte(
 );
 
 CREATE TABLE Calificacion(
-    id INT AUTO_INCREMENT,
+    idItem INT AUTO_INCREMENT,
     puntMaxima INT,
     fuerzaMusc INT,
     resMusc INT,
@@ -73,17 +73,17 @@ CREATE TABLE Calificacion(
     flexibilidad INT,
     cumpAgenda INT,
     resMonotonia INT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (idItem)
 );
 
 CREATE TABLE Obtiene(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    id INT AUTO_INCREMENT,
+    idItem INT,
     fecha DATE,
     puntEsperado INT,
     puntObtenido INT,
-    PRIMARY KEY(nroDocumento, tipoDocumento, id)
+    PRIMARY KEY(nroDocumento, tipoDocumento, idItem)
 );
 
 CREATE TABLE PlanPago(
@@ -132,7 +132,7 @@ CREATE TABLE Ejercicio(
 
 CREATE TABLE Elige (
     fechaPago DATE,
-    idPago INT AUTO_INCREMENT,
+    idPago INT,
     nombrePlan VARCHAR(12),
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR(16)
@@ -288,7 +288,7 @@ ALTER TABLE Obtiene
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Obtiene
-ADD FOREIGN KEY (Id) REFERENCES Calificacion(Id) ON DELETE CASCADE;
+ADD FOREIGN KEY (idItem) REFERENCES Calificacion(idItem) ON DELETE CASCADE;
 
 ALTER TABLE Recibe
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
