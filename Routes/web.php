@@ -85,18 +85,14 @@ SimpleRouter::post('/crearRutina', function () {
     $combosSeleccionadosJson = $_POST['combosSeleccionados'];
     $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
     if (is_array($combosSeleccionados)) {
-
         $nombresCombos = [];
-
         foreach ($combosSeleccionados as $combo) {
-
             $nombreCombo = $combo['nombreCombo'];
             $idEjercicio = $combo['idEjercicio'];
             $nombreEjercicio = $combo['nombre'];
             $descripcion = $combo['descripcion'];
             $tipoEjercicio = $combo['tipoEjercicio'];
             $grupoMuscular = $combo['grupoMuscular'];
-
             $nombresCombos[] = $nombreCombo;
         }
         foreach ($nombresCombos as $nombreCombo) {
@@ -106,10 +102,11 @@ SimpleRouter::post('/crearRutina', function () {
                 'ejercicios' => $ejercicioId
             ];
         }
-        $rutina->crearRutina();
-        $compone->crearRutina($combos);
-        echo json_encode($combos);
-    }
+        $id = $rutina->crearRutina();
+        $compone->crearRutina($combos, $id);
+        }
+    $template = new TemplateController();
+    $template->renderTemplate('alerta', ['mensaje' => 'Rutina creada con éxito'], 'crearRutina');
     exit();
 });
 

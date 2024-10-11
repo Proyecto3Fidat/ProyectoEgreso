@@ -13,6 +13,7 @@ class RutinaController
         $repeticiones = filter_input(INPUT_POST, 'repeticiones', FILTER_VALIDATE_FLOAT);
         $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_STRING);
         $service = new RutinaService();
-        $service->crearRutina();
+        $id = $service->crearRutina($series, $repeticiones, $dia);
+        return $id;
     }
 }

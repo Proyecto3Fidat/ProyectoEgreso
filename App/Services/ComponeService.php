@@ -7,10 +7,9 @@ use App\Repositories\ComponeRepository;
 class ComponeService
 {
 
-    public function crearRutina()
+    public function crearRutina($idRutina, $nombreCombo, $idEjercicio)
     {
         $repo  = new ComponeRepository();
-        $repo->crearRutina();
-
+        $repo->crearRutina($idRutina, $nombreCombo, $idEjercicio);
     }
 }
