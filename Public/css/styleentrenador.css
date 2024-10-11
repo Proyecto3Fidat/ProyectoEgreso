@@ -97,7 +97,7 @@ nav a:hover {
 
 .clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
     transform: scale(1.1);
-    box-shadow: 2px 1px 3rem 1px rgba(111, 65, 187, 1);
+    box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
 }
 
 .clienteslist, .ejerciciolist, .rutinaslist{
@@ -108,7 +108,7 @@ nav a:hover {
     border-radius: 3rem 3rem / 2rem 5rem;
     border-color: #6f41bb;
     background: linear-gradient(135deg, #303030, #160d1a);
-    box-shadow: 2px 1px .5rem 1px rgba(111, 65, 187, 1);
+    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
     font-family: 'Poppins', sans-serif;
 }
     .clienteslist, .ejerciciolist, .rutinaslist:hover {

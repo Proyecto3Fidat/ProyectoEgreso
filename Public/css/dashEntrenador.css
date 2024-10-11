@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+}     
+body {
+    color: white;
+    background-color: #131313;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+
+.calificaciones {
+    margin: 3rem auto;
+    padding: 2rem;
+}
+.tablaCliente {
+    background-color:#303030;
+    padding: 1rem;
+    padding-top: .5rem;
+    border-radius: 1rem;
+    width: auto;
+  }
+  .clasCliente {
+    margin-top: 1rem;
+    border-collapse: collapse; 
+    overflow: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, .3);
+  }
+    .clasCliente th, .clasCliente td {
+        padding: .7rem; 
+        text-align: center;  
+    }
+    .clasCliente th {
+        background: linear-gradient(135deg, #6f41bb, #a63dd2);
+        color: rgb(255, 255, 255); 
+        font-size: 1rem; 
+    }
+    .clasCliente td {
+        border-bottom: 1px solid #fff; 
+    }
+    .clasCliente tr:nth-child(even) {
+        background-color: #222; 
+    }
+    .clasCliente tr:nth-child(odd) {
+        background-color: #222; 
+    }
+    .clasCliente td:hover{
+        background-color: #555;
+    }
+
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}   
+
+.informacionUsuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+    .informacionUsuario h2 {
+        
+        font-size: 2rem;
+    }
+
+
+
+
+
+
+.evolucion {
+    background: linear-gradient(135deg, #EDF2F4, #EBEBEB);
+    background-color: #EDF2F4;
+    color: #131313;
+    padding: 6rem;
+    margin: 4rem auto;
+    width: 80%;
+    border-radius: 20rem 10rem;
+    box-shadow: 0 0 2rem 2px rgba(111, 65, 187);
+}
+    .evolucion p {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 1rem;
+    }
+
+
+.modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #1e1c1f;
+            padding: 40px;
+            border-radius: 15px;
+            border: 5px solid #7a3afa;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+            width: 80%;
+            height: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Efecto de entrada suave */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            width: 3em;
+            height: 3em;
+            border: none;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.5s, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        /* Líneas de la "X" */
+        .X, .Y {
+            position: absolute;
+            width: 1.5em;
+            height: 2px;
+            background-color: #ffffff;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .X {
+            transform: rotate(45deg);
+        }
+
+        .Y {
+            transform: rotate(-45deg);
+        }
+
+        /* Texto de "Close" emergente */
+        .close-button .close {
+            position: absolute;
+            display: flex;
+            padding: 0.8rem 1.5rem;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50%);
+            top: -80%;
+            left: 50%;
+            width: 4em;
+            height: 2em;
+            font-size: 12px;
+            background-color: rgb(19, 22, 24);
+            color: rgb(187, 229, 236);
+            border: none;
+            border-radius: 3px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .close-button:hover {
+            background-color: rgba(239, 9, 9, 0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-button:active {
+            background-color: rgb(236, 11, 11);
+        }
+
+        .close-button:hover > .close {
+            opacity: 1;
+        }
+
+        .close-button:hover > .X,
+        .close-button:hover > .Y {
+            background-color: #ffcccc;
+        }

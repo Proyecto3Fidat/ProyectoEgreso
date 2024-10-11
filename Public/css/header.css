@@ -1,0 +1,52 @@
+header{
+    background-color: #100e0f;
+}
+
+.navbar {
+    display: flex;
+}
+
+.navbar li a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s, background-color 0.3s;
+    text-decoration: none;
+    list-style: none;
+}
+
+nav{
+    background-color: #100e0f;
+    padding: 20px;
+}
+
+nav a:hover {
+    color: #6f41bb;
+}
+
+.menu1 {
+    display: flex;
+    margin-right: auto;
+}
+
+.menu2 {
+    display: flex;
+    margin-left: auto;
+}
+
+.listmenu1, .listmenu2{
+    display: flex;
+}
+
+.abrirmenu, .cerrarmenu {
+    display: none;
+}
+
+.inicioa{
+    margin-right: 1rem;
+}
+.login-btn {
+    margin-right: 1rem;
+}
+.login-btn:hover, .sign-in-btn:hover {
+    color: #6f41bb;
+}

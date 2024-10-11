@@ -139,9 +139,9 @@ nav a:hover {
     border-radius: 1rem;
     box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
 }
-.fichagnrl.visible{
+    .fichagnrl.visible{
     display: block;
-}
+    }
 .fichaTecnica {
         display: flex;
         flex-direction: column;
