@@ -104,6 +104,14 @@ h1, h2 {
     margin: 20px 0;
 }
 
+.entrenamiento {
+    background-color:#303030;
+    padding: 2rem;
+    margin: 2rem auto;
+    width: 50%;
+    border-radius: 10rem 4rem / 20rem 10rem;
+}
+
 .listaejercicio {
     width: 50% auto;
     margin: 20px auto;
