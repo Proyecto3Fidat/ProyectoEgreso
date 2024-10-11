@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
+use App\Repositories\RutinaRepository;
+
 class RutinaService
 {
 
-    public function crearRutina()
+    public function crearRutina($series, $repeticiones, $dia)
     {
         $repo  = new RutinaRepository();
-        $repo->crearRutina();
-        
+        return $repo->crearRutina($series, $repeticiones, $dia);
     }
+
 }

@@ -5,10 +5,16 @@ namespace App\Repositories;
 class ComponeRepository extends Database
 {
 
-    public function crearRutina()
+    public function crearRutina($idRutina, $nombreCombo, $idEjercicio)
     {
         $database = Database::getInstance();
-        $connection = $database->getConnection();
-        $sql = "INSERT INTO rutina (nombre, descripcion) VALUES ('Rutina de prueba', 'Esta es una rutina de prueba')";
+        $database->connect();
+        $sql = "INSERT INTO Compone (idRutina, nombreCombo, idEjercicio) VALUES (?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('isi', $idRutina, $nombreCombo, $idEjercicio);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
     }
+
 }
