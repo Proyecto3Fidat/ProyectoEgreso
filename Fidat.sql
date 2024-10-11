@@ -47,8 +47,8 @@ CREATE TABLE Club(
 
 
 CREATE TABLE Estado(
-    id_Estado INT,
-    PRIMARY KEY(id_Estado)
+    idEstado INT AUTO_INCREMENT,
+    PRIMARY KEY(idEstado)
 );
 
 CREATE TABLE Paciente(
@@ -79,7 +79,7 @@ CREATE TABLE Calificacion(
 CREATE TABLE Obtiene(
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    id INT,
+    id INT AUTO_INCREMENT,
     fecha DATE,
     puntEsperado INT,
     puntObtenido INT,
@@ -109,7 +109,7 @@ CREATE TABLE LocalGym(
 );
 
 CREATE TABLE Rutina(
-    idRutina INT,
+    idRutina INT AUTO_INCREMENT,
     series INT NOT NULL,
     repeticiones INT NOT NULL,
     dia VARCHAR(8) NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE Ejercicio(
 
 CREATE TABLE Elige (
     fechaPago DATE,
-    idPago INT,
+    idPago INT AUTO_INCREMENT,
     nombrePlan VARCHAR(12),
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR(16)
@@ -176,7 +176,7 @@ CREATE TABLE Contiene(
 CREATE TABLE Recibe(
     nroDocumento VARCHAR (30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    id_Estado INT,
+    idEstado INT,
     fechaInicio DATE,
     fechaFin DATE,
     PRIMARY KEY (nroDocumento,tipoDocumento)
@@ -294,7 +294,7 @@ ALTER TABLE Recibe
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
 ALTER TABLE Recibe
-ADD FOREIGN KEY (id_Estado) REFERENCES Estado(id_Estado) ON DELETE CASCADE;
+ADD FOREIGN KEY (idEstado) REFERENCES Estado(idEstado) ON DELETE CASCADE;
 
 ALTER TABLE Cumple
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
