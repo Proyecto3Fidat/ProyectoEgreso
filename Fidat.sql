@@ -151,17 +151,12 @@ CREATE TABLE Entrena(
     PRIMARY KEY (nombre)
 );
 
-CREATE TABLE Pertenece(
-    idClub AUTO_INCREMENT,
-    nroDocumento VARCHAR(30) NOT NULL,
-    tipoDocumento VARCHAR (16),
-    PRIMARY KEY (nroDocumento, tipoDocumento, idClub)
-);
-
 CREATE TABLE Relacionado(
     idClub AUTO_INCREMENT,
-    nombreClub VARCHAR(20),
-    PRIMARY KEY (idClub, nombreClub)
+    nombre VARCHAR (20),
+    nroDocumento VARCHAR(30) NOT NULL,
+    tipoDocumento VARCHAR (16),
+    PRIMARY KEY (idClub, nombre, nroDocumento, tipoDocumento)
 );
 
 CREATE TABLE Practica(
@@ -324,14 +319,8 @@ ADD FOREIGN KEY (nombreCombo) REFERENCES ComboEjercicio (nombreCombo) ON DELETE 
 ALTER TABLE Contiene
 ADD FOREIGN KEY (idEjercicio) REFERENCES Ejercicio (idEjercicio) ON DELETE CASCADE;
 
-ALTER TABLE Pertenece
-ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
-
-ALTER TABLE Pertenece
-ADD FOREIGN KEY (idClub) REFERENCES Club(idClub) ON DELETE CASCADE;
-
 ALTER TABLE Relacionado
 ADD FOREIGN KEY (idClub) REFERENCES Club(idClub) ON DELETE CASCADE;
 
 ALTER TABLE Relacionado
-ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
+ADD FOREIGN KEY (nombre,nroDocumento, tipoDocumento) REFERENCES Entrena(nombre,nroDocumento, tipoDocumento) ON DELETE CASCADE;
