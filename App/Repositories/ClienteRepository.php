@@ -360,7 +360,6 @@ class ClienteRepository extends Database
         $stmt->store_result();
         $stmt->bind_result($nombre, $apellido, $fechaNacimiento, $patologias, $email, $calle, $numero, $esquina, $peso, $altura);
         $clientes = array();
-        echo $nombre;
         while ($stmt->fetch()) {
             $clientes[] = array(
                 'nombre' => $nombre,

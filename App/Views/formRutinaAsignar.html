@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Ejercicio</title>
+    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
+</head>
+<body>
+<div class="crearEjercicio-Container">
+    <div id="formulario-crear-ejercicio" class="content oculto">
+        <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo">
+            <label for="nombre-combo">Nombre del Combo:</label>
+            <input type="text" id="nombre-combo" name="nombreCombo" required><br><br>
+            <div id="ejercicios-seleccionados">
+            </div>
+            <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
+            <input type="hidden" name="ejercicios" id="ejercicios-input">
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+    <div id="ejercicios-lista" class="ejercicios-lista">
+        <h2>Lista de Ejercicios</h2>
+        <ul id="lista-ejercicios"></ul>
+    </div>

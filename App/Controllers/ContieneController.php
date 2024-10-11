@@ -13,7 +13,13 @@ class ContieneController
         $service = new ContieneService();
         $ejercicios = $service->obtenerEjercicios();
         return $ejercicios;
+    }
 
+    public function obtenerEjerciciosNombre($nombre)
+    {
+
+        $service = new ContieneService();
+        return $service->obtenerEjerciciosNombre($nombre);
     }
 
 }

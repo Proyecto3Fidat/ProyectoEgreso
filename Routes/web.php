@@ -79,10 +79,11 @@ SimpleRouter::get('/obtenerComboEjercicios', function () {
 });
 
 SimpleRouter::post('/crearRutina', function () {
+    $contiene = new App\Controllers\ContieneController();
+    $compone = new App\Controllers\ComponeController();
+    $rutina = new App\Controllers\RutinaController();
     $combosSeleccionadosJson = $_POST['combosSeleccionados'];
-
     $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
-
     if (is_array($combosSeleccionados)) {
 
         $nombresCombos = [];
@@ -97,12 +98,17 @@ SimpleRouter::post('/crearRutina', function () {
             $grupoMuscular = $combo['grupoMuscular'];
 
             $nombresCombos[] = $nombreCombo;
-
         }
-
-
-        print_r($nombresCombos);
-
+        foreach ($nombresCombos as $nombreCombo) {
+            $ejercicioId = $contiene->obtenerEjerciciosNombre($nombreCombo);
+            $combos [] = [
+              'nombreCombo' => $nombreCombo,
+                'ejercicios' => $ejercicioId
+            ];
+        }
+        $rutina->crearRutina();
+        $compone->crearRutina($combos);
+        echo json_encode($combos);
     }
     exit();
 });

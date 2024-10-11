@@ -26,4 +26,11 @@ class ContieneService
         $repository = new ContieneRepository();
         return $repository->obtenerEjercicios();
     }
+
+    public function obtenerEjerciciosNombre($nombre)
+    {
+        $repo = new ContieneRepository();
+        return $repo->obtenerEjerciciosNombre($nombre);
+
+    }
 }

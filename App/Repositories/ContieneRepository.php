@@ -57,4 +57,22 @@ class ContieneRepository extends Database
         $database->disconnect();
         return $ejercicios;
     }
+
+    public function obtenerEjerciciosNombre($nombre)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+
+        $sql = "SELECT idEjercicio FROM Contiene WHERE nombreCombo = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('s', $nombre);
+        $stmt->execute();
+        $stmt->bind_result($idEjercicio);
+        while ($stmt->fetch()) {
+            $ejercicios[] = $idEjercicio;
+        }
+        $stmt->close();
+        $database->disconnect();
+       return $ejercicios;
+    }
 }

@@ -45,7 +45,6 @@
     <button id="btn-crear-rutina" class="ejerciciolist">Crear Rutina</button>
 </div>
 
-<!-- Modal para Mostrar Formularios dentro de un Iframe -->
 <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
         <button class="modal-close-button">
@@ -151,17 +150,17 @@
 
         // Evento para abrir el modal de Crear Rutina y cargar el formulario en el iframe
         btnCrearRutina.addEventListener('click', function () {
-            iframe.src = '/obtenerComboEjercicios'; // URL del formulario de Crear Rutina
-            modalOverlay.style.display = 'flex'; // Mostrar el modal
+            iframe.src = '/obtenerComboEjercicios';
+            modalOverlay.style.display = 'flex';
         });
 
         // Evento para cerrar el modal
         closeModalButton.addEventListener('click', function () {
-            modalOverlay.style.display = 'none'; // Ocultar el modal
-            iframe.src = ''; // Limpiar la URL del iframe
+            modalOverlay.style.display = 'none';
+            iframe.src = '';
         });
 
-        // Cerrar el modal al hacer clic fuera del contenido
+
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
