@@ -7,7 +7,8 @@ use Pecee\SimpleRouter\SimpleRouter;
 require_once  '../Config/monolog.php';
 $config = require '../Config/monolog.php';
 $logger = $config['logger']();
-// Establecer manejadores de errores y excepciones globales
+
+
 set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($logger) {
     $message = "Error [$errno]: $errstr at $errfile line $errline";
     $logger->error($message);
@@ -23,5 +24,5 @@ set_exception_handler(function ($exception) use ($logger) {
     header ("Location: /App/Views/error.html");
 });
 
-require_once  '../Routes/web.php';
+require_once '../Routes/web.php';
 SimpleRouter::start();

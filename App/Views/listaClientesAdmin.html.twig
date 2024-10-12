@@ -243,6 +243,33 @@
 
 </style>
 
+<!-- Modal para ingresar local -->
+<div id="modal-ingresar-local" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-button">
+            <span class="X"></span>
+            <span class="Y"></span>
+            <div class="close">Close</div>
+        </button>
+        <iframe id="iframe-ingresar-local" src="" frameborder="0" width="100%" height="500px"></iframe>
+    </div>
+</div>
+<!-- Modal para agenda -->
+<div id="modal-agenda" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close-button">
+            <span class="X"></span>
+            <span class="Y"></span>
+            <div class="close">Close</div>
+        </button>
+        <iframe id="iframe-agenda" src="" frameborder="0" width="100%" height="500px"></iframe>
+    </div>
+</div>
+
+<!-- Botones para Ingresar Local y Agenda -->
+<button id="btnIngresarLocal" class="btnCargarMas">Ingresar Local</button>
+<button id="btnAgenda" class="btnCargarMas">Agenda</button>
+
 <form action="/logo" method="post" enctype="multipart/form-data">
     <label for="fileToUpload">Subir logo de la pagina:</label>
     <input type="file" name="logo" id="fileToUpload">
@@ -253,10 +280,10 @@
 <script src="../../Public/js/responsive.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Obtener referencias a los elementos del modal
+        // Obtener referencias a los elementos del modal de pago/agendar
         const modalOverlay = document.getElementById('modal-overlay');
         const iframe = document.getElementById('form-iframe');
-        const closeModalButton = document.querySelector('.modal-close-button');
+        const closeModalButton = modalOverlay.querySelector('.modal-close-button');
 
         // Agregar eventos a los botones de Ingresar Pago y Agendar
         document.querySelectorAll('.btnpago button').forEach(button => {
@@ -279,21 +306,75 @@
             });
         });
 
-        // Agregar evento para cerrar el modal
+        // Agregar evento para cerrar el modal de pago/agendar
         closeModalButton.addEventListener('click', function () {
             modalOverlay.style.display = 'none';
             iframe.src = ''; // Limpiar el src del iframe
         });
 
-        // Cerrar el modal cuando se haga clic fuera del contenido del modal
+        // Cerrar el modal cuando se haga clic fuera del contenido del modal de pago/agendar
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
                 iframe.src = ''; // Limpiar el src del iframe
             }
         });
+
+        // Obtener referencias a los elementos del modal de ingresar local
+        const modalIngresarLocal = document.getElementById('modal-ingresar-local');
+        const iframeIngresarLocal = document.getElementById('iframe-ingresar-local');
+        const closeModalIngresarLocalButton = modalIngresarLocal.querySelector('.modal-close-button');
+
+        // Agregar evento al botón Ingresar Local
+        const btnIngresarLocal = document.getElementById('btnIngresarLocal');
+        btnIngresarLocal.addEventListener('click', function () {
+            iframeIngresarLocal.src = '/ingresarGym'; // URL del contenido del iframe
+            modalIngresarLocal.style.display = 'flex'; // Mostrar el modal
+        });
+
+        // Agregar evento para cerrar el modal de ingresar local
+        closeModalIngresarLocalButton.addEventListener('click', function () {
+            modalIngresarLocal.style.display = 'none';
+            iframeIngresarLocal.src = ''; // Limpiar el src del iframe
+        });
+
+        // Cerrar el modal cuando se haga clic fuera del contenido del modal de ingresar local
+        modalIngresarLocal.addEventListener('click', function (event) {
+            if (event.target === modalIngresarLocal) {
+                modalIngresarLocal.style.display = 'none';
+                iframeIngresarLocal.src = ''; // Limpiar el src del iframe
+            }
+        });
+
+        // Obtener referencias a los elementos del modal de agenda
+        const modalAgenda = document.getElementById('modal-agenda');
+        const iframeAgenda = document.getElementById('iframe-agenda');
+        const closeModalAgendaButton = modalAgenda.querySelector('.modal-close-button');
+
+        // Agregar evento al botón Agenda
+        const btnAgenda = document.getElementById('btnAgenda');
+        btnAgenda.addEventListener('click', function () {
+            iframeAgenda.src = '/dashAgenda'; // URL del contenido del iframe
+            modalAgenda.style.display = 'flex'; // Mostrar el modal
+        });
+
+        // Agregar evento para cerrar el modal de agenda
+        closeModalAgendaButton.addEventListener('click', function () {
+            modalAgenda.style.display = 'none';
+            iframeAgenda.src = ''; // Limpiar el src del iframe
+        });
+
+        // Cerrar el modal cuando se haga clic fuera del contenido del modal de agenda
+        modalAgenda.addEventListener('click', function (event) {
+            if (event.target === modalAgenda) {
+                modalAgenda.style.display = 'none';
+                iframeAgenda.src = ''; // Limpiar el src del iframe
+            }
+        });
     });
 </script>
+
+
 
 </body>
 

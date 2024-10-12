@@ -94,6 +94,10 @@ class UsuarioController
         $this->logger->info('Se intento cerrar sesion');
         $this->usuarioService->logout();
     }
+    public function obtenerIipoDocumento($documento)
+    {
+        return $this->usuarioService->obtenerTipoDocumento($documento);
+    }
 }
 
 ?>

@@ -1,0 +1,115 @@
+<form id="form-seleccion-local" method="post" action="/agendar">
+    <label for="select-local">Seleccionar Local:</label>
+    <select id="select-local" name="local" required>
+        <option value="" disabled selected>Seleccione un local</option>
+        {% for local in locales %}
+            <option value="{{ loop.index0 }}"
+                    data-calle="{{ local.calle }}"
+                    data-esquina="{{ local.esquina }}"
+                    data-nro-puerta="{{ local.nroPuerta }}"
+                    data-cap-x-turno="{{ local.capXTurno }}"
+                    data-nombre="{{ local.nombre }}">
+                {{ local.nombre }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <div id="documento" style="display: none; margin-top: 20px;">
+        <label for="documento">Documento:</label>
+        <input type="text" id="documento" name="documento" required value="{{ nombre }}"><br>
+    </div>
+
+    <div id="detalles-local" style="display: none; margin-top: 20px;">
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" readonly><br>
+
+        <label for="esquina">Esquina:</label>
+        <input type="text" id="esquina" name="esquina" readonly><br>
+
+        <label for="nroPuerta">Número de Puerta:</label>
+        <input type="text" id="nroPuerta" name="nroPuerta" readonly><br>
+
+        <label for="capXTurno">Capacidad por Turno:</label>
+        <input type="text" id="capXTurno" name="capXTurno" readonly><br>
+    </div>
+
+    <div id="seleccion-agenda" style="display: none; margin-top: 20px;">
+        <label for="select-agenda">Seleccionar Agenda(s):</label><br>
+        {% for agenda in agendas %}
+            <input type="checkbox" class="agenda-checkbox" id="agenda-{{ loop.index }}" value="{{ loop.index0 }}"
+                   data-dia="{{ agenda.dia }}"
+                   data-hora-inicio="{{ agenda.horaInicio }}"
+                   data-hora-fin="{{ agenda.horaFin }}"
+                   data-agendados="{{ agenda.agendados }}">
+            <label for="agenda-{{ loop.index }}">{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})</label><br>
+        {% endfor %}
+    </div>
+
+    <!-- Contenedor para inputs ocultos de las agendas seleccionadas -->
+    <div id="agendas-seleccionadas"></div>
+
+    <!-- Campo oculto para enviar el nombre del local seleccionado -->
+    <input type="hidden" id="nombreLocal" name="nombreLocal">
+
+    <button type="submit" style="margin-top: 20px;">Enviar</button>
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectLocal = document.getElementById('select-local');
+        const detallesLocal = document.getElementById('detalles-local');
+        const calleInput = document.getElementById('calle');
+        const esquinaInput = document.getElementById('esquina');
+        const nroPuertaInput = document.getElementById('nroPuerta');
+        const capXTurnoInput = document.getElementById('capXTurno');
+        const seleccionAgenda = document.getElementById('seleccion-agenda');
+        const nombreLocalInput = document.getElementById('nombreLocal');
+        const agendasSeleccionadas = document.getElementById('agendas-seleccionadas');
+        const agendaCheckboxes = document.querySelectorAll('.agenda-checkbox');
+
+        // Mostrar detalles del local seleccionado
+        selectLocal.addEventListener('change', function () {
+            const selectedOption = selectLocal.options[selectLocal.selectedIndex];
+
+            if (selectedOption.value) {
+                detallesLocal.style.display = 'block';
+
+                calleInput.value = selectedOption.getAttribute('data-calle');
+                esquinaInput.value = selectedOption.getAttribute('data-esquina');
+                nroPuertaInput.value = selectedOption.getAttribute('data-nro-puerta');
+                capXTurnoInput.value = selectedOption.getAttribute('data-cap-x-turno');
+                nombreLocalInput.value = selectedOption.getAttribute('data-nombre');
+
+                seleccionAgenda.style.display = 'block';
+            } else {
+                detallesLocal.style.display = 'none';
+                seleccionAgenda.style.display = 'none';
+            }
+        });
+
+        // Actualizar agendas seleccionadas al marcar/desmarcar un checkbox
+        agendaCheckboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', function () {
+                // Limpiar el contenedor de agendas seleccionadas
+                agendasSeleccionadas.innerHTML = '';
+
+                // Recorrer todos los checkboxes y agregar los inputs ocultos para los seleccionados
+                agendaCheckboxes.forEach(function (agenda) {
+                    if (agenda.checked) {
+                        const dia = agenda.getAttribute('data-dia');
+                        const horaInicio = agenda.getAttribute('data-hora-inicio');
+                        const horaFin = agenda.getAttribute('data-hora-fin');
+                        const agendados = agenda.getAttribute('data-agendados');
+
+                        const inputHidden = document.createElement('input');
+                        inputHidden.type = 'hidden';
+                        inputHidden.name = 'agendas[]';
+                        inputHidden.value = JSON.stringify({ dia, horaInicio, horaFin, agendados });
+
+                        agendasSeleccionadas.appendChild(inputHidden);
+                    }
+                });
+            });
+        });
+    });
+</script>

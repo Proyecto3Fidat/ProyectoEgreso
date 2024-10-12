@@ -51,11 +51,10 @@ class RutinaRepository extends Database
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Verificar si hay resultados
         if ($result->num_rows > 0) {
-            $rutina = $result->fetch_assoc();  // Obtener directamente la fila como array asociativo
+            $rutina = $result->fetch_assoc();
         } else {
-            $rutina = [];  // Si no hay resultados, devolver un array vacío
+            $rutina = [];
         }
         $database->disconnect();
         return $rutina;

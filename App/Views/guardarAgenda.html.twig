@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="/guardarAgenda" method="post">
+    <label for="nombre">Nombre Local:</label>
+    <input type="text" readonly name="nombre" value="{{ nombre }}">
+
+    <label for="agenda">Seleccionar Agenda:</label>
+    <select name="agenda" id="agenda" onchange="setAgendaData(this.value)">
+        <option value="">Seleccione una agenda</option>
+        {% for key, agenda in agendas %}
+            <option value="{{ key }}">{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})</option>
+        {% endfor %}
+    </select>
+
+    <input type="hidden" id="dia" name="dia" value="">
+    <input type="hidden" id="horaInicio" name="horaInicio" value="">
+    <input type="hidden" id="horaFin" name="horaFin" value="">
+    <input type="hidden" id="agendados" name="agendados" value="">
+
+    <button type="submit">Guardar</button>
+</form>
+
+<script>
+    const agendas = {{ agendas | json_encode | raw }};
+
+    function setAgendaData(key) {
+        if (key && agendas[key]) {
+            document.getElementById('dia').value = agendas[key].dia;
+            document.getElementById('horaInicio').value = agendas[key].horaInicio;
+            document.getElementById('horaFin').value = agendas[key].horaFin;
+            document.getElementById('agendados').value = agendas[key].agendados;
+        } else {
+            document.getElementById('dia').value = '';
+            document.getElementById('horaInicio').value = '';
+            document.getElementById('horaFin').value = '';
+            document.getElementById('agendados').value = '';
+        }
+    }
+</script>
+</body>
+</html>

@@ -32,7 +32,7 @@ class TemplateController
         } catch (\Twig\Error\RuntimeError $e) {
             echo "Error: Ocurrió un problema al renderizar la plantilla.";
         } catch (\Twig\Error\SyntaxError $e) {
-            echo "Error: Problema de sintaxis en la plantilla.";
+            echo "Error: Problema de sintaxis en la plantilla.". $e;
         }
     }
     public function renderHtml(string $htmlFileName): void

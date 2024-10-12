@@ -66,7 +66,6 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
 
-
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
 
     Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
@@ -83,7 +82,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $solicitud = json_decode(file_get_contents('php://input'), true);
             $id = $solicitud['idRutina'];
             try {
-              $compone->eliminarRutina($id);
+                $compone->eliminarRutina($id);
                 echo json_encode([
                     'status' => 'ok',
                 ]);
@@ -222,10 +221,10 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
             $usuario = $clienteController->obtenerInfoCliente();
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
-            try{
+            try {
                 $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
 
-            }catch (Exception $e){
+            } catch (Exception $e) {
                 $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
             }
             $practicar = $practica->obtenerPracticas();
@@ -273,7 +272,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                 echo json_encode([
                     'status' => 'ok',
                 ]);
-            }catch (Exception $e) {
+            } catch (Exception $e) {
                 echo json_encode([
                     'success' => false,
                     'error' => 'Error al editar la calificación: '
@@ -284,8 +283,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::get('editarCalificacion', function () use ($logger) {
-           $template = new TemplateController();
-           $template->renderTemplate('editarCalificacion', ['id' => $_GET['id']]);
+            $template = new TemplateController();
+            $template->renderTemplate('editarCalificacion', ['id' => $_GET['id']]);
         });
 
         SimpleRouter::get('/dashboard', function () {
@@ -372,6 +371,80 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
     });
     SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger) {
+
+
+        SimpleRouter::get('/agendar', function () {
+            $nombre = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+            $template = new TemplateController();
+            $localGym = new App\Controllers\GymController();
+            $agenda = new App\Controllers\AgendaController();
+            $locales = $localGym->obtenerGym();
+            $agendas = $agenda->obtenerAgendas();
+            $data = [
+                'locales' => $locales,
+                'agendas' => $agendas,
+                'nombre' => $nombre
+            ];
+            $template->renderTemplate('agendar', $data);
+            exit();
+        });
+        SimpleRouter::post('/agendar', function ()use ($logger) {
+            $template = new TemplateController();
+            $seAgenda = new App\Controllers\SeAgendaController();
+            $usuarioRepository = new UsuarioRepository();
+            $usuarioService = new UsuarioService($usuarioRepository);
+            $usuario = new UsuarioController($usuarioService, $logger);
+            $local = $_POST['local'];
+            $documento = $_POST['documento'];
+            $calle = $_POST['calle'];
+            $esquina = $_POST['esquina'];
+            $nroPuerta = $_POST['nroPuerta'];
+            $capXTurno = $_POST['capXTurno'];
+            $nombreLocal = $_POST['nombreLocal'];
+            $resultado = [];
+
+            $tipoDocumento = $usuario->obtenerIipoDocumento($documento);
+            $agendas = isset($_POST['agendas']) ? $_POST['agendas'] : [];
+
+            // Iterar sobre las agendas seleccionadas
+            foreach ($agendas as $agendaJson) {
+                $agenda = json_decode($agendaJson, true); // Decodificar el JSON en un array asociativo
+                if (is_array($agenda)) {
+                    $dia = $agenda['dia'];
+                    $horaInicio = $agenda['horaInicio'];
+                    $horaFin = $agenda['horaFin'];
+                    $agendados = $agenda['agendados'];
+
+                    $seAgenda->agendar($documento,$tipoDocumento, $dia, $horaInicio, $horaFin);
+                }
+            }
+            $data = [
+                'mensaje' => 'Agenda creada con éxito',
+                'ruta' => 'agendar'
+            ];
+            $template->renderTemplate('alerta', $data);
+            exit();
+        });
+
+        SimpleRouter::get('/dashAgenda', function () {
+            $conforma = new App\Controllers\ConformaController();
+            $template = new TemplateController();
+            $agendas = $conforma->obtenerAgendas();
+            $template->renderTemplate('dashAgenda', ['agenda' => $agendas]);
+            exit();
+        });
+
+
+        SimpleRouter::get('/ingresarGym', function () {
+            $template = new TemplateController();
+            $template->renderTemplate('ingresarGym');
+        });
+
+        SimpleRouter::post('/ingresarGym', function () {
+            $controller = new App\Controllers\GymController();
+            $controller->ingresarGym();
+            exit();
+        });
 
         SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
             $clienteRepository = new ClienteRepository();
@@ -468,6 +541,53 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
+
+        SimpleRouter::get('/guardarAgenda', function () {
+            $nombre = filter_input(INPUT_GET, 'local', FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $template = new TemplateController();
+            $agenda = new \App\Controllers\AgendaController();
+            $conforma = new \App\Controllers\ConformaController();
+            $locales = $agenda->obtenerAgendas();
+            $asignados = $conforma->obtenerAsignados($nombre);
+            $localesFiltrados = [];
+            if (empty($asignados)) {
+                $localesFiltrados = $locales;
+            } else {
+                // Filtrar los locales que coinciden con los elementos en $asignados
+                $localesFiltrados = array_filter($locales, function ($local) use ($asignados) {
+                    foreach ($asignados as $asignado) {
+                        if ($local['horaInicio'] === $asignado['horaInicio'] && $local['horaFin'] === $asignado['horaFin']) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+            $data = [
+                'agendas' => $localesFiltrados,
+                'nombre' => $nombre
+            ];
+            $template->renderTemplate('guardarAgenda', $data);
+            exit();
+        });
+
+        SimpleRouter::post('/guardarAgenda', function () {
+            $conforma = new App\Controllers\ConformaController();
+            $conforma->guardarAgenda();
+            exit();
+        });
+        SimpleRouter::post('/crearAgenda', function () {
+            $agenda = new App\Controllers\AgendaController();
+            $agenda->crearAgenda();
+            exit();
+        });
+
+        SimpleRouter::post('/eliminar', function () use ($logger) {
+            $planes = new App\Controllers\EligeController();
+            $planes->eliminarPorDocumento();
+            exit();
+        });
     });
 
     SimpleRouter::get('/verificarsesion', function () use ($logger) {
@@ -480,11 +600,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
 });
 
-SimpleRouter::post('/eliminar', function () use ($logger) {
-    $planes = new App\Controllers\EligeController();
-    $planes->eliminarPorDocumento();
-    exit();
-});
 
 
 SimpleRouter::get('/cargarDatos', function () {
