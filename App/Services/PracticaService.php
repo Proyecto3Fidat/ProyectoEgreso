@@ -15,4 +15,10 @@ class PracticaService
 
     }
 
+    public function obtenerPracticas($documento)
+    {
+        $repo  = new PracticaRepository();
+        return $repo->obtenerPracticas($documento);
+    }
+
 }

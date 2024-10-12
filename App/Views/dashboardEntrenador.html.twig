@@ -72,29 +72,45 @@
             </table>
         </div>
     </section>
-
     <section class="rutina">
         <h2>Rutina</h2>
         <button class="btnAsignarRutina" onclick="openModal()">Asignar Rutina</button>
         <div class="tablaRutina">
-            <table class="clasRutina" id="tablaRutina">
+            <table class="clasCliente" id="tablaCalificaciones">
+                <thead>
                 <tr>
-                    <th>Día</th>
-                    <th>Ejercicio</th>
+                    <th>Dia</th>
                     <th>Series</th>
                     <th>Repeticiones</th>
-                    <th>Descanso</th>
+                    <th>Combo de Ejercicios</th>
+                    <th></th>
                 </tr>
-                <tr>
-                    <td>Lunes</td>
-                    <td>Press de Banca</td>
-                    <td>4</td>
-                    <td>12</td>
-                    <td>90 seg</td>
-                </tr>
+                </thead>
+                <tbody>
+                {% for rutina in practicas %}
+                    <tr>
+                        <td>{{ rutina.dia }}</td>
+                        <td>{{ rutina.series }}</td>
+                        <td>{{ rutina.repeticiones }}</td>
+                        <td>
+                            {% for combo in rutina.combo %}
+                                {{ combo.nombreCombo }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <button class="btnEditar">Eliminar</button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No hay rutinas disponibles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
             </table>
         </div>
     </section>
+
 
     <section class="evolucion">
         <div class="graficaEvolucion">

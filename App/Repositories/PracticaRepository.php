@@ -16,4 +16,21 @@ class PracticaRepository extends Database
         $stmt->close();
         $database->disconnect();
     }
+
+    public function obtenerPracticas($nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT idRutina FROM Practica WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $practicas = [];
+        while ($row = $result->fetch_assoc()) {
+            $practicas[] = $row;
+        }
+        $database->disconnect();
+        return $practicas;
+    }
 }

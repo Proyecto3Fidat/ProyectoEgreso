@@ -20,4 +20,10 @@ class RutinaService
 
     }
 
+    public function obtenerRutina($idRutina)
+    {
+        $repo  = new RutinaRepository();
+        return $repo->obtenerRutina($idRutina);
+    }
+
 }

@@ -40,4 +40,25 @@ class RutinaRepository extends Database
         $database->disconnect();
         return $rutinas;
     }
+
+    public function obtenerRutina($idRutina)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT * FROM Rutina WHERE idRutina = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('i', $idRutina);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Verificar si hay resultados
+        if ($result->num_rows > 0) {
+            $rutina = $result->fetch_assoc();  // Obtener directamente la fila como array asociativo
+        } else {
+            $rutina = [];  // Si no hay resultados, devolver un array vacío
+        }
+        $database->disconnect();
+        return $rutina;
+    }
+
 }

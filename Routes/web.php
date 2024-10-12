@@ -186,6 +186,9 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::post('/dashboard', function () use ($loggerU) {
+            $compone = new App\Controllers\ComponeController();
+            $rutina = new \App\Controllers\RutinaController();
+            $practica = new \App\Controllers\PracticaController();
             $graficos = new App\Controllers\GraficosController();
             $template = new TemplateController();
             $calificacionRepository = new CalificacionRepository();
@@ -194,13 +197,47 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $clienteRepository = new ClienteRepository();
             $clienteService = new ClienteService($clienteRepository);
             $clienteController = new ClienteController($clienteService, $loggerU);
+
             $usuario = $clienteController->obtenerInfoCliente();
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
-            $grafico = $graficos->crearGrafico($_POST['documento'],$calificaciones, $loggerU);
-            $loggerU->info('Dashboard del entrenador');
-            $template->renderTemplate('dashboardEntrenador', array_merge(['usuario' => $usuario], ['calificaciones' => $calificaciones], ['grafico' => $grafico]));
+            $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
+
+            $practicar = $practica->obtenerPracticas();
+            $resultado = []; // Inicializar el resultado
+
+            foreach ($practicar as $practica) {
+                // Obtener la información de la rutina
+                $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
+
+                // Verificar si el array no está vacío y tiene al menos un elemento
+                if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
+                    $rutinaData = $rutinaInfo[0]; // Usar una variable diferente para almacenar la rutina
+                    $combos = $compone->obtenerCombos($practica['idRutina']);
+
+                    // Añadir la información de la rutina al resultado
+                    $resultado[] = [
+                        'idRutina' => $rutinaData['idRutina'],
+                        'series' => $rutinaData['series'],
+                        'repeticiones' => $rutinaData['repeticiones'],
+                        'dia' => $rutinaData['dia'],
+                        'combo' => $combos
+                    ];
+                }
+            }
+
+            // Renderizar el template si se requiere una vista
+            $template->renderTemplate(
+                'dashboardEntrenador',
+                array_merge(
+                    ['usuario' => $usuario],
+                    ['calificaciones' => $calificaciones],
+                    ['grafico' => $grafico],
+                    ['practicas' => $resultado]
+                )
+            );
             exit();
         });
+
 
         SimpleRouter::get('/dashboard', function () {
             $template = new TemplateController();
