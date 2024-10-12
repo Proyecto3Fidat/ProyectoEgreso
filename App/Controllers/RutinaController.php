@@ -16,4 +16,12 @@ class RutinaController
         $id = $service->crearRutina($series, $repeticiones, $dia);
         return $id;
     }
+
+    public function obtenerRutinas()
+    {
+
+        $service = new RutinaService();
+        $rutinas = $service->obtenerRutinas();
+        return $rutinas;
+    }
 }
