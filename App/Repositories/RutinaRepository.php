@@ -18,6 +18,7 @@ class RutinaRepository extends Database
         $database->disconnect();
         return $last_id;
     }
+
     public function obtenerRutinas()
     {
         $database = Database::getInstance();

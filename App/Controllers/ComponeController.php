@@ -19,4 +19,10 @@ class ComponeController
 
     }
 
+    public function obtenerCombos($idRutina)
+    {
+        $service = new ComponeService();
+        return $service->obtenerCombos($idRutina);
+    }
+
 }

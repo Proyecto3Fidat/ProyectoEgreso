@@ -174,4 +174,9 @@ class ClienteService
     {
         return $this->clienteRepository->obtenerInfoCliente($documento);
     }
+
+    public function obtenerTipoDocumento($documento)
+    {
+        return $this->clienteRepository->obtenerTipoDocumento($documento);
+    }
 }

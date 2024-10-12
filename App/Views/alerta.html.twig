@@ -9,10 +9,12 @@
 </head>
 <body>
 </body>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         alert('{{ mensaje | e('js') }}');
         window.location.href = '/{{ ruta | e('js') }}';
     });
 </script>
+
 </html>
