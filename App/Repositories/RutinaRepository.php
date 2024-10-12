@@ -18,4 +18,26 @@ class RutinaRepository extends Database
         $database->disconnect();
         return $last_id;
     }
+
+    public function obtenerRutinas()
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT * FROM Rutina";
+        $result = $database->getConnection()->query($sql);
+        $rutinas = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rutina = [
+                    'idRutina' => $row['idRutina'],
+                    'series' => $row['series'],
+                    'repeticiones' => $row['repeticiones'],
+                    'dia' => $row['dia']
+                ];
+                array_push($rutinas, $rutina);
+            }
+        }
+        $database->disconnect();
+        return $rutinas;
+    }
 }

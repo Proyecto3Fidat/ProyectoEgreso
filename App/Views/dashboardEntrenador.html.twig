@@ -11,7 +11,7 @@
 <body>
 <div class="dashboardContainer">
 
- {% include 'header.html.twig' %}
+    {% include 'header.html.twig' %}
 
     <script src="../../Public/js/listaCalificaciones.js"></script>
 
@@ -103,35 +103,55 @@
         </div>
     </section>
 
-<!-- Modal para Asignar Rutina -->
-<div class="modal" id="modalRutina">
-    <div class="modal-content">
-        <button class="close-button" onclick="closeModal()">
-            <span class="X"></span>
-            <span class="Y"></span>
-            <div class="close">Close</div>
-        </button>
-        <iframe src="/asignarRutina?id={{ usuario.id }}"></iframe>
+    <!-- Modal para Asignar Rutina -->
+    <div class="modal" id="modalRutina">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal()">
+                <span class="X"></span>
+                <span class="Y"></span>
+                <div class="close">Close</div>
+            </button>
+            <iframe id="iframeRutina" src=""></iframe>
+        </div>
     </div>
-</div>
 
-<script>
-    function openModal() {
-        document.getElementById('modalRutina').style.display = 'flex';
-    }
-
-    function closeModal() {
-        document.getElementById('modalRutina').style.display = 'none';
-    }
-
-    // Cierra el modal al hacer clic fuera del contenido
-    window.onclick = function(event) {
-        const modal = document.getElementById('modalRutina');
-        if (event.target === modal) {
-            closeModal();
+    <script>
+        function openModal() {
+            const modal = document.getElementById('modalRutina');
+            modal.classList.remove('hide');
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            document.getElementById('iframeRutina').src = '/asignarRutina?documento={{ usuario.documento }}';
         }
-    }
-</script>
+
+        function closeModal() {
+            const modal = document.getElementById('modalRutina');
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+            // Esperar el tiempo de la transición para ocultar el modal de forma definitiva
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.getElementById('iframeRutina').src = ''; // Limpiar el src del iframe para detener su ejecución
+            }, 500);
+        }
+
+        // Cierra el modal al hacer clic fuera del contenido
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalRutina');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Escuchar mensajes desde el iframe para cerrar el modal
+        window.addEventListener('message', function(event) {
+            // Verificar el contenido del mensaje recibido
+            if (event.data === 'cerrarModalRutina') {
+                closeModal(); // Llamar a la función para cerrar el modal
+            }
+        });
+
+    </script>
 
     {% include 'footer.html.twig' %}
 

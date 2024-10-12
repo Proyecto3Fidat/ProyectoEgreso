@@ -380,4 +380,20 @@ class ClienteRepository extends Database
 
     }
 
+    public function obtenerTipoDocumento($documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT tipoDocumento FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($tipoDocumento);
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        return $tipoDocumento;
+    }
+
 }

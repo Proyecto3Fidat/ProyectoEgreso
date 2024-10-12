@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar Rutina</title>
+    <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
+    <link rel="stylesheet" href="../../Public/css/style.css">
+</head>
+<body>
+
+<div class="asignarEjercicio-Container">
+    <div id="formulario-asignar-rutina" class="content oculto">
+        <form id="asignar-rutina-form" class="califidepo">
+            <input type="text" name="documento" readonly value="{{ documento }}">
+
+            <label for="nombre-rutina">Seleccione la rutina:</label>
+            <select id="nombre-rutina" name="nombreRutina" required onchange="mostrarDetalleRutina()">
+                <option value="" disabled selected>Seleccione una rutina</option>
+                {% for rutina in rutinas %}
+                    <option value="{{ rutina.idRutina }}">{{ rutina.idRutina }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <div id="rutina-seleccionada">
+                <input type="hidden" name="ejercicios" id="ejercicios-input">
+                <input type="button" value="Enviar" onclick="enviarFormulario()">
+            </div>
+        </form>
+    </div>
+    <div id="detalle-rutina" class="content">
+        <h3>Rutina Seleccionada</h3>
+        <div id="rutina-detalle"></div>
+    </div>
+</div>
+
+<script>
+    const rutinas = {{ rutinas|json_encode|raw }};
+
+    function mostrarDetalleRutina() {
+        const select = document.getElementById('nombre-rutina');
+        const rutinaId = select.value;
+        const rutina = rutinas.find(r => r.idRutina == rutinaId);
+
+        if (rutina) {
+            let detalleHtml = '<ul>';
+            rutina.combos.forEach(combo => {
+                detalleHtml += `<li>Combo: ${combo.nombreCombo}</li>`;
+            });
+            detalleHtml += `<li>Series: ${rutina.series}</li>`;
+            detalleHtml += `<li>Repeticiones: ${rutina.repeticiones}</li>`;
+            detalleHtml += `<li>Día: ${rutina.dia}</li>`;
+            detalleHtml += '</ul>';
+            document.getElementById('rutina-detalle').innerHTML = detalleHtml;
+
+            // Asignar el valor JSON del campo ejercicios
+            document.getElementById('ejercicios-input').value = JSON.stringify(rutina.combos);
+        } else {
+            document.getElementById('rutina-detalle').innerHTML = '';
+            document.getElementById('ejercicios-input').value = '';
+        }
+    }
+
+    function enviarFormulario() {
+        const form = document.getElementById('asignar-rutina-form');
+        const formData = new FormData(form);
+
+        // Enviar la solicitud POST con fetch
+        fetch('/asignarRutina', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    alert('Rutina creada con éxito');
+                    window.parent.postMessage('cerrarModalRutina', '*');
+                } else {
+                    alert('Hubo un error al crear la rutina. Inténtalo de nuevo.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Hubo un error al enviar el formulario. Inténtalo de nuevo.');
+            });
+    }
+</script>
+<script src="../../Public/js/script.js"></script>
+</body>
+</html>
