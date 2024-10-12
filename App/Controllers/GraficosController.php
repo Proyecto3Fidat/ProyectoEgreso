@@ -14,12 +14,22 @@
             $hashCalificaciones = md5(json_encode($calificaciones));
             $cachePath = __DIR__ . "/../../Resources/Images/Graphics/grafico_evolucion_{$usuarioId}.png";
 
-            // Obtener la calificación con el ID más alto
-            $ultimaCalificacion = array_reduce($calificaciones, function ($carry, $item) {
-                return ($carry === null || $item['id'] > $carry['id']) ? $item : $carry;
-            });
-            $ultimaCalificacionId = $ultimaCalificacion['id'];
+            try {
+                // Obtener la calificación con el ID más alto
+                $ultimaCalificacion = array_reduce($calificaciones, function ($carry, $item) {
+                    return ($carry === null || $item['id'] > $carry['id']) ? $item : $carry;
+                });
 
+                if ($ultimaCalificacion === null) {
+                    throw new \Exception("No se encontraron calificaciones.");
+                }
+
+                $ultimaCalificacionId = $ultimaCalificacion['id'];
+
+            } catch (Exception $e) {
+                $logger->error('Error al obtener la calificación con el ID más alto', ['exception' => $e]);
+                return;
+            }
             // Verificar si la última calificación ya tiene un gráfico generado
             $ultimoLogPath = __DIR__ . "/../../Config/logs/usuario.log";
             $ultimaCalificacionRegistrada = null;

@@ -207,6 +207,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::post('/dashboard', function () use ($loggerU) {
+            $grafico = [];
             $compone = new App\Controllers\ComponeController();
             $rutina = new \App\Controllers\RutinaController();
             $practica = new \App\Controllers\PracticaController();
@@ -221,8 +222,12 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
             $usuario = $clienteController->obtenerInfoCliente();
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
-            $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
+            try{
+                $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
 
+            }catch (Exception $e){
+                $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
+            }
             $practicar = $practica->obtenerPracticas();
             $resultado = []; // Inicializar el resultado
 
