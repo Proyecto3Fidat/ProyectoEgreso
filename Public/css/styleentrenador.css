@@ -95,10 +95,6 @@ nav a:hover {
     gap: 3rem;      
 }
 
-.clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
-    transform: scale(1.1);
-    box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
-}
 
 .clienteslist, .ejerciciolist, .rutinaslist{
     cursor: pointer;
@@ -111,6 +107,10 @@ nav a:hover {
     box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
     font-family: 'Poppins', sans-serif;
 }
+    .clienteslist:hover, .ejerciciolist:hover, .rutinaslist:hover{
+        transform: scale(1.1);
+        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+    }
     .clienteslist, .ejerciciolist, .rutinaslist:hover {
         transition: 600ms;
     }
