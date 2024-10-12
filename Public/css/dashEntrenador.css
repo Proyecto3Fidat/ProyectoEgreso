@@ -56,7 +56,8 @@ h2 {
     padding: 1rem;
     padding-top: .5rem;
     border-radius: 1rem;
-    width: auto;
+    margin: 2rem auto;
+    width: 75vw;
   }
   .clasCliente {
     margin-top: 1rem;
@@ -64,6 +65,10 @@ h2 {
     overflow: hidden;
     border-radius: 1rem;
     box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    width: 75vw;
+    max-width: 1000px;
+    min-width: 320px;
+    margin: auto;
   }
     .clasCliente th, .clasCliente td {
         padding: .7rem; 
@@ -142,12 +147,18 @@ h2 {
     }
 
 .evolucion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+
     background: linear-gradient(135deg, #EDF2F4, #EBEBEB);
     background-color: #EDF2F4;
     color: #131313;
     padding: 7rem;
     margin: 4rem auto;
-    width: 80%;
+    
     border-radius: 20rem 10rem;
     box-shadow: 0 0 2rem 2px rgba(111, 65, 187);
 }
@@ -157,6 +168,19 @@ h2 {
         margin-top: 1rem;
     }
 
+.graficaEvolucion {
+    width: 75vw;
+    max-width: 1000px;
+    min-width: 320px;
+    margin: auto;
+}
+
+.graficaEvolucion img {
+    max-width: 100%;  
+    height: auto;     
+    display: block;
+    margin: 0 auto;
+}
 
 
 
