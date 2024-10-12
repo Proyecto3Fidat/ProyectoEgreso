@@ -230,7 +230,6 @@ CREATE TABLE Conforma(
     PRIMARY KEY (nombre, dia, horaInicio, horaFin)
 );
 
-/* Claves Foráneas con ON DELETE CASCADE */
 ALTER TABLE Cliente_Telefono
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
 
