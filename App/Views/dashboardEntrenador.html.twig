@@ -31,6 +31,7 @@
 
     <section class="calificaciones">
         <h2>Calificaciones</h2>
+        <button class="btnEditar" onclick="openModalCalificacion()">Asignar Calificación</button>
         <div class="tablaCliente">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
@@ -60,12 +61,12 @@
                         <td>{{ calificacion.cumplAgenda }}</td>
                         <td>{{ calificacion.resMonotonia }}</td>
                         <td>
-                            <button class="btnEditar">Editar</button>
+                            <button class="btnEditar" onclick="abrirModalCalificacion({{ calificacion.id }})">Editar</button>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="6">No hay calificaciones disponibles</td>
+                        <td colspan="10">No hay calificaciones disponibles</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -131,6 +132,30 @@
         </div>
     </div>
 
+    <!-- Modal para Asignar Calificación -->
+    <div class="modal" id="modalAsignarCalificacion">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModalAsignarCalificacion()">
+                <span class="X"></span>
+                <span class="Y"></span>
+                <div class="close">Close</div>
+            </button>
+            <iframe id="iframeAsignarCalificacion" src=""></iframe>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Calificación -->
+    <div class="modal" id="modalCalificacion">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModalCalificacion()">
+                <span class="X"></span>
+                <span class="Y"></span>
+                <div class="close">Close</div>
+            </button>
+            <iframe id="iframeCalificacion" src=""></iframe>
+        </div>
+    </div>
+
     <script>
         function openModal() {
             const modal = document.getElementById('modalRutina');
@@ -144,31 +169,78 @@
             const modal = document.getElementById('modalRutina');
             modal.classList.remove('show');
             modal.classList.add('hide');
-            // Esperar el tiempo de la transición para ocultar el modal de forma definitiva
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.getElementById('iframeRutina').src = ''; // Limpiar el src del iframe para detener su ejecución
-                window.location.reload(); // Recargar la página después de cerrar el modal
+                document.getElementById('iframeRutina').src = '';
+                window.location.reload();
             }, 500);
         }
 
-        // Cierra el modal al hacer clic fuera del contenido
+        function openModalCalificacion() {
+            const modal = document.getElementById('modalAsignarCalificacion');
+            modal.classList.remove('hide');
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            document.getElementById('iframeAsignarCalificacion').src = '/calificacion?documento={{ usuario.documento }}';
+        }
+
+        function closeModalAsignarCalificacion() {
+            const modal = document.getElementById('modalAsignarCalificacion');
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.getElementById('iframeAsignarCalificacion').src = '';
+                window.location.reload();
+            }, 500);
+        }
+
         window.onclick = function(event) {
-            const modal = document.getElementById('modalRutina');
-            if (event.target === modal) {
+            const modalRutina = document.getElementById('modalRutina');
+            const modalCalificacion = document.getElementById('modalCalificacion');
+            const modalAsignarCalificacion = document.getElementById('modalAsignarCalificacion');
+            if (event.target === modalRutina) {
                 closeModal();
+            }
+            if (event.target === modalCalificacion) {
+                closeModalCalificacion();
+            }
+            if (event.target === modalAsignarCalificacion) {
+                closeModalAsignarCalificacion();
             }
         }
 
-        // Escuchar mensajes desde el iframe para cerrar el modal
         window.addEventListener('message', function(event) {
-            // Verificar el contenido del mensaje recibido
             if (event.data === 'cerrarModalRutina') {
-                closeModal(); // Llamar a la función para cerrar el modal
+                closeModal();
+            }
+            if (event.data === 'cerrarModalCalificacion') {
+                closeModalCalificacion();
+            }
+            if (event.data === 'cerrarModalAsignarCalificacion') {
+                closeModalAsignarCalificacion();
             }
         });
 
-        // Función para eliminar rutina
+        function abrirModalCalificacion(idCalificacion) {
+            const modal = document.getElementById('modalCalificacion');
+            modal.classList.remove('hide');
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            document.getElementById('iframeCalificacion').src = '/editarCalificacion?id=' + idCalificacion;
+        }
+
+        function closeModalCalificacion() {
+            const modal = document.getElementById('modalCalificacion');
+            modal.classList.remove('show');
+            modal.classList.add('hide');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.getElementById('iframeCalificacion').src = '';
+                window.location.reload();
+            }, 500);
+        }
+
         function eliminarRutina(idRutina) {
             if (confirm('¿Estás seguro de que deseas eliminar esta rutina al usuario {{ usuario.documento }}?')) {
                 fetch('/eliminarRutina', {
@@ -182,7 +254,7 @@
                     .then(data => {
                         if (data.status === 'ok') {
                             alert('Rutina eliminada con éxito');
-                            window.location.reload(); // Recargar la página después de eliminar la rutina
+                            window.location.reload();
                         } else {
                             alert('Error al eliminar la rutina. Inténtalo de nuevo.');
                         }

@@ -6,16 +6,22 @@
     <link rel="stylesheet" href="../../Public/css/calificacionIn.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
-    <title>Calificar</title>
+    <title>Editar Calificacion</title>
 
 </head>
+<style>
+    .documento {
+        display: none;
+    }
+    </style>
 <body>
+
 <div class="content">
     <h4>Calificar</h4>
-    <form action="/calificacion" method="post" class="califidepo">
-        <input type="text" id="documento" name="nroDocumento" readonly placeholder="Documento" required>
-        <input name="puntMaxima" type="text" placeholder="Puntuacion maxima">
-        <input name="puntuacionEsperado" type="text" placeholder="Calificacion Esperada">
+    <form action="/editarCalificacion" method="post" class="califidepo">
+        <div id="documento" class="documento">
+        <input display="none" type="text" id="documento" name="id" readonly placeholder="Documento" required value="{{ id }}">
+        </div>
         <input name="fuerzaMusc" type="text" placeholder="Fuerza Muscular">
         <input name="resAnaerobica" type="text" placeholder="Resistencia anaerobica">
         <input name="resiliencia" type="text" placeholder="Resiliencia">
@@ -42,17 +48,17 @@
         event.preventDefault();
 
         const formData = new FormData(this);
-        fetch('/calificacion', {
+        fetch('/editarCalificacion', {
             method: 'POST',
             body: formData,
         })
             .then(response => response.json())
             .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                } else {
-                    alert('Calificación creada con éxito');
+                if (data.status === 'ok') {
+                    alert('Calificación editada con éxito');
                     window.parent.postMessage('cerrarModalCalificacion', '*');
+                } else {
+                    alert(data.error || 'Hubo un problema al editar la calificación. Intenta nuevamente.');
                 }
             })
             .catch(error => {

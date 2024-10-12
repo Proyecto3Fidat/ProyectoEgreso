@@ -25,4 +25,10 @@ class ComponeController
         return $service->obtenerCombos($idRutina);
     }
 
+    public function eliminarRutina($id)
+    {
+        $service = new ComponeService();
+        $service->eliminarRutina($id);
+    }
+
 }

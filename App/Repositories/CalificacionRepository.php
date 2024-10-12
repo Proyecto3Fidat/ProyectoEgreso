@@ -51,4 +51,24 @@ Class CalificacionRepository extends Database{
         $database->disconnect();
         return $calificaciones;
     }
+
+    public function editarCalificacion(\App\Models\CalificacionModel $calificacionModel, $id)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "UPDATE Calificacion SET puntMaxima = ?, fuerzaMusc = ?, resMusc = ?, resAnaerobica = ?, resilicencia = ?, flexibilidad = ?, cumpAgenda = ?, resMonotonia = ? WHERE id = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $puntMaxima = $calificacionModel->getPuntMaxima();
+        $fuerzaMusc = $calificacionModel->getFuerzaMusc();
+        $resMusc = $calificacionModel->getResMusc();
+        $resAnaerobica = $calificacionModel->getResAnaerobica();
+        $resiliencia = $calificacionModel->getResiliencia();
+        $flexibilidad = $calificacionModel->getFlexibilidad();
+        $cumplAgenda = $calificacionModel->getCumplAgenda();
+        $resMonotonia = $calificacionModel->getResMonotonia();
+        $stmt->bind_param("iiiiiiiii", $puntMaxima, $fuerzaMusc, $resMusc, $resAnaerobica, $resiliencia, $flexibilidad, $cumplAgenda, $resMonotonia, $id);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

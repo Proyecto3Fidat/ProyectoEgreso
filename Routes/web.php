@@ -53,7 +53,7 @@ SimpleRouter::post('/pagos', function () use ($logger) {
 
 SimpleRouter::get('/inicio', function () {
     $template = new TemplateController();
-    $template->renderTemplate('inicio', ['calificacion'=>'<li><a href="/">Calificación</a></li>']);
+    $template->renderTemplate('inicio', ['calificacion' => '<li><a href="/">Calificación</a></li>']);
 });
 
 SimpleRouter::post('planes', function () use ($logger) {
@@ -61,111 +61,14 @@ SimpleRouter::post('planes', function () use ($logger) {
     $planes->obtenerPagosPorDocumento();
     exit();
 });
-SimpleRouter::get('/ejercicios', function () {
-    $ejer = new EjercicioController();
-    $ejer->obtenerEjercicios();
-    exit();
-});
+
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
 
-SimpleRouter::post('asignarRutina', function () {
-    $template = new TemplateController();
-    $practica = new App\Controllers\PracticaController();
-
-    try {
-        $practica->asignarRutina();
-
-        echo json_encode([
-            'status' => 'ok',
-        ]);
-    } catch (Exception $e) {
-        echo json_encode([
-            'status' => 'error',
-            'message' => $e->getMessage(),
-        ]);
-    }
-
-    exit();
-});
-
-SimpleRouter::get('/asignarRutina', function () {
-    $resultados = [];
-    $rutina = new App\Controllers\RutinaController();
-    $compone = new App\Controllers\ComponeController();
-    $template = new TemplateController();
-    $rutinas = $rutina->obtenerRutinas();
-    foreach ($rutinas as $rutina) {
-        $r = [
-            'combos' => $compone->obtenerCombos($rutina['idRutina']),
-            'idRutina' => $rutina['idRutina'],
-            'series' => $rutina['series'],
-            'repeticiones' => $rutina['repeticiones'],
-            'dia' => $rutina['dia']
-        ];
-        $resultado [] = $r;
-    }
-    $data = [
-        'rutinas' => $resultado,
-        'documento' => $_GET['documento']
-    ];
-
-    $template->renderTemplate('asignarRutina', $data);
-
-});
-
-SimpleRouter::get('/obtenerComboEjercicios', function () {
-    $template = new TemplateController();
-    $ejer = new ContieneController();
-    $calificaciones = $ejer->obtenerEjercicios();
-    $template->renderTemplate('combo', ['combos' => $calificaciones]);
-});
-
-SimpleRouter::post('/crearRutina', function () {
-
-    $contiene = new App\Controllers\ContieneController();
-    $compone = new App\Controllers\ComponeController();
-    $rutina = new App\Controllers\RutinaController();
-    $combosSeleccionadosJson = $_POST['combosSeleccionados'];
-    $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
-
-    if (is_array($combosSeleccionados)) {
-        $nombresCombos = [];
-        foreach ($combosSeleccionados as $combo) {
-            $nombreCombo = $combo['nombreCombo'];
-            $idEjercicio = $combo['idEjercicio'];
-            $nombreEjercicio = $combo['nombre'];
-            $descripcion = $combo['descripcion'];
-            $tipoEjercicio = $combo['tipoEjercicio'];
-            $grupoMuscular = $combo['grupoMuscular'];
-            $nombresCombos[] = $nombreCombo;
-        }
-
-        foreach ($nombresCombos as $nombreCombo) {
-            $ejercicioId = $contiene->obtenerEjerciciosNombre($nombreCombo);
-            $combos [] = [
-              'nombreCombo' => $nombreCombo,
-                'ejercicios' => $ejercicioId
-            ];
-        }
-        $id = $rutina->crearRutina();
-        $compone->crearRutina($combos, $id);
-        }
-
-    $datos = [
-        'mensaje' => 'Rutina creada con éxito',
-        'ruta' => 'obtenerComboEjercicios'
-    ];
-
-    $template = new TemplateController();
-    $template->renderTemplate('alerta', $datos);
-    exit();
-
-});
-
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
+
     Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
@@ -175,6 +78,124 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
     });
 
     SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
+        SimpleRouter::post('/eliminarRutina', function () {
+            $compone = new App\Controllers\ComponeController();
+            $solicitud = json_decode(file_get_contents('php://input'), true);
+            $id = $solicitud['idRutina'];
+            try {
+              $compone->eliminarRutina($id);
+                echo json_encode([
+                    'status' => 'ok',
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Error al eliminar la rutina: ',
+                ]);
+            }
+
+            exit();
+
+        });
+        SimpleRouter::get('/ejercicios', function () {
+            $ejer = new EjercicioController();
+            $ejer->obtenerEjercicios();
+            exit();
+        });
+
+        SimpleRouter::post('asignarRutina', function () {
+            $template = new TemplateController();
+            $practica = new App\Controllers\PracticaController();
+
+            try {
+                $practica->asignarRutina();
+
+                echo json_encode([
+                    'status' => 'ok',
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => $e->getMessage(),
+                ]);
+            }
+
+            exit();
+        });
+
+        SimpleRouter::get('/obtenerComboEjercicios', function () {
+            $template = new TemplateController();
+            $ejer = new ContieneController();
+            $calificaciones = $ejer->obtenerEjercicios();
+            $template->renderTemplate('combo', ['combos' => $calificaciones]);
+        });
+
+        SimpleRouter::get('/asignarRutina', function () {
+            $resultados = [];
+            $rutina = new App\Controllers\RutinaController();
+            $compone = new App\Controllers\ComponeController();
+            $template = new TemplateController();
+            $rutinas = $rutina->obtenerRutinas();
+            foreach ($rutinas as $rutina) {
+                $r = [
+                    'combos' => $compone->obtenerCombos($rutina['idRutina']),
+                    'idRutina' => $rutina['idRutina'],
+                    'series' => $rutina['series'],
+                    'repeticiones' => $rutina['repeticiones'],
+                    'dia' => $rutina['dia']
+                ];
+                $resultado [] = $r;
+            }
+            $data = [
+                'rutinas' => $resultado,
+                'documento' => $_GET['documento']
+            ];
+
+            $template->renderTemplate('asignarRutina', $data);
+
+        });
+
+        SimpleRouter::post('/crearRutina', function () {
+
+            $contiene = new App\Controllers\ContieneController();
+            $compone = new App\Controllers\ComponeController();
+            $rutina = new App\Controllers\RutinaController();
+            $combosSeleccionadosJson = $_POST['combosSeleccionados'];
+            $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
+
+            if (is_array($combosSeleccionados)) {
+                $nombresCombos = [];
+                foreach ($combosSeleccionados as $combo) {
+                    $nombreCombo = $combo['nombreCombo'];
+                    $idEjercicio = $combo['idEjercicio'];
+                    $nombreEjercicio = $combo['nombre'];
+                    $descripcion = $combo['descripcion'];
+                    $tipoEjercicio = $combo['tipoEjercicio'];
+                    $grupoMuscular = $combo['grupoMuscular'];
+                    $nombresCombos[] = $nombreCombo;
+                }
+
+                foreach ($nombresCombos as $nombreCombo) {
+                    $ejercicioId = $contiene->obtenerEjerciciosNombre($nombreCombo);
+                    $combos [] = [
+                        'nombreCombo' => $nombreCombo,
+                        'ejercicios' => $ejercicioId
+                    ];
+                }
+                $id = $rutina->crearRutina();
+                $compone->crearRutina($combos, $id);
+            }
+
+            $datos = [
+                'mensaje' => 'Rutina creada con éxito',
+                'ruta' => 'obtenerComboEjercicios'
+            ];
+
+            $template = new TemplateController();
+            $template->renderTemplate('alerta', $datos);
+            exit();
+
+        });
 
         global $loggerU;
         Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
@@ -238,6 +259,29 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
+        SimpleRouter::post('editarCalificacion', function () use ($loggerU) {
+            $calificacionRepository = new CalificacionRepository();
+            $calificacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calificacionService, $loggerU);
+            try {
+                $calificacionController->editarCalificacion();
+                echo json_encode([
+                    'status' => 'ok',
+                ]);
+            }catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Error al editar la calificación: '
+                ]);
+            }
+
+            exit();
+        });
+
+        SimpleRouter::get('editarCalificacion', function () use ($logger) {
+           $template = new TemplateController();
+           $template->renderTemplate('editarCalificacion', ['id' => $_GET['id']]);
+        });
 
         SimpleRouter::get('/dashboard', function () {
             $template = new TemplateController();
@@ -418,17 +462,17 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $planes->obtenerPlanes();
             exit();
         });
-        
+
     });
-    
+
     SimpleRouter::get('/verificarsesion', function () use ($logger) {
         echo json_encode([
             'authenticated' => $_SESSION['sesion']
         ]);
         exit();
     });
-    
-    
+
+
 });
 
 SimpleRouter::post('/eliminar', function () use ($logger) {

@@ -170,5 +170,39 @@ class CalificacionController
         return $calificacionesR;
     }
 
+    public function editarCalificacion()
+    {
+
+        $calificacionRepository = new CalificacionRepository();
+        $calificacionService = new CalificacionService($calificacionRepository);
+
+        $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        // Validar y convertir datos de $_POST
+        $puntMaxima = filter_input(INPUT_POST, 'puntMaxima', FILTER_VALIDATE_INT);
+        $fuerzaMusc = filter_input(INPUT_POST, 'fuerzaMusc', FILTER_VALIDATE_FLOAT);
+        $resMusc = filter_input(INPUT_POST, 'resMusc', FILTER_VALIDATE_FLOAT);
+        $resAnaerobica = filter_input(INPUT_POST, 'resAnaerobica', FILTER_VALIDATE_FLOAT);
+        $resiliencia = filter_input(INPUT_POST, 'resiliencia', FILTER_VALIDATE_FLOAT);
+        $flexibilidad = filter_input(INPUT_POST, 'flexibilidad', FILTER_VALIDATE_FLOAT);
+        $cumplAgenda = filter_input(INPUT_POST, 'cumplAgenda', FILTER_VALIDATE_FLOAT);
+        $resMonotonia = filter_input(INPUT_POST, 'resMonotonia', FILTER_VALIDATE_FLOAT);
+        $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $puntuacionEsperado = filter_input(INPUT_POST, 'puntuacionEsperado', FILTER_VALIDATE_FLOAT);
+
+        $calificacionService->editarCalificacion(new CalificacionModel(
+            null,
+            $puntMaxima,
+            $fuerzaMusc,
+            $resMusc,
+            $resAnaerobica,
+            $resiliencia,
+            $flexibilidad,
+            $cumplAgenda,
+            $resMonotonia
+        ), $id);
+
+        $this->logger->info('Puntuación del usuario '.$nroDocumento.' asignada correctamente. '.$id);
+    }
+
 }
 

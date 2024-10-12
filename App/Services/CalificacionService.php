@@ -34,4 +34,9 @@ Class CalificacionService{
     public function obtenerPuntuaciones($id){
         return $this->calificacionRepository->obtenerPuntuaciones($id);
     }
+
+    public function editarCalificacion(CalificacionModel $calificacionModel, $id)
+    {
+        return $this->calificacionRepository->editarCalificacion($calificacionModel, $id);
+    }
 }

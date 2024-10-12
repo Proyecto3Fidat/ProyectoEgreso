@@ -19,4 +19,11 @@ class ComponeService
         return $repo->obtenerCombos($idRutina);
     }
 
+    public function eliminarRutina($id)
+    {
+
+        $repo  = new ComponeRepository();
+        $repo->eliminarRutina($id);
+    }
+
 }
