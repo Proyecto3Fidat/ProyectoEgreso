@@ -12,7 +12,6 @@ class RutinaService
         $repo  = new RutinaRepository();
         return $repo->crearRutina($series, $repeticiones, $dia);
     }
-
     public function obtenerRutinas()
     {
         $repo  = new RutinaRepository();

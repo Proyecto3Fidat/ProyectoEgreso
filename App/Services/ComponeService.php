@@ -12,11 +12,4 @@ class ComponeService
         $repo  = new ComponeRepository();
         $repo->crearRutina($idRutina, $nombreCombo, $idEjercicio);
     }
-
-    public function obtenerCombos($idRutina)
-    {
-        $repo  = new ComponeRepository();
-        return $repo->obtenerCombos($idRutina);
-    }
-
 }

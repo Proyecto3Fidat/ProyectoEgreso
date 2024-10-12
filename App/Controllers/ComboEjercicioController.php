@@ -25,16 +25,13 @@ class ComboEjercicioController
         }
 
         if (is_array($ejercicios)) {
-
             $comboEjercicioServices = new ComboEjercicioServices();
             $contiene = new ContieneService();
             $comboEjercicioServices->crearCombo($nombre);
 
             foreach ($ejercicios as $ejercicio) {
-
                 $id = $ejercicio['idEjercicio'];
                 $contiene->crearContiene($nombre, $id);
-
             }
 
         }
