@@ -1,12 +1,3 @@
-.crearEjercicio-Container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-    width: 100%;
-    max-width: 100%;
-}
-
 .califidepo {
     background: transparent;
     display: flex;
