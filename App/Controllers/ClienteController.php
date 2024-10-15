@@ -7,6 +7,7 @@ use App\Repositories\ClientetelefonoRepository;
 use App\Services\ClienteService;
 use App\Services\ClientetelefonoService;
 use App\Services\EligeService;
+use App\Services\SeAgendaService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
@@ -129,12 +130,12 @@ class ClienteController
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
         $this->logger->info('Se intento imprimir la nota');
-        if(isset($_SESSION['sesion']) && $_SESSION['sesion'] === true) {
-        if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
+        if (isset($_SESSION['sesion']) && $_SESSION['sesion'] === true) {
+            if ($usuarioService->comprobarToken($_SESSION['documento'], $_SESSION['token'])) {
 
-            $this->clienteService->imprimirNota($_GET['id']);
-        }
-        }else{
+                $this->clienteService->imprimirNota($_GET['id']);
+            }
+        } else {
             $usuarioService->tokenInvalido();
             echo "<script>
                 alert('No tiene permisos para ver esta página');
@@ -152,28 +153,29 @@ class ClienteController
         $usuarioService = new UsuarioService($usuarioRepo);
 
 
-            $lista = $this->clienteService->listarClientes();
-            $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
-            $resultado = [];
-            foreach ($clientes as $cliente) {
-                $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
-                $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
-                $resultado[] = [
-                    'nombre' => $cliente['nombre'],
-                    'nroDocumento' => $cliente['nroDocumento'],
-                    'rol' => $cliente['rol'],
-                    'altura' => $cliente['altura'],
-                    'peso' => $cliente['peso'],
-                    'patologias' => $cliente['patologia'],
-                    'email' => $cliente['email'],
-                    'edad' => $edad,
-                    'direccion' => $direccion,
-                    'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
-                ];
-            }
-            echo json_encode($resultado);
+        $lista = $this->clienteService->listarClientes();
+        $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
+        $resultado = [];
+        foreach ($clientes as $cliente) {
+            $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+            $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+            $resultado[] = [
+                'nombre' => $cliente['nombre'],
+                'nroDocumento' => $cliente['nroDocumento'],
+                'rol' => $cliente['rol'],
+                'altura' => $cliente['altura'],
+                'peso' => $cliente['peso'],
+                'patologias' => $cliente['patologia'],
+                'email' => $cliente['email'],
+                'edad' => $edad,
+                'direccion' => $direccion,
+                'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
+            ];
+        }
+        echo json_encode($resultado);
 
     }
+
     public function obtenerInfoCliente($nroDocumento)
     {
 
@@ -194,6 +196,7 @@ class ClienteController
 
     public function obtenerListaClientesAdmin()
     {
+        $seAgenda = new SeAgendaService();
         $clienteTelefonoRepository = new ClientetelefonoRepository();
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $usuarioRepo = new UsuarioRepository();
@@ -202,7 +205,22 @@ class ClienteController
         $lista = $this->clienteService->listarClientes();
         $clientes = $usuarioService->comprobarClientes($lista);
         $resultado = [];
+
         foreach ($clientes as $cliente) {
+            $agenda = $seAgenda->obtenerAgendas($cliente['nroDocumento']);
+
+            // Verificamos si la agenda no es null
+            if ($agenda !== null && !empty($agenda)) {
+                $horaInicioSinSegundos = substr($agenda['horaInicio'], 0, 5);
+                $horaFinSinSegundos = substr($agenda['horaFin'], 0, 5);
+                $dia = $agenda['dia'];
+            } else {
+                // Si no hay agenda, se establecen valores por defecto
+                $horaInicioSinSegundos = null;
+                $horaFinSinSegundos = null;
+                $dia = null;
+            }
+
             $pago = $eligeService->obtenerPagosPorDocumento($cliente['nroDocumento']);
             $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
             $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
@@ -222,7 +240,10 @@ class ClienteController
                     'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento']),
                     'nombrePlan' => $pago['nombrePlan'],
                     'tipoPlan' => $pago['tipoPlan'],
-                    'fechaVencimiento' => $pago['fechaVencimiento']
+                    'fechaVencimiento' => $pago['fechaVencimiento'],
+                    'horaInicio' => $horaInicioSinSegundos,
+                    'horaFin' => $horaFinSinSegundos,
+                    'dia' => $dia
                 ];
             } else {
                 // En caso de que $pago sea null
@@ -240,7 +261,10 @@ class ClienteController
                     'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento']),
                     'nombrePlan' => null,
                     'tipoPlan' => null,
-                    'fechaVencimiento' => null
+                    'fechaVencimiento' => null,
+                    'horaInicio' => null,  // Valores nulos para agenda
+                    'horaFin' => null,
+                    'dia' => null
                 ];
             }
         }

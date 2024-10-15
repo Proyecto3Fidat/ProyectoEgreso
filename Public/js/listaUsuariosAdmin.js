@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Variable para almacenar la lista de clientes
+
     let clientes = [];
 
-    // Cargar la lista de clientes
     fetch('/usuario/obtenerListaClientesAdmin')
         .then(response => {
             if (response.status === 403) {

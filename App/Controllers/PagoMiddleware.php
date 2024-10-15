@@ -15,6 +15,8 @@ class PagoMiddleware implements IMiddleware
         $payService = new PayService();
         if (isset($_SESSION['sesion']) && $_SESSION['sesion'] === true && $_SESSION['rol'] === 'cliente') {
             $payService->verificarPago();
+        }else {
+            return;
         }
     }
 }

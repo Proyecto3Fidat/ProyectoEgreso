@@ -83,8 +83,19 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         exit();
     });
 
-    SimpleRouter::get('/dashboardUsuario', function () use ($loggerU) {
+    SimpleRouter::post('/asistencia', function () use ($logger) {
+        $asistencia = filter_input(INPUT_POST, 'asistencia', FILTER_SANITIZE_SPECIAL_CHARS);
+        $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
+        $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
+        $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
+        $seAgenda = new App\Services\SeAgendaService();
+        $seAgenda->asistir($documento, $dia, $horaInicio, $horaFin, $asistencia);
+        exit();
+    });
 
+    SimpleRouter::get('/dashboardUsuario', function () use ($loggerU) {
+        $seAgenda = new App\Services\SeAgendaService();
         $grafico = [];
         $compone = new App\Controllers\ComponeController();
         $rutina = new \App\Controllers\RutinaController();
@@ -97,6 +108,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         $clienteRepository = new ClienteRepository();
         $clienteService = new ClienteService($clienteRepository);
         $clienteController = new ClienteController($clienteService, $loggerU);
+
+        $agenda = $seAgenda->obtenerAgendasUsuario($_SESSION['documento']);
 
         $usuario = $clienteController->obtenerInfoCliente($_SESSION['documento']);
         $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_SESSION['documento']);
@@ -133,7 +146,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                 ['usuario' => $usuario],
                 ['calificaciones' => $calificaciones],
                 ['grafico' => $grafico],
-                ['practicas' => $resultado]
+                ['practicas' => $resultado],
+                ['agenda' => $agenda]
             )
         );
         exit();

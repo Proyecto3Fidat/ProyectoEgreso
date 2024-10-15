@@ -16,4 +16,77 @@ class SeAgendaRepository extends Database
         $stmt->close();
         $database->disconnect();
     }
+
+    public function obtenerAgendas($nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT * FROM SeAgenda WHERE nroDocumento = ?";
+        $result = $database->getConnection()->prepare($sql);
+        $result->bind_param("s", $nroDocumento);
+        $result->execute();
+        $result = $result->get_result();
+        $agendas = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $agenda = [
+                    'nroDocumento' => $row['nroDocumento'],
+                    'tipoDocumento' => $row['tipoDocumento'],
+                    'dia' => $row['dia'],
+                    'horaInicio' => $row['horaInicio'],
+                    'horaFin' => $row['horaFin']
+                ];
+                array_push($agendas, $agenda);
+            }
+        }
+        $result->close();
+        $database->disconnect();
+        return $agendas;
+    }
+
+    public function asistir($documento, $dia, $horaInicio, $horaFin, $asistencia)
+    {
+        // Verificamos que los tiempos estén en formato adecuado HH:MM:SS
+        if (!preg_match('/^\d{2}:\d{2}:\d{2}$/', $horaInicio)) {
+            throw new Exception('El formato de horaInicio es incorrecto: ' . $horaInicio);
+        }
+        if (!preg_match('/^\d{2}:\d{2}:\d{2}$/', $horaFin)) {
+            throw new Exception('El formato de horaFin es incorrecto: ' . $horaFin);
+        }
+
+        $database = Database::getInstance();
+        $database->connect();
+
+        // Preparamos la consulta
+        $sql = "UPDATE SeAgenda SET asistencia = ? WHERE nroDocumento = ? AND dia = ? AND horaInicio = ? AND horaFin = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+
+        // Verificamos si la consulta se preparó correctamente
+        if ($stmt === false) {
+            throw new Exception('Error preparando la consulta: ' . $database->getConnection()->error);
+        }
+
+        // Vinculamos los parámetros
+        if (!$stmt->bind_param("sssss", $asistencia, $documento, $dia, $horaInicio, $horaFin)) {
+            throw new Exception('Error al vincular los parámetros: ' . $stmt->error);
+        }
+
+        // Ejecutamos la consulta
+        if (!$stmt->execute()) {
+            throw new Exception('Error ejecutando la consulta: ' . $stmt->error);
+        }
+
+        // Verificamos si la consulta afectó alguna fila
+        if ($stmt->affected_rows === 0) {
+            throw new Exception('No se actualizó ninguna fila. Verifica los parámetros.');
+        }
+
+        // Cerramos el statement
+        $stmt->close();
+
+        // Desconectamos la base de datos
+        $database->disconnect();
+    }
+
+
 }

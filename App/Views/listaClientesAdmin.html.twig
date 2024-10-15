@@ -286,12 +286,12 @@
 <script src="../../Public/js/responsive.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Obtener referencias a los elementos del modal de pago/agendar
+
         const modalOverlay = document.getElementById('modal-overlay');
         const iframe = document.getElementById('form-iframe');
         const closeModalButton = modalOverlay.querySelector('.modal-close-button');
 
-        // Agregar eventos a los botones de Ingresar Pago y Agendar
+
         document.querySelectorAll('.btnpago button').forEach(button => {
             button.addEventListener('click', function (event) {
                 event.preventDefault();
@@ -306,19 +306,17 @@
                     url = `/agendar?documento=${documento}`;
                 }
 
-                // Abrir el modal y cargar la URL en el iframe
+
                 iframe.src = url;
                 modalOverlay.style.display = 'flex';
             });
         });
 
-        // Agregar evento para cerrar el modal de pago/agendar
         closeModalButton.addEventListener('click', function () {
             modalOverlay.style.display = 'none';
             iframe.src = ''; // Limpiar el src del iframe
         });
 
-        // Cerrar el modal cuando se haga clic fuera del contenido del modal de pago/agendar
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
@@ -326,29 +324,26 @@
             }
         });
 
-        // Obtener referencias a los elementos del modal de ingresar local
         const modalIngresarLocal = document.getElementById('modal-ingresar-local');
         const iframeIngresarLocal = document.getElementById('iframe-ingresar-local');
         const closeModalIngresarLocalButton = modalIngresarLocal.querySelector('.modal-close-button');
 
-        // Agregar evento al botón Ingresar Local
+
         const btnIngresarLocal = document.getElementById('btnIngresarLocal');
         btnIngresarLocal.addEventListener('click', function () {
-            iframeIngresarLocal.src = '/ingresarGym'; // URL del contenido del iframe
-            modalIngresarLocal.style.display = 'flex'; // Mostrar el modal
+            iframeIngresarLocal.src = '/ingresarGym';
+            modalIngresarLocal.style.display = 'flex';
         });
 
-        // Agregar evento para cerrar el modal de ingresar local
         closeModalIngresarLocalButton.addEventListener('click', function () {
             modalIngresarLocal.style.display = 'none';
-            iframeIngresarLocal.src = ''; // Limpiar el src del iframe
+            iframeIngresarLocal.src = '';
         });
 
-        // Cerrar el modal cuando se haga clic fuera del contenido del modal de ingresar local
         modalIngresarLocal.addEventListener('click', function (event) {
             if (event.target === modalIngresarLocal) {
                 modalIngresarLocal.style.display = 'none';
-                iframeIngresarLocal.src = ''; // Limpiar el src del iframe
+                iframeIngresarLocal.src = '';
             }
         });
 
@@ -360,21 +355,20 @@
         // Agregar evento al botón Agenda
         const btnAgenda = document.getElementById('btnAgenda');
         btnAgenda.addEventListener('click', function () {
-            iframeAgenda.src = '/dashAgenda'; // URL del contenido del iframe
-            modalAgenda.style.display = 'flex'; // Mostrar el modal
+            iframeAgenda.src = '/dashAgenda';
+            modalAgenda.style.display = 'flex';
         });
 
-        // Agregar evento para cerrar el modal de agenda
+
         closeModalAgendaButton.addEventListener('click', function () {
             modalAgenda.style.display = 'none';
-            iframeAgenda.src = ''; // Limpiar el src del iframe
+            iframeAgenda.src = '';
         });
 
-        // Cerrar el modal cuando se haga clic fuera del contenido del modal de agenda
         modalAgenda.addEventListener('click', function (event) {
             if (event.target === modalAgenda) {
                 modalAgenda.style.display = 'none';
-                iframeAgenda.src = ''; // Limpiar el src del iframe
+                iframeAgenda.src = '';
             }
         });
     });

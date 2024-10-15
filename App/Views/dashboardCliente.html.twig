@@ -20,7 +20,6 @@
     {% include 'header.html.twig' with {'links': links} %}
 
 
-
     <h1>Bienvenido al Dashboard  {{ usuario.nombre }} {{ usuario.apellido }}</h1>
 
     <!-- Seccion de Informacion del Usuario -->
@@ -32,6 +31,34 @@
             <p><strong>Altura:</strong> {{ usuario.altura }}</p>
             <p><strong>Peso:</strong> {{ usuario.peso }}</p>
             <p><strong>Documento:</strong> {{ usuario.documento }}</p>
+        </div>
+    </section>
+    <section class="rutina">
+        <h2>Agenda</h2>
+        <div class="tablaRutina">
+            <table class="clasCliente" id="tablaCalificaciones">
+                <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for agendas in agenda %}
+                    <tr>
+                        <td>{{ agendas.dia }}</td>
+                        <td>{{ agendas.horaInicio }}</td>
+                        <td>{{ agendas.horaFin }}</td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No hay rutinas disponibles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </section>
 
@@ -130,6 +157,37 @@
 
 <script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>
+
+<script>
+    // Capturamos todos los formularios de la clase asistencia-form
+    const forms = document.querySelectorAll('.asistencia-form');
+
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evitamos que el formulario se envíe de forma tradicional
+
+            // Creamos un objeto FormData con los datos del formulario
+            const formData = new FormData(form);
+
+            // Enviamos los datos usando fetch
+            fetch('/asistencia', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json()) // Parseamos la respuesta a JSON
+                .then(data => {
+                    if (data.success) {
+                        alert('Asistencia enviada correctamente');
+                    } else {
+                        alert('Hubo un error al enviar la asistencia');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+</script>
 
 </body>
 </html>
