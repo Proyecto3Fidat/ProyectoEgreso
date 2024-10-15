@@ -190,17 +190,49 @@ input[type="submit"] {
     display: flex;
 }
 
-.fichatecn {
+.fichagnrl{
+    display: none;
+    background-color:#303030;
+    width:80%;
+    margin: 2rem auto;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
+}
+    .fichagnrl.visible{
+    display: block;
+    }
+.fichaTecnica {
+        display: flex;
+        flex-direction: column;
+        margin-top: 0;
+    }
+    .divficha-container {
+        display: flex;
+        text-align: center;
+        justify-content: center; 
+        margin-bottom: 2rem; 
+    }
+        .imgCliente img {
+            width:40%;
+            height:auto;
+        }
+.btnpago {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
 }
+    .btnpago button {
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 1rem;
+        color: white;
+        border-radius: 3rem;
+        border-color: #6f41bb;
+        background: linear-gradient(135deg, #303030, #160d1a);
+        box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+        transition: 600ms;
+    }
 
 .cerrarficha{
     background-color: transparent;
@@ -212,14 +244,6 @@ h4 {
     text-align: center; 
     margin-bottom: 2rem;
     font-size: 2rem;
-}
-
-.divficha-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center; 
-    margin-bottom: 2rem; 
 }
 
 .divficha, .divficha2, .divficha3 {
@@ -237,19 +261,11 @@ h4 {
     gap: 2rem; 
 }
 
-.adejerci, .adrut {
-    padding: 10px 20px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-}
-
 .adejerci:hover, .adrut:hover {
     transform: scale(1.2); /* Efecto de zoom al pasar el mouse */
 }
 
-form {
+.upLogo {
     margin: 3rem auto;
     padding: 2rem;
     width: 40%;

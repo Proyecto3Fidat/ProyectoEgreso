@@ -84,6 +84,9 @@
     <button class="cerrarficha" id="cerrarficha" data-cliente-id=""><i class="fa-solid fa-xmark fa-2xl"
                                                                        style="color: #ffffff;"></i></button>
     <div class="divficha-container">
+                <div class="imgCliente"> 
+                    <img src="../../images/clienteEjm.png"/>
+                </div>
         <div class="divficha">
             <p>Documento: </p>
             <p>Tipo de Documento: </p>
@@ -105,6 +108,9 @@
             <p>Verificacion de asistencia: </p>
         </div>
         <section>
+            
+        </section>
+    </div>
             <div class="btnpago">
                 <form method="get" action="/pago">
                     <input type="hidden" name="documento" value="">
@@ -112,8 +118,6 @@
                     <button type="submit" class="adrut">Agendar</button>
                 </form>
             </div>
-        </section>
-    </div>
 </div>
 <!-- Modal para iframe -->
 <div id="modal-overlay" class="modal-overlay">
@@ -272,7 +276,7 @@
 <button id="btnAgenda" class="btnCargarMas">Agenda</button>
 </div>
 
-<form action="/logo" method="post" enctype="multipart/form-data">
+<form class="upLogo" action="/logo" method="post" enctype="multipart/form-data">
     <label for="fileToUpload">Subir logo de la pagina:</label>
     <input type="file" name="logo" id="fileToUpload">
     <input type="submit" value="Subir archivo" name="submit">
