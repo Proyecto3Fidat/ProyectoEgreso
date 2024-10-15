@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/dashEntrenador.css">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+    <title>Dashboard del Usuario</title>
+</head>
+<body>
+<div class="dashboardContainer">
+    {% set links = {
+        'inicio': '/inicio',
+        'horarios': '/horarios',
+        'planes': '/planes',
+        'nosotros': '/inicio',
+    } %}
+
+    {% include 'header.html.twig' with {'links': links} %}
+
+
+
+    <h1>Bienvenido al Dashboard  {{ usuario.nombre }} {{ usuario.apellido }}</h1>
+
+    <!-- Seccion de Informacion del Usuario -->
+    <section class="informacionUsuario">
+        <h2>Información del Usuario</h2>
+        <div class="usuarioInfo">
+            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+            <p><strong>Edad:</strong> {{ usuario.edad }}</p>
+            <p><strong>Altura:</strong> {{ usuario.altura }}</p>
+            <p><strong>Peso:</strong> {{ usuario.peso }}</p>
+            <p><strong>Documento:</strong> {{ usuario.documento }}</p>
+        </div>
+    </section>
+
+    <section class="calificaciones">
+        <h2>Calificaciones</h2>
+        <div class="tablaCliente">
+            <table class="clasCliente" id="tablaCalificaciones">
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Puntuacion Total</th>
+                    <th>Fuerza Muscular</th>
+                    <th>Resistencia Muscular</th>
+                    <th>Resistencia Anaerobica</th>
+                    <th>Resiliencia</th>
+                    <th>Flexibilidad</th>
+                    <th>Cumplimiento de Agenda</th>
+                    <th>Resistencia a la Monotonia</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for calificacion in calificaciones %}
+                    <tr>
+                        <td>{{ calificacion.fecha }}</td>
+                        <td>{{ calificacion.puntObtenido }}</td>
+                        <td>{{ calificacion.fuerzaMusc }}</td>
+                        <td>{{ calificacion.resMusc }}</td>
+                        <td>{{ calificacion.resAnaerobica }}</td>
+                        <td>{{ calificacion.resiliencia }}</td>
+                        <td>{{ calificacion.flexibilidad }}</td>
+                        <td>{{ calificacion.cumplAgenda }}</td>
+                        <td>{{ calificacion.resMonotonia }}</td>
+                        <td>
+                            <button class="btnEditar" onclick="window.location.href='imprimirNota?id={{ calificacion.id }}'">Imprimir</button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">No hay calificaciones disponibles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="rutina">
+        <h2>Rutina</h2>
+        <div class="tablaRutina">
+            <table class="clasCliente" id="tablaCalificaciones">
+                <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Series</th>
+                    <th>Repeticiones</th>
+                    <th>Combo de Ejercicios</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for rutina in practicas %}
+                    <tr>
+                        <td>{{ rutina.dia }}</td>
+                        <td>{{ rutina.series }}</td>
+                        <td>{{ rutina.repeticiones }}</td>
+                        <td>
+                            {% for combo in rutina.combo %}
+                                {{ combo.nombreCombo }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No hay rutinas disponibles</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="evolucion">
+        <div class="graficaEvolucion">
+            <p>Aquí podrás ver tu evolución física a lo largo del tiempo.</p>
+            <img src="/../../Resources/Images/Graphics/grafico_evolucion_{{ usuario.documento }}.png" alt="Gráfica de Evolución">
+        </div>
+    </section>
+
+
+    <script>
+    </script>
+
+    {% include 'footer.html.twig' %}
+
+</div>
+
+<script src="../../Public/js/script.js"></script>
+<script src="../../Public/js/responsive.js"></script>
+
+</body>
+</html>

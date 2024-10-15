@@ -21,7 +21,7 @@ class HomeController
             $template->renderTemplate('entrenador');
             exit();
         } else if ($_SESSION['rol'] == "deportista" || $_SESSION['rol'] == "paciente" && $_SESSION['rol'] != null) {
-            $template->renderTemplate('calificaciones');
+            header ("Location: /dashboardUsuario");
             exit();
         }else if ($_SESSION['rol'] == "administrativo" && $_SESSION['rol'] != null) {
             $template->renderTemplate("listaClientesAdmin");

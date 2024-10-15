@@ -20,9 +20,8 @@ class PracticaController
         $service->asignarRutina($nombreRutina, $documento, $tipoDocumento);
     }
 
-    public function obtenerPracticas()
+    public function obtenerPracticas($documento)
     {
-        $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
         $service = new PracticaService();
         $practicas = $service->obtenerPracticas($documento);
         return $practicas;
