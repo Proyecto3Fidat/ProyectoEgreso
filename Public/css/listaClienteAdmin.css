@@ -5,11 +5,11 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-color: #100e0f;
-    font-family: 'Poppins', sans-serif;
     color: white;
 }
 
@@ -17,16 +17,11 @@ header{
     background-color: #100e0f;
 }
 
-/*Style generales para los botones*/
-button { 
+button {
+    padding: 2rem;
+    border: none;
+    background-color: transparent;
     cursor: pointer;
-    font-size: 1.2rem;
-    padding: 1rem;
-    border-radius: 20px;
-    color: white;
-    border-color: transparent;
-    background-color: #6f41bb;
-    border: 0;
 }
 
 .navbar {
@@ -75,6 +70,7 @@ nav a:hover {
 .login-btn:hover, .sign-in-btn:hover {
     color: #6f41bb;
 }
+/*Fin de estilo para el nav*/
 
 .tituloadmin {
     display: flex;
@@ -100,34 +96,91 @@ nav a:hover {
 .lista-clientes {
     display: flex;
     margin: 0 auto; 
-    margin-top: 2%;
+    margin-top: 3rem;
     padding: 0;
-    width: 90%; 
+    width: 50% auto; 
     border-collapse: collapse; 
-    background-color: black;
+    background-color:#303030;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
     color: white;
     border-radius: 10px; 
     overflow: hidden; 
     justify-content: center;
 }
-
-.lista-clientes th, .lista-clientes td {
-    padding: 1rem; 
-    text-align: center; 
-    border: 1px solid #fff; 
-    border-radius: 20px;
-    border: hidden;
-    gap: 2rem;
-}
-
-.lista-clientes.visible {
-    display: flex;
-}
+    .lista-clientes th, .lista-clientes td {
+        padding: 1rem; 
+        text-align: center; 
+        border: 1px solid #fff; 
+        border-radius: 20px;
+        border: hidden;
+        gap: 2rem;
+    }
+    .lista-clientes.visible {
+        display: block;
+    }
 
 .btn-detalles { 
     border-radius: 10px;
     background-color: black;
 }
+
+.containerBotonesAgenda {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    margin: 1rem auto;
+    margin-top: 2rem;
+}
+    #btnIngresarLocal, #btnAgenda {
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 1rem;
+        color: white;
+        border-radius: 3rem;
+        border-color: #6f41bb;
+        background: linear-gradient(135deg, #303030, #160d1a);
+        box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+        transition: 600ms;
+    }
+        #btnIngresarLocal:hover, #btnAgenda:hover {
+            transform: scale(1.1);
+            box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+        }
+
+.btnfichatecnica {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 1rem;
+    color: white;
+    border-radius: 3rem;
+    border-color: #6f41bb;
+    background: linear-gradient(135deg, #303030, #160d1a);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+    transition: 600ms;
+}
+    .btnfichatecnica:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+    }
+
+
+input[type="submit"] {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    color: white;
+    border-radius: 3rem;
+    border-color: #6f41bb;
+    background: linear-gradient(135deg, #303030, #160d1a);
+    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
+    transition: 600ms;
+}
+    input[type="submit"]:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+    }
 
 .fichagnrl{
     display: none;
@@ -238,25 +291,4 @@ form input[type="file"]::file-selector-button {
 
 form input[type="file"]::file-selector-button:hover {
     background-color: #5c3499;
-}
-
-form input[type="submit"] {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #6f41bb;
-    color: #ffffff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
-
-form input[type="submit"]:hover {
-    background-color: #5c3499;
-    transform: scale(1.05);
-}
-
-
-form input[type="submit"]:active {
-    transform: scale(0.98);
 }

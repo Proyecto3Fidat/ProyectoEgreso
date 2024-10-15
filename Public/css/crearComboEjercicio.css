@@ -41,7 +41,7 @@ button {
     border-radius: 3rem;
     border-color: #6f41bb;
     background: linear-gradient(135deg, #303030, #160d1a);
-    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
     transition: 600ms;
 }
     button:hover {
@@ -86,7 +86,7 @@ input[type="submit"] {
     border-radius: 3rem;
     border-color: #6f41bb;
     background: linear-gradient(135deg, #303030, #160d1a);
-    box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
     transition: 600ms;
 }
     input[type="submit"]:hover {
