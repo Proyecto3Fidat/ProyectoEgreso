@@ -11,7 +11,7 @@ SIGEN es un sistema web diseñado para optimizar la gestión de planes de entren
 - [@faquito22](https://www.github.com/faquito22)
 - [@DiegoGar15](https://www.github.com/DiegoGar15)
 - [@IsmaelBergaradev](https://www.github.com/IsmaelBergaradev)
-- [@Thisguitoxddd](https://www.github.com/Thisguitoxddd)
+- [@Thisguitoxddd](https://www.github.com/Diplom3)
 ## Sitios Web 
   [Fidat NET](http://fidat.net)
   [Fidat UY](http://fidat.uy)
