@@ -134,11 +134,10 @@ class CalificacionController
             header('Content-Type: application/json');
             echo json_encode($calificaciones);
     }
-    public function obtenerPuntuacionesCliente()
+    public function obtenerPuntuacionesCliente($documento)
     {
         $obtieneRepository = new ObtieneRepository();
         $obtieneService = new ObtieneService($obtieneRepository);
-        $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
         $calificaciones = $obtieneService->obtenerCalificaciones($documento);
         $calificacionesR = [];
         foreach ($calificaciones as $calificacion) {

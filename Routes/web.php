@@ -56,6 +56,13 @@ SimpleRouter::get('/inicio', function () {
     $template->renderTemplate('inicio', ['calificacion' => '<li><a href="/">Calificación</a></li>']);
 });
 
+SimpleRouter::get('/main', function () {
+    $template = new TemplateController();
+    $template->renderTemplate('inicio');
+});
+
+
+
 SimpleRouter::post('planes', function () use ($logger) {
     $planes = new App\Controllers\EligeController();
     $planes->obtenerPagosPorDocumento();
@@ -66,13 +73,69 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
     SimpleRouter::get('/', [HomeController::class, 'index']);
 });
 
-SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger) {
+SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
     Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
         $calificacionController = new CalificacionController($calificacionService, $logger);
         $calificacionController->obtenerPuntuacionesAjax();
+        exit();
+    });
+
+    SimpleRouter::get('/dashboardUsuario', function () use ($loggerU) {
+
+        $grafico = [];
+        $compone = new App\Controllers\ComponeController();
+        $rutina = new \App\Controllers\RutinaController();
+        $practica = new \App\Controllers\PracticaController();
+        $graficos = new App\Controllers\GraficosController();
+        $template = new TemplateController();
+        $calificacionRepository = new CalificacionRepository();
+        $calificacionService = new CalificacionService($calificacionRepository);
+        $calificacionController = new CalificacionController($calificacionService, $loggerU);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $loggerU);
+
+        $usuario = $clienteController->obtenerInfoCliente($_SESSION['documento']);
+        $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_SESSION['documento']);
+        try {
+            $grafico = $graficos->crearGrafico($_SESSION['documento'], $calificaciones, $loggerU);
+
+        } catch (Exception $e) {
+            $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
+        }
+        $practicar = $practica->obtenerPracticas($_SESSION['documento']);
+        $resultado = []; // Inicializar el resultado
+        foreach ($practicar as $practica) {
+            $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
+
+            // Verificar si el array no está vacío y tiene al menos un elemento
+            if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
+                $rutinaData = $rutinaInfo[0]; // Usar una variable diferente para almacenar la rutina
+                $combos = $compone->obtenerCombos($practica['idRutina']);
+
+                // Añadir la información de la rutina al resultado
+                $resultado[] = [
+                    'idRutina' => $rutinaData['idRutina'],
+                    'series' => $rutinaData['series'],
+                    'repeticiones' => $rutinaData['repeticiones'],
+                    'dia' => $rutinaData['dia'],
+                    'combo' => $combos
+                ];
+            }
+        }
+        // Renderizar el template si se requiere una vista
+        $template->renderTemplate(
+            'dashboardCliente',
+            array_merge(
+                ['usuario' => $usuario],
+                ['calificaciones' => $calificaciones],
+                ['grafico' => $grafico],
+                ['practicas' => $resultado]
+            )
+        );
         exit();
     });
 
@@ -206,6 +269,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::post('/dashboard', function () use ($loggerU) {
+
             $grafico = [];
             $compone = new App\Controllers\ComponeController();
             $rutina = new \App\Controllers\RutinaController();
@@ -219,27 +283,25 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $clienteService = new ClienteService($clienteRepository);
             $clienteController = new ClienteController($clienteService, $loggerU);
 
-            $usuario = $clienteController->obtenerInfoCliente();
-            $calificaciones = $calificacionController->obtenerPuntuacionesCliente();
+            $usuario = $clienteController->obtenerInfoCliente($_POST['documento']);
+            $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_POST['documento']);
             try {
                 $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
 
             } catch (Exception $e) {
                 $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
             }
-            $practicar = $practica->obtenerPracticas();
+            $practicar = $practica->obtenerPracticas($_POST['documento']);
             $resultado = []; // Inicializar el resultado
 
             foreach ($practicar as $practica) {
-                // Obtener la información de la rutina
+
                 $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
 
-                // Verificar si el array no está vacío y tiene al menos un elemento
                 if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
-                    $rutinaData = $rutinaInfo[0]; // Usar una variable diferente para almacenar la rutina
+                    $rutinaData = $rutinaInfo[0];
                     $combos = $compone->obtenerCombos($practica['idRutina']);
 
-                    // Añadir la información de la rutina al resultado
                     $resultado[] = [
                         'idRutina' => $rutinaData['idRutina'],
                         'series' => $rutinaData['series'],
@@ -250,7 +312,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                 }
             }
 
-            // Renderizar el template si se requiere una vista
             $template->renderTemplate(
                 'dashboardEntrenador',
                 array_merge(

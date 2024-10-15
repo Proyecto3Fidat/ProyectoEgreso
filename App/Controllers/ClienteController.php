@@ -174,9 +174,10 @@ class ClienteController
             echo json_encode($resultado);
 
     }
-    public function obtenerInfoCliente()
+    public function obtenerInfoCliente($nroDocumento)
     {
-        $nroDocumento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+
+
         $clienteTelefonoRepository = new ClientetelefonoRepository();
         $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
         $cliente = $this->clienteService->obtenerInfoCliente($nroDocumento);

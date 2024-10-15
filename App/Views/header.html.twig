@@ -5,12 +5,12 @@
         <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
         <div class="menu1">
             <ul class="listmenu1">
-                <li><a href="/" class="inicioa">Inicio</a></li>
-                <li><a href="/horarios"class="inicioa">Horarios</a></li>
-                <li><a href="/planes" class="inicioa">Planes</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                {% if calificacion is defined and calificacion is not empty %}
-                    {{ calificacion|raw }}
+                <li><a href="{{ links.inicio }}" class="inicioa">Inicio</a></li>
+                <li><a href="{{ links.horarios }}" class="inicioa">Horarios</a></li>
+                <li><a href="{{ links.planes }}" class="inicioa">Planes</a></li>
+                <li><a href="{{ links.nosotros }}">Nosotros</a></li>
+                {% if links.calificacion is defined and links.calificacion is not empty %}
+                    <li><a href="/">Calificación</a></li>
                 {% endif %}
             </ul>
         </div>

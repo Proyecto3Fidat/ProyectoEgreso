@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-
+use Twig\Extension\DebugExtension;
 class TemplateController
 {
     protected $twig;
@@ -15,7 +15,13 @@ class TemplateController
             '../App/Views',
             '../Public'
         ]);
-        $this->twig = new Environment($loader);
+        $this->twig = new Environment($loader, [
+            'debug' => true,
+            'cache' => false
+        ]);
+
+
+        $this->twig->addExtension(new DebugExtension());
     }
 
 
