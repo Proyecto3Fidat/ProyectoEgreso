@@ -69,9 +69,8 @@ SimpleRouter::post('planes', function () use ($logger) {
     exit();
 });
 
-SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger) {
+SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger, $loggerU) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
-});
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
@@ -124,12 +123,11 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         foreach ($practicar as $practica) {
             $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
 
-            // Verificar si el array no está vacío y tiene al menos un elemento
+
             if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
-                $rutinaData = $rutinaInfo[0]; // Usar una variable diferente para almacenar la rutina
+                $rutinaData = $rutinaInfo[0];
                 $combos = $compone->obtenerCombos($practica['idRutina']);
 
-                // Añadir la información de la rutina al resultado
                 $resultado[] = [
                     'idRutina' => $rutinaData['idRutina'],
                     'series' => $rutinaData['series'],
@@ -139,7 +137,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
                 ];
             }
         }
-        // Renderizar el template si se requiere una vista
+
         $template->renderTemplate(
             'dashboardCliente',
             array_merge(
@@ -275,6 +273,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
         global $loggerU;
         Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
+
             $calificacionRepository = new CalificacionRepository();
             $calificacionService = new CalificacionService($calificacionRepository);
             $calificacionController = new CalificacionController($calificacionService, $logger);
@@ -446,19 +445,57 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
     });
     SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger) {
+        SimpleRouter::post('/usuario/eliminarAgenda', function () use ($logger) {
 
+
+            $template = new TemplateController();
+            $seAgenda = new App\Services\SeAgendaService();
+
+            $documento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+            $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
+            $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
+            $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
+            echo $dia;
+            echo $horaInicio;
+            echo $horaFin;
+            $seAgenda->eliminarAgenda($dia, $horaInicio, $horaFin, $documento);
+            $datos = [
+                'mensaje' => 'Agenda eliminada con éxito',
+                'ruta' => 'agendar?documento=' . $documento
+            ];
+            $template->renderTemplate('alerta', $datos);
+            exit();
+        });
 
         SimpleRouter::get('/agendar', function () {
+            $resultado = [];
             $nombre = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
             $template = new TemplateController();
             $localGym = new App\Controllers\GymController();
             $agenda = new App\Controllers\AgendaController();
             $locales = $localGym->obtenerGym();
             $agendas = $agenda->obtenerAgendas();
+            $agendasYaAsignadas = $agenda->obtenerAgendasYaAsignadas($nombre);
+
+          foreach ($agendas as $comparacion1) {
+                $coincide = false;
+                foreach ($agendasYaAsignadas as $comparacion2) {
+                    if ($comparacion1['horaInicio'] === $comparacion2['horaInicio'] && $comparacion1['horaFin'] === $comparacion2['horaFin'] && $comparacion1['dia'] === $comparacion2['dia']) {
+                        $coincide = true;
+                        break;
+                    }
+
+                }
+              if (!$coincide) {
+                  $coincide = true;
+                  $resultado[] = $comparacion1;
+              }
+            }
             $data = [
                 'locales' => $locales,
-                'agendas' => $agendas,
-                'nombre' => $nombre
+                'agendas' => $resultado ,
+                'nombre' => $nombre,
+                'agendasYaAsignadas' => $agendasYaAsignadas
             ];
             $template->renderTemplate('agendar', $data);
             exit();
@@ -481,9 +518,9 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $tipoDocumento = $usuario->obtenerIipoDocumento($documento);
             $agendas = isset($_POST['agendas']) ? $_POST['agendas'] : [];
 
-            // Iterar sobre las agendas seleccionadas
+
             foreach ($agendas as $agendaJson) {
-                $agenda = json_decode($agendaJson, true); // Decodificar el JSON en un array asociativo
+                $agenda = json_decode($agendaJson, true);
                 if (is_array($agenda)) {
                     $dia = $agenda['dia'];
                     $horaInicio = $agenda['horaInicio'];
@@ -495,7 +532,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             }
             $data = [
                 'mensaje' => 'Agenda creada con éxito',
-                'ruta' => 'agendar'
+                'ruta' => 'agendar?documento=' . $documento
             ];
             $template->renderTemplate('alerta', $data);
             exit();
@@ -988,6 +1025,7 @@ SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
     }
 });
 
+});
 
 // Iniciar el enrutador
 SimpleRouter::start();

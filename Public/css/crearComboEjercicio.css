@@ -95,29 +95,5 @@ input[type="submit"] {
     }
 
 #ejercicios-lista {
-    background-color: transparent;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 0 auto;
-}    
-    #ejercicios-lista h2 {
-        text-align: center;
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-        color: white;
-    }
-#lista-ejercicios {
-    list-style-type: none;
-    padding: 0;
+  display: none;
 }
-    #lista-ejercicios li {
-        background-color: #303030;
-        border: 1px solid #6f41bb;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 6px;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-       

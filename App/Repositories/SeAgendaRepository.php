@@ -61,30 +61,36 @@ class SeAgendaRepository extends Database
         $sql = "UPDATE SeAgenda SET asistencia = ? WHERE nroDocumento = ? AND dia = ? AND horaInicio = ? AND horaFin = ?";
         $stmt = $database->getConnection()->prepare($sql);
 
-        // Verificamos si la consulta se preparó correctamente
         if ($stmt === false) {
             throw new Exception('Error preparando la consulta: ' . $database->getConnection()->error);
         }
 
-        // Vinculamos los parámetros
         if (!$stmt->bind_param("sssss", $asistencia, $documento, $dia, $horaInicio, $horaFin)) {
             throw new Exception('Error al vincular los parámetros: ' . $stmt->error);
         }
 
-        // Ejecutamos la consulta
         if (!$stmt->execute()) {
             throw new Exception('Error ejecutando la consulta: ' . $stmt->error);
         }
 
-        // Verificamos si la consulta afectó alguna fila
         if ($stmt->affected_rows === 0) {
             throw new Exception('No se actualizó ninguna fila. Verifica los parámetros.');
         }
 
-        // Cerramos el statement
         $stmt->close();
 
-        // Desconectamos la base de datos
+        $database->disconnect();
+    }
+
+    public function eliminarAgenda($dia, $horaInicio, $horaFin, $documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM SeAgenda WHERE dia = ? AND horaInicio = ? AND horaFin = ? AND nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("ssss", $dia, $horaInicio, $horaFin, $documento);
+        $stmt->execute();
+        $stmt->close();
         $database->disconnect();
     }
 

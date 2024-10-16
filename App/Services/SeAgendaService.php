@@ -86,4 +86,11 @@ class SeAgendaService
         $seAgenda = new SeAgendaRepository();
         $seAgenda->asistir($documento, $dia, $horaInicio, $horaFin, $asistencia);
     }
+
+    public function eliminarAgenda($dia, $horaInicio, $horaFin, $documento)
+    {
+        $seAgenda = new SeAgendaRepository();
+        $seAgenda->eliminarAgenda($dia, $horaInicio, $horaFin, $documento);
+
+    }
 }

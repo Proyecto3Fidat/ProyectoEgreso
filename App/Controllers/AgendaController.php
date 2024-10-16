@@ -26,4 +26,12 @@ class AgendaController
         return $agendas;
     }
 
+    public function obtenerAgendasYaAsignadas($nombre)
+    {
+        $service = new AgendaService();
+        $agendas = $service->obtenerAgendasYaAsignadas($nombre);
+
+        return $agendas;
+    }
+
 }

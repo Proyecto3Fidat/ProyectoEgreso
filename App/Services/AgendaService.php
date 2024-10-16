@@ -19,4 +19,11 @@ class AgendaService
         $agendas = $agendaRepository->obtenerAgendas();
         return $agendas;
     }
+
+    public function obtenerAgendasYaAsignadas($nombre)
+    {
+        $agendaRepository = new AgendaRepository();
+        $agendas = $agendaRepository->obtenerAgendasYaAsignadas($nombre);
+        return $agendas;
+    }
 }

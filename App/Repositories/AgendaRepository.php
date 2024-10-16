@@ -32,4 +32,24 @@ class AgendaRepository
         $database->disconnect();
         return $agendas;
     }
+
+    public function obtenerAgendasYaAsignadas($nombre)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT * FROM SeAgenda WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('s', $nombre);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $agendas = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $agendas[] = $row;
+            }
+        }
+        $stmt->close();
+        $database->disconnect();
+        return $agendas;
+    }
 }
