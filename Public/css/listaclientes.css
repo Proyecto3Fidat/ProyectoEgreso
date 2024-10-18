@@ -5,11 +5,11 @@
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
     background-color: #131313;
-    font-family: 'Poppins', sans-serif;
     color: white;
 }
 
@@ -29,20 +29,13 @@ header{
 /*Style generales para los botones*/
 button {
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 1rem;
-    margin: 1rem auto;
+    border-radius: 20px;
     color: white;
-    border-radius: 3rem;
-    border-color: #6f41bb;
-    background: linear-gradient(135deg, #303030, #160d1a);
-    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
-    transition: 600ms;
+    border-color: transparent;
+    border: 0;
 }
-    button:hover {
-        transform: scale(1.1);
-        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
-    }
 
 /*Inicio del nav*/
 .navbar {
@@ -131,10 +124,22 @@ nav a:hover {
         display: block;
     }
 
-.btn-detalles { 
-    border-radius: 10px;
-    background-color: black;
+.btnfichatecnica {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    color: white;
+    border-radius: 3rem;
+    border-color: #6f41bb;
+    background: linear-gradient(135deg, #303030, #160d1a);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+    transition: 600ms;
 }
+    .btnfichatecnica:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+    }
 
 .fichagnrl{
     display: none;
@@ -166,6 +171,23 @@ nav a:hover {
         top: 0;
         background-color: transparent;
         cursor: pointer;
+    }
+
+.btnGestionar {
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 1rem;
+    margin: 1rem auto;
+    color: white;
+    border-radius: 3rem;
+    border-color: #6f41bb;
+    background: linear-gradient(135deg, #303030, #160d1a);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+    transition: 600ms;
+}
+    .btnGestionar:hover {
+        transform: scale(1.1);
+        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
     }
     h4 {
         text-align: center; 
