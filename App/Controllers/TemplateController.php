@@ -20,7 +20,6 @@ class TemplateController
             'cache' => false
         ]);
 
-
         $this->twig->addExtension(new DebugExtension());
     }
 

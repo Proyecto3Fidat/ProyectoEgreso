@@ -209,13 +209,11 @@ class ClienteController
         foreach ($clientes as $cliente) {
             $agenda = $seAgenda->obtenerAgendas($cliente['nroDocumento']);
 
-            // Verificamos si la agenda no es null
             if ($agenda !== null && !empty($agenda)) {
                 $horaInicioSinSegundos = substr($agenda['horaInicio'], 0, 5);
                 $horaFinSinSegundos = substr($agenda['horaFin'], 0, 5);
                 $dia = $agenda['dia'];
             } else {
-                // Si no hay agenda, se establecen valores por defecto
                 $horaInicioSinSegundos = null;
                 $horaFinSinSegundos = null;
                 $dia = null;

@@ -19,7 +19,7 @@ class AuthService
         }
         return true;
     }
-    // Comprobar si el token es válido
+
     public function comprobarToken(): bool {
         if (!isset($_SESSION['token'], $_SESSION['documento'])) {
             $this->handleForbiddenError('Token Invalido');
@@ -36,7 +36,7 @@ class AuthService
 
         return true;
     }
-    // Comprobar si el usuario es un entrenador
+
     public function comprobarEntrenador(): bool {
 
         if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'entrenador') {
