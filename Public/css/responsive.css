@@ -149,6 +149,18 @@
         margin-top: 5rem;
         padding: 1rem;
     }
+        .headFicha button {
+            cursor: pointer;
+            padding: 0rem;
+        }
+        .headFicha h4 {
+            margin-top: 3rem;
+        }
+    
+    .imgCliente img {
+        width:60%;
+        height:auto;
+    }
 
     .fichagnrl {
         margin-top: 5rem;
@@ -157,8 +169,17 @@
     .divficha-container {
         display: flex;
         flex-direction: column;
+        gap: 2rem;
     }
 
+    .divficha, .divficha2 {
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .btnGestionar {
+        margin: 0;
+    }
 
 
     /*Form loginUsuario*/
