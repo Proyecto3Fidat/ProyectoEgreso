@@ -14,7 +14,6 @@ class PagoMiddleware implements IMiddleware
     {
         if (!isset($_SESSION['sesion'])) {
             return;
-
         }
         $payService = new PayService();
         if (isset($_SESSION['sesion']) && $_SESSION['sesion'] === true && $_SESSION['rol'] === 'cliente') {

@@ -94,5 +94,23 @@ class SeAgendaRepository extends Database
         $database->disconnect();
     }
 
+    public function guardarSeAgenda(\App\Models\SeAgendaModel $seAgendaModel)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO SeAgenda (nroDocumento, tipoDocumento, dia, horaInicio, horaFin, asistencia) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $nroDocumento = $seAgendaModel->getNroDocumento();
+        $tipoDocumento = $seAgendaModel->getTipoDocumento();
+        $dia = $seAgendaModel->getDia();
+        $horaInicio = $seAgendaModel->getHoraInicio();
+        $horaFin = $seAgendaModel->getHoraFin();
+        $asistencia = "0";
+        $stmt->bind_param("ssssss", $nroDocumento, $tipoDocumento, $dia, $horaInicio, $horaFin, $asistencia);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 
 }

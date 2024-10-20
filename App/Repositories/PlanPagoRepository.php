@@ -65,4 +65,20 @@ class PlanPagoRepository extends Database
         $database->disconnect();
         return $planes;
     }
+
+    public function guardar(\App\Models\PlanPagoModel $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO PlanPago (nombrePlan, descripcion, tipoPlan) VALUES (?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $nombrePlan = $param->getNombrePlan();
+        $descripcion = $param->getDescripcion();
+        $tipoPlan = $param->getTipoPlan();
+
+        $stmt->bind_param('sss',$nombrePlan, $descripcion, $tipoPlan);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

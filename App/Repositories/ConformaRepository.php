@@ -65,4 +65,21 @@ class ConformaRepository extends Database
         $stmt->close();
         $database->disconnect();
     }
+
+    public function guardar(\App\Models\ConformaModel $conformaModel)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Conforma (dia, horaInicio, horaFin, nombre) VALUES (?, ?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $dia = $conformaModel->getDia();
+        $horaInicio = $conformaModel->getHoraInicio();
+        $horaFin = $conformaModel->getHoraFin();
+        $nombre = $conformaModel->getNombre();
+        $stmt->bind_param("ssss", $dia, $horaInicio, $horaFin, $nombre);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 }

@@ -9,9 +9,8 @@ class EligeModel
     private $idPago;
     private $fechaPago;
     private $nombrePlan;
-    public function __construct($nroDocumento, $tipoDocumento, $fechaPago, $nombrePlan, $idPago)
+    public function __construct($nroDocumento, $tipoDocumento, $fechaPago, $nombrePlan)
     {
-        $this->idPago = $idPago;
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
         $this->fechaPago = $fechaPago;

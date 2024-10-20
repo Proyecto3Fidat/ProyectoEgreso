@@ -9,8 +9,11 @@ class SeAgendaModel
     private $fecha;
     private $asistencia;
 
-    public function __construct($nroDocumento, $tipoDocumento, $fecha, $asistencia)
+    public function __construct($nroDocumento, $tipoDocumento, $fecha, $asistencia, $dia, $horaInicio, $horaFin)
     {
+        $this->dia = $dia;
+        $this->horaInicio = $horaInicio;
+        $this->horaFin = $horaFin;
         $this->nroDocumento = $nroDocumento;
         $this->tipoDocumento = $tipoDocumento;
         $this->fecha = $fecha;
@@ -56,5 +59,37 @@ class SeAgendaModel
     {
         $this->asistencia = $asistencia;
     }
+
+    public function getDia()
+    {
+        return $this->dia;
+    }
+
+    public function getHoraInicio()
+    {
+        return $this->horaInicio;
+    }
+
+    public function getHoraFin()
+    {
+        return $this->horaFin;
+    }
+
+    public function setDia($dia)
+    {
+        $this->dia = $dia;
+    }
+
+    public function setHoraInicio($horaInicio)
+    {
+        $this->horaInicio = $horaInicio;
+    }
+
+    public function setHoraFin($horaFin)
+    {
+        $this->horaFin = $horaFin;
+    }
+
+    
 
 }

@@ -125,4 +125,20 @@ class EligeRepository
 
         return true;
     }
+
+    public function guardar(\App\Models\EligeModel $param2, $id)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Elige (nroDocumento, tipoDocumento, fechaPago, nombrePlan, idPago) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $nroDocumento = $param2->getNroDocumento();
+        $tipoDocumento = $param2->getTipoDocumento();
+        $fechaPago = $param2->getFechaPago();
+        $nombrePlan = $param2->getNombrePlan();
+        $stmt->bind_param('ssssi', $nroDocumento, $tipoDocumento, $fechaPago, $nombrePlan, $id);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

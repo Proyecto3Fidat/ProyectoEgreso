@@ -41,4 +41,22 @@ class EjercicioRepository extends Database
         return $ejercicios;
     }
 
+    public function guardar(EjercicioModel $ejercicioModel)
+    {
+
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Ejercicio (nombre, descripcion, grupoMuscular, tipoEjercicio) VALUES (?, ?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $nombre = $ejercicioModel->getNombre();
+        $descripcion = $ejercicioModel->getDescripcion();
+        $grupoMuscular = $ejercicioModel->getGrupoMuscular();
+        $tipoEjercicio = $ejercicioModel->getTipoEjercicio();
+        $stmt->bind_param('ssss', $nombre, $descripcion, $grupoMuscular, $tipoEjercicio);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+
+    }
+
 }

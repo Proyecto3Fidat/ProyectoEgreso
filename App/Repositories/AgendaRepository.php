@@ -52,4 +52,21 @@ class AgendaRepository
         $database->disconnect();
         return $agendas;
     }
+
+    public function guardar(\App\Models\AgendaModel $agendaModel)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Agenda (dia, horaInicio, horaFin, agendados) VALUES (?, ?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $dia = $agendaModel->getDia();
+        $horaInicio = $agendaModel->getHoraInicio();
+        $horaFin = $agendaModel->getHoraFin();
+        $agendados = $agendaModel->getAgendados();
+        $stmt->bind_param('ssss', $dia, $horaInicio, $horaFin, $agendados);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 }
