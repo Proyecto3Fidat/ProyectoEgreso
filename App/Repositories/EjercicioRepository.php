@@ -24,21 +24,40 @@ class EjercicioRepository extends Database
         $database->disconnect();
     }
 
-    public function obtenerEjercicios()
+    public function obtenerEjercicios($page = 1, $itemsPerPage = 7)
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT idEjercicio, nombre, descripcion, grupoMuscular, tipoEjercicio FROM Ejercicio";
+
+        $offset = ($page - 1) * $itemsPerPage;
+
+        $sql = "SELECT idEjercicio, nombre, descripcion, grupoMuscular, tipoEjercicio 
+            FROM Ejercicio 
+            LIMIT ?, ?";
         $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("ii", $offset, $itemsPerPage); // Pasar el offset y el número de resultados por página
         $stmt->execute();
         $result = $stmt->get_result();
+
         $ejercicios = [];
         while ($row = $result->fetch_assoc()) {
             $ejercicios[] = $row;
         }
 
+        // Obtener el total de ejercicios para calcular el número de páginas
+        $sqlTotal = "SELECT COUNT(*) AS total FROM Ejercicio";
+        $totalResult = $database->getConnection()->query($sqlTotal);
+        $totalRow = $totalResult->fetch_assoc();
+        $totalItems = $totalRow['total'];
+        $totalPages = ceil($totalItems / $itemsPerPage);
+
         $database->disconnect();
-        return $ejercicios;
+
+        return [
+            'ejercicios' => $ejercicios,
+            'totalPages' => $totalPages,
+            'currentPage' => $page
+        ];
     }
 
     public function guardar(EjercicioModel $ejercicioModel)

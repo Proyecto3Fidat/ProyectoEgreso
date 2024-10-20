@@ -265,3 +265,37 @@ footer .redes a:hover {
 }
     
 /*Fin de footer*/
+.search-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.buscador {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #303030;
+    border: 2px solid #6f41bb;
+    border-radius: 3rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.buscador::placeholder {
+    color: #a0a0a0;
+}
+
+.buscador:focus {
+    box-shadow: 0 0 0 3px rgba(111, 65, 187, 0.5);
+}
+
+.buscador:hover {
+    border-color: #8a5ad2;
+}
+.buscador.active {
+    border-color: #8a5ad2;
+    box-shadow: 0 0 0 3px rgba(111, 65, 187, 0.5);
+}

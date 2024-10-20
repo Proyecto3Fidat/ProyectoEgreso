@@ -68,6 +68,10 @@
 <ul class="listmenu2" id="welcome-message">
 </ul>
 
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Buscar por nombre, documento o rol" class="buscador">
+</div>
+
 <section class="listaclientes">
     <table class="lista-clientes" id="tablaClientes">
         <tbody>
@@ -79,6 +83,7 @@
         </tbody>
     </table>
 </section>
+    <div id="pagination" class="pagination-container"></div> <!-- Contenedor de paginación -->
 <div class="fichagnrl" id="fichagnl">
     <section class="headFicha">
                 <h4>Ficha técnica de </h4>
@@ -111,8 +116,19 @@
             <p>Verificacion de asistencia: </p>
         </div>
         <section>
-
+            <section class="listaclientes">
+                <table class="lista-clientes" id="tablaClientes">
+                    <tbody>
+                    <tr>
+                        <th> Nombre de Cliente</th>
+                        <th> Documento</th>
+                        <th>Rol</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
         </section>
+
     </div>
             <div class="btnpago">
                 <form method="get" action="/pago">

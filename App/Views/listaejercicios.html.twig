@@ -52,7 +52,13 @@
                     </table>
                 </section>
         </main>
-
+        <div class="pagination">
+            {% for i in 1..totalPages %}
+                <a href="/listaejercicios?page={{ i }}" class="{% if i == currentPage %}active{% endif %}">
+                    {{ i }}
+                </a>
+            {% endfor %}
+        </div>
         {% include 'footer.html.twig' %}
     </div>
     <script src="../../Public/js/script.js"></script>

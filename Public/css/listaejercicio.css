@@ -171,3 +171,26 @@ td:first-child {
 .ejercicio-card p {
     margin: 5px 0;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: white;
+    background-color: #6f41bb;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #8a5ad2;
+}
+
+.pagination a:hover {
+    background-color: #9b63d2;
+}
