@@ -156,10 +156,9 @@
         }
     </style>
 </head>
-<body>
-<div class="container">
+<body><div class="container">
     <h1>Ingresar Gym</h1>
-    <form action="/ingresarGym" method="post">
+    <form id="gymForm" action="/ingresarGym" method="post" onsubmit="return validateForm()">
         <div>
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required>
@@ -177,11 +176,41 @@
             <input type="text" id="nroPuerta" name="nroPuerta" required>
         </div>
         <div>
-            <label for="CapXTurno">Capacidad por Turno</label>
-            <input type="text" id="CapXTurno" name="capXTurno" required>
+            <label for="capXTurno">Capacidad por Turno</label>
+            <input type="text" id="capXTurno" name="capXTurno" required>
         </div>
         <input type="submit" value="Registrar Gym">
     </form>
 </div>
+
+<script>
+    function validateForm() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const calle = document.getElementById("calle").value.trim();
+        const esquina = document.getElementById("esquina").value.trim();
+        const nroPuerta = document.getElementById("nroPuerta").value.trim();
+        const capXTurno = document.getElementById("capXTurno").value.trim();
+
+        // Verificar que no estén vacíos
+        if (!nombre || !calle || !esquina || !nroPuerta || !capXTurno) {
+            alert("Todos los campos son obligatorios.");
+            return false;
+        }
+
+        // Verificar que número de puerta y capacidad por turno sean números
+        if (isNaN(nroPuerta)) {
+            alert("El número de puerta debe ser un número válido.");
+            return false;
+        }
+
+        if (isNaN(capXTurno)) {
+            alert("La capacidad por turno debe ser un número válido.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
 </body>
 </html>

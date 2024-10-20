@@ -62,7 +62,6 @@ class DataSeeder
     public function seedCalificaciones($puntMaxima, $fuerzaMusc, $resMusc, $resAnaerobica, $resiliencia, $flexibilidad, $cumplAgenda, $resMonotonia)
     {
         $calificacionRepository = new CalificacionRepository();
-
         $calificacionModel = new CalificacionModel(
             null,
             $puntMaxima,
@@ -90,4 +89,7 @@ class DataSeeder
         );
         return $obtieneRepository->asignarPuntuacion($obtieneModel);
     }
+
+
+    
 }

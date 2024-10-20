@@ -45,7 +45,9 @@ $logger = $config['logger']();
 $usuarioLog = require __DIR__ . '/../Config/usuarioLogger.php';
 $loggerU = $usuarioLog['logger']();
 
-
+SimpleRouter::get('cargarDatos', function (){
+    $seeder = new DataSeeder();
+});
 SimpleRouter::post('/pagos', function () use ($logger) {
     $elige = new App\Controllers\EligeController();
     $elige->obtenerPagosPorDocumento();
@@ -373,8 +375,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $ejercicio = new EjercicioController();
             $ejercicio->crearEjercicio();
             $datos = [
-                'mensaje' => 'Rutina creada con éxitooo',
-                'ruta' => '//'
+                'mensaje' => 'Ejercicio creado con éxito',
+                'ruta' => 'crearEjercicio'
             ];
             $template->renderTemplate('alerta', $datos);
             exit();
@@ -413,8 +415,13 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::get('/listaejercicios', function () {
+            $ejercicios = new EjercicioController();
+            $lista  = $ejercicios->obtenerListaEjercicios();
             $template = new TemplateController();
-            $template->renderTemplate('listaejercicios');
+            $data = [
+                'ejercicios' => $lista
+            ];
+            $template->renderTemplate('listaejercicios', $data);
         });
 
         SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {

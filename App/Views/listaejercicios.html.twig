@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Lista de Ejercicios</title>
 </head>
-<body>    
+<body>
     <div class="ejercicios-container">
         <header>
             <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
@@ -29,32 +29,28 @@
         </nav>
     </header>
         <main>
-            <section class="entrenamiento">
-                <table class="listaejercicio">
-                    <thead>
+                <section class="entrenamiento">
+                    <table class="listaejercicio">
+                        <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Grupo muscular</th>
                             <th>Tipo de ejercicio</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
+                    {% for ejercicio in ejercicios %}
                         <tr>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
+                            <td>{{ ejercicio.nombre }}</td>
+                            <td>{{ ejercicio.descripcion }}</td>
+                            <td>{{ ejercicio.grupoMuscular }}</td>
+                            <td>{{ ejercicio.tipoEjercicio }}</td>
                         </tr>
-                        <tr>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
-                            <td>Ejemplo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+                    {% endfor %}
+                        </tbody>
+                    </table>
+                </section>
         </main>
 
         {% include 'footer.html.twig' %}

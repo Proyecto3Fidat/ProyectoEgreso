@@ -9,9 +9,9 @@
 <body>
 <div class="crearEjercicio-Container">
     <div id="formulario-crear-ejercicio" class="content oculto">
-        <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo">
+        <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo" onsubmit="return validateStrings()">
             <label for="nombre-combo">Nombre del Combo:</label>
-            <input type="text" id="nombre-combo" name="nombreCombo" required><br><br>
+            <input type="text" id="nombre-combo" name="nombreCombo" pattern="[a-zA-Z\s]+" title="Solo se permiten letras y espacios" required><br><br>
             <div id="ejercicios-seleccionados">
             </div>
             <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
@@ -20,67 +20,67 @@
         </form>
     </div>
 
-<div id="ejercicios-lista" class="ejercicios-lista">
-    <h2>Lista de Ejercicios</h2>
-    <ul id="lista-ejercicios"></ul>
-</div>
+    <div id="ejercicios-lista" class="ejercicios-lista">
+        <h2>Lista de Ejercicios</h2>
+        <ul id="lista-ejercicios"></ul>
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ejerciciosSeleccionados = [];
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const ejerciciosSeleccionados = [];
 
-        // Realizar la petición a la API para obtener los ejercicios
-        fetch('/ejercicios')
-            .then(response => response.json())
-            .then(data => {
-                const listaEjercicios = document.getElementById('lista-ejercicios');
+            // Realizar la petición a la API para obtener los ejercicios
+            fetch('/ejercicios')
+                .then(response => response.json())
+                .then(data => {
+                    const listaEjercicios = document.getElementById('lista-ejercicios');
 
-                data.forEach(ejercicio => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Nombre: ${ejercicio.nombre}, Descripción: ${ejercicio.descripcion}, Grupo Muscular: ${ejercicio.grupoMuscular}, Tipo de Ejercicio: ${ejercicio.tipoEjercicio}`;
-                    listaEjercicios.appendChild(listItem);
-                });
+                    data.forEach(ejercicio => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Nombre: ${ejercicio.nombre}, Descripción: ${ejercicio.descripcion}, Grupo Muscular: ${ejercicio.grupoMuscular}, Tipo de Ejercicio: ${ejercicio.tipoEjercicio}`;
+                        listaEjercicios.appendChild(listItem);
+                    });
 
-                // Manejar el botón para agregar más ejercicios
-                const agregarEjercicioBtn = document.getElementById('agregar-ejercicio');
-                agregarEjercicioBtn.addEventListener('click', function () {
+                    // Manejar el botón para agregar más ejercicios
+                    const agregarEjercicioBtn = document.getElementById('agregar-ejercicio');
+                    agregarEjercicioBtn.addEventListener('click', function () {
+                        agregarNuevoEjercicio(data);
+                    });
+
+                    // Agregar el primer select automáticamente
                     agregarNuevoEjercicio(data);
+                })
+                .catch(error => {
+                    console.error('Error al obtener los ejercicios:', error);
                 });
 
-                // Agregar el primer select automáticamente
-                agregarNuevoEjercicio(data);
-            })
-            .catch(error => {
-                console.error('Error al obtener los ejercicios:', error);
-            });
+            function agregarNuevoEjercicio(data) {
+                const ejerciciosSeleccionadosDiv = document.getElementById('ejercicios-seleccionados');
 
-        function agregarNuevoEjercicio(data) {
-            const ejerciciosSeleccionadosDiv = document.getElementById('ejercicios-seleccionados');
+                // Crear un nuevo contenedor para el select y sus detalles
+                const contenedorEjercicio = document.createElement('div');
+                contenedorEjercicio.classList.add('ejercicio-contenedor');
 
-            // Crear un nuevo contenedor para el select y sus detalles
-            const contenedorEjercicio = document.createElement('div');
-            contenedorEjercicio.classList.add('ejercicio-contenedor');
+                // Crear un nuevo select
+                const nuevoSelect = document.createElement('select');
+                nuevoSelect.required = true;
+                nuevoSelect.innerHTML = '<option value="" disabled selected>Seleccione un ejercicio</option>';
 
-            // Crear un nuevo select
-            const nuevoSelect = document.createElement('select');
-            nuevoSelect.required = true;
-            nuevoSelect.innerHTML = '<option value="" disabled selected>Seleccione un ejercicio</option>';
+                // Llenar el select con las opciones de ejercicios
+                data.forEach(ejercicio => {
+                    // Verificar si el ejercicio ya ha sido seleccionado
+                    if (!ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio)) {
+                        const option = document.createElement('option');
+                        option.value = JSON.stringify(ejercicio);
+                        option.textContent = ejercicio.nombre;
+                        nuevoSelect.appendChild(option);
+                    }
+                });
 
-            // Llenar el select con las opciones de ejercicios
-            data.forEach(ejercicio => {
-                // Verificar si el ejercicio ya ha sido seleccionado
-                if (!ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio)) {
-                    const option = document.createElement('option');
-                    option.value = JSON.stringify(ejercicio);
-                    option.textContent = ejercicio.nombre;
-                    nuevoSelect.appendChild(option);
-                }
-            });
-
-            // Agregar listener para mostrar detalles del ejercicio seleccionado
-            nuevoSelect.addEventListener('change', function () {
-                const ejercicio = JSON.parse(this.value);
-                const detalleHtml = `
+                // Agregar listener para mostrar detalles del ejercicio seleccionado
+                nuevoSelect.addEventListener('change', function () {
+                    const ejercicio = JSON.parse(this.value);
+                    const detalleHtml = `
                         <div>
                             <label>Descripción:</label>
                             <input type="text" value="${ejercicio.descripcion}" readonly><br>
@@ -90,61 +90,74 @@
                             <input type="text" value="${ejercicio.tipoEjercicio}" readonly><br>
                         </div>
                     `;
-                // Agregar los detalles debajo del select correspondiente
-                detallesDiv.innerHTML = detalleHtml;
+                    // Agregar los detalles debajo del select correspondiente
+                    detallesDiv.innerHTML = detalleHtml;
 
-                // Actualizar el array de ejercicios seleccionados
-                ejerciciosSeleccionados.push(ejercicio);
-                document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
+                    // Actualizar el array de ejercicios seleccionados
+                    ejerciciosSeleccionados.push(ejercicio);
+                    document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
 
-                // Deshabilitar la opción seleccionada en otros selects
-                actualizarOpcionesDisponibles();
-            });
-
-            // Crear un div para los detalles del ejercicio seleccionado
-            const detallesDiv = document.createElement('div');
-            detallesDiv.classList.add('detalle-ejercicio');
-
-            // Crear botón para eliminar la selección
-            const eliminarBtn = document.createElement('button');
-            eliminarBtn.type = 'button';
-            eliminarBtn.textContent = 'Eliminar ejercicio';
-            eliminarBtn.addEventListener('click', function () {
-                // Eliminar el contenedor del ejercicio
-                ejerciciosSeleccionadosDiv.removeChild(contenedorEjercicio);
-                // Actualizar el array de ejercicios seleccionados
-                const index = ejerciciosSeleccionados.findIndex(e => e.idEjercicio === JSON.parse(nuevoSelect.value).idEjercicio);
-                if (index > -1) {
-                    ejerciciosSeleccionados.splice(index, 1);
-                }
-                document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
-                // Actualizar las opciones disponibles en los selects restantes
-                actualizarOpcionesDisponibles();
-            });
-
-            // Añadir el select, los detalles y el botón de eliminar al contenedor del ejercicio
-            contenedorEjercicio.appendChild(nuevoSelect);
-            contenedorEjercicio.appendChild(detallesDiv);
-            contenedorEjercicio.appendChild(eliminarBtn);
-
-            // Añadir el contenedor del ejercicio al formulario
-            ejerciciosSeleccionadosDiv.appendChild(contenedorEjercicio);
-        }
-
-        function actualizarOpcionesDisponibles() {
-            const selects = document.querySelectorAll('#ejercicios-seleccionados select');
-            selects.forEach(select => {
-                const opciones = select.querySelectorAll('option');
-                opciones.forEach(option => {
-                    const ejercicio = JSON.parse(option.value || null);
-                    if (ejercicio) {
-                        option.disabled = ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio);
-                    }
+                    // Deshabilitar la opción seleccionada en otros selects
+                    actualizarOpcionesDisponibles();
                 });
-            });
+
+                // Crear un div para los detalles del ejercicio seleccionado
+                const detallesDiv = document.createElement('div');
+                detallesDiv.classList.add('detalle-ejercicio');
+
+                // Crear botón para eliminar la selección
+                const eliminarBtn = document.createElement('button');
+                eliminarBtn.type = 'button';
+                eliminarBtn.textContent = 'Eliminar ejercicio';
+                eliminarBtn.addEventListener('click', function () {
+                    // Eliminar el contenedor del ejercicio
+                    ejerciciosSeleccionadosDiv.removeChild(contenedorEjercicio);
+                    // Actualizar el array de ejercicios seleccionados
+                    const index = ejerciciosSeleccionados.findIndex(e => e.idEjercicio === JSON.parse(nuevoSelect.value).idEjercicio);
+                    if (index > -1) {
+                        ejerciciosSeleccionados.splice(index, 1);
+                    }
+                    document.getElementById('ejercicios-input').value = JSON.stringify(ejerciciosSeleccionados);
+                    // Actualizar las opciones disponibles en los selects restantes
+                    actualizarOpcionesDisponibles();
+                });
+
+                // Añadir el select, los detalles y el botón de eliminar al contenedor del ejercicio
+                contenedorEjercicio.appendChild(nuevoSelect);
+                contenedorEjercicio.appendChild(detallesDiv);
+                contenedorEjercicio.appendChild(eliminarBtn);
+
+                // Añadir el contenedor del ejercicio al formulario
+                ejerciciosSeleccionadosDiv.appendChild(contenedorEjercicio);
+            }
+
+            function actualizarOpcionesDisponibles() {
+                const selects = document.querySelectorAll('#ejercicios-seleccionados select');
+                selects.forEach(select => {
+                    const opciones = select.querySelectorAll('option');
+                    opciones.forEach(option => {
+                        const ejercicio = JSON.parse(option.value || null);
+                        if (ejercicio) {
+                            option.disabled = ejerciciosSeleccionados.some(e => e.idEjercicio === ejercicio.idEjercicio);
+                        }
+                    });
+                });
+            }
+        });
+
+        // Función para validar que el nombre del combo solo contenga letras y espacios
+        function validateStrings() {
+            const nombreCombo = document.getElementById('nombre-combo').value.trim();
+            const stringPattern = /^[a-zA-Z\s]+$/;
+
+            if (!stringPattern.test(nombreCombo)) {
+                alert("El nombre del combo solo debe contener letras y espacios.");
+                return false;
+            }
+
+            return true;
         }
-    });
-</script>
+    </script>
 </div>
 </body>
 </html>

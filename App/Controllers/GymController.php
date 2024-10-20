@@ -26,7 +26,12 @@ class GymController
         }
         $service = new GymService();
         $service->ingresarGym($nombre, $calle, $numero, $esquina, $capXTurno);
-
+       $data = [
+           'mensaje' => 'Local Ingresado Correctamente',
+           'ruta' => 'ingresarGym'
+       ];
+       $template->renderTemplate('alerta', $data);
+       exit();
    }
 
     public function obtenerGym()

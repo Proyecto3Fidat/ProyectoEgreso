@@ -1,4 +1,7 @@
-@media screen and (max-width:768px){ 
+@media screen and (max-width:768px){
+    .grid-ejercicios {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
     /* Nav y menu desplegable */
     .cerrarmenu {
         display: block;
