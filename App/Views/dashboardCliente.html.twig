@@ -159,22 +159,20 @@
 <script src="../../Public/js/responsive.js"></script>
 
 <script>
-    // Capturamos todos los formularios de la clase asistencia-form
+
     const forms = document.querySelectorAll('.asistencia-form');
 
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Evitamos que el formulario se envíe de forma tradicional
+            e.preventDefault();
 
-            // Creamos un objeto FormData con los datos del formulario
             const formData = new FormData(form);
 
-            // Enviamos los datos usando fetch
             fetch('/asistencia', {
                 method: 'POST',
                 body: formData,
             })
-                .then(response => response.json()) // Parseamos la respuesta a JSON
+                .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         alert('Asistencia enviada correctamente');
