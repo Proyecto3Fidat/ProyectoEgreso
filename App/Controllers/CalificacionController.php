@@ -38,7 +38,6 @@ class CalificacionController
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
 
-        // Validar y convertir datos de $_POST
         $puntMaxima = filter_input(INPUT_POST, 'puntMaxima', FILTER_VALIDATE_INT);
         $fuerzaMusc = filter_input(INPUT_POST, 'fuerzaMusc', FILTER_VALIDATE_FLOAT);
         $resMusc = filter_input(INPUT_POST, 'resMusc', FILTER_VALIDATE_FLOAT);
@@ -50,11 +49,10 @@ class CalificacionController
         $nroDocumento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
         $puntuacionEsperado = filter_input(INPUT_POST, 'puntuacionEsperado', FILTER_VALIDATE_FLOAT);
 
-        // Comprobar si las conversiones son válidas
         if ($puntMaxima === false || $fuerzaMusc === false || $resMusc === false || $resAnaerobica === false ||
             $resiliencia === false || $flexibilidad === false || $cumplAgenda === false || $resMonotonia === false ||
             $nroDocumento === false || $puntuacionEsperado === false) {
-            // Manejar error si alguno de los datos no es válido
+            
             $this->logger->error('Error en los datos de entrada.');
             echo "<script>
             alert('Error en los datos de entrada.'); 
@@ -113,7 +111,7 @@ class CalificacionController
                 $calificacion = $this->calificacionService->obtenerPuntuaciones($resultados['id']);
 
                 if (is_array($calificacion) && !empty($calificacion)) {
-                    $calificacion = $calificacion[0]; // Usar solo el primer elemento
+                    $calificacion = $calificacion[0]; 
                 } else {
                     $calificacion = [];
                 }
@@ -176,7 +174,6 @@ class CalificacionController
         $calificacionService = new CalificacionService($calificacionRepository);
 
         $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        // Validar y convertir datos de $_POST
         $puntMaxima = filter_input(INPUT_POST, 'puntMaxima', FILTER_VALIDATE_INT);
         $fuerzaMusc = filter_input(INPUT_POST, 'fuerzaMusc', FILTER_VALIDATE_FLOAT);
         $resMusc = filter_input(INPUT_POST, 'resMusc', FILTER_VALIDATE_FLOAT);

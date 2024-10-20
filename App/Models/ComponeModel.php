@@ -13,36 +13,22 @@ class ComponeModel
         $this->nombreCombo = $nombreCombo;
     }
 
-    /**
-     * @return mixed
-     */
     public function getIdEjercicio()
     {
         return $this->idEjercicio;
     }
 
-    /**
-     * @param mixed $idEjercicio
-     * @return ComponeModel
-     */
     public function setIdEjercicio($idEjercicio)
     {
         $this->idEjercicio = $idEjercicio;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getNombreCombo()
     {
         return $this->nombreCombo;
     }
 
-    /**
-     * @param mixed $nombreCombo
-     * @return ComponeModel
-     */
     public function setNombreCombo($nombreCombo)
     {
         $this->nombreCombo = $nombreCombo;

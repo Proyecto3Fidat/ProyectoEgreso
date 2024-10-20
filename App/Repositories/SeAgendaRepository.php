@@ -46,7 +46,6 @@ class SeAgendaRepository extends Database
 
     public function asistir($documento, $dia, $horaInicio, $horaFin, $asistencia)
     {
-        // Verificamos que los tiempos estén en formato adecuado HH:MM:SS
         if (!preg_match('/^\d{2}:\d{2}:\d{2}$/', $horaInicio)) {
             throw new Exception('El formato de horaInicio es incorrecto: ' . $horaInicio);
         }
@@ -57,7 +56,6 @@ class SeAgendaRepository extends Database
         $database = Database::getInstance();
         $database->connect();
 
-        // Preparamos la consulta
         $sql = "UPDATE SeAgenda SET asistencia = ? WHERE nroDocumento = ? AND dia = ? AND horaInicio = ? AND horaFin = ?";
         $stmt = $database->getConnection()->prepare($sql);
 

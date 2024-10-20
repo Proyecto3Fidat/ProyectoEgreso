@@ -49,24 +49,13 @@ class ClienteService
                 $pdf->SetSubject('Calificación');
                 $pdf->SetKeywords('TCPDF, PDF, calificación');
                 $pdf->SetMargins(15, 15, 15);
-                $pdf->AddPage(); // Asegúrate de añadir una nueva página
+                $pdf->AddPage(); 
 
-                // Agregar ícono
-                /*$iconFile = __DIR__ . '/../../images/1344134.png'; // Ruta absoluta
-
-                // Verificar si el archivo de ícono existe
-                if (!file_exists($iconFile)) {
-                    echo "El archivo de ícono no se encontró.";
-                    die();
-                }
-
-                $pdf->Image($iconFile, 15, 15, 20, 20, 'PNG', '', '', false, 300, '', false, false, 0, false, false, false); // Ajusta las coordenadas y dimensiones
-*/
+         
                 $pdf->SetFont('helvetica', 'B', 16);
                 $pdf->Cell(0, 10, 'Calificación', 0, 1, 'C');
-                $pdf->Ln(10); // Espacio adicional
+                $pdf->Ln(10); 
 
-                // Estilo de la tabla
                 $html = '<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">';
                 $html .= '<thead>
                 <tr style="background-color: #007BFF; color: #ffffff;">
@@ -82,8 +71,6 @@ class ClienteService
                 </tr>
               </thead>
               <tbody>';
-
-                // Añadir datos
                 if (!empty($calificacion) && !empty($puntuacion)) {
                     $html .= '<tr style="background-color: #f2f2f2;">
                         <td style="text-align: center;">' . htmlspecialchars($calificacion[0]['fecha']) . '</td>
@@ -106,7 +93,7 @@ class ClienteService
 
                 $pdf->writeHTML($html, true, false, true, false, '');
                 $nombreArchivo = 'calificacion_' . $calificacion[0]['fecha'] . '.pdf';
-                $pdf->Output($nombreArchivo, 'I'); // 'I' para visualizar en el navegador, 'D' para forzar descarga
+                $pdf->Output($nombreArchivo, 'I'); 
             } else {
                 echo "<script>
             alert('Acceso Denegado');
@@ -128,13 +115,10 @@ class ClienteService
         $mensaje = "Bienvenido a la plataforma de entrenamiento";
         $from = "FIDAT <isbergara1@gmail.com>";
 
-        // Comando para enviar correo usando mailx
         $comando = 'echo ' . escapeshellarg($mensaje) . ' | mailx -s ' . escapeshellarg($asunto) . ' -S from=' . escapeshellarg($from) . ' ' . $para;
-        // Ejecutar el comando y capturar la salida
-        // echo "Bienvenido a la plataforma de entrenamiento" | mailx -s "Bienvenido a la plataforma de entrenamiento" -S from="FIDAT <isbergara1@gmail.com>" {$email}
+        
         exec($comando, $salida, $devolver);
 
-        // Verificar si el correo se envió correctamente
         if ($devolver === 0) {
             echo 'Correo enviado correctamente.';
         } else {

@@ -244,7 +244,6 @@ class ClienteController
                     'dia' => $dia
                 ];
             } else {
-                // En caso de que $pago sea null
                 $resultado[] = [
                     'nombre' => $cliente['nombre'],
                     'nroDocumento' => $cliente['nroDocumento'],
@@ -260,7 +259,7 @@ class ClienteController
                     'nombrePlan' => null,
                     'tipoPlan' => null,
                     'fechaVencimiento' => null,
-                    'horaInicio' => null,  // Valores nulos para agenda
+                    'horaInicio' => null,  
                     'horaFin' => null,
                     'dia' => null
                 ];

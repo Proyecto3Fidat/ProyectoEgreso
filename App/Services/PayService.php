@@ -33,7 +33,6 @@ class PayService
         } else {
         }
 
-       // exit();
     }
 
     public function verificarCaducidad()

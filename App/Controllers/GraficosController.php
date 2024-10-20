@@ -15,7 +15,6 @@
             $cachePath = __DIR__ . "/../../Resources/Images/Graphics/grafico_evolucion_{$usuarioId}.png";
 
             try {
-                // Obtener la calificación con el ID más alto
                 $ultimaCalificacion = array_reduce($calificaciones, function ($carry, $item) {
                     return ($carry === null || $item['id'] > $carry['id']) ? $item : $carry;
                 });
@@ -30,25 +29,18 @@
                 $logger->error('Error al obtener la calificación con el ID más alto', ['exception' => $e]);
                 return;
             }
-            // Verificar si la última calificación ya tiene un gráfico generado
             $ultimoLogPath = __DIR__ . "/../../Config/logs/usuario.log";
             $ultimaCalificacionRegistrada = null;
 
             if (file_exists($ultimoLogPath)) {
-                // Leer el contenido del archivo de log
                 $logContents = file_get_contents($ultimoLogPath);
-                // Dividir el contenido del log en entradas individuales usando una expresión regular basada en el patrón de fecha
                 preg_match_all('/\[\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d+.*?\] app\.INFO: (.*?)(?=\[\d{4}-\d{2}-\d{2}T|$)/s', $logContents, $logEntries);
 
-                // Recorrer las entradas en orden inverso (de la más reciente a la más antigua)
                 foreach (array_reverse($logEntries[1]) as $logEntry) {
-                    // Verificar si la línea contiene "Gráfico generado" y el usuario especificado
                     if (strpos($logEntry, 'Gráfico generado') !== false && strpos($logEntry, '"usuarioId":"' . $usuarioId . '"') !== false) {
-                        // Buscar el valor de "calificacionId"
                         preg_match('/"calificacionId":(\d+)/', $logEntry, $matches);
                         if (isset($matches[1])) {
                             $ultimaCalificacionRegistrada = (int)$matches[1];
-                            // Comparar con la calificación de mayor ID
                             if ($ultimaCalificacionRegistrada >= $ultimaCalificacionId) {
                                 return;
                             }
@@ -57,7 +49,6 @@
                 }
             }
 
-            // Si no existe un gráfico o hay una n  ueva calificación, crear el gráfico
             $fechas = array_column($calificaciones, 'fecha');
             $items = [
                 "Puntuación Total" => array_column($calificaciones, 'puntObtenido'),
@@ -160,14 +151,12 @@
 
                 $imageUrl = $body['url'];
 
-                // Descargar la imagen y eliminar la anterior si existe
                 if (file_exists($cachePath)) {
                     unlink($cachePath);
                 }
                 $imageContent = file_get_contents($imageUrl);
                 file_put_contents($cachePath, $imageContent);
 
-                // Registrar la calificación que generó el gráfico
                 $logger->info('Gráfico generado', ['usuarioId' => $usuarioId, 'calificacionId' => $ultimaCalificacionId]);
         }
     }
