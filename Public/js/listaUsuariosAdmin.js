@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Guardar la lista de clientes en la variable
             clientes = data;
 
             const tbody = document.querySelector('#tablaClientes tbody');
@@ -34,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 tbody.appendChild(row);
             });
 
-            // Agregar evento click a los botones de "Ficha técnica"
             document.querySelectorAll('.btnfichatecnica').forEach(button => {
                 button.addEventListener('click', function () {
                     const clienteId = this.getAttribute('data-cliente-id');
@@ -72,7 +70,12 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.divficha-container .divficha3 p:nth-child(4)').textContent = `Hora de finalizacion: ${cliente.horaFin || 'N/A'}`;
             document.querySelector('.divficha-container .divficha3 p:nth-child(5)').textContent = `Verificacion de asistencia: ${cliente.asistencia || 'N/A'}`;
 
-            // Configurar el valor del formulario oculto para calificar
+            const imgCliente = document.querySelector('.divficha-container .imgCliente img');
+            imgCliente.src = cliente.imagenUrl ? cliente.imagenUrl : `http://proyecto.localhost/Resources/Images/ProfilePhoto/${cliente.nroDocumento}.jpg`;
+            imgCliente.onerror = function () {
+                this.src = '../../images/clienteEjm.png';
+            };
+
             const form = document.querySelector('form');
             form.action = `/pago?documento=${clienteId}`;
             form.querySelector('input[name="documento"]').value = clienteId;

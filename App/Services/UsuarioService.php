@@ -178,5 +178,42 @@ class UsuarioService
     {
         return $this->usuarioRepository->obtenerTipoDocumento($documento);
     }
+
+    public function cargarImagen($imagen, $documento)
+    {
+        if ($imagen['error'] == UPLOAD_ERR_OK) {
+
+            $archivo = $imagen['tmp_name'];
+            $ext = strtolower(pathinfo($imagen['name'], PATHINFO_EXTENSION));
+            $nombreFinal = "$documento.jpg";
+            $destino = __DIR__ . '/../../Resources/Images/ProfilePhoto/' . $nombreFinal;
+
+            switch ($ext) {
+                case 'jpg':
+                case 'jpeg':
+                    $imagenOriginal = imagecreatefromjpeg($archivo);
+                    break;
+                case 'png':
+                    $imagenOriginal = imagecreatefrompng($archivo);
+                    break;
+                case 'gif':
+                    $imagenOriginal = imagecreatefromgif($archivo);
+                    break;
+                default:
+                    return null;
+            }
+
+            if ($imagenOriginal) {
+                imagejpeg($imagenOriginal, $destino, 90);
+                imagedestroy($imagenOriginal);
+                return true;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
 }
 

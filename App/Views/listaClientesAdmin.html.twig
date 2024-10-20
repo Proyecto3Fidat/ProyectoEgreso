@@ -87,7 +87,7 @@
             </button>
         </section>
     <div class="divficha-container">
-                <div class="imgCliente"> 
+                <div class="imgCliente">
                     <img src="../../images/clienteEjm.png"/>
                 </div>
         <div class="divficha">
@@ -111,7 +111,7 @@
             <p>Verificacion de asistencia: </p>
         </div>
         <section>
-            
+
         </section>
     </div>
             <div class="btnpago">
@@ -119,6 +119,7 @@
                     <input type="hidden" name="documento" value="">
                     <button type="submit" class="adrut">Ingresar Pago</button>
                     <button type="submit" class="adrut">Agendar</button>
+                    <button type="submit" class="adrut">Subir Imagen</button>
                 </form>
             </div>
 </div>
@@ -307,6 +308,9 @@
                 } else if (actionType === 'Agendar') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/agendar?documento=${documento}`;
+                }else if (actionType === 'Subir Imagen') {
+                    const documento = button.form.querySelector('input[name="documento"]').value;
+                    url = `/cargarImagen?documento=${documento}`;
                 }
 
 

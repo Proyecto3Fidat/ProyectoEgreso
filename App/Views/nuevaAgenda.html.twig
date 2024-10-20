@@ -1,11 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Guardar Agenda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #6f41bb;
@@ -63,7 +63,6 @@
             color: var(--text-color);
         }
 
-        input,
         select,
         button {
             width: 100%;
@@ -158,25 +157,40 @@
     </style>
 </head>
 <body>
-<form action="/guardarAgenda" method="post">
-    <label for="nombre">Nombre Local:</label>
-    <input type="text" readonly name="nombre" value="{{ nombre }}">
+<div class="container">
+    <h1>Guardar Agenda</h1>
+    <form action="/guardarAgenda" method="post">
+        <div>
+            <label for="nombre">Nombre Local:</label>
+            <select name="nombre" id="nombre">
+                {% if nombres is not null %}
+                    {% for nombre in nombres %}
+                        <option value="{{ nombre }}">{{ nombre }}</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </div>
 
-    <label for="agenda">Seleccionar Agenda:</label>
-    <select name="agenda" id="agenda" onchange="setAgendaData(this.value)">
-        <option value="">Seleccione una agenda</option>
-        {% for key, agenda in agendas %}
-            <option value="{{ key }}">{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})</option>
-        {% endfor %}
-    </select>
+        <div>
+            <label for="agenda">Seleccionar Agenda:</label>
+            <select name="agenda" id="agenda" onchange="setAgendaData(this.value)">
+                <option value="">Seleccione una agenda</option>
+                {% for key, agenda in agendas %}
+                    <option value="{{ key }}">{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }}
+                        (Agendados: {{ agenda.agendados }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
 
-    <input type="hidden" id="dia" name="dia" value="">
-    <input type="hidden" id="horaInicio" name="horaInicio" value="">
-    <input type="hidden" id="horaFin" name="horaFin" value="">
-    <input type="hidden" id="agendados" name="agendados" value="">
+        <input type="hidden" id="dia" name="dia" value="">
+        <input type="hidden" id="horaInicio" name="horaInicio" value="">
+        <input type="hidden" id="horaFin" name="horaFin" value="">
+        <input type="hidden" id="agendados" name="agendados" value="">
 
-    <button type="submit">Guardar</button>
-</form>
+        <button type="submit">Guardar</button>
+    </form>
+</div>
 
 <script>
     const agendas = {{ agendas | json_encode | raw }};

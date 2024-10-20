@@ -27,4 +27,11 @@ class ConformaService
         $asignados = $repo->obtenerAsignados($nombre);
         return $asignados;
     }
+
+    public function eliminarAgenda($dia, $horaInicio, $horaFin, $nombre)
+    {
+        $repo = new ConformaRepository();
+        $repo->eliminarAgenda($dia, $horaInicio, $horaFin, $nombre);
+
+    }
 }

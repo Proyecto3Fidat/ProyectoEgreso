@@ -32,4 +32,23 @@ class ConformaController
         $asignados = $conformaService->obtenerAsignados($nombre);
         return $asignados;
     }
+
+    public function eliminarAgenda()
+    {
+        $conformaService = new ConformaService();
+
+        $dia = filter_input(INPUT_GET, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
+        $horaInicio = filter_input(INPUT_GET, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
+        $horaFin = filter_input(INPUT_GET, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
+        $nombre = filter_input(INPUT_GET, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if ($dia == null || $horaInicio == null || $horaFin == null || $nombre == null) {
+            echo json_encode(['error' => 'Faltan datos']);
+            http_response_code(400);
+            return;
+        }
+
+        $conformaService->eliminarAgenda($dia, $horaInicio, $horaFin, $nombre);
+
+    }
 }

@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-use App\Controller\LocalGymController;
+use App\Controllers\LocalGymController;
 use App\Controllers\ComboEjercicioController;
 use App\Controllers\ContieneController;
 use Pecee\SimpleRouter\SimpleRouter;
@@ -445,7 +445,8 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
     });
-    SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger) {
+    SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger, $loggerU) {
+
         SimpleRouter::post('/usuario/eliminarAgenda', function () use ($logger) {
 
 
@@ -519,7 +520,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $tipoDocumento = $usuario->obtenerIipoDocumento($documento);
             $agendas = isset($_POST['agendas']) ? $_POST['agendas'] : [];
 
-
             foreach ($agendas as $agendaJson) {
                 $agenda = json_decode($agendaJson, true);
                 if (is_array($agenda)) {
@@ -545,6 +545,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $template = new TemplateController();
             $agendas = $conforma->obtenerAgendas();
             $nombres = $local->obtenerNombres();
+
             $data = [
                 'agenda' => $agendas,
                 'nombres' => $nombres
@@ -562,6 +563,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::post('/ingresarGym', function () {
+
             $controller = new App\Controllers\GymController();
             $controller->ingresarGym();
             exit();
@@ -638,6 +640,13 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             }
         });
 
+        SimpleRouter::post('/cargarImagen', function () use ($logger) {
+            $repository = new UsuarioRepository();
+            $service = new UsuarioService($repository);
+            $controller = new App\Controllers\UsuarioController($service, $logger);
+            $controller->cargarImagen();
+            exit();
+        });
 
         SimpleRouter::post('/actualizarPago', function () use ($logger) {
             $pago = new \App\Controllers\EligeController();
@@ -662,10 +671,37 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
+        SimpleRouter::get('/nuevaAgenda', function () {
+            $local = new LocalGymController();
+            $agenda = new \App\Controllers\AgendaController();
+            $template = new TemplateController();
+            $nombres = $local->obtenerNombres();
+            $agendas = $agenda->obtenerAgendas();
+            $data = [
+                'nombres' => $nombres,
+                'agendas' => $agendas
+            ];
+            $template->renderTemplate('nuevaAgenda', $data);
+            exit();
+        });
+
+        SimpleRouter::get('/cargarImagen', function () {
+            $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+            $template = new TemplateController();
+            $template->renderTemplate('cargarImagen', ['documento' => $documento]);
+            die();
+        });
+
+
+
+        SimpleRouter::delete('/eliminarAgenda', function (){
+            $conforma = new App\Controllers\ConformaController();
+            $conforma->eliminarAgenda();
+            exit();
+        });
 
         SimpleRouter::get('/guardarAgenda', function () {
             $nombre = filter_input(INPUT_GET, 'local', FILTER_SANITIZE_SPECIAL_CHARS);
-
             $template = new TemplateController();
             $agenda = new \App\Controllers\AgendaController();
             $conforma = new \App\Controllers\ConformaController();

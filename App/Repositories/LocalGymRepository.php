@@ -9,7 +9,7 @@ class LocalGymRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT * FROM LocalGym";
+        $sql = "SELECT nombre FROM LocalGym";
         $result = $database->getConnection()->query($sql);
         $nombres = [];
         if ($result->num_rows > 0) {

@@ -98,6 +98,26 @@ class UsuarioController
     {
         return $this->usuarioService->obtenerTipoDocumento($documento);
     }
+
+    public function cargarImagen()
+    {
+        $documento = filter_input(INPUT_POST, 'docName', FILTER_SANITIZE_STRING);
+        if (isset($_FILES['imagen']) && $_POST['docName'] != null) {
+            $this->logger->info('Se intento cargar la imagen: ' . $_FILES['imagen']['name']);
+            if($this->usuarioService->cargarImagen($_FILES['imagen'], $documento)){
+                echo json_encode([
+                    'status' => 'ok'
+                ]);
+                http_response_code(200);
+            }else
+            {
+                echo json_encode([
+                    'status' => 'error'
+                ]);
+                http_response_code(500);
+            }
+        }
+    }
 }
 
 ?>

@@ -53,4 +53,16 @@ class ConformaRepository extends Database
         $database->disconnect();
         return $asignados;
     }
+
+    public function eliminarAgenda($dia, $horaInicio, $horaFin, $nombre)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM Conforma WHERE dia = ? AND horaInicio = ? AND horaFin = ? AND nombre = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("ssss", $dia, $horaInicio, $horaFin, $nombre);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }
