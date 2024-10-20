@@ -3,39 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Public/css/calificacionIn.css">
-    <link rel="stylesheet" href="../../Public/css/responsive.css">
-    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Ingresar Pago</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <style>
-        .content {
-            display: none;
+        :root {
+            --primary-color: #6f41bb;
+            --primary-hover: #58359b;
+            --bg-color: #1e1c1f;
+            --text-color: #ffffff;
+            --input-bg: #2c2a2d;
+            --border-color: #3f3f3f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: transparent;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        .califidepo {
+            display: grid;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #6f41bb, #4e2d82);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(1px);
+        }
+
+        input[type="submit"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        input[type="submit"]:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        input[readonly] {
+            background-color: rgba(255, 255, 255, 0.1);
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h4 {
+                font-size: 2rem;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            select,
+            input[type="submit"] {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
-
 <body>
-<div class="content">
+<div class="container">
     <h4>Ingresar Pago</h4>
     <form id="miFormulario" class="califidepo">
-        <label for="selectPlan">Seleccionar Plan</label>
-        <select id="selectPlan" name="nombrePlan" required>
-            <option value="" disabled selected>Seleccione un plan</option>
-        </select>
+        <div>
+            <label for="selectPlan">Seleccionar Plan</label>
+            <select id="selectPlan" name="nombrePlan" required>
+                <option value="" disabled selected>Seleccione un plan</option>
+            </select>
+        </div>
 
-        <label for="descripcion">Descripción del Plan</label>
-        <input type="text" id="descripcion" name="descripcionPlan" placeholder="Descripción" readonly>
+        <div>
+            <label for="descripcion">Descripción del Plan</label>
+            <input type="text" id="descripcion" name="descripcionPlan" placeholder="Descripción" readonly>
+        </div>
 
-        <label for="tipo">Tipo de Plan</label>
-        <input type="text" id="tipo" name="tipoPlan" placeholder="Tipo de Plan" readonly>
+        <div>
+            <label for="tipo">Tipo de Plan</label>
+            <input type="text" id="tipo" name="tipoPlan" placeholder="Tipo de Plan" readonly>
+        </div>
 
-        <input type="text" id="documento" name="nroDocumento" placeholder="Numero de Documento" required>
-        <input name="fechaPago" type="date" placeholder="Fecha del Pago">
-        <input type="submit">
+        <div>
+            <label for="documento">Número de Documento</label>
+            <input type="text" id="documento" name="nroDocumento" placeholder="Numero de Documento" required>
+        </div>
+
+        <div>
+            <label for="fechaPago">Fecha del Pago</label>
+            <input id="fechaPago" name="fechaPago" type="date" required>
+        </div>
+
+        <input type="submit" value="Ingresar Pago">
     </form>
 </div>
-
 
 <script src="../../Public/js/pago.js"></script>
 <script src="../../Public/js/ingresarPago.js"></script>

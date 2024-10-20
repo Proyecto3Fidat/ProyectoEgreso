@@ -16,7 +16,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         .then(data => {
             if (data.success) {
                 alert(data.message);
-                window.location.href = '/';
+                window.location.href = '/pago';
             } else if (data.error === "token") {
                 alert(data.message);
             } else if (data.error === "documento") {
@@ -36,7 +36,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
                         })
                         .then(planData => {
                             alert(planData.message);
-                            window.location.href = '/pagina-de-exito';
+                            window.location.href = '/pago';
                         })
                         .catch(error => {
                             console.error('Error:', error);

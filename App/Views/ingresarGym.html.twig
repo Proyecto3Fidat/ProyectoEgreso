@@ -1,25 +1,187 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>IngresarGym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6f41bb;
+            --primary-hover: #58359b;
+            --bg-color: #1e1c1f;
+            --text-color: #ffffff;
+            --input-bg: #2c2a2d;
+            --border-color: #3f3f3f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: transparent;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2.5rem;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
+        }
+
+        input[type="submit"] {
+            background: linear-gradient(135deg, #6f41bb, #4e2d82);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        input[type="submit"]:active {
+            transform: translateY(1px);
+        }
+
+        input[type="submit"]::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        input[type="submit"]:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            input[type="text"],
+            input[type="submit"] {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
+<div class="container">
+    <h1>Ingresar Gym</h1>
     <form action="/ingresarGym" method="post">
-        <label for="nombre">Nombre</label><br>
-        <input type="text" id="nombre" name="nombre" required><br><br>
-        <label for="direccion">Calle</label><br>
-        <input type="text" id="calle" name="calle" required><br><br>
-        <label for="horario">Esquina</label><br>
-        <input type="text" id="esquina" name="esquina" required><br><br>
-        <label for="descripcion">Numero de Puerta</label><br>
-        <input type="text" id="nroPuerta" name="nroPuerta" required><br><br>
-        <label for="descripcion">Capacidad por Turno</label><br>
-        <input type="text" id="CapXTurno" name="capXTurno" required><br><br>
-        <input type="submit">
+        <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div>
+            <label for="calle">Calle</label>
+            <input type="text" id="calle" name="calle" required>
+        </div>
+        <div>
+            <label for="esquina">Esquina</label>
+            <input type="text" id="esquina" name="esquina" required>
+        </div>
+        <div>
+            <label for="nroPuerta">Número de Puerta</label>
+            <input type="text" id="nroPuerta" name="nroPuerta" required>
+        </div>
+        <div>
+            <label for="CapXTurno">Capacidad por Turno</label>
+            <input type="text" id="CapXTurno" name="capXTurno" required>
+        </div>
+        <input type="submit" value="Registrar Gym">
     </form>
+</div>
 </body>
 </html>

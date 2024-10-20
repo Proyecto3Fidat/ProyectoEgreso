@@ -1,82 +1,315 @@
-<form id="form-seleccion-local" method="post" action="/agendar">
-    <!-- Sección original -->
-    <label for="select-local">Seleccionar Local:</label>
-    <select id="select-local" name="local" required>
-        <option value="" disabled selected>Seleccione un local</option>
-        {% for local in locales %}
-            <option value="{{ loop.index0 }}"
-                    data-calle="{{ local.calle }}"
-                    data-esquina="{{ local.esquina }}"
-                    data-nro-puerta="{{ local.nroPuerta }}"
-                    data-cap-x-turno="{{ local.capXTurno }}"
-                    data-nombre="{{ local.nombre }}">
-                {{ local.nombre }}
-            </option>
-        {% endfor %}
-    </select>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6f41bb;
+            --primary-hover: #58359b;
+            --bg-color: #1e1c1f;
+            --text-color: #ffffff;
+            --input-bg: #2c2a2d;
+            --border-color: #3f3f3f;
+        }
 
-    <div id="documento" style="display: none; margin-top: 20px;">
-        <label for="documento">Documento:</label>
-        <input type="text" id="documento" name="documento" required value="{{ nombre }}"><br>
-    </div>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <div id="detalles-local" style="display: none; margin-top: 20px;">
-        <label for="calle">Calle:</label>
-        <input type="text" id="calle" name="calle" readonly><br>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: transparent;
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-        <label for="esquina">Esquina:</label>
-        <input type="text" id="esquina" name="esquina" readonly><br>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: transparent;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-        <label for="nroPuerta">Número de Puerta:</label>
-        <input type="text" id="nroPuerta" name="nroPuerta" readonly><br>
+        h1, h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-        <label for="capXTurno">Capacidad por Turno:</label>
-        <input type="text" id="capXTurno" name="capXTurno" readonly><br>
-    </div>
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
 
-    <div id="seleccion-agenda" style="display: none; margin-top: 20px;">
-        <label for="select-agenda">Seleccionar Agenda(s):</label><br>
-        {% for agenda in agendas %}
-            <input type="checkbox" class="agenda-checkbox" id="agenda-{{ loop.index }}" value="{{ loop.index0 }}"
-                   data-dia="{{ agenda.dia }}"
-                   data-hora-inicio="{{ agenda.horaInicio }}"
-                   data-hora-fin="{{ agenda.horaFin }}"
-                   data-agendados="{{ agenda.agendados }}">
-            <label for="agenda-{{ loop.index }}">{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})</label><br>
-        {% endfor %}
-    </div>
+        form {
+            display: grid;
+            gap: 20px;
+        }
 
-    <!-- Contenedor para inputs ocultos de las agendas seleccionadas -->
-    <div id="agendas-seleccionadas"></div>
+        label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
 
-    <!-- Campo oculto para enviar el nombre del local seleccionado -->
-    <input type="hidden" id="nombreLocal" name="nombreLocal">
+        input[type="text"],
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-    <button type="submit" style="margin-top: 20px;">Enviar</button>
-</form>
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
+        }
 
-<!-- Sección para mostrar las agendas ya asignadas -->
-<section id="agendas-ya-asignadas" style="margin-top: 40px;">
-    <h3>Agendas Ya Asignadas</h3>
-    {% if agendasYaAsignadas is not empty %}
-        <ul>
-            {% for agenda in agendasYaAsignadas %}
-                <li>
-                    {{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }}
-                    <form method="post" action="/usuario/eliminarAgenda" style="display: inline;">
-                        <input type="hidden" name="nroDocumento" value="{{ agenda.nroDocumento }}">
-                        <input type="hidden" name="dia" value="{{ agenda.dia }}">
-                        <input type="hidden" name="horaInicio" value="{{ agenda.horaInicio }}">
-                        <input type="hidden" name="horaFin" value="{{ agenda.horaFin }}">
-                        <button type="submit">Eliminar</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No hay agendas asignadas.</p>
-    {% endif %}
-</section>
+        button {
+            background: linear-gradient(135deg, #6f41bb, #4e2d82);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+
+        .checkbox-group {
+            display: grid;
+            gap: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-label:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        #agendas-ya-asignadas ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #agendas-ya-asignadas li {
+            background-color: var(--input-bg);
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        #agendas-ya-asignadas li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        #agendas-ya-asignadas button {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #ff4b4b, #a30000);
+            font-size: 0.9rem;
+            padding: 8px 15px;
+        }
+
+        .delete-btn:hover {
+            background: linear-gradient(135deg, #ff6b6b, #c30000);
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            input[type="text"],
+            select,
+            button {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Reserva de Local</h1>
+    <form id="form-seleccion-local" method="post" action="/agendar">
+        <div>
+            <label for="select-local">Seleccionar Local:</label>
+            <select id="select-local" name="local" required>
+                <option value="" disabled selected>Seleccione un local</option>
+                {% for local in locales %}
+                    <option value="{{ loop.index0 }}"
+                            data-calle="{{ local.calle }}"
+                            data-esquina="{{ local.esquina }}"
+                            data-nro-puerta="{{ local.nroPuerta }}"
+                            data-cap-x-turno="{{ local.capXTurno }}"
+                            data-nombre="{{ local.nombre }}">
+                        {{ local.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="documento" style="display: none;">
+            <label for="documento">Documento:</label>
+            <input type="text" id="documento" name="documento" required value="{{ nombre }}">
+        </div>
+
+        <div id="detalles-local" style="display: none;">
+            <h3>Detalles del Local</h3>
+            <div>
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" readonly>
+            </div>
+            <div>
+                <label for="esquina">Esquina:</label>
+                <input type="text" id="esquina" name="esquina" readonly>
+            </div>
+            <div>
+                <label for="nroPuerta">Número de Puerta:</label>
+                <input type="text" id="nroPuerta" name="nroPuerta" readonly>
+            </div>
+            <div>
+                <label for="capXTurno">Capacidad por Turno:</label>
+                <input type="text" id="capXTurno" name="capXTurno" readonly>
+            </div>
+        </div>
+
+        <div id="seleccion-agenda" style="display: none;">
+            <h3>Seleccionar Agenda(s)</h3>
+            <div class="checkbox-group">
+                {% for agenda in agendas %}
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="agenda-checkbox" id="agenda-{{ loop.index }}" value="{{ loop.index0 }}"
+                               data-dia="{{ agenda.dia }}"
+                               data-hora-inicio="{{ agenda.horaInicio }}"
+                               data-hora-fin="{{ agenda.horaFin }}"
+                               data-agendados="{{ agenda.agendados }}">
+                        {{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id="agendas-seleccionadas"></div>
+        <input type="hidden" id="nombreLocal" name="nombreLocal">
+
+        <button type="submit">Enviar Reserva</button>
+    </form>
+
+    <section id="agendas-ya-asignadas">
+        <h3>Agendas Ya Asignadas</h3>
+        {% if agendasYaAsignadas is not empty %}
+            <ul>
+                {% for agenda in agendasYaAsignadas %}
+                    <li>
+                        <span>{{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }}</span>
+                        <form method="post" action="/usuario/eliminarAgenda" style="display: inline;">
+                            <input type="hidden" name="nroDocumento" value="{{ agenda.nroDocumento }}">
+                            <input type="hidden" name="dia" value="{{ agenda.dia }}">
+                            <input type="hidden" name="horaInicio" value="{{ agenda.horaInicio }}">
+                            <input type="hidden" name="horaFin" value="{{ agenda.horaFin }}">
+                            <button type="submit" class="delete-btn">Eliminar</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay agendas asignadas.</p>
+        {% endif %}
+    </section>
+</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -90,13 +323,14 @@
         const nombreLocalInput = document.getElementById('nombreLocal');
         const agendasSeleccionadas = document.getElementById('agendas-seleccionadas');
         const agendaCheckboxes = document.querySelectorAll('.agenda-checkbox');
+        const documentoDiv = document.getElementById('documento');
 
-        // Mostrar detalles del local seleccionado
         selectLocal.addEventListener('change', function () {
             const selectedOption = selectLocal.options[selectLocal.selectedIndex];
 
             if (selectedOption.value) {
                 detallesLocal.style.display = 'block';
+                documentoDiv.style.display = 'block';
 
                 calleInput.value = selectedOption.getAttribute('data-calle');
                 esquinaInput.value = selectedOption.getAttribute('data-esquina');
@@ -108,16 +342,14 @@
             } else {
                 detallesLocal.style.display = 'none';
                 seleccionAgenda.style.display = 'none';
+                documentoDiv.style.display = 'none';
             }
         });
 
-        // Actualizar agendas seleccionadas al marcar/desmarcar un checkbox
         agendaCheckboxes.forEach(function (checkbox) {
             checkbox.addEventListener('change', function () {
-                // Limpiar el contenedor de agendas seleccionadas
                 agendasSeleccionadas.innerHTML = '';
 
-                // Recorrer todos los checkboxes y agregar los inputs ocultos para los seleccionados
                 agendaCheckboxes.forEach(function (agenda) {
                     if (agenda.checked) {
                         const dia = agenda.getAttribute('data-dia');
@@ -137,3 +369,5 @@
         });
     });
 </script>
+</body>
+</html>

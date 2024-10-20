@@ -3,39 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../Public/css/listaClienteAdmin.css">
-    <link rel="stylesheet" href="../../Public/css/responsive.css">
-    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Agenda de Locales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <style>
-        .local-container {
-            margin-bottom: 20px;
+        :root {
+            --primary-color: #6f41bb;
+            --primary-hover: #58359b;
+            --bg-color: #1e1c1f;
+            --text-color: #ffffff;
+            --input-bg: #2c2a2d;
+            --border-color: #3f3f3f;
+            --delete-color: #f44336;
+            --delete-hover: #d32f2f;
+            --add-color: #4CAF50;
+            --add-hover: #45a049;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #303030, #160d1a);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .local-container {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
         .agenda-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-bottom: 20px;
         }
+
         .agenda-table th, .agenda-table td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
+            padding: 15px;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.05);
         }
-        .edit-button, .delete-button, .add-agenda-button {
-            margin: 5px;
-            padding: 8px 12px;
-            background-color: #4CAF50;
+
+        .agenda-table th {
+            background-color: var(--primary-color);
             color: white;
+            font-weight: 600;
+        }
+
+        .agenda-table tr {
+            transition: all 0.3s ease;
+        }
+
+        .agenda-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .edit-button, .delete-button, .add-agenda-button {
+            padding: 10px 15px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
+
         .delete-button {
-            background-color: #f44336;
+            background-color: var(--delete-color);
+            color: white;
         }
-        .edit-button:hover, .delete-button:hover, .add-agenda-button:hover {
-            opacity: 0.8;
+
+        .delete-button:hover {
+            background-color: var(--delete-hover);
         }
-        /* Estilo mejorado para el fondo del modal */
+
+        .add-agenda-button {
+            background-color: var(--add-color);
+            color: white;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .add-agenda-button:hover {
+            background-color: var(--add-hover);
+        }
+
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -49,12 +123,11 @@
             z-index: 999;
         }
 
-        /* Estilo mejorado del contenido del modal */
         .modal-content {
-            background: #1e1c1f;
+            background: var(--bg-color);
             padding: 40px;
             border-radius: 15px;
-            border: 5px solid #7a3afa;
+            border: 2px solid var(--primary-color);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
             position: relative;
             max-width: 700px;
@@ -62,90 +135,82 @@
             animation: fadeIn 0.3s ease-out;
         }
 
-        /* Efecto de entrada suave */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-close-button {
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 3em;
-            height: 3em;
+            width: 30px;
+            height: 30px;
             border: none;
-            background: rgba(255, 0, 0, 0.1);
-            border-radius: 50%;
+            background: transparent;
             cursor: pointer;
-            transition: background 0.5s, box-shadow 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
         }
 
-        /* Líneas de la "X" */
-        .X, .Y {
+        .modal-close-button::before,
+        .modal-close-button::after {
+            content: '';
             position: absolute;
-            width: 1.5em;
+            width: 20px;
             height: 2px;
-            background-color: #ffffff;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            background-color: var(--text-color);
+            transition: background-color 0.3s ease;
         }
 
-        .X {
+        .modal-close-button::before {
             transform: rotate(45deg);
         }
 
-        .Y {
+        .modal-close-button::after {
             transform: rotate(-45deg);
         }
 
-        /* Texto de "Close" emergente */
-        .modal-close-button .close {
-            position: absolute;
-            display: flex;
-            padding: 0.8rem 1.5rem;
-            align-items: center;
-            justify-content: center;
-            transform: translateX(-50%);
-            top: -80%;
-            left: 50%;
-            width: 4em;
-            height: 2em;
-            font-size: 12px;
-            background-color: rgb(19, 22, 24);
-            color: rgb(187, 229, 236);
+        .modal-close-button:hover::before,
+        .modal-close-button:hover::after {
+            background-color: var(--primary-color);
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
             border: none;
-            border-radius: 3px;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
-        .modal-close-button:hover {
-            background-color: rgba(239, 9, 9, 0.2);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
+        @media (max-width: 768px) {
+            .agenda-table, .agenda-table tbody, .agenda-table tr, .agenda-table td {
+                display: block;
+            }
 
-        .modal-close-button:active {
-            background-color: rgb(236, 11, 11);
-        }
+            .agenda-table thead {
+                display: none;
+            }
 
-        .modal-close-button:hover > .close {
-            opacity: 1;
-        }
+            .agenda-table td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
 
-        .modal-close-button:hover > .X,
-        .modal-close-button:hover > .Y {
-            background-color: #ffcccc;
+            .agenda-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+
+            .modal-content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -162,8 +227,8 @@
             {% endif %}
         {% endfor %}
 
-        <div class="local-container">
-            {% for local, agendas in grouped_agenda %}
+        {% for local, agendas in grouped_agenda %}
+            <div class="local-container">
                 <h2>{{ local }}</h2>
                 <table class="agenda-table">
                     <thead>
@@ -177,10 +242,10 @@
                     <tbody>
                     {% for item in agendas %}
                         <tr>
-                            <td>{{ item.dia }}</td>
-                            <td>{{ item.horaInicio }}</td>
-                            <td>{{ item.horaFin }}</td>
-                            <td>
+                            <td data-label="Día">{{ item.dia }}</td>
+                            <td data-label="Hora Inicio">{{ item.horaInicio }}</td>
+                            <td data-label="Hora Fin">{{ item.horaFin }}</td>
+                            <td data-label="Acciones">
                                 <button class="delete-button" onclick="abrirModal('eliminarModal', '{{ item.id }}', '{{ item.dia }}', '{{ item.horaInicio }}', '{{ item.horaFin }}', '{{ item.nombre }}')">Eliminar</button>
                             </td>
                         </tr>
@@ -188,8 +253,8 @@
                     </tbody>
                 </table>
                 <button class="add-agenda-button" onclick="abrirModal('agregarModal', '{{ local }}', '', '', '', '{{ local }}')">Agregar Agenda</button>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
     {% else %}
         <p>No hay agendas disponibles.</p>
     {% endif %}
@@ -197,23 +262,15 @@
 
 <div id="eliminarModal" class="modal-overlay">
     <div class="modal-content">
-        <button class="modal-close-button" onclick="cerrarModal('eliminarModal')">
-            <span class="X"></span>
-            <span class="Y"></span>
-            <div class="close">Close</div>
-        </button>
-        <iframe id="eliminarIframe" style="width: 100%; height: 100%; border: none;"></iframe>
+        <button class="modal-close-button" onclick="cerrarModal('eliminarModal')"></button>
+        <iframe id="eliminarIframe"></iframe>
     </div>
 </div>
 
 <div id="agregarModal" class="modal-overlay">
     <div class="modal-content">
-        <button class="modal-close-button" onclick="cerrarModal('agregarModal')">
-            <span class="X"></span>
-            <span class="Y"></span>
-            <div class="close">Close</div>
-        </button>
-        <iframe id="agregarIframe" style="width: 100%; height: 100%; border: none;"></iframe>
+        <button class="modal-close-button" onclick="cerrarModal('agregarModal')"></button>
+        <iframe id="agregarIframe"></iframe>
     </div>
 </div>
 

@@ -1,22 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/verificarsesion', {
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-                window.location.href = '/login';
-            } else {
-                document.querySelector('.content').style.display = 'block';
-            }
-        })
-        .catch(error => {
-            alert('Error al verificar la sesión. Intente nuevamente.');
-            console.error('Error:', error);
-            window.location.href = '/login';
-        });
-
     const urlParams = new URLSearchParams(window.location.search);
     const documento = urlParams.get('documento');
 

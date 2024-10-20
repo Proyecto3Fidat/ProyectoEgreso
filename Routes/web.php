@@ -3,6 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+use App\Controller\LocalGymController;
 use App\Controllers\ComboEjercicioController;
 use App\Controllers\ContieneController;
 use Pecee\SimpleRouter\SimpleRouter;
@@ -539,11 +540,19 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::get('/dashAgenda', function () {
+            $local = new LocalGymController();
             $conforma = new App\Controllers\ConformaController();
             $template = new TemplateController();
             $agendas = $conforma->obtenerAgendas();
-            $template->renderTemplate('dashAgenda', ['agenda' => $agendas]);
+            $nombres = $local->obtenerNombres();
+            $data = [
+                'agenda' => $agendas,
+                'nombres' => $nombres
+            ];
+
+            $template->renderTemplate('dashAgenda', $data);
             exit();
+
         });
 
 
