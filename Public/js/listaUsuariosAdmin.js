@@ -1,50 +1,91 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     let clientes = [];
+    let clientesFiltrados = [];
+    const itemsPerPage = 10;
+    let currentPage = 1;
 
+    // Fetch para obtener los clientes
     fetch('/usuario/obtenerListaClientesAdmin')
-        .then(response => {
-            if (response.status === 403) {
-                alert('No tiene permisos para ver esta página.');
-                window.location.href = '/login';
-                return;
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.error) {
                 console.error(data.error);
                 alert('Hubo un problema al cargar la lista de clientes.');
                 return;
             }
-
             clientes = data;
-
-            const tbody = document.querySelector('#tablaClientes tbody');
-            clientes.forEach(cliente => {
-                console.log(cliente.rol);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${cliente.nombre}</td>
-                    <td>${cliente.nroDocumento}</td>
-                    <td>${cliente.rol}</td>
-                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Detalles</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            document.querySelectorAll('.btnfichatecnica').forEach(button => {
-                button.addEventListener('click', function () {
-                    const clienteId = this.getAttribute('data-cliente-id');
-                    abrirFichaTecnica(clienteId);
-                });
-            });
+            clientesFiltrados = clientes;
+            renderTable();
+            setupPagination();
         })
         .catch(error => {
             console.error('Error al cargar la lista de clientes:', error);
             alert('Hubo un problema al cargar la lista de clientes.');
         });
 
+    // Función para renderizar la tabla
+    function renderTable() {
+        const tbody = document.querySelector('#tablaClientes tbody');
+        tbody.innerHTML = '';
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        const pageClients = clientesFiltrados.slice(start, end);
+
+        pageClients.forEach(cliente => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.nroDocumento}</td>
+                    <td>${cliente.rol}</td>
+                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Detalles</button></td>
+                `;
+            tbody.appendChild(row);
+        });
+
+        // Reasignar eventos a los botones para abrir la ficha técnica
+        document.querySelectorAll('.btnfichatecnica').forEach(button => {
+            button.addEventListener('click', function () {
+                const clienteId = this.getAttribute('data-cliente-id');
+                abrirFichaTecnica(clienteId);
+            });
+        });
+    }
+
+    // Configurar la paginación
+    function setupPagination() {
+        const pagination = document.getElementById('pagination');
+        pagination.innerHTML = '';
+        const totalPages = Math.ceil(clientesFiltrados.length / itemsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            if (i === currentPage) {
+                pageButton.classList.add('active');
+            }
+            pageButton.addEventListener('click', function () {
+                currentPage = i;
+                renderTable();
+                setupPagination();
+            });
+            pagination.appendChild(pageButton);
+        }
+    }
+
+    // Función de búsqueda
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function () {
+        const searchValue = searchInput.value.toLowerCase();
+        clientesFiltrados = clientes.filter(cliente => {
+            return cliente.nombre.toLowerCase().includes(searchValue) ||
+                cliente.nroDocumento.toLowerCase().includes(searchValue);
+        });
+        currentPage = 1; // Reiniciar la página actual a la primera
+        renderTable();
+        setupPagination();
+    });
+
+    // Función para abrir la ficha técnica
     function abrirFichaTecnica(clienteId) {
         const ficha = document.getElementById('fichagnl');
         const listaclientes = document.getElementById("tablaClientes");

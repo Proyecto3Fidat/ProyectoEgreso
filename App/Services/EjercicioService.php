@@ -11,10 +11,10 @@ class EjercicioService
         $repository = new EjercicioRepository();
         $repository->crearEjercicio($ejercicio);
     }
-    public function obtenerEjercicios()
+    public function obtenerEjercicios($page)
     {
         $repository = new EjercicioRepository();
-        $ejercicios = $repository->obtenerEjercicios();
+        $ejercicios = $repository->obtenerEjercicios($page);
         return $ejercicios;
     }
 }

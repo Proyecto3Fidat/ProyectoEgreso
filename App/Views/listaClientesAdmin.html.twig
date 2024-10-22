@@ -9,6 +9,13 @@
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Lista de Clientes</title>
     <style>
+
+        /* Asegurar que la ficha técnica se oculte por defecto */
+        #fichagnl {
+            display: none;
+        }
+    </style>
+    <style>
         /* Pantalla de carga (preloader) */
         #preloader {
             position: fixed;
@@ -68,28 +75,41 @@
 <ul class="listmenu2" id="welcome-message">
 </ul>
 
+<section class="buscador-clientes">
+    <input type="text" id="searchInput" placeholder="Buscar por nombre o documento...">
+    <svg class="buscador-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+</section>
+
 <section class="listaclientes">
     <table class="lista-clientes" id="tablaClientes">
-        <tbody>
+        <thead>
         <tr>
-            <th> Nombre de Cliente</th>
-            <th> Documento</th>
+            <th>Nombre de Cliente</th>
+            <th>Documento</th>
             <th>Rol</th>
         </tr>
+        </thead>
+        <tbody>
         </tbody>
     </table>
 </section>
+
+<div class="paginacion" id="pagination"></div>
+
 <div class="fichagnrl" id="fichagnl">
     <section class="headFicha">
-                <h4>Ficha técnica de </h4>
-            <button class="cerrarficha" id="cerrarficha" data-cliente-id="">
-                <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
-            </button>
-        </section>
+        <h4>Ficha técnica de </h4>
+        <button class="cerrarficha" id="cerrarficha" data-cliente-id="">
+            <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
+        </button>
+    </section>
     <div class="divficha-container">
-                <div class="imgCliente">
-                    <img src="../../images/clienteEjm.png"/>
-                </div>
+        <div class="imgCliente">
+            <img src="../../images/clienteEjm.png"/>
+        </div>
         <div class="divficha">
             <p>Documento: </p>
             <p>Tipo de Documento: </p>
@@ -114,14 +134,14 @@
 
         </section>
     </div>
-            <div class="btnpago">
-                <form method="get" action="/pago">
-                    <input type="hidden" name="documento" value="">
-                    <button type="submit" class="adrut">Ingresar Pago</button>
-                    <button type="submit" class="adrut">Agendar</button>
-                    <button type="submit" class="adrut">Subir Imagen</button>
-                </form>
-            </div>
+    <div class="btnpago">
+        <form method="get" action="/pago">
+            <input type="hidden" name="documento" value="">
+            <button type="submit" class="adrut">Ingresar Pago</button>
+            <button type="submit" class="adrut">Agendar</button>
+            <button type="submit" class="adrut">Subir Imagen</button>
+        </form>
+    </div>
 </div>
 <!-- Modal para iframe -->
 <div id="modal-overlay" class="modal-overlay">
@@ -275,9 +295,9 @@
 </div>
 
 <div class="containerBotonesAgenda">
-<!-- Botones para Ingresar Local y Agenda -->
-<button id="btnIngresarLocal" class="btnCargarMas">Ingresar Local</button>
-<button id="btnAgenda" class="btnCargarMas">Agenda</button>
+    <!-- Botones para Ingresar Local y Agenda -->
+    <button id="btnIngresarLocal" class="btnCargarMas">Ingresar Local</button>
+    <button id="btnAgenda" class="btnCargarMas">Agenda</button>
 </div>
 
 <form class="upLogo" action="/logo" method="post" enctype="multipart/form-data">
@@ -308,7 +328,7 @@
                 } else if (actionType === 'Agendar') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/agendar?documento=${documento}`;
-                }else if (actionType === 'Subir Imagen') {
+                } else if (actionType === 'Subir Imagen') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/cargarImagen?documento=${documento}`;
                 }
@@ -380,7 +400,6 @@
         });
     });
 </script>
-
 
 
 </body>

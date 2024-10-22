@@ -813,11 +813,15 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         });
 
         SimpleRouter::get('/listaejercicios', function () {
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
             $ejercicios = new EjercicioController();
-            $lista  = $ejercicios->obtenerListaEjercicios();
+            $lista = $ejercicios->obtenerListaEjercicios($page);
+
             $template = new TemplateController();
             $data = [
-                'ejercicios' => $lista
+                'ejercicios' => $lista['ejercicios'],
+                'totalPages' => $lista['totalPages'],
+                'currentPage' => $lista['currentPage']
             ];
             $template->renderTemplate('listaejercicios', $data);
         });
