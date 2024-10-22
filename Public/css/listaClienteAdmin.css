@@ -98,37 +98,52 @@ nav a:hover {
 
 .clienteslist, .ejerciciolist, .rutinaslist{
     transition: transform 0.8s ease-in-out; /*Metodo que logra detalle de animacion tipo "progresion"*/
+}.lista-clientes {
+     width: 100%;
+     max-width: 1000px; /* Ajusta este valor según tus necesidades */
+     margin: 3rem auto;
+     border-collapse: separate;
+     border-spacing: 0;
+     background-color: #303030;
+     box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+     color: white;
+     border-radius: 10px;
+     overflow: hidden;
+ }
+
+.lista-clientes th,
+.lista-clientes td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #444;
 }
 
-.lista-clientes {
-    display: flex;
-    margin: 0 auto;
-    margin-top: 3rem;
-    padding: 0;
-    width: 50% !important;
-    border-collapse: collapse;
-    background-color:#303030;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+.lista-clientes th {
+    background-color: #252525;
+    font-weight: bold;
+}
+
+.lista-clientes tr:last-child td {
+    border-bottom: none;
+}
+
+.lista-clientes tbody tr:hover {
+    background-color: #3a3a3a;
+}
+
+/* Asegúrate de que el botón de detalles tenga un estilo consistente */
+.btn-detalles {
+    padding: 0.5rem 1rem;
+    background-color: #6f41bb;
     color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    justify-content: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
-    .lista-clientes th, .lista-clientes td {
-        padding: 1rem;
-        text-align: center;
-        border: 1px solid #fff;
-        border-radius: 20px;
-        border: hidden;
-        gap: 2rem;
-    }
-    .lista-clientes.visible {
-        display: block;
-    }
 
-.btn-detalles { 
-    border-radius: 10px;
-    background-color: black;
+.btn-detalles:hover {
+    background-color: #5a35a0;
 }
 
 .containerBotonesAgenda {
