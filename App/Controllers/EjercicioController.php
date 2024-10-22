@@ -27,10 +27,10 @@ class EjercicioController
          echo json_encode($ejercicios);
     }
 
-    public function obtenerListaEjercicios($page)
+    public function obtenerListaEjercicios()
     {
         $service = new EjercicioService();
-        $ejercicios = $service->obtenerEjercicios($page);
+        $ejercicios = $service->obtenerEjercicios();
         return $ejercicios;
     }
 
