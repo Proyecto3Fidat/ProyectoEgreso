@@ -184,6 +184,9 @@
         margin: 0;
     }
 
+    .search-container {
+        margin-top: 6rem;
+    }
 
     /*Form loginUsuario*/
     form {
