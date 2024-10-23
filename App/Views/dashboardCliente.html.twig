@@ -47,7 +47,7 @@
                 <tbody>
                 {% for agendas in agenda %}
                     <tr>
-                        <td>{{ agendas.dia }}</td>
+                        <th>{{ agendas.dia }}</th>
                         <td>{{ agendas.horaInicio }}</td>
                         <td>{{ agendas.horaFin }}</td>
 
@@ -68,31 +68,31 @@
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Puntuacion Total</th>
-                    <th>Fuerza Muscular</th>
-                    <th>Resistencia Muscular</th>
-                    <th>Resistencia Anaerobica</th>
-                    <th>Resiliencia</th>
-                    <th>Flexibilidad</th>
-                    <th>Cumplimiento de Agenda</th>
-                    <th>Resistencia a la Monotonia</th>
-                    <th></th>
+                    <th data-label="Fecha">Fecha</th>
+                    <th data-label="Puntuación total">Puntuación Total</th>
+                    <th data-label="Fuerza muscular">Fuerza Muscular</th>
+                    <th data-label="Resistencia muscular">Resistencia Muscular</th>
+                    <th data-label="Resistencia anaerobica">Resistencia Anaerobica</th>
+                    <th data-label="Resiliencia">Resiliencia</th>
+                    <th data-label="Flexibilidad">Flexibilidad</th>
+                    <th data-label="Cumplimiento de agenda">Cumplimiento de Agenda</th>
+                    <th data-label="Resistencia a la monotonia">Resistencia a la Monotonia</th>
+                    <th data-label="Imprimir"></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for calificacion in calificaciones %}
                     <tr>
-                        <td>{{ calificacion.fecha }}</td>
-                        <td>{{ calificacion.puntObtenido }}</td>
-                        <td>{{ calificacion.fuerzaMusc }}</td>
-                        <td>{{ calificacion.resMusc }}</td>
-                        <td>{{ calificacion.resAnaerobica }}</td>
-                        <td>{{ calificacion.resiliencia }}</td>
-                        <td>{{ calificacion.flexibilidad }}</td>
-                        <td>{{ calificacion.cumplAgenda }}</td>
-                        <td>{{ calificacion.resMonotonia }}</td>
-                        <td>
+                        <th data-label="Fecha">{{ calificacion.fecha }}</th>
+                        <td data-label="Puntuación total">{{ calificacion.puntObtenido }}</td>
+                        <td data-label="Fuerza muscular">{{ calificacion.fuerzaMusc }}</td>
+                        <td data-label="Resistencia muscular">{{ calificacion.resMusc }}</td>
+                        <td data-label="Resistencia anaerobica">{{ calificacion.resAnaerobica }}</td>
+                        <td data-label="Resiliencia">{{ calificacion.resiliencia }}</td>
+                        <td data-label="Flexibilidad">{{ calificacion.flexibilidad }}</td>
+                        <td data-label="Cumplimiento de agenda">{{ calificacion.cumplAgenda }}</td>
+                        <td data-label="Resistencia a la monotonia">{{ calificacion.resMonotonia }}</td>
+                        <td data-label="Imprimir">
                             <button class="btnEditar" onclick="window.location.href='imprimirNota?id={{ calificacion.id }}'">Imprimir</button>
                         </td>
                     </tr>

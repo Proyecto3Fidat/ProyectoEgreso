@@ -147,6 +147,40 @@
     }
     /*Fin vista admin*/
 
+    /*Inicio del dashboard*/
+    .clasCliente, .clasCliente thead, .clasCliente tbody, .clasCliente th, .clasCliente td, .clasCliente tr {
+        display: block;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .clasCliente thead tr {
+        display: none;
+    }
+
+    .clasCliente tr {
+        margin-bottom: 15px;
+    }
+
+    .clasCliente td, .clasCliente th {
+        text-align: center;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .clasCliente td::before, .clasCliente th::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 45%;
+        padding-left: 10px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+
+
+
     /*Inicio lista de clientes y ficha tecnica Entrenador/Administrador */
     .lista-clientes {
         margin-top: 5rem;
