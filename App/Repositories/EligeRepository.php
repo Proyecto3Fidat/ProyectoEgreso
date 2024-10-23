@@ -5,13 +5,12 @@ namespace App\Repositories;
 class EligeRepository
 {
 
-    public function actualizarPago($eligeModel)
+    public function actualizarPago($eligeModel, $idPago)
     {
         $nroDocumento = $eligeModel->getNroDocumento();
         $tipoDocumento = $eligeModel->getTipoDocumento();
         $fechaPago = $eligeModel->getFechaPago();
         $nombrePlan = $eligeModel->getNombrePlan();
-        $idPago = $eligeModel->getIdPago();
         $database = Database::getInstance();
         $database->connect();
         $sql = "INSERT INTO Elige (nroDocumento, tipoDocumento, fechaPago, nombrePlan, idPago) VALUES (?, ?, ?, ?, ?)";

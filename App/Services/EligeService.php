@@ -30,8 +30,7 @@ class EligeService
         $realizaService->actualizarPago($idPago, $realiza);
         $eligeModel = new EligeModel($nroDocumento, $tipoDocumento, $realiza->getFechaPago(), $planPago->getNombrePlan(), $idPago);
         $eligeRepository = new EligeRepository();
-        $eligeRepository->actualizarPago($eligeModel);
-
+        $eligeRepository->actualizarPago($eligeModel, $idPago);
         return true;
     }
     public function obtenerPagosPorDocumento($nroDocumento)

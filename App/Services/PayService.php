@@ -16,9 +16,11 @@ class PayService
 
         $eligeService = new EligeService();
         $pago = $eligeService->obtenerPagosPorDocumento($_SESSION['documento']);
+
         if (!isset($pago['fechaVencimiento'])){
             return;
         }
+
         $fechaVencimiento = new \DateTime($pago['fechaVencimiento']);
         $fechaActual = new \DateTime();
 
@@ -45,6 +47,7 @@ class PayService
 
         $eligeService = new EligeService();
         $pago = $eligeService->obtenerPagosPorDocumento($_SESSION['documento']);
+
         if (!isset($pago['fechaVencimiento'])){
             echo $twig->render('pagoCaducado.html.twig');
             die();

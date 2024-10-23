@@ -460,7 +460,10 @@ SimpleRouter::post('planes', function () use ($logger) {
     $planes->obtenerPagosPorDocumento();
     exit();
 });
-
+SimpleRouter::get('/matarSesion', function (){
+    session_destroy();
+    exit();
+});
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger, $loggerU) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 
