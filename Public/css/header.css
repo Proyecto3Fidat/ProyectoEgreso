@@ -10,11 +10,9 @@ header{
     color: white;
     font-size: 1.2rem;
     transition: color 0.3s, background-color 0.3s;
-    text-decoration: none;
-    list-style: none;
 }
 
-nav{
+nav {
     background-color: #100e0f;
     padding: 20px;
 }
@@ -33,7 +31,7 @@ nav a:hover {
     margin-left: auto;
 }
 
-.listmenu1, .listmenu2{
+.listmenu1, .listmenu2 {
     display: flex;
 }
 
@@ -41,12 +39,14 @@ nav a:hover {
     display: none;
 }
 
-.inicioa{
+.inicioa {
     margin-right: 1rem;
 }
+
 .login-btn {
     margin-right: 1rem;
 }
+
 .login-btn:hover, .sign-in-btn:hover {
     color: #6f41bb;
 }

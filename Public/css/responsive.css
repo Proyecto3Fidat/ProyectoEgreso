@@ -21,6 +21,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        padding: 1rem;
     }
 
     nav {
@@ -148,6 +149,15 @@
     /*Fin vista admin*/
 
     /*Inicio del dashboard*/
+    h1 {
+        margin-top: 5rem;
+    }
+
+    .tablaCliente {
+        background-color: transparent;
+        border-radius: 1rem;
+    }
+
     .clasCliente, .clasCliente thead, .clasCliente tbody, .clasCliente th, .clasCliente td, .clasCliente tr {
         display: block;
         width: 100%;
@@ -159,25 +169,30 @@
     }
 
     .clasCliente tr {
-        margin-bottom: 15px;
+        margin-bottom: 2rem;
     }
 
     .clasCliente td, .clasCliente th {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
         text-align: center;
-        padding-left: 50%;
         position: relative;
+        padding: 2rem;
     }
 
     .clasCliente td::before, .clasCliente th::before {
         content: attr(data-label);
+        display: flex;
         position: absolute;
+        flex-direction: column;
+        justify-content: space-between;
         left: 0;
         width: 45%;
-        padding-left: 10px;
         font-weight: bold;
-        text-align: left;
+        text-align: center;
     }
-
+    
 
 
 
