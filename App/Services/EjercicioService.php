@@ -17,4 +17,11 @@ class EjercicioService
         $ejercicios = $repository->obtenerEjercicios($page);
         return $ejercicios;
     }
+
+    public function obtenerEjerciciosSinPaginacion()
+    {
+        $repository = new EjercicioRepository();
+        $ejercicios = $repository->obtenerEjerciciosSinPaginacion();
+        return $ejercicios;
+    }
 }

@@ -23,7 +23,7 @@ class EjercicioController
     public function obtenerEjercicios()
     {
         $service = new EjercicioService();
-        $ejercicios = $service->obtenerEjercicios();
+        $ejercicios = $service->obtenerEjerciciosSinPaginacion();
          echo json_encode($ejercicios);
     }
 

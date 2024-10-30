@@ -78,4 +78,18 @@ class EjercicioRepository extends Database
 
     }
 
+    public function obtenerEjerciciosSinPaginacion()
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT idEjercicio, nombre, descripcion, grupoMuscular, tipoEjercicio FROM Ejercicio";
+        $result = $database->getConnection()->query($sql);
+        $ejercicios = [];
+        while ($row = $result->fetch_assoc()) {
+            $ejercicios[] = $row;
+        }
+        $database->disconnect();
+        return $ejercicios;
+    }
+
 }
