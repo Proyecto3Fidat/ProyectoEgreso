@@ -15,71 +15,59 @@
 
     <form action= "/registrarcliente" method= "POST" onsubmit="return validateForm()">
         <fieldset>
-            <legend>Nombre</legend>
+            <legend>{{ translator.trans('nombre') }}</legend>
             <input type="text" maxlength="30" name="nombre" required>
             <br></br>
-            <legend>Apellido</legend>
+            <legend>{{ translator.trans('apellido') }}</legend>
             <input type="text" max="30" name="apellido" required>
             <br></br>
-            <legend>N° de Telefono</legend>
-            <input type="text"  name="telefono"  placeholder="(Formato: +598xxxxxxxx)" required pattern="\+598\d{8}" title="Debe comenzar con +598 seguido de 8 dígitos">
+            <legend>{{ translator.trans('telefono') }}</legend>
+            <input type="text"  name="telefono"  placeholder="{{ translator.trans('formato') }}" required pattern="\+598\d{8}" title="Debe comenzar con +598 seguido de 8 dígitos">
             <br></br>
-            <legend>Correo Electronico</legend>
+            <legend>{{ translator.trans('email') }}</legend>
             <input type="email" maxlength="40"  name="email" required>
             <br></br>
-            <legend>Contraseña</legend>
+            <legend>{{ translator.trans('contrasena') }}</legend>
             <input type="password"  name="passwd" minlength= "08" required>
         </fieldset>
        
         <fieldset>
-            <legend>Tipo de Documento</legend>
+            <legend>{{ translator.trans('tipoDocumento') }}</legend>
             <select name="tipoDocumento">
-            <option value="CI">Cédula de identidad</option>
-            <option value="Pasaporte">Pasaporte</option>
+            <option value="CI">{{ translator.trans('cedula') }}</option>
+            <option value="Pasaporte">{{ translator.trans('pasaporte') }}</option>
             <br></br>
             <legend>Número de Documento</legend>
-            <input type="text" name="nroDocumento" required>
+            <input type="text" name="nroDocumento" placeholder="{{ translator.trans('documento') }}" required>
             <br></br>
-            <h2>Fecha de Nacimiento</h2>
+            <h2>{{ translator.trans('nacimiento') }}</h2>
             <input type="date" name="fechaNacimiento" required>
             <br></br>
-            <legend>Patologías</legend>
-            <input type="text" maxlength="25"  name="patologias" required placeholder="Patologías">
+            <legend>{{ translator.trans('patologias') }}</legend>
+            <input type="text" maxlength="25"  name="patologias" required placeholder="{{ translator.trans('patologias') }}">
             <br></br>
-            <legend>Altura</legend>
-            <input type="text" placeholder="1.90" id="altura" name="altura" required> 
+            <legend>{{ translator.trans('altura') }}</legend>
+            <input type="text" placeholder="1.90" id="altura" name="{{ translator.trans('altura') }}" required>
         </fieldset>
        
         <fieldset>
-            <legend>Peso</legend>
-            <input type="text"  name="peso" required placeholder="Peso">
+            <legend>{{ translator.trans('peso') }}</legend>
+            <input type="text"  name="peso" required placeholder="{{ translator.trans('peso') }}">
             <br></br>
-            <legend>Calle</legend>
-            <input type="text" maxlength="100"  name="calle" required placeholder="Calle">
+            <legend>{{ translator.trans('calle') }}</legend>
+            <input type="text" maxlength="100"  name="calle" required placeholder="{{ translator.trans('calle') }}">
             <br></br>
-            <legend>Número de puerta</legend>
-            <input type="text"  name="numero" required placeholder="Número de puerta">
+            <legend>{{ translator.trans('numero') }}</legend>
+            <input type="text"  name="numero" required placeholder="{{ translator.trans('numero') }}">
             <br></br>
-            <legend>Esquina</legend>
-            <input type="text"  name="esquina" required placeholder="Esquina">
+            <legend>{{ translator.trans('esquina') }}</legend>
+            <input type="text"  name="esquina" required placeholder="{{ translator.trans('esquina') }}">
             <br></br>
         </fieldset> 
-        <input type="submit" value="ENVIAR" class="button">
+        <input type="submit" value="{{ translator.trans('registrarse') }}" class="button">
 </form>
 
-            <footer class="footer">
-                <h1>Gracias por elegirnos!</h1>
-                <h2>Nuestras Redes</h2>
-                <div class="redes">
-                    <a href="https://www.instagram.com/fidatdevs/" class="ig-logo">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://github.com/Proyecto3Fidat/ProyectoEgreso" class="github-logo">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <h4>Copyright <span>&copy;</span> GYM 2024</h4>
-            </footer>
+           {% include 'footer.html.twig' %}
     <script src="../../Public/js/script.js"></script>
     <script src="../../Public/js/responsive.js"></script>
     </div>

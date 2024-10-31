@@ -1,8 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Variable para almacenar la lista de clientes
     let clientes = [];
+    const langCookie = document.cookie.split('; ').find(row => row.startsWith('lang='));
+    const lang = langCookie ? langCookie.split('=')[1] : 'es';
 
-    // Cargar la lista de clientes
+    const translations = {
+        es: {
+            paciente: "Paciente",
+            deportista: "Deportista",
+            fichaTecnica: "Ficha técnica",
+            documento: "Documento",
+            edad: "Edad",
+            email: "Email",
+            telefono: "Teléfono",
+            direccion: "Dirección",
+            patologias: "Patologías",
+            altura: "Altura",
+            peso: "Peso"
+        },
+        en: {
+            paciente: "Patient",
+            deportista: "Athlete",
+            fichaTecnica: "Technical file",
+            documento: "Document",
+            edad: "Age",
+            email: "Email",
+            telefono: "Phone",
+            direccion: "Address",
+            patologias: "Pathologies",
+            altura: "Height",
+            peso: "Weight"
+        }
+    };
+
     fetch('/usuario/obtenerListaClientesAjax')
         .then(response => {
             if (response.status === 403) {
@@ -19,34 +48,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Guardar la lista de clientes en la variable
             clientes = data;
 
             const tbody = document.querySelector('#tablaClientes tbody');
             clientes.forEach(cliente => {
+                const role = translations[lang][cliente.rol] || cliente.rol;
+                const fichaText = translations[lang].fichaTecnica;
+
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${cliente.nombre}</td>
                     <td>${cliente.nroDocumento}</td>
-                    <td>${cliente.rol}</td>
-                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">Ficha técnica</button></td>
+                    <td>${role}</td>
+                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">${fichaText}</button></td>
                 `;
                 tbody.appendChild(row);
             });
 
-            // Agregar evento click a los botones de "Ficha técnica"
             document.querySelectorAll('.btnfichatecnica').forEach(button => {
                 button.addEventListener('click', function () {
                     const clienteId = this.getAttribute('data-cliente-id');
                     abrirFichaTecnica(clienteId);
-                });
-            });
-
-            // Agregar evento click a los botones de "Calificar"
-            document.querySelectorAll('.btncalificar').forEach(button => {
-                button.addEventListener('click', function () {
-                    const clienteId = this.getAttribute('data-cliente-id');
-                    window.location.href = `/calificarCliente?documento=${clienteId}`;
                 });
             });
         })
@@ -56,51 +78,33 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     function abrirFichaTecnica(clienteId) {
-        // Mostrar la ficha técnica
         const ficha = document.getElementById('fichagnl');
-        const listaclientes = document.getElementById("tablaClientes");
         ficha.style.display = 'block';
-        listaclientes.style.display = "none";
-        
+        document.getElementById("tablaClientes").style.display = "none";
 
-        // Encontrar el cliente correspondiente en la lista
         const cliente = clientes.find(c => c.nroDocumento === clienteId);
-
         if (cliente) {
-            // Actualizar los elementos de la ficha técnica con los datos del cliente
-            document.querySelector('.fichagnrl h4').textContent = `Ficha técnica de ${cliente.nombre}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `Documento: ${cliente.nroDocumento}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `Edad: ${cliente.edad || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Email: ${cliente.email}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Teléfono: ${cliente.telefono || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `Dirección: ${cliente.direccion || 'N/A'}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `Patologías: ${cliente.patologias}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `Altura: ${cliente.altura}`;
-            document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `Peso: ${cliente.peso}`;
+            document.querySelector('.fichagnrl h4').textContent = `${translations[lang].fichaTecnica} de ${cliente.nombre}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `${translations[lang].documento}: ${cliente.nroDocumento}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `${translations[lang].edad}: ${cliente.edad || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `${translations[lang].email}: ${cliente.email}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `${translations[lang].telefono}: ${cliente.telefono || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `${translations[lang].direccion}: ${cliente.direccion || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `${translations[lang].patologias}: ${cliente.patologias || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `${translations[lang].altura}: ${cliente.altura || 'N/A'}`;
+            document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `${translations[lang].peso}: ${cliente.peso || 'N/A'}`;
 
-            // Actualizar el formulario para enviar una solicitud POST
-            const form = document.querySelector('form');
-            form.action = '/dashboard';
-            form.method = 'POST';
-
-            // Asignar valor al campo oculto del formulario para enviar el clienteId
-            let inputDocumento = form.querySelector('input[name="documento"]');
-            if (!inputDocumento) {
-                inputDocumento = document.createElement('input');
-                inputDocumento.type = 'hidden';
-                inputDocumento.name = 'documento';
-                form.appendChild(inputDocumento);
+            const inputDocumento = document.querySelector('input[name="documento"]');
+            if (inputDocumento) {
+                inputDocumento.value = cliente.nroDocumento;
             }
-            inputDocumento.value = clienteId;
         } else {
             console.error('Cliente no encontrado.');
             alert('No se encontraron los datos del cliente.');
         }
     }
 
-    // Agregar evento para cerrar la ficha técnica
     document.getElementById('cerrarficha').addEventListener('click', function () {
-        const listaclientes = document.getElementById("lista-clientes");
         document.getElementById('fichagnl').style.display = 'none';
         document.getElementById("tablaClientes").style.display = "block";
     });

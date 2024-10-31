@@ -14,3 +14,48 @@ horarios: "Horarios"
 planes: "Planes"
 nosotros: "Nosotros"
 idioma: "Idioma"
+
+
+#footer
+gracias: "Gracias por elegirnos"
+redes: "Nuestras Redes"
+
+
+
+#Planes:
+3Meses: "Plan 3 meses"
+6Meses: "Plan 6 meses"
+anual: "Plan Anual"
+
+
+#login
+usuario: "Usuario"
+contrasena: "Contraseña"
+iniciar: "Ingresar"
+documento: "Documento"
+
+
+#registro
+nombre: "Nombre"
+apellido: "Apellido"
+telefono: "N° de Teléfono"
+email: "Correo Electrónico"
+registrarse: "Registrarse"
+tipoDocumento: "Tipo de Documento"
+cedula: "Cédula de Identidad"
+pasaporte: "Pasaporte"
+nacimiento: "Fecha de Nacimiento"
+patologias: "Patologías"
+altura: "Altura"
+peso: "Peso"
+calle: "Calle"
+numero: "Número de puerta"
+esquina: "Esquina"
+formato: "(Formato: +598xxxxxxxx)"
+
+#ListaEntrenador
+nombreCliente: "Nombre de Cliente"
+rol: "Rol"
+ficha: "Ficha"
+
+

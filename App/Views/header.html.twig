@@ -8,7 +8,7 @@
         <div class="menu1">
             <ul class="listmenu1">
                 <li><a href="/" class="inicioa">{{ translator.trans('inicio') }}</a></li>
-                <li><a href="/horios" class="inicioa">{{ translator.trans('horarios') }}</a></li>
+                <li><a href="horarios" class="inicioa">{{ translator.trans('horarios') }}</a></li>
                 <li><a href="/planes" class="inicioa">{{ translator.trans('planes') }}</a></li>
                 <li><a href="/">{{ translator.trans('nosotros') }}</a></li>
             </ul>
@@ -17,7 +17,7 @@
             <ul class="listmenu2" id="welcome-message">
             </ul>
             <div class="language-selector">
-                <button id="languageButton" class="btnfichatecnica">{{ translator.trans('idioma') }}</button>
+                <button id="languageButton" class="language-btn">{{ translator.trans('idioma') }}</button>
                 <ul id="languageMenu" class="language-menu">
                     <li><button onclick="setLanguage('en')" class="btnGestionar">English</button></li>
                     <li><button onclick="setLanguage('es')" class="btnGestionar">Español</button></li>

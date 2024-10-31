@@ -51,15 +51,15 @@
                 <tbody>
                 {% for calificacion in calificaciones %}
                     <tr>
-                        <td>{{ calificacion.fecha }}</td>
-                        <td>{{ calificacion.puntObtenido }}</td>
-                        <td>{{ calificacion.fuerzaMusc }}</td>
-                        <td>{{ calificacion.resMusc }}</td>
-                        <td>{{ calificacion.resAnaerobica }}</td>
-                        <td>{{ calificacion.resiliencia }}</td>
-                        <td>{{ calificacion.flexibilidad }}</td>
-                        <td>{{ calificacion.cumplAgenda }}</td>
-                        <td>{{ calificacion.resMonotonia }}</td>
+                        <td data-label="Fecha">{{ calificacion.fecha }}</td>
+                        <td data-label="Puntuacion Total">{{ calificacion.puntObtenido }}</td>
+                        <td data-label="Fuerza Muscular">{{ calificacion.fuerzaMusc }}</td>
+                        <td data-label="Resistencia Muscular">{{ calificacion.resMusc }}</td>
+                        <td data-label="Resistencia Anaerobica">{{ calificacion.resAnaerobica }}</td>
+                        <td data-label="Resiliencia">{{ calificacion.resiliencia }}</td>
+                        <td data-label="Flexibilidad">{{ calificacion.flexibilidad }}</td>
+                        <td data-label="Cumplimiento de Agenda">{{ calificacion.cumplAgenda }}</td>
+                        <td data-label="Resistencia a la Monotonia">{{ calificacion.resMonotonia }}</td>
                         <td>
                             <button class="btnEditar" onclick="abrirModalCalificacion({{ calificacion.id }})">Editar</button>
                         </td>
@@ -91,10 +91,10 @@
                 <tbody>
                 {% for rutina in practicas %}
                     <tr>
-                        <td>{{ rutina.dia }}</td>
-                        <td>{{ rutina.series }}</td>
-                        <td>{{ rutina.repeticiones }}</td>
-                        <td>
+                        <td data-label="Dia">{{ rutina.dia }}</td>
+                        <td data-label="Series">{{ rutina.series }}</td>
+                        <td data-label="Repeticiones">{{ rutina.repeticiones }}</td>
+                        <td data-label="Combo de Ejercicios">
                             {% for combo in rutina.combo %}
                                 {{ combo.nombreCombo }}{% if not loop.last %}, {% endif %}
                             {% endfor %}
@@ -265,6 +265,24 @@
                     });
             }
         }
+
+        // Add this function to handle responsive behavior
+        function handleResponsive() {
+            const width = window.innerWidth;
+            const tables = document.querySelectorAll('.clasCliente');
+
+            tables.forEach(table => {
+                if (width < 768) {
+                    table.classList.add('responsive');
+                } else {
+                    table.classList.remove('responsive');
+                }
+            });
+        }
+
+        // Call the function on load and resize
+        window.addEventListener('load', handleResponsive);
+        window.addEventListener('resize', handleResponsive);
     </script>
 
     {% include 'footer.html.twig' %}

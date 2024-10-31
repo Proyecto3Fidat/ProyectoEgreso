@@ -16,3 +16,43 @@ horarios: "Schedule"
 planes: "Plans"
 nosotros: "Contact"
 idioma: "Language"
+
+#footer
+gracias: "Thanks for choosing us"
+redes: "Our social networks"
+
+
+#Planes
+3Meses: "3 months plan"
+6Meses: "6 months plan"
+anual: "Annual plan"
+
+
+#Login
+usuario: "User"
+contrasena: "Password"
+iniciar: "Log in"
+documento: "Document"
+
+#Registro
+nombre: "Name"
+apellido: "Last Name"
+telefono: "Phone Number"
+email: "Email"
+registrarse: "Sign up"
+tipoDocumento: "Document Type"
+cedula: "ID"
+pasaporte: "Passport"
+nacimiento: "Birth Date"
+patologias: "Pathologies"
+altura: "Height"
+peso: "Weight"
+calle: "Street"
+numero: "Door Number"
+esquina: "Corner"
+formato: "(Format: +598xxxxxxxx)"
+
+#ListaEntrenador
+nombreCliente: "Client Name"
+rol: "Role"
+ficha: "File"

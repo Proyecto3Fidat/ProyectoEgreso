@@ -78,7 +78,7 @@ nav a:hover {
     padding: 0.5rem;
 }
 
-.language-selector .btnfichatecnica {
+.language-selector .language-btn {
     font-size: 1rem;
     padding: 0.5rem 1rem;
     margin: 0;
@@ -90,7 +90,7 @@ nav a:hover {
     transition: 600ms;
 }
 
-.language-selector .btnfichatecnica:hover {
+.language-selector .language-btn:hover {
     transform: scale(1.1);
     box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
 }

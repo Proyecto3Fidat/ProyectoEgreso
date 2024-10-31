@@ -15,29 +15,17 @@
     </header>
 
     <form action="/login" method="post" onsubmit="return errorContraseña()">
-        <h2>Usuario</h2>
-        <input type="text" required name="documento" placeholder="Documento" > <br> <br>
-        <h2>Contraseña</h2>
-        <input type="password" required name="passwd" placeholder="Contraseña"> <br> <br>
-        <input type="submit" name="Ingresar" value="INGRESAR" class="button">
+        <h2>{{ translator.trans('usuario') }}</h2>
+        <input type="text" required name="documento" placeholder="{{ translator.trans('documento') }}" > <br> <br>
+        <h2>{{ translator.trans('contrasena') }}</h2>
+        <input type="password" required name="passwd" placeholder="{{ translator.trans('contrasena') }}"> <br> <br>
+        <input type="submit" name="Ingresar" value="{{ translator.trans('iniciar') }}" class="button">
         <p id="error-message" style="color: red;"></p>
     </form>
 
     <script src="../../Public/js/script.js"></script>
 
-    <footer class="footer">
-        <h1>Gracias por elegirnos!</h1>
-        <h2>Nuestras Redes</h2>
-        <div class="redes">
-            <a href="https://www.instagram.com/fidatdevs/" class="ig-logo">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://github.com/Proyecto3Fidat/ProyectoEgreso" class="github-logo">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-        <h4>Copyright <span>&copy;</span> GYM 2024</h4>
-    </footer>
+    {% include 'footer.html.twig' %}
 </div>
     </body>
 <script src="../../Public/js/responsive.js"></script>
