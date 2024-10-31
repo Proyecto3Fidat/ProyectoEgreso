@@ -155,4 +155,61 @@ nav a:hover {
         font-size: 2.5rem;
     }
 }
-/*Fin tabla horarios*/
+.language-selector {
+    margin-left: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.language-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #303030;
+    min-width: 160px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.language-menu.visible {
+    display: block;
+}
+
+.language-menu li {
+    padding: 0.5rem;
+}
+
+.language-selector .btnfichatecnica {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    color: white;
+    border-radius: 3rem;
+    border-color: #6f41bb;
+    background: linear-gradient(135deg, #303030, #160d1a);
+    box-shadow: 0 0 1rem 2px rgba(111, 65, 187, 1);
+    transition: 600ms;
+}
+
+.language-selector .btnfichatecnica:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+}
+
+.language-menu .btnGestionar {
+    width: 100%;
+    text-align: left;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    background: transparent;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.language-menu .btnGestionar:hover {
+    background-color: #6f41bb;
+    transform: scale(1.05);
+}

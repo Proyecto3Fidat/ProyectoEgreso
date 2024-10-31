@@ -9,37 +9,19 @@
     <title>Agenda GYM</title>
 </head>
 <body>
-    <header>
-        <section class="navhead">
-            <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
-        </section>
-        <nav class="navbar" id="nav">
-            <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
-                <div class="menu1">
-                    <ul class="listmenu1">
-                        <li><a href="/" class="inicioa">Inicio</a></li>
-                        <li><a style="color: #6f41bb;" href="#" class="inicioa">Horarios</a></li>
-                        <li><a href="/planes" class="inicioa">Planes</a></li>
-                        <li><a href="/">Nosotros</a></li>
-                    </ul>
-                </div>
-                <div class="menu2">
-                    <ul class="listmenu2" id="welcome-message">
-                    </ul>
-                </div>
-        </nav>
-    </header>
+
+{% include 'header.html.twig' %}
 
     <section class="agenda">
-        <h1>HORARIOS</h1>
+        <h1>{{ translator.trans('horarios') }}</h1>
         <table class="horarios">
             <tr id="diasagenda">
-                <th data-label="Hora">Hora</th>
-                <th data-label="Lunes">Lunes</th>
-                <th data-label="Martes">Martes</th>
-                <th data-label="Miércoles">Miércoles</th>
-                <th data-label="Jueves">Jueves</th>
-                <th data-label="Viernes">Viernes</th>
+                <th data-label="Hora">{{ translator.trans('horarios') }}</th>
+                <th data-label="Lunes">{{ translator.trans('lunes') }}</th>
+                <th data-label="Martes">{{ translator.trans('martes') }}</th>
+                <th data-label="Miércoles">{{ translator.trans('miercoles') }}</th>
+                <th data-label="Jueves">{{ translator.trans('jueves') }}</th>
+                <th data-label="Viernes">{{ translator.trans('viernes') }}</th>
             </tr>
             <tr>
                 <th data-label="Hora">7:00 a 8:00</th>
@@ -105,5 +87,6 @@
     
     <script src="../../Public/js/script.js"></script>
     <script src="../../Public/js/responsive.js"></script>
+
 </body>
 </html>

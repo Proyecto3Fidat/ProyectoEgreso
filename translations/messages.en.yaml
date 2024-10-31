@@ -1,0 +1,18 @@
+# translations/messages.en.yaml
+
+
+
+#Agenda
+lunes: "Monday"
+martes: "Tuesday"
+miercoles: "Wednesday"
+jueves: "Thursday"
+viernes: "Friday"
+
+
+#Header
+inicio: "Home"
+horarios: "Schedule"
+planes: "Plans"
+nosotros: "Contact"
+idioma: "Language"

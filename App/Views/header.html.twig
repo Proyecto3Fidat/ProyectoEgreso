@@ -7,18 +7,69 @@
         <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #ffffff;"></i></button>
         <div class="menu1">
             <ul class="listmenu1">
-                <li><a href="{{ links.inicio }}" class="inicioa">Inicio</a></li>
-                <li><a href="{{ links.horarios }}" class="inicioa">Horarios</a></li>
-                <li><a href="{{ links.planes }}" class="inicioa">Planes</a></li>
-                <li><a href="{{ links.nosotros }}">Nosotros</a></li>
-                {% if links.calificacion is defined and links.calificacion is not empty %}
-                    <li><a href="/">Calificación</a></li>
-                {% endif %}
+                <li><a href="/" class="inicioa">{{ translator.trans('inicio') }}</a></li>
+                <li><a href="/horios" class="inicioa">{{ translator.trans('horarios') }}</a></li>
+                <li><a href="/planes" class="inicioa">{{ translator.trans('planes') }}</a></li>
+                <li><a href="/">{{ translator.trans('nosotros') }}</a></li>
             </ul>
         </div>
         <div class="menu2">
             <ul class="listmenu2" id="welcome-message">
             </ul>
+            <div class="language-selector">
+                <button id="languageButton" class="btnfichatecnica">{{ translator.trans('idioma') }}</button>
+                <ul id="languageMenu" class="language-menu">
+                    <li><button onclick="setLanguage('en')" class="btnGestionar">English</button></li>
+                    <li><button onclick="setLanguage('es')" class="btnGestionar">Español</button></li>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const languageButton = document.getElementById('languageButton');
+        const languageMenu = document.getElementById('languageMenu');
+
+        languageButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            languageMenu.classList.toggle('visible');
+        });
+
+        document.addEventListener('click', function() {
+            languageMenu.classList.remove('visible');
+        });
+
+        languageMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+
+    function setLanguage(language) {
+        // Implement your language change logic here
+        console.log('Language set to:', language);
+        // For example, you might want to reload the page or update content
+        // location.reload();
+    }
+</script>
+<script>
+    function setLanguage(language) {
+        fetch('/set-language', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ language: language })
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Recargar la página para aplicar el idioma seleccionado
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error al cambiar el idioma:', error));
+    }
+
+</script>
+
+

@@ -1,14 +1,41 @@
- document.addEventListener('DOMContentLoaded', function() {
-     const welcomeMessage = document.getElementById('welcome-message');
-     const nombre = localStorage.getItem('nombre');
+document.addEventListener('DOMContentLoaded', function() {
+    const welcomeMessage = document.getElementById('welcome-message');
+    const nombre = localStorage.getItem('nombre');
 
-     if (nombre) {
-         welcomeMessage.innerHTML = `<li><a class="login-btn">Bienvenido, ${nombre}</a></li>  <li><a href="/logout?nombre=${nombre}" class="sign-in-btn">Cerrar sesión</a></li>`;
-     } else {
-         welcomeMessage.innerHTML = '<li><a href="/login" class="login-btn">Ingresar</a></li> <li><a href="/registrarcliente" class="sign-in-btn">Registrarse</a></li>';
-     }
- });
+    // Función para obtener el valor de una cookie
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
+    // Obtener el idioma actual de la cookie 'lang'
+    const lang = getCookie('lang') || 'es'; // 'es' como idioma predeterminado
+
+    // Textos de bienvenida en diferentes idiomas
+    const texts = {
+        es: {
+            welcome: 'Bienvenido',
+            login: 'Ingresar',
+            register: 'Registrarse',
+            logout: 'Cerrar sesión'
+        },
+        en: {
+            welcome: 'Welcome',
+            login: 'Log in',
+            register: 'Sign up',
+            logout: 'Log out'
+        }
+        // Puedes agregar más idiomas aquí si lo necesitas
+    };
+
+    // Verificar si el nombre está en el localStorage y mostrar el mensaje de bienvenida
+    if (nombre) {
+        welcomeMessage.innerHTML = `<li><a class="login-btn">${texts[lang].welcome}, ${nombre}</a></li> <li><a href="/logout?nombre=${nombre}" class="sign-in-btn">${texts[lang].logout}</a></li>`;
+    } else {
+        welcomeMessage.innerHTML = `<li><a href="/login" class="login-btn">${texts[lang].login}</a></li> <li><a href="/registrarcliente" class="sign-in-btn">${texts[lang].register}</a></li>`;
+    }
+});
 function validateForm() {
     var altura = document.getElementById("altura").value;
     var alturaPattern = /^\d(\.\d{1,2})?$/;

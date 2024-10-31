@@ -4,9 +4,15 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 require_once '../vendor/autoload.php';
 use Pecee\SimpleRouter\SimpleRouter;
+
+
+
+
 require_once  '../Config/monolog.php';
+
 $config = require '../Config/monolog.php';
 $logger = $config['logger']();
+
 
 
 set_error_handler(function ($errno, $errstr, $errfile, $errline) use ($logger) {

@@ -34,7 +34,6 @@ class LocalGymRepository extends Database
         $nroPuerta = $localGymModel->getNroPuerta();
         $esquina = $localGymModel->getEsquina();
         $capXturno = $localGymModel->getCapXturno();
-        echo $nombre;
         $stmt->bind_param('sssss', $nombre, $calle, $nroPuerta, $esquina, $capXturno);
         $stmt->execute();
         $stmt->close();

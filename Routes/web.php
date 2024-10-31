@@ -38,6 +38,8 @@ use App\Controllers\AdministrativoMiddleware;
 use \App\Controllers\PagoMiddleware;
 use App\Controllers\TemplateController;
 use App\Controllers\EjercicioController;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Loader\YamlFileLoader;
 
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -46,6 +48,7 @@ $usuarioLog = require __DIR__ . '/../Config/usuarioLogger.php';
 $loggerU = $usuarioLog['logger']();
 
 SimpleRouter::get('cargarDatos', function (){
+
     $seeder = new DataSeeder();
     /* Locales    */
     $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym1', 'Calle 1', '1', 'Esquina 1', '10'));
@@ -1189,7 +1192,21 @@ SimpleRouter::get('/registrarcliente', function () {
 SimpleRouter::get('/horarios', function () {
     $template = new TemplateController();
     $template->renderTemplate('agenda');
+
 });
+
+    SimpleRouter::post('/set-language', function () {
+        $data = json_decode(file_get_contents('php://input'), true);
+        if (isset($data['language'])) {
+            echo $data['language'];
+            // Guardar el idioma en una cookie
+            setcookie('lang', $data['language'], time() + (86400 * 30), "/"); // 30 días
+            http_response_code(200);
+            exit();
+        } else {
+            http_response_code(400);
+        }
+    });
 
 SimpleRouter::get('/planes', function () {
     $template = new TemplateController();
