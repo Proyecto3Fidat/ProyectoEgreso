@@ -100,6 +100,7 @@ nav a:hover {
 
 .lista-clientes {
     display: flex;
+    flex-direction: column;
     margin: 0 auto; 
     margin-top: 3rem;
     padding: 0;
