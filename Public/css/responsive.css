@@ -237,6 +237,23 @@
         margin-top: 6rem;
     }
 
+    .buscador-clientes {
+        margin-top: 5rem;
+    }
+
+    /*Metodos para opcion subir logo*/
+    .upLogo {
+        padding: 15px;
+    }
+
+    .upLogo label {
+        font-size: 1.4rem;
+    }
+
+    .upLogo input[type="submit"] {
+        font-size: 1.2rem;
+    }
+
     /*Form loginUsuario*/
     form {
         width: 70%;
