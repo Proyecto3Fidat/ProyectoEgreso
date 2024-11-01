@@ -15,58 +15,58 @@
 
     <script src="../../Public/js/listaCalificaciones.js"></script>
 
-    <h1>Bienvenido al Dashboard del Usuario {{ usuario.nombre }} {{ usuario.apellido }}</h1>
+    <h1>{{ translator.trans('informacion') }} {{ usuario.nombre }} {{ usuario.apellido }}</h1>
 
     <!-- Seccion de Informacion del Usuario -->
     <section class="informacionUsuario">
-        <h2>Información del Usuario</h2>
+        <h2{{ translator.trans('informacion') }}</h2>
         <div class="usuarioInfo">
-            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
-            <p><strong>Edad:</strong> {{ usuario.edad }}</p>
-            <p><strong>Altura:</strong> {{ usuario.altura }}</p>
-            <p><strong>Peso:</strong> {{ usuario.peso }}</p>
-            <p><strong>Documento:</strong> {{ usuario.documento }}</p>
+            <p><strong>{{ translator.trans('nombre') }}:</strong> {{ usuario.nombre }}</p>
+            <p><strong>{{ translator.trans('edad') }}:</strong> {{ usuario.edad }}</p>
+            <p><strong>{{ translator.trans('altura') }}:</strong> {{ usuario.altura }}</p>
+            <p><strong>{{ translator.trans('peso') }}:</strong> {{ usuario.peso }}</p>
+            <p><strong>{{ translator.trans('documento') }}:</strong> {{ usuario.documento }}</p>
         </div>
     </section>
 
     <section class="calificaciones">
-        <h2>Calificaciones</h2>
-        <button class="btnEditar" onclick="openModalCalificacion()">Asignar Calificación</button>
+        <h2>{{ translator.trans('calificaciones') }}</h2>
+        <button class="btnEditar" onclick="openModalCalificacion()">{{ translator.trans('asignarCalificacion') }}</button>
         <div class="tablaCliente">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>Fecha</th>
-                    <th>Puntuacion Total</th>
-                    <th>Fuerza Muscular</th>
-                    <th>Resistencia Muscular</th>
-                    <th>Resistencia Anaerobica</th>
-                    <th>Resiliencia</th>
-                    <th>Flexibilidad</th>
-                    <th>Cumplimiento de Agenda</th>
-                    <th>Resistencia a la Monotonia</th>
+                    <th>{{ translator.trans('fecha') }}</th>
+                    <th>{{ translator.trans('puntuacionTotal') }}</th>
+                    <th>{{ translator.trans('fuerzaMuscular') }}</th>
+                    <th>{{ translator.trans('resistenciaMuscular') }}</th>
+                    <th>{{ translator.trans('resistenciaAnaerobica') }}</th>
+                    <th>{{ translator.trans('resiliencia') }}</th>
+                    <th>{{ translator.trans('flexibilidad') }}</th>
+                    <th>{{ translator.trans('cumplimientoAgenda') }}</th>
+                    <th>{{ translator.trans('resistenciaMonotonia') }}</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for calificacion in calificaciones %}
                     <tr>
-                        <td data-label="Fecha">{{ calificacion.fecha }}</td>
-                        <td data-label="Puntuacion Total">{{ calificacion.puntObtenido }}</td>
-                        <td data-label="Fuerza Muscular">{{ calificacion.fuerzaMusc }}</td>
-                        <td data-label="Resistencia Muscular">{{ calificacion.resMusc }}</td>
-                        <td data-label="Resistencia Anaerobica">{{ calificacion.resAnaerobica }}</td>
-                        <td data-label="Resiliencia">{{ calificacion.resiliencia }}</td>
-                        <td data-label="Flexibilidad">{{ calificacion.flexibilidad }}</td>
-                        <td data-label="Cumplimiento de Agenda">{{ calificacion.cumplAgenda }}</td>
-                        <td data-label="Resistencia a la Monotonia">{{ calificacion.resMonotonia }}</td>
+                        <td data-label="{{ translator.trans('fecha') }}">{{ calificacion.fecha }}</td>
+                        <td data-label="{{ translator.trans('puntuacionTotal') }}">{{ calificacion.puntObtenido }}</td>
+                        <td data-label="{{ translator.trans('fuerzaMuscular') }}">{{ calificacion.fuerzaMusc }}</td>
+                        <td data-label="{{ translator.trans('resistenciaMuscular') }}">{{ calificacion.resMusc }}</td>
+                        <td data-label="{{ translator.trans('resistenciaAnaerobica') }}">{{ calificacion.resAnaerobica }}</td>
+                        <td data-label="{{ translator.trans('resiliencia') }}">{{ calificacion.resiliencia }}</td>
+                        <td data-label="{{ translator.trans('flexibilidad') }}">{{ calificacion.flexibilidad }}</td>
+                        <td data-label="{{ translator.trans('cumplimientoAgenda') }}">{{ calificacion.cumplAgenda }}</td>
+                        <td data-label="{{ translator.trans('resistenciaMonotonia') }}">{{ calificacion.resMonotonia }}</td>
                         <td>
                             <button class="btnEditar" onclick="abrirModalCalificacion({{ calificacion.id }})">Editar</button>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="10">No hay calificaciones disponibles</td>
+                        <td colspan="10">{{ translator.trans('sinCalificacion') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -75,16 +75,16 @@
     </section>
 
     <section class="rutina">
-        <h2>Rutina</h2>
-        <button class="btnAsignarRutina" onclick="openModal()">Asignar Rutina</button>
+        <h2>{{ translator.trans('rutina') }}</h2>
+        <button class="btnAsignarRutina" onclick="openModal()">{{ translator.trans('asignarRutina') }}</button>
         <div class="tablaRutina">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>Dia</th>
-                    <th>Series</th>
-                    <th>Repeticiones</th>
-                    <th>Combo de Ejercicios</th>
+                    <th>{{ translator.trans('dia') }}</th>
+                    <th>{{ translator.trans('series') }}</th>
+                    <th>{{ translator.trans('repeticiones') }}</th>
+                    <th>{{ translator.trans('comboEjercicios') }}</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -105,7 +105,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">No hay rutinas disponibles</td>
+                        <td colspan="5">{{ translator.trans('noRutinas') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -120,7 +120,6 @@
         </div>
     </section>
 
-    <!-- Modal para Asignar Rutina -->
     <div class="modal" id="modalRutina">
         <div class="modal-content">
             <button class="close-button" onclick="closeModal()">
