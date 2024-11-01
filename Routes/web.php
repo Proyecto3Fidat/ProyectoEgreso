@@ -688,6 +688,16 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             exit();
         });
 
+        SimpleRouter::get('obtenerDatosGrafico', function () use ($loggerU) {
+
+            $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+            $calificacionRepository = new CalificacionRepository();
+            $calficacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calficacionService, $loggerU);
+            $calificacionController->puntuacionesAjax($documento);
+
+        });
+
         SimpleRouter::post('/dashboard', function () use ($loggerU) {
 
             $grafico = [];
@@ -702,7 +712,6 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $clienteRepository = new ClienteRepository();
             $clienteService = new ClienteService($clienteRepository);
             $clienteController = new ClienteController($clienteService, $loggerU);
-
             $usuario = $clienteController->obtenerInfoCliente($_POST['documento']);
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_POST['documento']);
             try {

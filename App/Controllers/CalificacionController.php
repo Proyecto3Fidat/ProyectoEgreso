@@ -132,6 +132,43 @@ class CalificacionController
             header('Content-Type: application/json');
             echo json_encode($calificaciones);
     }
+    public function puntuacionesAjax($documento) {
+        header('Content-Type: application/json'); // Encabezado para JSON
+
+        $obtieneRepository = new ObtieneRepository();
+        $obtieneService = new ObtieneService($obtieneRepository);
+        $calificaciones = $obtieneService->obtenerCalificaciones($documento);
+
+        $calificacionesR = [];
+        foreach ($calificaciones as $calificacion) {
+            $calificacionR = $this->calificacionService->obtenerPuntuaciones($calificacion['id']);
+
+            if (is_array($calificacionR) && !empty($calificacionR)) {
+                $calificacionR = $calificacionR[0];
+            } else {
+                $calificacionR = [];
+            }
+
+            $resultado = [
+                'id' => $calificacion['id'],
+                'puntObtenido' => $calificacion['puntObtenido'],
+                'fecha' => $calificacion['fecha'],
+                'fuerzaMusc' => $calificacionR['fuerzaMusc'] ?? '',
+                'resMusc' => $calificacionR['resMusc'] ?? '',
+                'resAnaerobica' => $calificacionR['resAnaerobica'] ?? '',
+                'resiliencia' => $calificacionR['resiliencia'] ?? '',
+                'flexibilidad' => $calificacionR['flexibilidad'] ?? '',
+                'cumplAgenda' => $calificacionR['cumplAgenda'] ?? '',
+                'resMonotonia' => $calificacionR['resMonotonia'] ?? ''
+            ];
+
+            $calificacionesR[] = $resultado;
+        }
+
+        echo json_encode($calificacionesR);
+        die();
+    }
+
     public function obtenerPuntuacionesCliente($documento)
     {
         $obtieneRepository = new ObtieneRepository();

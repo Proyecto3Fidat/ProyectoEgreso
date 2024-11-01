@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../public/css/dashEntrenador.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <title>Dashboard del Usuario</title>
 </head>
 <body>
@@ -114,10 +115,9 @@
     </section>
 
     <section class="evolucion">
-        <div class="graficaEvolucion">
+        <div class="graficaEvolucion" id="grafico">
             <p>Aquí podrás ver tu evolución física a lo largo del tiempo.</p>
-            <img src="/../../Resources/Images/Graphics/grafico_evolucion_{{ usuario.documento }}.png" alt="Gráfica de Evolución">
-        </div>
+              </div>
     </section>
 
     <div class="modal" id="modalRutina">
@@ -287,7 +287,85 @@
     {% include 'footer.html.twig' %}
 
 </div>
+<script>
+    async function crearGrafico(usuarioId) {
+        try {
+            console.log("Enviando solicitud a /obtenerDatosGrafico con ID:", usuarioId);
+            const response = await fetch(`/obtenerDatosGrafico?documento=${usuarioId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
+            const data = await response.json();
+            console.log("Datos recibidos:", data);
+
+            // Extrae fechas y valores para cada métrica
+            const fechas = data.map(item => item.fecha);
+            const series = [
+                { name: "Puntuación Total", data: data.map(item => item.puntObtenido) },
+                { name: "Fuerza Muscular", data: data.map(item => item.fuerzaMusc) },
+                { name: "Resistencia Muscular", data: data.map(item => item.resMusc) },
+                { name: "Resistencia Anaeróbica", data: data.map(item => item.resAnaerobica) },
+                { name: "Resiliencia", data: data.map(item => item.resiliencia) },
+                { name: "Flexibilidad", data: data.map(item => item.flexibilidad) },
+                { name: "Cumplimiento Agenda", data: data.map(item => item.cumplAgenda) },
+                { name: "Resistencia a la Monotonía", data: data.map(item => item.resMonotonia) },
+            ];
+
+            const options = {
+                chart: {
+                    type: 'line',
+                    height: 350,
+                    zoom: {
+                        enabled: false,
+                        type: 'x',
+                        autoScaleYaxis: true
+                    },
+                    toolbar: {
+                        show: false,
+                        tools: {
+                            zoom: true,
+                            zoomin: true,
+                            zoomout: true,
+                            pan: true,
+                            reset: true
+                        },
+                        autoSelected: 'zoom'          
+                    }
+                },
+                series: series,
+                xaxis: {
+                    categories: fechas,
+                    title: {
+                        text: 'Fechas'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Valores'
+                    }
+                },
+                title: {
+                    text: 'Gráfico de Evolución en el Tiempo',
+                    align: 'center'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#grafico"), options);
+            chart.render();
+        } catch (error) {
+            console.error("Error al crear el gráfico:", error);
+        }
+    }
+
+    // Llama a la función para cargar el gráfico cuando el DOM esté listo
+    document.addEventListener("DOMContentLoaded", function() {
+        crearGrafico({{ usuario.documento }});
+    });
+</script>
 <script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>
 
