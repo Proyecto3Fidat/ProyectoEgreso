@@ -11,10 +11,10 @@
 </head>
 <body>
 <div class="content">
-    <h4>Calificar</h4>
+    <h4>{{ translator.trans('calificar') }}</h4>
     <form action="/calificacion" method="post" class="califidepo">
-        <input type="text" id="documento" name="nroDocumento" readonly placeholder="Documento" required>
-        <input name="puntMaxima" type="text" placeholder="Puntuacion maxima">
+        <input type="text" id="documento" name="nroDocumento" readonly placeholder="{{ translator.trans('documento') }}" required>
+        <input name="puntMaxima" type="text" placeholder="{{ translator.trans('puntuacionMaxima') }}">
         <input name="puntuacionEsperado" type="text" placeholder="Calificacion Esperada">
         <input name="fuerzaMusc" type="text" placeholder="Fuerza Muscular">
         <input name="resAnaerobica" type="text" placeholder="Resistencia anaerobica">

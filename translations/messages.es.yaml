@@ -58,4 +58,29 @@ nombreCliente: "Nombre de Cliente"
 rol: "Rol"
 ficha: "Ficha"
 
+#dashEntrenador
+informacion: "Información del Usuario"
+edad: "Edad"
+calificaciones: "Calificaciones"
+
+rutina: "Rutina"
+fecha: "Fecha"
+
+#calificar
+puntuacionTotal: "Puntuación Total"
+fuerzaMuscular: "Fuerza Muscular"
+resistenciaMuscular: "Resistencia Muscular"
+resistenciaAnaerobica: "Resistencia Anaeróbica"
+resiliencia: "Resiliencia"
+flexibilidad: "Flexibilidad"
+cumplimientoAgenda: "Cumplimiento de Agenda"
+resistenciaMonotonia: "Resistencia a la Monotonía"
+sinCalificacion: "No hay Calificaciones disponibles"
+asignarCalificacion: "Asignar Calificación"
+asignarRutina: "Asignar Rutina"
+dia: "Día"
+series: "Series"
+comboEjercicios: "Combo de Ejercicios"
+noRutinas: "No hay rutinas disponibles"
+repeticiones: "Repeticiones"
 

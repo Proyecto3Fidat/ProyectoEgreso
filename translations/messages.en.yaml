@@ -56,3 +56,32 @@ formato: "(Format: +598xxxxxxxx)"
 nombreCliente: "Client Name"
 rol: "Role"
 ficha: "File"
+
+#dashEntrenador
+informacion: "User Information"
+edad: "Age"
+calificaciones: "Ratings"
+
+rutina: "Routine"
+fecha: "Date"
+puntuacionTotal: "Total Score"
+fuerzaMuscular: "Muscle Strength"
+resistencia: "Resistance"
+flexibilidad: "Flexibility"
+cumplimientoAgenda: "Schedule Compliance"
+resistenciaMonotonia: "Monotony Resistance"
+sinCalificacion: "No rating"
+asignarCalificacion: "Assign rating"
+asignarRutina: "Assign routine"
+dia: "Day"
+series: "Series"
+comboEjercicios: "Exercise Combo"
+noRutinas: "No routines available"
+repeticiones: "Repetitions"
+
+
+#calificaciones
+calificar: "Rate"
+puntuacionMaxima: "Max Score"
+calificacionEsperada: "Expected Rating"
+
