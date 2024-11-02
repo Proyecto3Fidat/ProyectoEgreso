@@ -226,5 +226,10 @@ class UsuarioService
         return $resultados;
     }
 
+    public function comprobarDocumentoRol(mixed $nroDocumento)
+    {
+        return $this->usuarioRepository->comprobarDocumentoRol($nroDocumento);
+    }
+
 }
 
