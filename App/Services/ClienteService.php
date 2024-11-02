@@ -24,7 +24,7 @@ class ClienteService
     {
         $this->clienteRepository->guardar($clienteModel);
     }
-    public function crearEntrenador(ClienteModel $clienteModel)
+    public function crearSinInfo(ClienteModel $clienteModel)
     {
         $this->clienteRepository->guardarEntrenador($clienteModel);
     }

@@ -473,7 +473,10 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
     SimpleRouter::post('/usuarioTI', function () use ($logger) {
-        var_dump($_POST);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clienteController->crearUsuarioAdmin();
         exit();
     });
     SimpleRouter::get('/admin', function () use ($logger) {
@@ -482,6 +485,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
         $clienteController = new ClienteController($clienteService, $logger);
         $clientes = $clienteController->obtenerListaClientesAdmintrativo();
         $template = new TemplateController();
+
         $template->renderTemplate('admin', ['usuarios' => $clientes]);
     });
 

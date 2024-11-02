@@ -203,19 +203,23 @@ class UsuarioRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ?";
+
+        $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ? OR nroDocumento LIKE CONCAT(?, '@%')";
         $stmt = $database->getConnection()->prepare($sql);
-        $stmt->bind_param("s", $documento);
+        $stmt->bind_param("ss", $documento, $documento);
+
         $stmt->execute();
         if ($stmt->error) {
             echo "error";
         }
+
         $stmt->bind_result($rol);
         $stmt->fetch();
         $stmt->close();
         $database->disconnect();
         return $rol;
     }
+
     public function obtenerTipoDocumento($documento)
     {
         $database = Database::getInstance();
@@ -232,5 +236,30 @@ class UsuarioRepository extends Database
         $stmt->close();
         $database->disconnect();
         return $tipoDocumento;
+    }
+
+    public function comprobarDocumentoRol(mixed $nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT nroDocumento, rol FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        if ($stmt->error) {
+            echo "error";
+        }
+        $stmt->store_result();
+        $num_of_rows = $stmt->num_rows;
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        if ($num_of_rows > 0) {
+            return "true";
+
+        } else {
+            return "false";
+        }
+
     }
 }
