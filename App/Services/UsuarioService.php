@@ -215,5 +215,16 @@ class UsuarioService
         }
     }
 
+    public function comprobarRol(array $lista)
+    {
+        $resultados = array();
+        foreach ($lista as $usuario) {
+            $rol = $this->usuarioRepository->comprobarRol($usuario['nroDocumento']);
+            $usuario['rol'] = $rol;
+            $resultados[] = $usuario;
+        }
+        return $resultados;
+    }
+
 }
 

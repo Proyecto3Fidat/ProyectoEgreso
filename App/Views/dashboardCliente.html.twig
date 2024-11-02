@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../public/css/dashEntrenador.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <title>Dashboard del Usuario</title>
 </head>
 <body>
@@ -24,24 +25,24 @@
 
     <!-- Seccion de Informacion del Usuario -->
     <section class="informacionUsuario">
-        <h2>Información del Usuario</h2>
+        <h2>{{ translator.trans('informacion') }}</h2>
         <div class="usuarioInfo">
-            <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
-            <p><strong>Edad:</strong> {{ usuario.edad }}</p>
-            <p><strong>Altura:</strong> {{ usuario.altura }}</p>
-            <p><strong>Peso:</strong> {{ usuario.peso }}</p>
-            <p><strong>Documento:</strong> {{ usuario.documento }}</p>
+            <p><strong>{{ translator.trans('nombre') }}:</strong> {{ usuario.nombre }}</p>
+            <p><strong>{{ translator.trans('edad') }}:</strong> {{ usuario.edad }}</p>
+            <p><strong>{{ translator.trans('altura') }}:</strong> {{ usuario.altura }}</p>
+            <p><strong>{{ translator.trans('peso') }}:</strong> {{ usuario.peso }}</p>
+            <p><strong>{{ translator.trans('documento') }}:</strong> {{ usuario.documento }}</p>
         </div>
     </section>
     <section class="rutina">
-        <h2>Agenda</h2>
+        <h2>{{ translator.trans('agenda') }}</h2>
         <div class="tablaRutina">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>Dia</th>
-                    <th>Hora Inicio</th>
-                    <th>Hora Fin</th>
+                    <th>{{ translator.trans('dia') }}</th>
+                    <th>{{ translator.trans('horaInicio') }}</th>
+                    <th>{{ translator.trans('horaFin') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -54,7 +55,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">No hay rutinas disponibles</td>
+                        <td colspan="5">{{ translator.trans('noAgenda') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -63,20 +64,20 @@
     </section>
 
     <section class="calificaciones">
-        <h2>Calificaciones</h2>
+        <h2>{{ translator.trans('calificaciones') }}</h2>
         <div class="tablaCliente">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th data-label="Fecha">Fecha</th>
-                    <th data-label="Puntuación total">Puntuación Total</th>
-                    <th data-label="Fuerza muscular">Fuerza Muscular</th>
-                    <th data-label="Resistencia muscular">Resistencia Muscular</th>
-                    <th data-label="Resistencia anaerobica">Resistencia Anaerobica</th>
-                    <th data-label="Resiliencia">Resiliencia</th>
-                    <th data-label="Flexibilidad">Flexibilidad</th>
-                    <th data-label="Cumplimiento de agenda">Cumplimiento de Agenda</th>
-                    <th data-label="Resistencia a la monotonia">Resistencia a la Monotonia</th>
+                    <th data-label="Fecha">{{ translator.trans('fecha') }}</th>
+                    <th data-label="Puntuación total">{{ translator.trans('puntuacionTotal') }}</th>
+                    <th data-label="Fuerza muscular">{{ translator.trans('fuerzaMuscular') }}</th>
+                    <th data-label="Resistencia muscular">{{ translator.trans('resistenciaMuscular') }}</th>
+                    <th data-label="Resistencia anaerobica">{{ translator.trans('resistenciaAnaerobica') }}</th>
+                    <th data-label="Resiliencia">{{ translator.trans('resiliencia') }}</th>
+                    <th data-label="Flexibilidad">{{ translator.trans('flexibilidad') }}</th>
+                    <th data-label="Cumplimiento de agenda">{{ translator.trans('cumplimientoAgenda') }}</th>
+                    <th data-label="Resistencia a la monotonia">{{ translator.trans('resistenciaMonotonia') }}</th>
                     <th class="btnImprimir" data-label=""></th>
                 </tr>
                 </thead>
@@ -98,7 +99,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="10">No hay calificaciones disponibles</td>
+                        <td colspan="10">{{ translator.trans('noCalificaciones') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -107,15 +108,15 @@
     </section>
 
     <section class="rutina">
-        <h2>Rutina</h2>
+        <h2>{{ translator.trans('rutina') }}</h2>
         <div class="tablaRutina">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>Dia</th>
-                    <th>Series</th>
-                    <th>Repeticiones</th>
-                    <th>Combo de Ejercicios</th>
+                    <th>{{ translator.trans('dia') }}</th>
+                    <th>{{ translator.trans('series') }}</th>
+                    <th>{{ translator.trans('repeticiones') }}</th>
+                    <th>{{ translator.trans('comboEjercicios') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -132,7 +133,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">No hay rutinas disponibles</td>
+                        <td colspan="5">{{ translator.trans('noRutinas') }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -141,13 +142,10 @@
     </section>
 
     <section class="evolucion">
-        <div class="graficaEvolucion">
-            <p>Aquí podrás ver tu evolución física a lo largo del tiempo.</p>
-            <img src="/../../Resources/Images/Graphics/grafico_evolucion_{{ usuario.documento }}.png" alt="Gráfica de Evolución">
+        <div class="graficaEvolucion" id="grafico">
+            <p>{{ translator.trans('puedesGrafico') }}</p>
         </div>
     </section>
-
-
     <script>
     </script>
 
@@ -186,6 +184,88 @@
         });
     });
 </script>
+
+<script>
+    async function crearGrafico(usuarioId) {
+        try {
+            console.log("Enviando solicitud a /obtenerDatosGrafico con ID:", usuarioId);
+            const response = await fetch(`/usuario/obtenerDatosGrafico?documento=${usuarioId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Datos recibidos:", data);
+
+            // Extrae fechas y valores para cada métrica
+            const fechas = data.map(item => item.fecha);
+            const series = [
+                { name: "{{ translator.trans('puntuacionTotal') }}", data: data.map(item => item.puntObtenido) },
+                { name: "{{ translator.trans('fuerzaMuscular') }}", data: data.map(item => item.fuerzaMusc) },
+                { name: "{{ translator.trans('resistenciaMuscular') }}", data: data.map(item => item.resMusc) },
+                { name: "{{ translator.trans('resistenciaAnaerobica') }}", data: data.map(item => item.resAnaerobica) },
+                { name: "{{ translator.trans('resiliencia') }}", data: data.map(item => item.resiliencia) },
+                { name: "{{ translator.trans('flexibilidad') }}", data: data.map(item => item.flexibilidad) },
+                { name: "{{ translator.trans('cumplimientoAgenda') }}", data: data.map(item => item.cumplAgenda) },
+                { name: "{{ translator.trans('resistenciaMuscular') }}", data: data.map(item => item.resMonotonia) },
+            ];
+
+            const options = {
+                chart: {
+                    type: 'line',
+                    height: 350,
+                    zoom: {
+                        enabled: false,
+                        type: 'x',
+                        autoScaleYaxis: true
+                    },
+                    toolbar: {
+                        show: false,
+                        tools: {
+                            zoom: true,
+                            zoomin: true,
+                            zoomout: true,
+                            pan: true,
+                            reset: true
+                        },
+                        autoSelected: 'zoom'
+                    }
+                },
+                series: series,
+                xaxis: {
+                    categories: fechas,
+                    title: {
+                        text: '{{ translator.trans('fechas') }}'
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: '{{ translator.trans('valores') }}'
+                    }
+                },
+                title: {
+                    text: '{{ translator.trans('graficoEvolucion') }}',
+                    align: 'center'
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#grafico"), options);
+            chart.render();
+        } catch (error) {
+            console.error("Error al crear el gráfico:", error);
+        }
+    }
+
+    // Llama a la función para cargar el gráfico cuando el DOM esté listo
+    document.addEventListener("DOMContentLoaded", function() {
+        crearGrafico({{ usuario.documento }});
+    });
+</script>
+
+
 
 </body>
 </html>

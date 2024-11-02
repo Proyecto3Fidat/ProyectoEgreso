@@ -54,6 +54,7 @@ class TemplateController
             echo $e;
         } catch (\Twig\Error\SyntaxError $e) {
             echo "Error: Problema de sintaxis en la plantilla.";
+            echo $e;
         }
     }
 }

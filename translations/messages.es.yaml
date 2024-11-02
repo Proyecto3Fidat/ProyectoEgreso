@@ -83,4 +83,10 @@ series: "Series"
 comboEjercicios: "Combo de Ejercicios"
 noRutinas: "No hay rutinas disponibles"
 repeticiones: "Repeticiones"
+noCalificaciones: "No hay calificaciones disponibles"
+
+fechas: "Fechas"
+valores: "Valores"
+graficoEvolucion: "Gráfico de Evolución en el Tiempo"
+puedesGrafico: "Puedes ver tu evolucion fisica a lo largo del tiempo"
 

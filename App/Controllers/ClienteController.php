@@ -268,5 +268,35 @@ class ClienteController
         echo json_encode($resultado);
     }
 
+    public function obtenerListaClientesAdmintrativo()
+    {
+        $clienteTelefonoRepository = new ClientetelefonoRepository();
+        $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+        $lista = $this->clienteService->listarClientes();
+        $clientes = $usuarioService->comprobarRol($lista);
+        $resultado = [];
+
+        foreach ($clientes as $cliente) {
+            $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+            $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+            $resultado[] = [
+                'nombre' => $cliente['nombre'],
+                'nroDocumento' => $cliente['nroDocumento'],
+                'tipoDocumento' => $cliente['tipoDocumento'],
+                'altura' => $cliente['altura'],
+                'peso' => $cliente['peso'],
+                'rol' => $cliente['rol'],
+                'patologias' => $cliente['patologia'],
+                'email' => $cliente['email'],
+                'edad' => $edad,
+                'direccion' => $direccion,
+                'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento'])
+            ];
+        }
+        return $resultado;
+    }
+
 
 }   
