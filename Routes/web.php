@@ -472,6 +472,29 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 
 SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
+    SimpleRouter::post('/usuarioTI', function () use ($logger) {
+        var_dump($_POST);
+        exit();
+    });
+    SimpleRouter::get('/admin', function () use ($logger) {
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $clientes = $clienteController->obtenerListaClientesAdmintrativo();
+        $template = new TemplateController();
+        $template->renderTemplate('admin', ['usuarios' => $clientes]);
+    });
+
+    SimpleRouter::get('/usuario/obtenerDatosGrafico', function () use ($loggerU) {
+
+        $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $calificacionRepository = new CalificacionRepository();
+        $calficacionService = new CalificacionService($calificacionRepository);
+        $calificacionController = new CalificacionController($calficacionService, $loggerU);
+        $calificacionController->puntuacionesAjax($documento);
+
+    });
+
     Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
         $calificacionRepository = new CalificacionRepository();
         $calificacionService = new CalificacionService($calificacionRepository);
@@ -1000,6 +1023,7 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $clienteController->obtenerListaClientesAdmin();
             exit();
         });
+
 
 
         SimpleRouter::post('/logo', function () use ($logger) {

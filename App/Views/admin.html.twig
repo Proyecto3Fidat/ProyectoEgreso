@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrativo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #131313;
+            color: white;
+        }
+
+        header {
+            background-color: #100e0f;
+            padding: 1rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+        }
+
+        nav ul li {
+            margin-right: 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6f41bb;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .btn-crear {
+            display: block;
+            width: 200px;
+            margin: 0 auto 2rem;
+            padding: 1rem;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #6f41bb, #a63dd2);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-crear:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(111, 65, 187, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #1e1c1f;
+            margin: 10% auto;
+            padding: 2rem;
+            border: 1px solid #6f41bb;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(111, 65, 187, 0.2);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #6f41bb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        input, select {
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #2b2b2d;
+            border: 1px solid #6f41bb;
+            border-radius: 5px;
+            color: white;
+        }
+
+        button[type="submit"] {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #6f41bb, #a63dd2);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #5f31ab, #962dc2);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .tabla-usuarios {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tabla-usuarios th, .tabla-usuarios td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        .tabla-usuarios th {
+            background: linear-gradient(135deg, #6f41bb, #a63dd2);
+            color: white;
+            font-weight: 600;
+        }
+
+        .tabla-usuarios tr:nth-child(even) {
+            background-color: #2b2b2d;
+        }
+
+        .tabla-usuarios tr:hover {
+            background-color: #333;
+        }
+
+        .acciones {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-editar, .btn-eliminar {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-editar {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-eliminar {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-editar:hover, .btn-eliminar:hover {
+            opacity: 0.8;
+        }
+        .paginacion {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .paginacion button {
+            margin: 0 0.5rem;
+            padding: 0.75rem 1rem;
+            background-color: #303030;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .paginacion button:hover {
+            background-color: #4a2d7d;
+        }
+
+        .paginacion button.active {
+            background-color: #6f41bb;
+        }
+    </style>
+</head>
+<body>
+{% include 'header.html.twig' %}
+
+<main>
+    <h1>Panel Administrativo</h1>
+    <button class="btn-crear" id="btnCrearUsuario">Crear Usuario</button>
+    <div id="modalCrearUsuario" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Crear Nuevo Usuario</h2>
+            <form id="formCrearUsuario" method="post" action="/usuarioTI">
+
+                <label for="rol">Rol de Usuario:</label>
+                <select id="rol" name="rol" required>
+                    <option value="">Seleccione un rol</option>
+                    <option value="entrenador">Entrenador</option>
+                    <option value="administrativo">Administrativo</option>
+                    <option value="paciente">Paciente</option>
+                    <option value="deportista">Deportista</option>
+                </select>
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required><br><br>
+
+                <label for="tipoDocumento">Tipo de Documento:</label>
+                <select id="tipoDocumento" name="tipoDocumento">
+                    <option value="cedula">Cédula</option>
+                    <option value="pasaporte">Pasaporte</option>
+                </select>
+
+                <label for="documento">Documento:</label>
+                <input type="text" id="documento" name="documento" required><br><br>
+
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" required><br><br>
+
+                <label for="nroTelefono">N° de Teléfono:</label>
+                <input type="text" id="nroTelefono" name="nroTelefono" required><br><br>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+
+                <div id="pacienteFields" class="hidden">
+                    <label for="altura">Altura:</label><br><br>
+                    <input type="text" id="altura" name="altura"><br><br>
+                    <label for="peso">Peso:</label><br><br>
+                    <input type="text" id="peso" name="peso"><br><br>
+                    <label for="deporte">Deporte:</label><br><br>
+                    <input type="text" id="deporte" name="deporte"><br><br>
+                    <label for="posicion">Posición:</label><br><br>
+                    <input type="text" id="posicion" name="posicion"><br><br>
+                    <label for="posicion">Numero de Puerta:</label>
+                    <input type="text" id="posicion" name="calle"><br><br>
+                    <label for="patologias">Patologías:</label><br><br>
+                    <input type="text" id="patologias" name="patologias"><br><br>
+                </div>
+
+                <div id="deportistaFields" class="hidden">
+                    <label for="altura">Altura:</label><br><br>
+                    <input type="text" id="altura" name="altura"><br><br>
+                    <label for="peso">Peso:</label><br><br>
+                    <input type="text" id="peso" name="peso"><br><br>
+                    <label for="deporte">Deporte:</label><br><br>
+                    <input type="text" id="deporte" name="deporte"><br><br>
+                    <label for="posicion">Posición:</label><br><br>
+                    <input type="text" id="posicion" name="posicion"><br><br>
+                    <label for="posicion">Numero de Puerta:</label>
+                    <input type="text" id="posicion" name="calle"><br><br>
+                </div>
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Crear Usuario</button>
+            </form>
+        </div>
+    </div>
+
+    <input type="text" id="searchInput" placeholder="Buscar usuario..." onkeyup="buscarUsuario()" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
+
+    <table class="tabla-usuarios">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Documento</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Correo Electrónico</th>
+            <th>Rol</th>
+        </tr>
+        </thead>
+        <tbody id="tablaUsuariosBody">
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido }}</td>
+                <td>{{ usuario.nroDocumento }}</td>
+                <td>{{ usuario.fechaNacimiento }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.rol }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="paginacion" id="pagination"></div>
+
+</main>
+
+{% include 'footer.html.twig' %}
+<script>
+    const modal = document.getElementById("modalCrearUsuario");
+    const btn = document.getElementById("btnCrearUsuario");
+    const span = document.getElementsByClassName("close")[0];
+    const form = document.getElementById("formCrearUsuario");
+    const rolSelect = document.getElementById("rol");
+
+    const entrenadorFields = document.getElementById("entrenadorFields");
+    const administrativoFields = document.getElementById("administrativoFields");
+    const pacienteFields = document.getElementById("pacienteFields");
+    const deportistaFields = document.getElementById("deportistaFields");
+
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    rolSelect.onchange = function () {
+        entrenadorFields.classList.add("hidden");
+        administrativoFields.classList.add("hidden");
+        pacienteFields.classList.add("hidden");
+        deportistaFields.classList.add("hidden");
+
+        if (rolSelect.value === "entrenador") {
+            entrenadorFields.classList.remove("hidden");
+        } else if (rolSelect.value === "administrativo") {
+            administrativoFields.classList.remove("hidden");
+        } else if (rolSelect.value === "paciente") {
+            pacienteFields.classList.remove("hidden");
+        } else if (rolSelect.value === "deportista") {
+            deportistaFields.classList.remove("hidden");
+        }
+    }
+
+</script>
+<script>
+    const rowsPerPage = 12;
+    let currentPage = 1;
+    let filteredRows = [];
+
+
+    function setupPagination() {
+        const pagination = document.getElementById("pagination");
+        const pageCount = Math.ceil(filteredRows.length / rowsPerPage);
+        pagination.innerHTML = "";
+
+        for (let i = 1; i <= pageCount; i++) {
+            const pageBtn = document.createElement("button");
+            pageBtn.innerText = i;
+            pageBtn.classList.add("page-btn");
+            pageBtn.style.margin = "0 5px";
+            pageBtn.onclick = function() {
+                currentPage = i;
+                displayPage();
+            };
+            pagination.appendChild(pageBtn);
+        }
+
+        displayPage();
+    }
+
+    function displayPage() {
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+
+        document.querySelectorAll("#tablaUsuariosBody tr").forEach(row => {
+            row.style.display = "none";
+        });
+
+        filteredRows.slice(start, end).forEach(row => {
+            row.style.display = "";
+        });
+    }
+
+    function buscarUsuario() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const tableRows = document.querySelectorAll("#tablaUsuariosBody tr");
+
+        filteredRows = Array.from(tableRows).filter(row => {
+            const cells = row.querySelectorAll("td");
+            return Array.from(cells).some(cell => cell.innerText.toLowerCase().includes(filter));
+        });
+
+        currentPage = 1;
+        setupPagination();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        filteredRows = Array.from(document.querySelectorAll("#tablaUsuariosBody tr"));
+        setupPagination();
+    });
+</script>
+</body>
+</html>

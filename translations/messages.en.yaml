@@ -78,6 +78,9 @@ series: "Series"
 comboEjercicios: "Exercise Combo"
 noRutinas: "No routines available"
 repeticiones: "Repetitions"
+resistenciaMuscular: "Muscle Resistance"
+resistenciaAnaerobica: "Anaerobic Resistance"
+noCalificaciones: "No ratings available"
 
 
 #calificaciones
@@ -85,3 +88,8 @@ calificar: "Rate"
 puntuacionMaxima: "Max Score"
 calificacionEsperada: "Expected Rating"
 
+
+fechas: "Dates"
+valores: "Values"
+graficoEvolucion: "Evolution Chart in Time"
+puedesGrafico: "You can see you physical evolution over time"
