@@ -315,6 +315,13 @@ class ClienteController
         $passwd = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
         $rol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_SPECIAL_CHARS);
 
+        $altura = filter_input(INPUT_POST, 'altura', FILTER_SANITIZE_SPECIAL_CHARS);
+        $peso = filter_input(INPUT_POST, 'peso', FILTER_SANITIZE_SPECIAL_CHARS);
+        $calle = filter_input(INPUT_POST, 'calle', FILTER_SANITIZE_SPECIAL_CHARS);
+        $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_SPECIAL_CHARS);
+        $esquina = filter_input(INPUT_POST, 'esquina', FILTER_SANITIZE_SPECIAL_CHARS);
+        $patologias = filter_input(INPUT_POST, 'patologias', FILTER_SANITIZE_SPECIAL_CHARS);
+
         if ($nombre === null || $apellido === null || $nroDocumento === null || $tipoDocumento === null || $fechaNacimiento === null || $correo === null || $passwd === null || $rol === null) {
             echo json_encode(['error' => 'Faltan datos']);
             exit();
@@ -383,11 +390,11 @@ class ClienteController
                     new ClienteModel(
                         $nroDocumento,
                         $tipoDocumento,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
+                        $altura,
+                        $peso,
+                        $calle,
+                        $numero,
+                        $esquina,
                         $correo,
                         null,
                         $fechaNacimiento,
@@ -406,6 +413,39 @@ class ClienteController
                 );
                 exit();
                 break;
+                case('deportista'):
+                if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
+                    $this->clienteService->crearCliente(
+                        new ClienteModel(
+                            $nroDocumento,
+                            $tipoDocumento,
+                            $altura,
+                            null,
+                            null,
+                            null,
+                            null,
+                            $correo,
+                            null,
+                            $fechaNacimiento,
+                            $nombre,
+                            $apellido,
+                            $rol
+                        )
+                    );
+                    if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'deportista') {
+                        echo json_encode(['error' => 'El deportista ya existe']);
+                        exit();
+                    }
+                    $usuarioService->crearDeportista(
+                        new UsuarioModel(
+                            $nroDocumento . "@" . "deportista",
+                            'deportista',
+                            $passwd,
+                            $usuarioService->generarToken()
+                        )
+                    );
+                    exit();
+                }
             default:
                 echo json_encode(['error' => 'Rol incorrecto']);
                 exit();

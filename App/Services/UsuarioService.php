@@ -231,5 +231,10 @@ class UsuarioService
         return $this->usuarioRepository->comprobarDocumentoRol($nroDocumento);
     }
 
+    public function comprobarRolAdministrativo(mixed $nroDocumento)
+    {
+        return $this->usuarioRepository->comprobarRolAdministrativo($nroDocumento);
+    }
+
 }
 

@@ -262,4 +262,20 @@ class UsuarioRepository extends Database
         }
 
     }
+
+    public function comprobarRolAdministrativo(mixed $nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ? ";
+        $stmt = $database->getConnection()->prepare($sql);
+        $rol = "administrativo";
+        $stmt->bind_param("ss", $nroDocumento, $rol);
+        $stmt->execute();
+        $stmt->bind_result($erol);
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        return $erol;
+    }
 }
