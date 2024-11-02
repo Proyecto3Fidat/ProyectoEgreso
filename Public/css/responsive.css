@@ -149,6 +149,10 @@
     /*Fin vista admin*/
 
     /*Inicio del dashboard*/
+    .btnEditar {
+        width: 50%;
+    }
+
     h1 {
         margin-top: 5rem;
     }
