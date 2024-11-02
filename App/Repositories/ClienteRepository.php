@@ -301,6 +301,7 @@ class ClienteRepository extends Database
 
     public function comprobarCliente($nroDocumento)
     {
+        echo $nroDocumento;
         $database = Database::getInstance();
         $database->connect();
         $sql = "SELECT nroDocumento FROM Cliente WHERE nroDocumento = ?";
@@ -312,6 +313,7 @@ class ClienteRepository extends Database
         $stmt->close();
         $database->disconnect();
         if ($num_of_rows > 0) {
+
             return "true";
 
         } else {

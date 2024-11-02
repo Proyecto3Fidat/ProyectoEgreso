@@ -5,8 +5,10 @@ namespace App\Controllers;
 use App\Models\UsuarioModel;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ClientetelefonoRepository;
+use App\Repositories\DeportistaRepository;
 use App\Services\ClienteService;
 use App\Services\ClientetelefonoService;
+use App\Services\DeportistaService;
 use App\Services\EligeService;
 use App\Services\SeAgendaService;
 use App\Services\UsuarioService;
@@ -305,15 +307,20 @@ class ClienteController
         $usuarioRepo = new UsuarioRepository();
         $usuarioService = new UsuarioService($usuarioRepo);
 
+        $depotistaRepo = new DeportistaRepository();
+        $deportistaService = new DeportistaService($depotistaRepo);
         var_dump($_POST);
         $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
         $apellido = filter_input(INPUT_POST, 'apellido', FILTER_SANITIZE_SPECIAL_CHARS);
         $nroDocumento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
         $tipoDocumento = filter_input(INPUT_POST, 'tipoDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+        $fechaNacimientoP = filter_input(INPUT_POST, 'fechaNacimientoP', FILTER_SANITIZE_SPECIAL_CHARS);
         $fechaNacimiento = filter_input(INPUT_POST, 'fechaNacimiento', FILTER_SANITIZE_SPECIAL_CHARS);
+
         $correo = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
         $passwd = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
         $rol = filter_input(INPUT_POST, 'rol', FILTER_SANITIZE_SPECIAL_CHARS);
+
 
         $altura = filter_input(INPUT_POST, 'altura', FILTER_SANITIZE_SPECIAL_CHARS);
         $peso = filter_input(INPUT_POST, 'peso', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -330,7 +337,7 @@ class ClienteController
         switch ($rol) {
             case 'entrenador':
                 if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
-                    if ($usuarioService->comprobarDocumentoRol($nroDocumento."@entrenador") === 'true') {
+                    if ($usuarioService->comprobarDocumentoRol($nroDocumento . "@entrenador") === 'true') {
                         echo json_encode(['error' => 'El entrenador ya existe']);
                         exit();
                     }
@@ -362,17 +369,17 @@ class ClienteController
                     )
                 );
                 $usuarioService->crearEntrenador(
-                         new UsuarioModel(
-                            $nroDocumento . "@" . "entrenador",
-                            'entrenador',
-                            $passwd,
-                            $usuarioService->generarToken()
+                    new UsuarioModel(
+                        $nroDocumento . "@" . "entrenador",
+                        'entrenador',
+                        $passwd,
+                        $usuarioService->generarToken()
                     )
-                    );
+                );
                 exit();
             case 'administrativo':
                 if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
-                    if ($usuarioService->comprobarDocumentoRol($nroDocumento."@administrativo") === 'true') {
+                    if ($usuarioService->comprobarDocumentoRol($nroDocumento . "@administrativo") === 'true') {
                         echo json_encode(['error' => 'El administrativo ya existe']);
                         exit();
                     }
@@ -413,39 +420,85 @@ class ClienteController
                 );
                 exit();
                 break;
-                case('deportista'):
+            case('deportista'):
+                if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'deportista') {
+                    echo json_encode(['error' => 'El deportista ya existe']);
+                    exit();
+                }
+
                 if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
-                    $this->clienteService->crearCliente(
-                        new ClienteModel(
-                            $nroDocumento,
-                            $tipoDocumento,
-                            $altura,
-                            null,
-                            null,
-                            null,
-                            null,
-                            $correo,
-                            null,
-                            $fechaNacimiento,
-                            $nombre,
-                            $apellido,
-                            $rol
-                        )
-                    );
-                    if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'deportista') {
-                        echo json_encode(['error' => 'El deportista ya existe']);
-                        exit();
-                    }
-                    $usuarioService->crearDeportista(
+                    $usuarioService->crearUsuario(
                         new UsuarioModel(
-                            $nroDocumento . "@" . "deportista",
-                            'deportista',
+                            $nroDocumento . "@" . "paciente",
+                            'paciente',
                             $passwd,
                             $usuarioService->generarToken()
                         )
                     );
+                    $usuarioService->guardarDeportista( $nroDocumento);
+                    $deportistaService->guardarDeportista($nroDocumento);
                     exit();
                 }
+
+                $this->clienteService->crearCliente(
+                    new ClienteModel(
+                        $nroDocumento,
+                        $tipoDocumento,
+                        $altura,
+                        $peso,
+                        $calle,
+                        $numero,
+                        $esquina,
+                        $correo,
+                        null,
+                        $fechaNacimiento,
+                        $nombre,
+                        $apellido,
+                        $rol
+                    )
+                );
+                $usuarioService->guardarDeportista($nroDocumento);
+                $deportistaService->guardarDeportista($nroDocumento);
+                exit();
+                break;
+            case 'paciente':
+                if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'paciente') {
+                    echo json_encode(['error' => 'El paciente ya existe']);
+                    exit();
+                }
+
+                if ($this->clienteService->comprobarCliente($nroDocumento) === 'true') {
+                    $usuarioService->crearUsuario(
+                        new UsuarioModel(
+                            $nroDocumento . "@" . "paciente",
+                            'paciente',
+                            $passwd,
+                            $usuarioService->generarToken()
+                        )
+                    );
+                    $usuarioService->guardarPaciente($nroDocumento);
+                    exit();
+                }
+
+                $this->clienteService->crearCliente(
+                    new ClienteModel(
+                        $nroDocumento,
+                        $tipoDocumento,
+                        $altura,
+                        $peso,
+                        $calle,
+                        $numero,
+                        $esquina,
+                        $correo,
+                        $patologias,
+                        $fechaNacimiento,
+                        $nombre,
+                        $apellido,
+                        $rol
+                    )
+                );
+                $usuarioService->guardarPaciente($nroDocumento);
+                exit();
             default:
                 echo json_encode(['error' => 'Rol incorrecto']);
                 exit();

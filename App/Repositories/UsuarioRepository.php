@@ -83,7 +83,7 @@ class UsuarioRepository extends Database
 
 
 
-    public function guardarDeportista($cedula)
+    public function guardarDeportista($cedula): void
     {
         $database = Database::getInstance();
         $database->connect();
@@ -270,7 +270,7 @@ class UsuarioRepository extends Database
         $sql = "SELECT rol FROM Usuario WHERE nroDocumento = ? ";
         $stmt = $database->getConnection()->prepare($sql);
         $rol = "administrativo";
-        $stmt->bind_param("ss", $nroDocumento, $rol);
+        $stmt->bind_param("s", $nroDocumento);
         $stmt->execute();
         $stmt->bind_result($erol);
         $stmt->fetch();
