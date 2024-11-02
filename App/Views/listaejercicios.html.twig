@@ -18,19 +18,19 @@
                     <table class="listaejercicio">
                         <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Grupo muscular</th>
-                            <th>Tipo de ejercicio</th>
+                            <th data-label="Nombre">Nombre</th>
+                            <th data-label="Descripcion">Descripción</th>
+                            <th data-label="Grupo muscular">Grupo muscular</th>
+                            <th data-label="Tipo de ejercicio">Tipo de ejercicio</th>
                         </tr>
                         </thead>
                         <tbody>
                     {% for ejercicio in ejercicios %}
                         <tr>
-                            <td>{{ ejercicio.nombre }}</td>
-                            <td>{{ ejercicio.descripcion }}</td>
-                            <td>{{ ejercicio.grupoMuscular }}</td>
-                            <td>{{ ejercicio.tipoEjercicio }}</td>
+                            <td data-label="Nombre">{{ ejercicio.nombre }}</td>
+                            <td data-label="Descripcion">{{ ejercicio.descripcion }}</td>
+                            <td data-label="Grupo muscular">{{ ejercicio.grupoMuscular }}</td>
+                            <td data-label="Tipo de ejercicio">{{ ejercicio.tipoEjercicio }}</td>
                         </tr>
                     {% endfor %}
                         </tbody>
