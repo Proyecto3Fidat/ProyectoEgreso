@@ -197,7 +197,16 @@
         text-align: center;
     }
     
+    .informacionUsuario {
+        font-size: 1.4rem;
+    }
 
+    /*Contenedor grafica*/
+    .evolucion {
+        width: 100%;
+        padding: 1rem;
+        margin: 1rem auto;
+    }
 
 
     /*Inicio lista de clientes y ficha tecnica Entrenador/Administrador */
@@ -245,6 +254,18 @@
         margin-top: 5rem;
     }
 
+    /*Metodos register*/
+    form .input {
+        width: 100%;
+        border: 1.5px solid #6f41bb;
+    }
+        form .input:focus, select .input:focus {
+            box-shadow: 5.5px 7px 0 rgb(111, 65, 187);
+            border-color: #a463d9;
+            outline: none;
+        }
+
+
     /*Metodos para opcion subir logo*/
     .upLogo {
         padding: 15px;
@@ -283,13 +304,5 @@
         width: 70% auto;
         margin-top: 1rem;
     }
-        .button:hover {
-            background-color: #6f41bb;
-        }
     /*Fin LoginUsuario*/
-
-
-
-
-    
 }

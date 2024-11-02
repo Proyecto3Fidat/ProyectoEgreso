@@ -35,13 +35,15 @@ h2 {
     flex-direction: column;
     align-items: center;
     border-radius: 2rem;
-    padding: 4rem;
+    padding: 7rem;
     margin: 4rem auto;
     gap: 2rem;
+    font-size: 2rem;
     background-color: #303030;
     box-shadow: 0 0 30px rgba(0, 0, 0, 1);
 }
 .informacionUsuario h2 {
+    margin-top: 2rem;
     font-size: 2rem;
 }
 
@@ -55,11 +57,12 @@ h2 {
     background-color: #222;
     color: #fff;
 }
+
 .btnEditar {
     cursor: pointer;
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    width: 20%;
+    width: auto;
     margin: 1rem auto;
     color: white;
     border-radius: 3rem;
@@ -68,15 +71,15 @@ h2 {
     box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
-    .btnEditar:hover {
-        transform: scale(1.1);
-        box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
-    }
+
+.btnEditar:hover {
+    transform: scale(1.1);
+    box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
+}
 
 .tablaCliente {
     background-color: #303030;
     padding: 1rem;
-    padding-top: .5rem;
     margin: 2rem auto;
     width: 100%;
     border-radius: 1rem;
@@ -84,25 +87,23 @@ h2 {
 }
 
 .clasCliente {
-    margin-top: 1rem;
-    border-collapse: collapse;
-
-    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
     width: 100%;
-    table-layout: auto;
-    min-width: 320px;
+    border-collapse: collapse;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+    table-layout: fixed;
 }
 
 .clasCliente th, .clasCliente td {
     padding: .7rem;
     text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
 
 .clasCliente th {
     background: linear-gradient(135deg, #6f41bb, #a63dd2);
     color: rgb(255, 255, 255);
     font-size: 1rem;
-    white-space: nowrap;
 }
 
 .clasCliente td {
@@ -110,17 +111,16 @@ h2 {
 }
 
 .clasCliente tr:nth-child(even) {
-    background-color: #222;
+    background-color: #2a2a2a;
 }
 
 .clasCliente tr:nth-child(odd) {
     background-color: #222;
 }
 
-.clasCliente  td:hover {
+.clasCliente td:hover {
     background-color: #555;
 }
-
 
 .rutina {
     display: flex;
@@ -143,11 +143,11 @@ h2 {
     border-color: #6f41bb;
     background: linear-gradient(135deg, #303030, #160d1a);
     box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 1);
+    transition: ease-out 400ms;
 }
 .btnAsignarRutina:hover {
     transform: scale(1.1);
     box-shadow: 2px 1px 4rem 1px rgba(111, 65, 187, 1);
-    transition: ease-out 600ms;
 }
 .tablaRutina {
     padding: 2rem;
@@ -164,37 +164,14 @@ h2 {
 .evolucion {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
-    padding: 1rem;
-
     background: linear-gradient(135deg, #EDF2F4, #EBEBEB);
-    background-color: #EDF2F4;
     color: #131313;
     padding: 7rem;
     margin: 4rem auto;
-
-    border-radius: 20rem 10rem;
-    box-shadow: 0 0 2rem 2px rgba(111, 65, 187);
-}
-.evolucion p {
-    text-align: center;
-    font-size: 2rem;
-    margin-top: 1rem;
-}
-
-.graficaEvolucion {
-    width: 75vw;
-    max-width: 1000px;
-    min-width: 320px;
-    margin: auto;
-}
-
-.graficaEvolucion img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    width: 80%;
+    border-radius: 1rem;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1);
 }
 
 .modal {
