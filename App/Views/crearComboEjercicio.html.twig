@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Ejercicio</title>
     <link rel="stylesheet" href="../../Public/css/crearComboEjercicio.css">
+
 </head>
 <body>
 <div class="crearEjercicio-Container">
@@ -24,6 +25,17 @@
         <h2>Lista de Ejercicios</h2>
         <ul id="lista-ejercicios"></ul>
     </div>
+
+    <style>
+        @media screen and (max-width:768px){
+            button {
+                width:80%;
+            }
+            input[type="submit"] {
+                width:60%;
+        }
+        }
+    </style>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
