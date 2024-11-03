@@ -32,4 +32,17 @@ class ComboEjercicioRepository
             return false;
         }
     }
+
+    public function guardar(\App\Models\ComboEjercicio $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO ComboEjercicio (nombreCombo) VALUES (?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $nombre = $param->getNombreCombo();
+        $stmt->bind_param('s', $nombre);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

@@ -33,4 +33,19 @@ class PracticaRepository extends Database
         $database->disconnect();
         return $practicas;
     }
+
+    public function guardar(\App\Models\PracticaModel $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Practica (idRutina, nroDocumento, tipoDocumento) VALUES (?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $idRutina = $param->getIdRutina();
+        $nroDocumento = $param->getNroDocumento();
+        $tipoDocumento = $param->getTipoDocumento();
+        $stmt->bind_param("iss", $idRutina, $nroDocumento, $tipoDocumento);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }
