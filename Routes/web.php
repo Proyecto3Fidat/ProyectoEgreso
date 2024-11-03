@@ -667,7 +667,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                         $resultado [] = $r;
                     }
                     if (empty($resultado)) {
-                        echo "no hay rutinas";
+                        $template->renderTemplate('noRutinas');
                         exit();
                     }
                     $data = [

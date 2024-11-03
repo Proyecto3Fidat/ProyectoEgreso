@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No hay rutinas</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .message {
+            font-size: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, #303030, #160d1a);
+            border-radius: 1rem;
+            border: 2px solid #6f41bb;
+            box-shadow: 0 0 2rem 2px rgba(111, 65, 187, 0.5);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+            cursor: pointer;
+        }
+        .message:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 3rem 3px rgba(111, 65, 187, 0.8);
+        }
+    </style>
+</head>
+<body>
+<div class="message" id="noRoutinesMessage">No hay rutinas</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var message = document.getElementById('noRoutinesMessage');
+        message.addEventListener('mouseover', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 0 3rem 3px rgba(111, 65, 187, 0.8)';
+        });
+        message.addEventListener('mouseout', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 0 2rem 2px rgba(111, 65, 187, 0.5)';
+        });
+    });
+</script>
+</body>
+</html>
