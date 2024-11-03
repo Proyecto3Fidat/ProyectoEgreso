@@ -413,9 +413,9 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedPlanPago(new \App\Models\PlanPagoModel('anual', 'Pago de un año', '12 meses'));
 
 
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('2455963147', 'ci', '2024/06/13', 'trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('97121013', 'ci', '2024/06/13', 'trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('12326789', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('2455963147', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('97121013', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('12326789', 'ci', '2024/06/13', 'trimestral'));
 
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca plano', 'El press de banca activa los músculos del pecho, sobre todo el músculo pectoral mayor (los pectorales)', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca inclinado', ' Los principales músculos que participan son el pectoral mayor (con énfasis en la porción superior), el deltoides (porción anterior) y el tríceps. ', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
@@ -650,31 +650,39 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
             });
 
             SimpleRouter::get('/asignarRutina', function () {
-                $resultados = [];
-                $rutina = new App\Controllers\RutinaController();
-                $compone = new App\Controllers\ComponeController();
-                $template = new TemplateController();
-                $rutinas = $rutina->obtenerRutinas();
-                foreach ($rutinas as $rutina) {
-                    $r = [
-                        'combos' => $compone->obtenerCombos($rutina['idRutina']),
-                        'idRutina' => $rutina['idRutina'],
-                        'series' => $rutina['series'],
-                        'repeticiones' => $rutina['repeticiones'],
-                        'dia' => $rutina['dia']
+                try {
+                    $resultados = [];
+                    $rutina = new App\Controllers\RutinaController();
+                    $compone = new App\Controllers\ComponeController();
+                    $template = new TemplateController();
+                    $rutinas = $rutina->obtenerRutinas();
+                    foreach ($rutinas as $rutina) {
+                        $r = [
+                            'combos' => $compone->obtenerCombos($rutina['idRutina']),
+                            'idRutina' => $rutina['idRutina'],
+                            'series' => $rutina['series'],
+                            'repeticiones' => $rutina['repeticiones'],
+                            'dia' => $rutina['dia']
+                        ];
+                        $resultado [] = $r;
+                    }
+                    if (empty($resultado)) {
+                        echo "no hay rutinas";
+                        exit();
+                    }
+                    $data = [
+                        'rutinas' => $resultado,
+                        'documento' => $_GET['documento']
                     ];
-                    $resultado [] = $r;
+
+                    $template->renderTemplate('asignarRutina', $data);
+                }catch (Exception $e){
+                    echo "no hay rutinas";
                 }
-                $data = [
-                    'rutinas' => $resultado,
-                    'documento' => $_GET['documento']
-                ];
-
-                $template->renderTemplate('asignarRutina', $data);
-
             });
 
             SimpleRouter::post('/crearRutina', function () {
+
                 $contiene = new App\Controllers\ContieneController();
                 $compone = new App\Controllers\ComponeController();
                 $rutina = new App\Controllers\RutinaController();
@@ -722,6 +730,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                 $template = new TemplateController();
                 $template->renderTemplate('alerta', $datos);
                 exit();
+
 
             });
 

@@ -164,3 +164,8 @@ seleccionarImagen: "Seleccionar Imagen"
 plan3meses: "En este plan, puedes concurrir las veces semanales que quieras a nuestras instalaciones por 3 meses. Tienes acceso a todas las máquinas que quieras, y si quieres, puedes trabajar con tu propia rutina, pero te recomendamos que te anotes a una de las rutinas preparadas por nuestros entrenadores a cargo del gimnasio. "
 plan6meses: "Tienes acceso a nuestras instalaciones y máquinas por 6 meses, posiblemente más económicamente rentable que el plan de 3 meses si sabes que quieres concurrir al gimnasio a largo plazo. "
 plananual: "El plan más rentable económicamente, ya que tienes acceso a nuestras instalaciones todo el año, además de sesiones personalizadas con nuestro personal altamente capacitado. Además, te tendremos más en cuenta a la hora de agendar, así que no tendrás que preocuparte de que no haya lugar en lo que te quieres agendar. "
+
+gym: "Gimnasio"
+gymDescripcion: 'En (GYM) te vamos a ayudar a completar todos tus objetivos fitness, ya sea en gimnasio convencional o en fisioterapia. Tenemos los mejores equipos de ejercicio del mercado, todo lo que necesites está al alcance de tu mano con (GYM). Así que si querés comenzar tu vida "culturista" o simplemente recuperarte de una lesión o incluso fortalecer tus músculos o articulaciones, (GYM) es el lugar que estás buscando, simplemente elegí un plan y comenzá a entrenar. '
+oficinas: "Nuestras Oficinas"
+contactanos: "Contactanos"
