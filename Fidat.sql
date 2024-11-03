@@ -327,3 +327,8 @@ ADD FOREIGN KEY (nombre) REFERENCES Deporte(nombre) ON DELETE CASCADE;
 
 ALTER TABLE Relacionado
 ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, tipoDocumento) ON DELETE CASCADE;
+
+ALTER TABLE Cliente
+ADD COLUMN fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+
