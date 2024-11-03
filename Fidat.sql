@@ -331,4 +331,7 @@ ADD FOREIGN KEY (nroDocumento, tipoDocumento) REFERENCES Cliente(nroDocumento, t
 ALTER TABLE Cliente
 ADD COLUMN fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
+ALTER TABLE Relacionado
+ADD COLUMN fechaSeleccion TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
 
