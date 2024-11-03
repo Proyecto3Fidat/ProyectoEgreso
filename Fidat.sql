@@ -149,7 +149,7 @@ CREATE TABLE Entrena(
     nombre VARCHAR(20),
     nroDocumento VARCHAR(30) NOT NULL,
     tipoDocumento VARCHAR (16),
-    PRIMARY KEY (nombre)
+    PRIMARY KEY (nombre, nroDocumento, tipoDocumento)
 );
 
 CREATE TABLE Relacionado(
