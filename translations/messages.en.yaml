@@ -1,8 +1,16 @@
 # translations/messages.en.yaml
 
+#Index
+intro: "At (GYM) we will help you achieve all your fitness objectives, either on a conventional gym or physiotherapy. We have the best quality machines on the market and everything you need is a subscription away at (GYM). So, if you're trying to start your fitness career,  recover from an injury or just strengthen your muscles and joints, (GYM) is the right place for you. Just choose a plan and start training."
+contactanos : "Contact Info"
+oficinas: "Our offices"
 
 
 #Agenda
+agenda : "Schedule"
+noAgenda : "No Schedule Available"
+horaInicio : "Start Time"
+horaFin: "End Time"
 lunes: "Monday"
 martes: "Tuesday"
 miercoles: "Wednesday"
@@ -19,13 +27,17 @@ idioma: "Language"
 
 #footer
 gracias: "Thanks for choosing us"
-redes: "Our social networks"
+redes: "Our social Media"
 
 
 #Planes
-3Meses: "3 months plan"
-6Meses: "6 months plan"
+3Meses: "3 month plan"
+6Meses: "6 month plan"
 anual: "Annual plan"
+plan3meses: "With this plan, you can attend as many times a week as you can for 3 months. You have access to any machine you want and also work on your own routine, if you so desire. Although, we recommend you enroll to one of our trainer mandated classes."
+plan6meses: "With this plan, you have access to all machines and equipment for 6 months. This plan is more economically profitable if you plan on attending the gym long-term."
+plananual: "Most profitable plan, you have access to all our equipment for a full year, as well as custom-made training sessions with our highly trained staff. Lastly, you're going to be considered earlier when it's time to schedule a class, so you don't have to worry about waiting your turn."
+
 
 
 #Login
@@ -52,15 +64,16 @@ numero: "Door Number"
 esquina: "Corner"
 formato: "(Format: +598xxxxxxxx)"
 
-#ListaEntrenador
-nombreCliente: "Client Name"
-rol: "Role"
-ficha: "File"
+#dashUsuario
+bienvenido : "Welcome to your dashboard, "
 
 #dashEntrenador
 informacion: "User Information"
 edad: "Age"
 calificaciones: "Ratings"
+#antes del "'s" va el nombre del usuario. Ej: Juan's Technical file
+fichatecnica : "'s Technical file"
+gestionar: "Manage"
 
 rutina: "Routine"
 fecha: "Date"
@@ -87,9 +100,56 @@ noCalificaciones: "No ratings available"
 calificar: "Rate"
 puntuacionMaxima: "Max Score"
 calificacionEsperada: "Expected Rating"
-
+resiliencia : "Resilience"
 
 fechas: "Dates"
 valores: "Values"
-graficoEvolucion: "Evolution Chart in Time"
+graficoEvolucion: "Over Time Evolution Chart"
 puedesGrafico: "You can see you physical evolution over time"
+
+#ListaEntrenador
+listaDeCliente: "Client List"
+nombreCliente: "Client Name"
+rol: "Role"
+ficha: "File"
+
+listaDeEjercicios: "Exercise List"
+descripcion: "description"
+grupoMuscular : "Muscle group"
+Tipo de ejercicio: "Type"
+
+crearEjercicio: "Add Exercise"
+nombreEjercicio: "Exercise name"
+descripcionEjercicio: "Description"
+
+#Seleccione una opción
+pectoralHombroTricep: "Chest, Shoulder and Triceps"
+espaldaHombroBicep: "Back, Shoulder and Biceps"
+pierna: "Leg"
+entrenamientoPilates: "Pilates Training"
+
+tipoDeEjercicio: "Exercise type"
+aerobico: "Aerobic"
+fuerzaoResistencia: "Strength and Resistance"
+enviar: "Send"
+
+#Crear Combo
+crearCombo: "Add Exercise Combo"
+nombredelcombo: "Combo Name"
+aniadirEjercicio: "Add another exercise"
+
+#Crear Rutina
+crearRutina: "Add Routine"
+seleccionarCombo: "Choose combo"
+agregarCombo: "Add Combo"
+infoCombo: "Combo Info"
+ejerciciosSeleccionados: "Selected Exercises"
+botoncrearRutina: "Create Routine"
+
+
+#adminDash
+
+detalles: "Details"
+ingresarLocal: "Add new facility"
+subirLogo: "Upload website logo"
+buscar: "Search by name or document..."
