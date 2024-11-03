@@ -88,9 +88,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para abrir la ficha técnica
     function abrirFichaTecnica(clienteId) {
         const ficha = document.getElementById('fichagnl');
-        const listaclientes = document.getElementById("tablaClientes");
-        ficha.style.display = 'block';
-        listaclientes.style.display = "none";
+        const listaclientes = document.getElementById('tablaClientes');
+        const iconoBuscador = document.getElementById('buscadorIcono');
+        const containerBtnAdmin = document.getElementById('containerBotonesAdmin');
+        const searchInput = document.getElementById('searchInput');
+        const pagination = document.getElementById('pagination');
+        const upLogo = document.getElementById('upLogo');
+            searchInput.style.display = 'none';
+            pagination.style.display = 'none';
+            ficha.style.display = 'block';
+            iconoBuscador.style.display = 'none';
+            listaclientes.style.display = 'none';
+            containerBtnAdmin.style.display = 'none';
+            upLogo.style.display = 'none';
 
         const cliente = clientes.find(c => c.nroDocumento === clienteId);
 
@@ -128,7 +138,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Agregar evento para cerrar la ficha técnica
     document.getElementById('cerrarficha').addEventListener('click', function () {
-        document.getElementById('fichagnl').style.display = 'none';
-        document.getElementById("tablaClientes").style.display = "block";
-    });
+    const ficha = document.getElementById('fichagnl');
+    const pagination = document.getElementById('pagination');
+    const searchInput = document.getElementById('searchInput');
+    const iconoBuscador = document.getElementById('buscadorIcono');
+    const listaclientes = document.getElementById('tablaClientes');
+    const containerBtnAdmin = document.getElementById('containerBotonesAdmin');
+    const upLogo = document.getElementById('upLogo');
+
+    if (ficha && pagination && searchInput && iconoBuscador && listaclientes) {
+        ficha.style.display = 'none';
+        pagination.style.display = 'flex';
+        searchInput.style.display = 'block';
+        iconoBuscador.style.display = 'flex';
+        listaclientes.style.display = 'flex';
+        containerBtnAdmin.style.display = 'flex';
+        upLogo.style.display = 'block';
+    }
+});
+
 });

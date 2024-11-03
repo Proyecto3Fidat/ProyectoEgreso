@@ -75,9 +75,9 @@
 <ul class="listmenu2" id="welcome-message">
 </ul>
 
-<section class="buscador-clientes">
+<section class="buscador-clientes"  >
     <input type="text" id="searchInput" placeholder="Buscar por nombre o documento...">
-    <svg class="buscador-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg id="buscadorIcono" class="buscador-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
@@ -294,13 +294,13 @@
     </div>
 </div>
 
-<div class="containerBotonesAgenda">
+<div class="containerBotonesAgenda" id="containerBotonesAdmin">
     <!-- Botones para Ingresar Local y Agenda -->
     <button id="btnIngresarLocal" class="btnCargarMas">Ingresar Local</button>
     <button id="btnAgenda" class="btnCargarMas">Agenda</button>
 </div>
 
-<form class="upLogo" action="/logo" method="post" enctype="multipart/form-data">
+<form class="upLogo" id="upLogo" action="/logo" method="post" enctype="multipart/form-data">
     <label for="fileToUpload">Subir logo de la pagina:</label>
     <input type="file" name="logo" id="fileToUpload">
     <input type="submit" value="Subir archivo" name="submit">

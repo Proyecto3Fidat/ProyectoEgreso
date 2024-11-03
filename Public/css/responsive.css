@@ -146,6 +146,10 @@
         flex-direction: column;
         text-align: center;
     }
+
+    .buscador-clientes {
+        margin-top: 5rem;
+    }
     /*Fin vista admin*/
 
     /*Inicio del dashboard*/
