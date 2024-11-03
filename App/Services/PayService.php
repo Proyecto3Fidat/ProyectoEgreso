@@ -50,7 +50,7 @@ class PayService
 
         if (!isset($pago['fechaVencimiento'])){
             session_destroy();
-            echo "localStorage.clear();";
+            echo "<script>localStorage.clear();</script>";
             echo $twig->render('pagoCaducado.html.twig');
             die();
         }

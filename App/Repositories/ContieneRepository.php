@@ -75,4 +75,18 @@ class ContieneRepository extends Database
         $database->disconnect();
        return $ejercicios;
     }
+
+    public function guardar(\App\Models\ContieneModel $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Contiene (nombreCombo, idEjercicio) VALUES (?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $idEjercicio = $param->getIdEjercicio();
+        $nombreCombo = $param->getNombreCombo();
+        $stmt->bind_param('si', $nombreCombo,$idEjercicio);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

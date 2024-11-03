@@ -145,4 +145,34 @@ class DataSeeder
 
     }
 
+    public function seedComboEjercicio(\App\Models\ComboEjercicio $param)
+    {
+        $comboEjercicioRepository = new \App\Repositories\ComboEjercicioRepository();
+        $comboEjercicioRepository->guardar($param);
+    }
+
+    public function seedContiene(\App\Models\ContieneModel $param)
+    {
+        $contieneRepository = new \App\Repositories\ContieneRepository();
+        $contieneRepository->guardar($param);
+    }
+
+    public function seedRutina(\App\Models\RutinaModel $param)
+    {
+        $rutinaRepository = new \App\Repositories\RutinaRepository();
+        $rutinaRepository->guardar($param);
+    }
+
+    public function seedCompone(\App\Models\ComponeModel $param)
+    {
+        $componeRepository = new \App\Repositories\ComponeRepository();
+        $componeRepository->guardar($param);
+    }
+
+    public function seedPractica(\App\Models\PracticaModel $param)
+    {
+        $practicaRepository = new \App\Repositories\PracticaRepository();
+        $practicaRepository->guardar($param);
+    }
+
 }

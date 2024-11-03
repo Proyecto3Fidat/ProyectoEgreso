@@ -6,11 +6,13 @@ class ComponeModel
 {
     private $idEjercicio;
     private $nombreCombo;
+    private $idRutina;
 
-    public function __construct($idEjercicio, $nombreCombo)
+    public function __construct($idEjercicio, $nombreCombo, $idRutina)
     {
         $this->idEjercicio = $idEjercicio;
         $this->nombreCombo = $nombreCombo;
+        $this->idRutina = $idRutina;
     }
 
     public function getIdEjercicio()
@@ -34,5 +36,17 @@ class ComponeModel
         $this->nombreCombo = $nombreCombo;
         return $this;
     }
+
+    public function getIdRutina()
+    {
+        return $this->idRutina;
+    }
+
+    public function setIdRutina($idRutina)
+    {
+        $this->idRutina = $idRutina;
+        return $this;
+    }
+
 
 }
