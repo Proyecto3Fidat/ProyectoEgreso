@@ -101,6 +101,15 @@
     #diasagenda{
         display: none;
     }
+    
+    /*Responsive calificar*/
+    .content {
+        width: 100%;
+        text-align: center;
+        margin: 1rem auto;
+        display: flex;
+        flex-direction: column;
+    }
 
     /*Inicio de responsive horarios*/
     .horarios, .horarios thead, .horarios tbody, .horarios th, .horarios td, .horarios tr {
@@ -321,9 +330,8 @@
             margin-bottom: 0.5rem;
         }
 
-
     /*Form loginUsuario*/
-    form {
+    form #loginUsuario {
         width: 70%;
         margin: 10rem auto 40px;
         display: flex;

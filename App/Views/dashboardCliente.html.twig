@@ -105,25 +105,25 @@
         </div>
     </section>
 
-    <section class="rutina">
+    <section class="calificacion">
         <h2>{{ translator.trans('rutina') }}</h2>
-        <div class="tablaRutina">
+        <div class="tablaCliente">
             <table class="clasCliente" id="tablaCalificaciones">
                 <thead>
                 <tr>
-                    <th>{{ translator.trans('dia') }}</th>
-                    <th>{{ translator.trans('series') }}</th>
-                    <th>{{ translator.trans('repeticiones') }}</th>
-                    <th>{{ translator.trans('comboEjercicios') }}</th>
+                    <th data-label="dia">{{ translator.trans('dia') }}</th>
+                    <th data-label="series">{{ translator.trans('series') }}</th>
+                    <th data-label="repeticiones">{{ translator.trans('repeticiones') }}</th>
+                    <th data-label="comboEjercicios">{{ translator.trans('comboEjercicios') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for rutina in practicas %}
                     <tr>
-                        <td>{{ rutina.dia }}</td>
-                        <td>{{ rutina.series }}</td>
-                        <td>{{ rutina.repeticiones }}</td>
-                        <td>
+                        <td data-label="dia">{{ rutina.dia }}</td>
+                        <td data-label="series">{{ rutina.series }}</td>
+                        <td data-label="repeticiones">{{ rutina.repeticiones }}</td>
+                        <td data-label="comboEjercicios">
                             {% for combo in rutina.combo %}
                                 {{ combo.nombreCombo }}{% if not loop.last %}, {% endif %}
                             {% endfor %}

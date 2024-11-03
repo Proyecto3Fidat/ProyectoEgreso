@@ -14,7 +14,7 @@
     {% include 'header.html.twig' %}
     </header>
 
-    <form action="/login" method="post" onsubmit="return errorContraseña()">
+    <form id="loginUsuario" action="/login" method="post" onsubmit="return errorContraseña()">
         <h2>{{ translator.trans('usuario') }}</h2>
         <input type="text" required name="documento" placeholder="{{ translator.trans('documento') }}" > <br> <br>
         <h2>{{ translator.trans('contrasena') }}</h2>
