@@ -66,6 +66,7 @@ formato: "(Format: +598xxxxxxxx)"
 
 #dashUsuario
 bienvenido : "Welcome to your dashboard, "
+imprimir: "Print"
 
 #dashEntrenador
 informacion: "User Information"
