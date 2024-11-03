@@ -12,7 +12,6 @@
             {% include 'header.html.twig' %}
         <div class="registerContainer">
 
-
     <form action= "/registrarcliente" method= "POST" onsubmit="return validateForm()">
         <fieldset>
             <input type="text" maxlength="30" name="nombre" required placeholder="{{ translator.trans('nombre') }}" class="input">
@@ -25,7 +24,6 @@
             <br></br>
             <input type="password"  name="passwd" minlength= "08" required placeholder="{{ translator.trans('passwd') }}" class="input">
         </fieldset>
-        
         <fieldset>
             <select name="tipoDocumento" class="input">
             <option value="CI">{{ translator.trans('cedula') }}</option>
