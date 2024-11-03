@@ -222,12 +222,12 @@
 </head>
 <body>
 <div class="container">
-    <h1>Reserva de Local</h1>
+    <h1>{{ translator.trans('reservaLocal') }}</h1>
     <form id="form-seleccion-local" method="post" action="/agendar">
         <div>
-            <label for="select-local">Seleccionar Local:</label>
+            <label for="select-local">{{ translator.trans('reservaLocal') }}:</label>
             <select id="select-local" name="local" required>
-                <option value="" disabled selected>Seleccione un local</option>
+                <option value="" disabled selected>{{ translator.trans('seleccionarAgenda') }}</option>
                 {% for local in locales %}
                     <option value="{{ loop.index0 }}"
                             data-calle="{{ local.calle }}"
@@ -242,32 +242,32 @@
         </div>
 
         <div id="documento" style="display: none;">
-            <label for="documento">Documento:</label>
+            <label for="documento">{{ translator.trans('documento') }}:</label>
             <input type="text" id="documento" name="documento" required value="{{ nombre }}">
         </div>
 
         <div id="detalles-local" style="display: none;">
-            <h3>Detalles del Local</h3>
+            <h3>{{ translator.trans('detalleLocal') }}</h3>
             <div>
-                <label for="calle">Calle:</label>
+                <label for="calle">{{ translator.trans('calle') }}:</label>
                 <input type="text" id="calle" name="calle" readonly>
             </div>
             <div>
-                <label for="esquina">Esquina:</label>
+                <label for="esquina">{{ translator.trans('esquina') }}:</label>
                 <input type="text" id="esquina" name="esquina" readonly>
             </div>
             <div>
-                <label for="nroPuerta">Número de Puerta:</label>
+                <label for="nroPuerta">{{ translator.trans('numero') }}:</label>
                 <input type="text" id="nroPuerta" name="nroPuerta" readonly>
             </div>
             <div>
-                <label for="capXTurno">Capacidad por Turno:</label>
+                <label for="capXTurno">{{ translator.trans('capacidad') }}:</label>
                 <input type="text" id="capXTurno" name="capXTurno" readonly>
             </div>
         </div>
 
         <div id="seleccion-agenda" style="display: none;">
-            <h3>Seleccionar Agenda(s)</h3>
+            <h3>{{ translator.trans('seleccionarAgenda') }}</h3>
             <div class="checkbox-group">
                 {% for agenda in agendas %}
                     <label class="checkbox-label">
@@ -276,7 +276,7 @@
                                data-hora-inicio="{{ agenda.horaInicio }}"
                                data-hora-fin="{{ agenda.horaFin }}"
                                data-agendados="{{ agenda.agendados }}">
-                        {{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} (Agendados: {{ agenda.agendados }})
+                        {{ agenda.dia }} - {{ agenda.horaInicio }} a {{ agenda.horaFin }} ({{ translator.trans('agendados') }}: {{ agenda.agendados }})
                     </label>
                 {% endfor %}
             </div>
@@ -285,11 +285,11 @@
         <div id="agendas-seleccionadas"></div>
         <input type="hidden" id="nombreLocal" name="nombreLocal">
 
-        <button type="submit">Enviar Reserva</button>
+        <button type="submit">{{ translator.trans('enviarReserva') }}</button>
     </form>
 
     <section id="agendas-ya-asignadas">
-        <h3>Agendas Ya Asignadas</h3>
+        <h3>{{ translator.trans('agendasAsignadas') }}</h3>
         {% if agendasYaAsignadas is not empty %}
             <ul>
                 {% for agenda in agendasYaAsignadas %}
@@ -300,7 +300,7 @@
                             <input type="hidden" name="dia" value="{{ agenda.dia }}">
                             <input type="hidden" name="horaInicio" value="{{ agenda.horaInicio }}">
                             <input type="hidden" name="horaFin" value="{{ agenda.horaFin }}">
-                            <button type="submit" class="delete-btn">Eliminar</button>
+                            <button type="submit" class="delete-btn">{{ translator.trans('eliminar') }}</button>
                         </form>
                     </li>
                 {% endfor %}

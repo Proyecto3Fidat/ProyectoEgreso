@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (cliente) {
             document.querySelector('.fichagnrl h4').textContent = `Ficha técnica de ${cliente.nombre}`;
-            document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `Documento: ${cliente.nroDocumento}`;
+            document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `{{ translator.trans('documento') }}: ${cliente.nroDocumento}`;
             document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `Tipo de Documento: ${cliente.tipoDocumento}`;
             document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `Edad: ${cliente.edad || 'N/A'}`;
             document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `Email: ${cliente.email}`;

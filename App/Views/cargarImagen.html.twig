@@ -57,12 +57,12 @@
 </head>
 <body>
 <div class="upload-container">
-    <h2 style="color: #8a2be2;">Cargar Foto de Perfil</h2>
+    <h2 style="color: #8a2be2;">{{ translator.trans('cargarFotoPerfil') }}</h2>
     <div class="preview" id="imagePreview"></div>
     <input type="file" id="fileInput" class="file-input" accept=".jpg, .jpeg, .png, .gif">
     <input type="hidden" id="docName" value="{{ documento }}" name="docName">
-    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">Seleccionar Imagen</button>
-    <button class="submit-btn" id="submitBtn" disabled>Subir Imagen</button>
+    <button class="upload-btn" onclick="document.getElementById('fileInput').click()">{{ translator.trans('seleccionarImagen') }}</button>
+    <button class="submit-btn" id="submitBtn" disabled>{{ translator.trans('subirImagen') }}</button>
 </div>
 
 <script>

@@ -115,7 +115,7 @@ rol: "Role"
 ficha: "File"
 
 listaDeEjercicios: "Exercise List"
-descripcion: "description"
+descripcion: "Description"
 grupoMuscular : "Muscle group"
 Tipo de ejercicio: "Type"
 
@@ -156,7 +156,9 @@ detalles: "Details"
 ingresarLocal: "Add new facility"
 subirLogo: "Upload website logo"
 buscar: "Search by name or document..."
-
+ingresarPago: "Add new payment"
+subirImagen: "Upload image"
+agendar: "Schedule"
 
 
 #main Entrenador
@@ -169,3 +171,31 @@ editar: "Edit"
 
 seleccioneRutina: "Select Routine"
 rutinaSeleccionada: "Selected Routine"
+
+direccion: "Address"
+nombrePlan: "Plan Name"
+tipoPlan: "Plan Type"
+fechaVencimiento: "Expiration Date"
+fechaDeAgenda: "Schedule Date"
+diaDeAgenda: "Schedule Day"
+verificacionAsistencia: "Attendance Verification"
+
+seleccionarPlan: "Select Plan"
+descripcionPlan: "Plan Description"
+tipodePlan: "Plan Type"
+numeroDocumento: "Document Number"
+fechaPago: "Payment Date"
+
+reservaLocal: "Facility Reservation"
+seleccionarLocal: "Select Facility"
+detalleLocal: "Facility Details"
+capacidad: "Capacity"
+seleccionarAgenda: "Select Schedule"
+agendados: "Scheduled"
+enviarReserva: "Send Reservation"
+agendasAsignadas: "Assigned Schedules"
+noAgendas: "No schedules available"
+
+cargarFotoPerfil: "Upload Profile Picture"
+cargaFoto: "Upload Picture"
+seleccionarImagen: "Select Image"

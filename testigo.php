@@ -10,21 +10,19 @@
     <title>Lista de Clientes</title>
     <style>
 
-        /* Asegurar que la ficha técnica se oculte por defecto */
         #fichagnl {
             display: none;
         }
     </style>
     <style>
-        /* Pantalla de carga (preloader) */
         #preloader {
             position: fixed;
             width: 100%;
             height: 100%;
-            background: #000000; /* Fondo negro para la pantalla de carga */
+            background: #000000;
             top: 0;
             left: 0;
-            z-index: 9999; /* Asegurarse de que esté sobre todos los demás elementos */
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,7 +32,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db; /* Color del spinner */
+            border-top: 5px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -51,12 +49,12 @@
 </head>
 
 <body>
-{% include  'header.html.twig' %}
+{% include 'header.html.twig' %}
 <ul class="listmenu2" id="welcome-message">
 </ul>
 
 <section class="buscador-clientes"  >
-    <input type="text" id="searchInput" placeholder="Buscar por nombre o documento...">
+    <input type="text" id="searchInput" placeholder="{{ translator.trans('buscar') }}">
     <svg id="buscadorIcono" class="buscador-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -81,7 +79,7 @@
 
 <div class="fichagnrl" id="fichagnl">
     <section class="headFicha">
-        <h4>{{ translator.trans('fichaTecnica') }} </h4>
+        <h4>Ficha técnica de </h4>
         <button class="cerrarficha" id="cerrarficha" data-cliente-id="">
             <i class="fa-solid fa-xmark fa-2xl" style="color: #ffffff;"></i>
         </button>
@@ -123,6 +121,7 @@
         </form>
     </div>
 </div>
+<!-- Modal para iframe -->
 <div id="modal-overlay" class="modal-overlay">
     <div class="modal-content">
         <button class="modal-close-button">
@@ -272,167 +271,13 @@
 </div>
 
 <form class="upLogo" id="upLogo" action="/logo" method="post" enctype="multipart/form-data">
-    <label for="fileToUpload">{{ translator.trans('subirLogo') }}:</label>
+    <label for="fileToUpload">{{ translator.trans('subirLogo') }}</label>
     <input type="file" name="logo" id="fileToUpload">
     <input type="submit" value="Subir archivo" name="submit">
 </form>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        let clientes = [];
-        let clientesFiltrados = [];
-        const itemsPerPage = 10;
-        let currentPage = 1;
 
-        fetch('/usuario/obtenerListaClientesAdmin')
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    console.error(data.error);
-                    alert('Hubo un problema al cargar la lista de clientes.');
-                    return;
-                }
-                clientes = data;
-                clientesFiltrados = clientes;
-                renderTable();
-                setupPagination();
-            })
-            .catch(error => {
-                console.error('Error al cargar la lista de clientes:', error);
-                alert('Hubo un problema al cargar la lista de clientes.');
-            });
-
-        // Función para renderizar la tabla
-        function renderTable() {
-            const tbody = document.querySelector('#tablaClientes tbody');
-            tbody.innerHTML = '';
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const pageClients = clientesFiltrados.slice(start, end);
-
-            pageClients.forEach(cliente => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${cliente.nombre}</td>
-                    <td>${cliente.nroDocumento}</td>
-                    <td>${cliente.rol}</td>
-                    <td><button class="btnfichatecnica" data-cliente-id="${cliente.nroDocumento}">{{ translator.trans('detalles') }}</button></td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            document.querySelectorAll('.btnfichatecnica').forEach(button => {
-                button.addEventListener('click', function () {
-                    const clienteId = this.getAttribute('data-cliente-id');
-                    abrirFichaTecnica(clienteId);
-                });
-            });
-        }
-
-        function setupPagination() {
-            const pagination = document.getElementById('pagination');
-            pagination.innerHTML = '';
-            const totalPages = Math.ceil(clientesFiltrados.length / itemsPerPage);
-
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                if (i === currentPage) {
-                    pageButton.classList.add('active');
-                }
-                pageButton.addEventListener('click', function () {
-                    currentPage = i;
-                    renderTable();
-                    setupPagination();
-                });
-                pagination.appendChild(pageButton);
-            }
-        }
-
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', function () {
-            const searchValue = searchInput.value.toLowerCase();
-            clientesFiltrados = clientes.filter(cliente => {
-                return cliente.nombre.toLowerCase().includes(searchValue) ||
-                    cliente.nroDocumento.toLowerCase().includes(searchValue);
-            });
-            currentPage = 1;
-            renderTable();
-            setupPagination();
-        });
-
-        function abrirFichaTecnica(clienteId) {
-            const ficha = document.getElementById('fichagnl');
-            const listaclientes = document.getElementById('tablaClientes');
-            const iconoBuscador = document.getElementById('buscadorIcono');
-            const containerBtnAdmin = document.getElementById('containerBotonesAdmin');
-            const searchInput = document.getElementById('searchInput');
-            const pagination = document.getElementById('pagination');
-            const upLogo = document.getElementById('upLogo');
-            searchInput.style.display = 'none';
-            pagination.style.display = 'none';
-            ficha.style.display = 'block';
-            iconoBuscador.style.display = 'none';
-            listaclientes.style.display = 'none';
-            containerBtnAdmin.style.display = 'none';
-            upLogo.style.display = 'none';
-
-            const cliente = clientes.find(c => c.nroDocumento === clienteId);
-
-            if (cliente) {
-                document.querySelector('.fichagnrl h4').textContent = `Ficha técnica de ${cliente.nombre}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(1)').textContent = `{{ translator.trans('documento') }}: ${cliente.nroDocumento}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(2)').textContent = `{{ translator.trans('tipoDocumento') }}: ${cliente.tipoDocumento}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(3)').textContent = `{{ translator.trans('edad') }}: ${cliente.edad || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(4)').textContent = `{{ translator.trans('email') }}: ${cliente.email}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(5)').textContent = `{{ translator.trans('telefono') }}: ${cliente.telefono || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha p:nth-child(6)').textContent = `{{ translator.trans('direccion') }}: ${cliente.direccion || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha2 p:nth-child(1)').textContent = `{{ translator.trans('nombrePlan') }}: ${cliente.nombrePlan || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha2 p:nth-child(2)').textContent = `{{ translator.trans('tipoPlan') }}: ${cliente.tipoPlan || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha2 p:nth-child(3)').textContent = `{{ translator.trans('fechaVencimiento') }}: ${cliente.fechaVencimiento || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha3 p:nth-child(1)').textContent = `{{ translator.trans('fechaDeAgenda') }}: ${cliente.fecha || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha3 p:nth-child(2)').textContent = `{{ translator.trans('diaDeAgenda') }}: ${cliente.dia || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha3 p:nth-child(3)').textContent = `{{ translator.trans('horaInicio') }}: ${cliente.horaInicio || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha3 p:nth-child(4)').textContent = `{{ translator.trans('horaFin') }}: ${cliente.horaFin || 'N/A'}`;
-                document.querySelector('.divficha-container .divficha3 p:nth-child(5)').textContent = `{{ translator.trans('verificacionAsistencia') }}: ${cliente.asistencia || 'N/A'}`;
-
-                const imgCliente = document.querySelector('.divficha-container .imgCliente img');
-                imgCliente.src = cliente.imagenUrl ? cliente.imagenUrl : `http://proyecto.localhost/Resources/Images/ProfilePhoto/${cliente.nroDocumento}.jpg`;
-                imgCliente.onerror = function () {
-                    this.src = '../../images/clienteEjm.png';
-                };
-
-                const form = document.querySelector('form');
-                form.action = `/pago?documento=${clienteId}`;
-                form.querySelector('input[name="documento"]').value = clienteId;
-            } else {
-                console.error('Cliente no encontrado.');
-                alert('No se encontraron los datos del cliente.');
-            }
-        }
-
-        // Agregar evento para cerrar la ficha técnica
-        document.getElementById('cerrarficha').addEventListener('click', function () {
-            const ficha = document.getElementById('fichagnl');
-            const pagination = document.getElementById('pagination');
-            const searchInput = document.getElementById('searchInput');
-            const iconoBuscador = document.getElementById('buscadorIcono');
-            const listaclientes = document.getElementById('tablaClientes');
-            const containerBtnAdmin = document.getElementById('containerBotonesAdmin');
-            const upLogo = document.getElementById('upLogo');
-
-            if (ficha && pagination && searchInput && iconoBuscador && listaclientes) {
-                ficha.style.display = 'none';
-                pagination.style.display = 'flex';
-                searchInput.style.display = 'block';
-                iconoBuscador.style.display = 'flex';
-                listaclientes.style.display = 'flex';
-                containerBtnAdmin.style.display = 'flex';
-                upLogo.style.display = 'block';
-            }
-        });
-
-    });
-</script>
+{% include 'footer.html.twig' %}
+<script src="../../Public/js/listaUsuariosAdmin.js"></script>
 <script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>
 <script>
@@ -449,13 +294,13 @@
                 const actionType = button.textContent.trim();
                 let url = '';
 
-                if (actionType === '{{ translator.trans('ingresarPago') }}') {
+                if (actionType === 'Ingresar Pago') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/pago?documento=${documento}`;
-                } else if (actionType === '{{ translator.trans('agendar') }}') {
+                } else if (actionType === 'Agendar') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/agendar?documento=${documento}`;
-                } else if (actionType === '{{ translator.trans('subirImagen') }}') {
+                } else if (actionType === 'Subir Imagen') {
                     const documento = button.form.querySelector('input[name="documento"]').value;
                     url = `/cargarImagen?documento=${documento}`;
                 }
@@ -468,13 +313,13 @@
 
         closeModalButton.addEventListener('click', function () {
             modalOverlay.style.display = 'none';
-            iframe.src = ''; // Limpiar el src del iframe
+            iframe.src = '';
         });
 
         modalOverlay.addEventListener('click', function (event) {
             if (event.target === modalOverlay) {
                 modalOverlay.style.display = 'none';
-                iframe.src = ''; // Limpiar el src del iframe
+                iframe.src = '';
             }
         });
 

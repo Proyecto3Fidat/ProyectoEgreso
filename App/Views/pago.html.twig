@@ -169,32 +169,32 @@
 </head>
 <body>
 <div class="container">
-    <h4>Ingresar Pago</h4>
+    <h4>{{ translator.trans('ingresarPago') }}</h4>
     <form id="miFormulario" class="califidepo">
         <div>
-            <label for="selectPlan">Seleccionar Plan</label>
+            <label for="selectPlan">{{ translator.trans('seleccionarPlan') }}</label>
             <select id="selectPlan" name="nombrePlan" required>
-                <option value="" disabled selected>Seleccione un plan</option>
+                <option value="" disabled selected>{{ translator.trans('seleccionarPlan') }}</option>
             </select>
         </div>
 
         <div>
-            <label for="descripcion">Descripción del Plan</label>
-            <input type="text" id="descripcion" name="descripcionPlan" placeholder="Descripción" readonly>
+            <label for="descripcion">{{ translator.trans('descripcionPlan') }}</label>
+            <input type="text" id="descripcion" name="descripcionPlan" placeholder="{{ translator.trans('descripcion') }}" readonly>
         </div>
 
         <div>
-            <label for="tipo">Tipo de Plan</label>
-            <input type="text" id="tipo" name="tipoPlan" placeholder="Tipo de Plan" readonly>
+            <label for="tipo">{{ translator.trans('tipoPlan') }}</label>
+            <input type="text" id="tipo" name="tipoPlan" placeholder="{{ translator.trans('tipoPlan') }}" readonly>
         </div>
 
         <div>
-            <label for="documento">Número de Documento</label>
+            <label for="documento">{{ translator.trans('numeroDocumento') }}</label>
             <input type="text" id="documento" name="nroDocumento" placeholder="Numero de Documento" required>
         </div>
 
         <div>
-            <label for="fechaPago">Fecha del Pago</label>
+            <label for="fechaPago">{{ translator.trans('fechaPago') }}</label>
             <input id="fechaPago" name="fechaPago" type="date" required>
         </div>
 
