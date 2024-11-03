@@ -278,4 +278,34 @@ class UsuarioRepository extends Database
         $database->disconnect();
         return $erol;
     }
+
+    public function comprobarActivo($documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT activo FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        if ($stmt->error) {
+            echo "error";
+        }
+        $stmt->bind_result($activo);
+        $stmt->fetch();
+        $stmt->close();
+        $database->disconnect();
+        return $activo;
+    }
+
+    public function eliminarUsuario(mixed $documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM Usuario WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

@@ -39,7 +39,7 @@ class AuthService
 
     public function comprobarEntrenador(): bool {
 
-        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'entrenador') {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'entrenador' && $_SESSION['rol'] !== 'administrativoTi') {
             $templateController = new TemplateController();
             $templateController->renderTemplate('rol', ['rol' => 'entrenador']);
             $this->handleForbiddenError('Debes ser un Entrenador para realizar esta accion');
@@ -49,10 +49,20 @@ class AuthService
 
     public function comprobarAdministrativo(): bool {
 
-        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrativo') {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrativo' && $_SESSION['rol'] !== 'administrativoTi') {
             $templateController = new TemplateController();
             $templateController->renderTemplate('rol', ['rol' => 'administrativo']);
             $this->handleForbiddenError('Debes ser un Entrenador para realizar esta accion');
+        }
+        return true;
+    }
+
+    public function comprobarAdministrativoTi()
+    {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'administrativoTi') {
+            $templateController = new TemplateController();
+            $templateController->renderTemplate('rol', ['rol' => 'administrativoTi']);
+            $this->handleForbiddenError('Debes ser un Administrativo de TI para realizar esta accion');
         }
         return true;
     }

@@ -89,4 +89,42 @@ fechas: "Fechas"
 valores: "Valores"
 graficoEvolucion: "Gráfico de Evolución en el Tiempo"
 puedesGrafico: "Puedes ver tu evolucion fisica a lo largo del tiempo"
+calificar: "Calificar"
 
+
+listaClientes: "Lista de Clientes"
+listaEjercicios: "Lista de Ejercicios"
+crearEjercicio: "Crear Ejercicio"
+crearCombo: "Crear Combo"
+crearRutina: "Crear Rutina"
+
+
+descripcion: "Descripción"
+nombreEjercicio: "Nombre del Ejercicio"
+seleccione: "Seleccione un Ejercicio"
+tipoDeEjericio: "Tipo de Ejercicio"
+
+pectoralHombroTricep: "Pectoral, Hombro y Tríceps"
+espaldaHombroBicep: "Espalda, Hombro y Bíceps"
+entrenamientoPilates: "Entrenamiento Pilates"
+pierna: "Pierna"
+tipoDeEjercicio: "Tipo de Ejercicio"
+aerobico: "Aeróbico"
+fuerzaResistencia: "Fuerza y Resistencia"
+enviar: "Enviar"
+
+nombredelcombo: "Nombre del Combo"
+seleccionarEjercicio: "Seleccionar Ejercicio"
+eliminarEjericio: "Eliminar Ejercicio"
+aniadirEjercicio: "Añadir Ejercicio"
+
+
+seleccionarCombo: "Seleccionar Combo"
+agregarCombo: "Agregar Combo"
+infoCombo: "Información del Combo"
+tipo: "Tipo "
+grupoMuscular: "Grupo Muscular"
+ejerciciosSeleccionados: "Ejercicio Seleccionados"
+
+eliminar: "Eliminar"
+editar: "Editar"

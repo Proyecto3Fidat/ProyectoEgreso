@@ -237,5 +237,18 @@ class CalificacionController
         $this->logger->info('Puntuación del usuario '.$nroDocumento.' asignada correctamente. '.$id);
     }
 
+    public function eliminarCalificacion()
+    {
+        $input = file_get_contents('php://input');
+        $data = json_decode($input, true);
+        $obtieneRepository = new ObtieneRepository();
+        $obtieneService = new ObtieneService($obtieneRepository);
+        $obtieneService->eliminarCalificacion($data['idCalificacion']);
+        $this->calificacionService->eliminarCalificacion($data['idCalificacion']);
+
+        exit();
+
+    }
+
 }
 

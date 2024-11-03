@@ -47,16 +47,16 @@ $logger = $config['logger']();
 $usuarioLog = require __DIR__ . '/../Config/usuarioLogger.php';
 $loggerU = $usuarioLog['logger']();
 
-SimpleRouter::get('cargarDatos', function (){
+SimpleRouter::get('cargarDatos', function () {
 
     $seeder = new DataSeeder();
     /* Locales    */
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym1', 'Calle 1', '1', 'Esquina 1', '10'));
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym2', 'Calle 2', '2', 'Esquina 2', '20'));
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym3', 'Calle 3', '3', 'Esquina 3', '30'));
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym4', 'Calle 4', '4', 'Esquina 4', '40'));
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym5', 'Calle 5', '5', 'Esquina 5', '50'));
-    $seeder->seedLocalGym( new \App\Models\LocalGymModel('Gym6', 'Calle 6', '6', 'Esquina 6', '60'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym1', 'Calle 1', '1', 'Esquina 1', '10'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym2', 'Calle 2', '2', 'Esquina 2', '20'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym3', 'Calle 3', '3', 'Esquina 3', '30'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym4', 'Calle 4', '4', 'Esquina 4', '40'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym5', 'Calle 5', '5', 'Esquina 5', '50'));
+    $seeder->seedLocalGym(new \App\Models\LocalGymModel('Gym6', 'Calle 6', '6', 'Esquina 6', '60'));
 
 
     /* Agendas   */
@@ -356,22 +356,22 @@ SimpleRouter::get('cargarDatos', function (){
     $seeder->seedUsuario('97121013', '1234', 'deportista');
     $seeder->seedUsuario('2455963147', '1234', 'deportista');
     $seeder->seedUsuario('85463701', '1234', 'deportista');
-    $seeder->seedDeportista('12326789','ci','futbol','golero');
-    $seeder->seedDeportista('97121013','ci','futbol','golero');
-    $seeder->seedDeportista('2455963147','ci','futbol','golero');
-    $seeder->seedDeportista('85463701','ci','futbol','golero');
-    $seeder->seedObtiene('12326789','ci','90','200','8','2','16','17','9','26','1');
-    $seeder->seedObtiene('12326789','ci','99','200','18','12','19','17','9','2','8');
-    $seeder->seedObtiene('97121013','ci','90','200','8','2','16','17','9','26','1');
-    $seeder->seedObtiene('97121013','ci','99','200','18','12','19','17','9','2','8');
-    $seeder->seedObtiene('2455963147','ci','90','200','8','2','16','17','9','26','1');
-    $seeder->seedObtiene('2455963147','ci','99','200','18','12','19','17','9','2','8');
-    $seeder->seedObtiene('85463701','ci','90','200','8','2','16','17','9','26','1');
-    $seeder->seedObtiene('85463701','ci','99','200','18','12','19','17','9','2','8');
+    $seeder->seedDeportista('12326789', 'ci', 'futbol', 'golero');
+    $seeder->seedDeportista('97121013', 'ci', 'futbol', 'golero');
+    $seeder->seedDeportista('2455963147', 'ci', 'futbol', 'golero');
+    $seeder->seedDeportista('85463701', 'ci', 'futbol', 'golero');
+    $seeder->seedObtiene('12326789', 'ci', '90', '200', '8', '2', '16', '17', '9', '26', '1');
+    $seeder->seedObtiene('12326789', 'ci', '99', '200', '18', '12', '19', '17', '9', '2', '8');
+    $seeder->seedObtiene('97121013', 'ci', '90', '200', '8', '2', '16', '17', '9', '26', '1');
+    $seeder->seedObtiene('97121013', 'ci', '99', '200', '18', '12', '19', '17', '9', '2', '8');
+    $seeder->seedObtiene('2455963147', 'ci', '90', '200', '8', '2', '16', '17', '9', '26', '1');
+    $seeder->seedObtiene('2455963147', 'ci', '99', '200', '18', '12', '19', '17', '9', '2', '8');
+    $seeder->seedObtiene('85463701', 'ci', '90', '200', '8', '2', '16', '17', '9', '26', '1');
+    $seeder->seedObtiene('85463701', 'ci', '99', '200', '18', '12', '19', '17', '9', '2', '8');
 
 
-     $clientesSinUsuario = [
-         '745258963', '945852741', '789456123', '145852369', '34562147',
+    $clientesSinUsuario = [
+        '745258963', '945852741', '789456123', '145852369', '34562147',
         '145753486', '951753852', '65587321', '745963258', '984323654', '25876369', '456122789',
         '789654523', '963258741', '123987654', '74258963', '852741963', '258963741', '369852741',
         '654987123', '123654987', '852369741', '147852963', '258741963', '753951426', '159357486',
@@ -385,58 +385,58 @@ SimpleRouter::get('cargarDatos', function (){
     }
 
     /* Se Agenda*/
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('12326789', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
 
 
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('97121013', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
 
 
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('2455963147', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
 
 
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
-    $seeder->seedSeAgenda( new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Lunes', '08:00', '09:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Martes', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Miercoles', '09:00', '10:00'));
+    $seeder->seedSeAgenda(new \App\Models\SeAgendaModel('85463701', 'ci', '2021-06-13', '0', 'Jueves', '09:00', '10:00'));
 
-    $seeder->seedPlanPago( new \App\Models\PlanPagoModel('trimestral', 'Pago de 3 meses', '3 meses'));
-    $seeder->seedPlanPago( new \App\Models\PlanPagoModel('semestral', 'Pago de un semestre', '6 meses'));
-    $seeder->seedPlanPago( new \App\Models\PlanPagoModel('anual', 'Pago de un año', '12 meses'));
+    $seeder->seedPlanPago(new \App\Models\PlanPagoModel('trimestral', 'Pago de 3 meses', '3 meses'));
+    $seeder->seedPlanPago(new \App\Models\PlanPagoModel('semestral', 'Pago de un semestre', '6 meses'));
+    $seeder->seedPlanPago(new \App\Models\PlanPagoModel('anual', 'Pago de un año', '12 meses'));
 
 
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13','trimestral'), new \App\Models\EligeModel('2455963147','ci','2024/06/13','trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13','trimestral'), new \App\Models\EligeModel('97121013','ci','2024/06/13','trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13','trimestral'), new \App\Models\EligeModel('12326789','ci','2024/06/13','trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('2455963147', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('97121013', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2024/09/13'), new \App\Models\RealizaModel('2024/06/13', 'trimestral'), new \App\Models\EligeModel('12326789', 'ci', '2024/06/13', 'trimestral'));
 
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca plano','El press de banca activa los músculos del pecho, sobre todo el músculo pectoral mayor (los pectorales)','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca inclinado',' Los principales músculos que participan son el pectoral mayor (con énfasis en la porción superior), el deltoides (porción anterior) y el tríceps. ','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Aperturas con mancuerna y banco plano','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Aperturas con mancuerna y banco inclinado','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Hombro.  Elevaciones laterales','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Extensión de tríceps en polea','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','pectoral, hombro y tríceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press francés en banco y barra Z','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','pectoral, hombro y tríceps','Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca plano', 'El press de banca activa los músculos del pecho, sobre todo el músculo pectoral mayor (los pectorales)', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca inclinado', ' Los principales músculos que participan son el pectoral mayor (con énfasis en la porción superior), el deltoides (porción anterior) y el tríceps. ', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Aperturas con mancuerna y banco plano', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Aperturas con mancuerna y banco inclinado', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Hombro.  Elevaciones laterales', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Extensión de tríceps en polea', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press francés en banco y barra Z', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
 
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Empujes en polea alta','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Empujes en polea baja','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Hiperextensiones','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press en multipower','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Elevaciones frontales','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Wspalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl en barra','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl de martillo con mancuerna.','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Espalda, hombro (pres) y bíceps','Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Empujes en polea alta', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Empujes en polea baja', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Hiperextensiones', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press en multipower', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Elevaciones frontales', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Wspalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl en barra', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl de martillo con mancuerna.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Espalda, hombro (pres) y bíceps', 'Fuerza o Resistencia'));
 
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Sentadilla.','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Pierna','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Extensiones.','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Pierna','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl de femoral en banco.','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Pierna','Fuerza o Resistencia'));
-    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Elevaciones de pie.','el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor','Pierna','Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Sentadilla.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Extensiones.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl de femoral en banco.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
+    $seeder->seedEjercicios(new \App\Models\EjercicioModel('Elevaciones de pie.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
 
     exit();
 });
@@ -457,265 +457,59 @@ SimpleRouter::get('/main', function () {
 });
 
 
-
 SimpleRouter::post('planes', function () use ($logger) {
     $planes = new App\Controllers\EligeController();
     $planes->obtenerPagosPorDocumento();
     exit();
 });
-SimpleRouter::get('/matarSesion', function (){
+SimpleRouter::get('/matarSesion', function () {
     session_destroy();
     exit();
 });
 SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($logger, $loggerU) {
     SimpleRouter::get('/', [HomeController::class, 'index']);
 
-SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
+    SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
-    SimpleRouter::post('/usuarioTI', function () use ($logger) {
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $clienteController->crearUsuarioAdmin();
-        exit();
-    });
-    SimpleRouter::get('/admin', function () use ($logger) {
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $clientes = $clienteController->obtenerListaClientesAdmintrativo();
-        $template = new TemplateController();
+        SimpleRouter::group(['middleware' => \App\Controllers\AdministativoTiMiddleware::class], function () use ($logger) {
 
-        $template->renderTemplate('admin', ['usuarios' => $clientes]);
-    });
-
-    SimpleRouter::get('/usuario/obtenerDatosGrafico', function () use ($loggerU) {
-
-        $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
-        $calificacionRepository = new CalificacionRepository();
-        $calficacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calficacionService, $loggerU);
-        $calificacionController->puntuacionesAjax($documento);
-
-    });
-
-    Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
-        $calificacionRepository = new CalificacionRepository();
-        $calificacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calificacionService, $logger);
-        $calificacionController->obtenerPuntuacionesAjax();
-        exit();
-    });
-
-    SimpleRouter::post('/asistencia', function () use ($logger) {
-        $asistencia = filter_input(INPUT_POST, 'asistencia', FILTER_SANITIZE_SPECIAL_CHARS);
-        $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
-        $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
-        $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
-        $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
-        $seAgenda = new App\Services\SeAgendaService();
-        $seAgenda->asistir($documento, $dia, $horaInicio, $horaFin, $asistencia);
-        exit();
-    });
-
-    SimpleRouter::get('/dashboardUsuario', function () use ($loggerU) {
-        $seAgenda = new App\Services\SeAgendaService();
-        $grafico = [];
-        $compone = new App\Controllers\ComponeController();
-        $rutina = new \App\Controllers\RutinaController();
-        $practica = new \App\Controllers\PracticaController();
-        $graficos = new App\Controllers\GraficosController();
-        $template = new TemplateController();
-        $calificacionRepository = new CalificacionRepository();
-        $calificacionService = new CalificacionService($calificacionRepository);
-        $calificacionController = new CalificacionController($calificacionService, $loggerU);
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $loggerU);
-
-        $agenda = $seAgenda->obtenerAgendasUsuario($_SESSION['documento']);
-
-        $usuario = $clienteController->obtenerInfoCliente($_SESSION['documento']);
-        $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_SESSION['documento']);
-        try {
-            $grafico = $graficos->crearGrafico($_SESSION['documento'], $calificaciones, $loggerU);
-
-        } catch (Exception $e) {
-            $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
-        }
-        $practicar = $practica->obtenerPracticas($_SESSION['documento']);
-        $resultado = []; // Inicializar el resultado
-        foreach ($practicar as $practica) {
-            $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
-
-
-            if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
-                $rutinaData = $rutinaInfo[0];
-                $combos = $compone->obtenerCombos($practica['idRutina']);
-
-                $resultado[] = [
-                    'idRutina' => $rutinaData['idRutina'],
-                    'series' => $rutinaData['series'],
-                    'repeticiones' => $rutinaData['repeticiones'],
-                    'dia' => $rutinaData['dia'],
-                    'combo' => $combos
-                ];
-            }
-        }
-
-        $template->renderTemplate(
-            'dashboardCliente',
-            array_merge(
-                ['usuario' => $usuario],
-                ['calificaciones' => $calificaciones],
-                ['grafico' => $grafico],
-                ['practicas' => $resultado],
-                ['agenda' => $agenda]
-            )
-        );
-        exit();
-    });
-
-    SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
-        SimpleRouter::post('/eliminarRutina', function () {
-            $compone = new App\Controllers\ComponeController();
-            $solicitud = json_decode(file_get_contents('php://input'), true);
-            $id = $solicitud['idRutina'];
-            try {
-                $compone->eliminarRutina($id);
-                echo json_encode([
-                    'status' => 'ok',
-                ]);
-            } catch (Exception $e) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => 'Error al eliminar la rutina: ',
-                ]);
-            }
-
-            exit();
-
-        });
-        SimpleRouter::get('/ejercicios', function () {
-            $ejer = new EjercicioController();
-            $ejer->obtenerEjercicios();
-            exit();
-        });
-
-        SimpleRouter::post('asignarRutina', function () {
-            $template = new TemplateController();
-            $practica = new App\Controllers\PracticaController();
-
-            try {
-                $practica->asignarRutina();
-
-                echo json_encode([
-                    'status' => 'ok',
-                ]);
-            } catch (Exception $e) {
-                echo json_encode([
-                    'status' => 'error',
-                    'message' => $e->getMessage(),
-                ]);
-            }
-
-            exit();
-        });
-
-        SimpleRouter::get('/obtenerComboEjercicios', function () {
-            $template = new TemplateController();
-            $ejer = new ContieneController();
-            $calificaciones = $ejer->obtenerEjercicios();
-            $template->renderTemplate('combo', ['combos' => $calificaciones]);
-        });
-
-        SimpleRouter::get('/asignarRutina', function () {
-            $resultados = [];
-            $rutina = new App\Controllers\RutinaController();
-            $compone = new App\Controllers\ComponeController();
-            $template = new TemplateController();
-            $rutinas = $rutina->obtenerRutinas();
-            foreach ($rutinas as $rutina) {
-                $r = [
-                    'combos' => $compone->obtenerCombos($rutina['idRutina']),
-                    'idRutina' => $rutina['idRutina'],
-                    'series' => $rutina['series'],
-                    'repeticiones' => $rutina['repeticiones'],
-                    'dia' => $rutina['dia']
-                ];
-                $resultado [] = $r;
-            }
-            $data = [
-                'rutinas' => $resultado,
-                'documento' => $_GET['documento']
-            ];
-
-            $template->renderTemplate('asignarRutina', $data);
-
-        });
-
-        SimpleRouter::post('/crearRutina', function () {
-            $contiene = new App\Controllers\ContieneController();
-            $compone = new App\Controllers\ComponeController();
-            $rutina = new App\Controllers\RutinaController();
-            $combosSeleccionadosJson = $_POST['combosSeleccionados'];
-            $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
-
-            if($combosSeleccionados == null){
-                http_response_code(400);
-                $data = [
-                    'mensaje' => 'Debe seleccionar al menos un combo',
-                    'ruta' => 'obtenerComboEjercicios'
-                ];
-                $template = new TemplateController();
-                $template->renderTemplate('alerta', $data);
+            SimpleRouter::delete('/eliminarTi', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->eliminarUsuarioAdmin();
                 exit();
-            }
-            if (is_array($combosSeleccionados)) {
-                $nombresCombos = [];
-                foreach ($combosSeleccionados as $combo) {
-                    $nombreCombo = $combo['nombreCombo'];
-                    $idEjercicio = $combo['idEjercicio'];
-                    $nombreEjercicio = $combo['nombre'];
-                    $descripcion = $combo['descripcion'];
-                    $tipoEjercicio = $combo['tipoEjercicio'];
-                    $grupoMuscular = $combo['grupoMuscular'];
-                    $nombresCombos[] = $nombreCombo;
-                }
+            });
 
-                foreach ($nombresCombos as $nombreCombo) {
-                    $ejercicioId = $contiene->obtenerEjerciciosNombre($nombreCombo);
-                    $combos [] = [
-                        'nombreCombo' => $nombreCombo,
-                        'ejercicios' => $ejercicioId
-                    ];
-                }
-                $id = $rutina->crearRutina();
-                $compone->crearRutina($combos, $id);
-            }
+            SimpleRouter::post('/desactivarTi', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->desactivarUsuarioAdmin();
+                exit();
+            });
 
-            $datos = [
-                'mensaje' => 'Rutina creada con éxito',
-                'ruta' => 'obtenerComboEjercicios'
-            ];
+            SimpleRouter::post('/usuarioTI', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->crearUsuarioAdmin();
+                exit();
+            });
+            SimpleRouter::get('/admin', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clientes = $clienteController->obtenerListaClientesAdmintrativo();
+                $template = new TemplateController();
 
-            $template = new TemplateController();
-            $template->renderTemplate('alerta', $datos);
-            exit();
+                $template->renderTemplate('admin', ['usuarios' => $clientes]);
+            });
+
 
         });
 
-        global $loggerU;
-        Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
-
-            $calificacionRepository = new CalificacionRepository();
-            $calificacionService = new CalificacionService($calificacionRepository);
-            $calificacionController = new CalificacionController($calificacionService, $logger);
-            $calificacionController->obtenerPuntuacionesAjax();
-            exit();
-        });
-
-        SimpleRouter::get('obtenerDatosGrafico', function () use ($loggerU) {
+        SimpleRouter::get('/usuario/obtenerDatosGrafico', function () use ($loggerU) {
 
             $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
             $calificacionRepository = new CalificacionRepository();
@@ -725,8 +519,27 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
 
         });
 
-        SimpleRouter::post('/dashboard', function () use ($loggerU) {
+        Simplerouter::get('/usuario/obtenerCalificacionesAjax', function () use ($logger) {
+            $calificacionRepository = new CalificacionRepository();
+            $calificacionService = new CalificacionService($calificacionRepository);
+            $calificacionController = new CalificacionController($calificacionService, $logger);
+            $calificacionController->obtenerPuntuacionesAjax();
+            exit();
+        });
 
+        SimpleRouter::post('/asistencia', function () use ($logger) {
+            $asistencia = filter_input(INPUT_POST, 'asistencia', FILTER_SANITIZE_SPECIAL_CHARS);
+            $documento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+            $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
+            $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
+            $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
+            $seAgenda = new App\Services\SeAgendaService();
+            $seAgenda->asistir($documento, $dia, $horaInicio, $horaFin, $asistencia);
+            exit();
+        });
+
+        SimpleRouter::get('/dashboardUsuario', function () use ($loggerU) {
+            $seAgenda = new App\Services\SeAgendaService();
             $grafico = [];
             $compone = new App\Controllers\ComponeController();
             $rutina = new \App\Controllers\RutinaController();
@@ -739,20 +552,22 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             $clienteRepository = new ClienteRepository();
             $clienteService = new ClienteService($clienteRepository);
             $clienteController = new ClienteController($clienteService, $loggerU);
-            $usuario = $clienteController->obtenerInfoCliente($_POST['documento']);
-            $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_POST['documento']);
+
+            $agenda = $seAgenda->obtenerAgendasUsuario($_SESSION['documento']);
+
+            $usuario = $clienteController->obtenerInfoCliente($_SESSION['documento']);
+            $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_SESSION['documento']);
             try {
-                $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
+                $grafico = $graficos->crearGrafico($_SESSION['documento'], $calificaciones, $loggerU);
 
             } catch (Exception $e) {
                 $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
             }
-            $practicar = $practica->obtenerPracticas($_POST['documento']);
+            $practicar = $practica->obtenerPracticas($_SESSION['documento']);
             $resultado = []; // Inicializar el resultado
-
             foreach ($practicar as $practica) {
-
                 $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
+
 
                 if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
                     $rutinaData = $rutinaInfo[0];
@@ -769,468 +584,692 @@ SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($l
             }
 
             $template->renderTemplate(
-                'dashboardEntrenador',
+                'dashboardCliente',
                 array_merge(
                     ['usuario' => $usuario],
                     ['calificaciones' => $calificaciones],
                     ['grafico' => $grafico],
-                    ['practicas' => $resultado]
+                    ['practicas' => $resultado],
+                    ['agenda' => $agenda]
                 )
             );
             exit();
         });
 
-        SimpleRouter::post('editarCalificacion', function () use ($loggerU) {
-            $calificacionRepository = new CalificacionRepository();
-            $calificacionService = new CalificacionService($calificacionRepository);
-            $calificacionController = new CalificacionController($calificacionService, $loggerU);
-            try {
-                $calificacionController->editarCalificacion();
-                echo json_encode([
-                    'status' => 'ok',
-                ]);
-            } catch (Exception $e) {
-                echo json_encode([
-                    'success' => false,
-                    'error' => 'Error al editar la calificación: '
-                ]);
-            }
+        SimpleRouter::group(['middleware' => EntrenadorMiddleware::class], function () use ($logger) {
+            SimpleRouter::post('/eliminarRutina', function () {
+                $compone = new App\Controllers\ComponeController();
+                $solicitud = json_decode(file_get_contents('php://input'), true);
+                $id = $solicitud['idRutina'];
+                try {
+                    $compone->eliminarRutina($id);
+                    echo json_encode([
+                        'status' => 'ok',
+                    ]);
+                } catch (Exception $e) {
+                    echo json_encode([
+                        'status' => 'error',
+                        'message' => 'Error al eliminar la rutina: ',
+                    ]);
+                }
 
-            exit();
-        });
+                exit();
 
-        SimpleRouter::get('editarCalificacion', function () use ($logger) {
-            $template = new TemplateController();
-            $template->renderTemplate('editarCalificacion', ['id' => $_GET['id']]);
-        });
+            });
+            SimpleRouter::get('/ejercicios', function () {
+                $ejer = new EjercicioController();
+                $ejer->obtenerEjercicios();
+                exit();
+            });
 
-        SimpleRouter::get('/dashboard', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('dashboardEntrenador');
-        });
+            SimpleRouter::post('asignarRutina', function () {
+                $template = new TemplateController();
+                $practica = new App\Controllers\PracticaController();
 
+                try {
+                    $practica->asignarRutina();
 
-        SimpleRouter::post('/crearEjercicio', function () {
-            $template = new TemplateController();
-            $ejercicio = new EjercicioController();
-            $ejercicio->crearEjercicio();
-            $datos = [
-                'mensaje' => 'Ejercicio creado con éxito',
-                'ruta' => 'crearEjercicio'
-            ];
-            $template->renderTemplate('alerta', $datos);
-            exit();
-        });
+                    echo json_encode([
+                        'status' => 'ok',
+                    ]);
+                } catch (Exception $e) {
+                    echo json_encode([
+                        'status' => 'error',
+                        'message' => $e->getMessage(),
+                    ]);
+                }
 
-        SimpleRouter::get('/crearEjercicio', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('crearEjercicio');
-        });
+                exit();
+            });
 
-        SimpleRouter::get('/crearComboEjercicio', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('crearComboEjercicio');
-        });
-        SimpleRouter::post('/crearComboEjercicio', function () {
-            $template = new TemplateController();
-            $combo = new ComboEjercicioController();
-            $combo->crearCombo();
-            $datos = [
-                'mensaje' => 'Combo creado con éxito',
-                'ruta' => 'crearComboEjercicio'
-            ];
-            $template->renderTemplate('alerta', $datos);
-            exit();
-        });
+            SimpleRouter::get('/obtenerComboEjercicios', function () {
+                $template = new TemplateController();
+                $ejer = new ContieneController();
+                $calificaciones = $ejer->obtenerEjercicios();
+                $template->renderTemplate('combo', ['combos' => $calificaciones]);
+            });
 
-        SimpleRouter::get('/calificacion', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('calificacion');
-            exit();
-        });
+            SimpleRouter::get('/asignarRutina', function () {
+                $resultados = [];
+                $rutina = new App\Controllers\RutinaController();
+                $compone = new App\Controllers\ComponeController();
+                $template = new TemplateController();
+                $rutinas = $rutina->obtenerRutinas();
+                foreach ($rutinas as $rutina) {
+                    $r = [
+                        'combos' => $compone->obtenerCombos($rutina['idRutina']),
+                        'idRutina' => $rutina['idRutina'],
+                        'series' => $rutina['series'],
+                        'repeticiones' => $rutina['repeticiones'],
+                        'dia' => $rutina['dia']
+                    ];
+                    $resultado [] = $r;
+                }
+                $data = [
+                    'rutinas' => $resultado,
+                    'documento' => $_GET['documento']
+                ];
 
-        SimpleRouter::get('/listaclientes', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('listaclientes');
-        });
+                $template->renderTemplate('asignarRutina', $data);
 
-        SimpleRouter::get('/listaejercicios', function () {
-            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-            $ejercicios = new EjercicioController();
-            $lista = $ejercicios->obtenerListaEjercicios($page);
+            });
 
-            $template = new TemplateController();
-            $data = [
-                'ejercicios' => $lista['ejercicios'],
-                'totalPages' => $lista['totalPages'],
-                'currentPage' => $lista['currentPage']
-            ];
-            $template->renderTemplate('listaejercicios', $data);
-        });
+            SimpleRouter::post('/crearRutina', function () {
+                $contiene = new App\Controllers\ContieneController();
+                $compone = new App\Controllers\ComponeController();
+                $rutina = new App\Controllers\RutinaController();
+                $combosSeleccionadosJson = $_POST['combosSeleccionados'];
+                $combosSeleccionados = json_decode($combosSeleccionadosJson, true);
 
-        SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
-            $clienteRepository = new ClienteRepository();
-            $clienteService = new ClienteService($clienteRepository);
-            $clienteController = new ClienteController($clienteService, $logger);
-            $clienteController->obtenerListaClientesAjax();
-            exit();
-        });
-
-        SimpleRouter::post('/calificacion', function () use ($loggerU) {
-            $calificacionRepository = new CalificacionRepository();
-            $calificacionService = new CalificacionService($calificacionRepository);
-            $calificacionController = new CalificacionController($calificacionService, $loggerU);
-            try {
-                $calificacionController->asignarPuntuacion();
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Calificación creada con éxito'
-                ]);
-            } catch (Exception $e) {
-                echo json_encode([
-                    'success' => false,
-                    'error' => 'Error al crear la calificación: ' . $e->getMessage()
-                ]);
-            }
-            exit();
-        });
-
-    });
-    SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger, $loggerU) {
-
-        SimpleRouter::post('/usuario/eliminarAgenda', function () use ($logger) {
-
-
-            $template = new TemplateController();
-            $seAgenda = new App\Services\SeAgendaService();
-
-            $documento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
-            $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
-            $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
-            echo $dia;
-            echo $horaInicio;
-            echo $horaFin;
-            $seAgenda->eliminarAgenda($dia, $horaInicio, $horaFin, $documento);
-            $datos = [
-                'mensaje' => 'Agenda eliminada con éxito',
-                'ruta' => 'agendar?documento=' . $documento
-            ];
-            $template->renderTemplate('alerta', $datos);
-            exit();
-        });
-
-        SimpleRouter::get('/agendar', function () {
-            $resultado = [];
-            $nombre = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $template = new TemplateController();
-            $localGym = new App\Controllers\GymController();
-            $agenda = new App\Controllers\AgendaController();
-            $locales = $localGym->obtenerGym();
-            $agendas = $agenda->obtenerAgendas();
-            $agendasYaAsignadas = $agenda->obtenerAgendasYaAsignadas($nombre);
-
-          foreach ($agendas as $comparacion1) {
-                $coincide = false;
-                foreach ($agendasYaAsignadas as $comparacion2) {
-                    if ($comparacion1['horaInicio'] === $comparacion2['horaInicio'] && $comparacion1['horaFin'] === $comparacion2['horaFin'] && $comparacion1['dia'] === $comparacion2['dia']) {
-                        $coincide = true;
-                        break;
+                if ($combosSeleccionados == null) {
+                    http_response_code(400);
+                    $data = [
+                        'mensaje' => 'Debe seleccionar al menos un combo',
+                        'ruta' => 'obtenerComboEjercicios'
+                    ];
+                    $template = new TemplateController();
+                    $template->renderTemplate('alerta', $data);
+                    exit();
+                }
+                if (is_array($combosSeleccionados)) {
+                    $nombresCombos = [];
+                    foreach ($combosSeleccionados as $combo) {
+                        $nombreCombo = $combo['nombreCombo'];
+                        $idEjercicio = $combo['idEjercicio'];
+                        $nombreEjercicio = $combo['nombre'];
+                        $descripcion = $combo['descripcion'];
+                        $tipoEjercicio = $combo['tipoEjercicio'];
+                        $grupoMuscular = $combo['grupoMuscular'];
+                        $nombresCombos[] = $nombreCombo;
                     }
 
-                }
-              if (!$coincide) {
-                  $coincide = true;
-                  $resultado[] = $comparacion1;
-              }
-            }
-            $data = [
-                'locales' => $locales,
-                'agendas' => $resultado ,
-                'nombre' => $nombre,
-                'agendasYaAsignadas' => $agendasYaAsignadas
-            ];
-            $template->renderTemplate('agendar', $data);
-            exit();
-        });
-        SimpleRouter::post('/agendar', function ()use ($logger) {
-            $template = new TemplateController();
-            $seAgenda = new App\Controllers\SeAgendaController();
-            $usuarioRepository = new UsuarioRepository();
-            $usuarioService = new UsuarioService($usuarioRepository);
-            $usuario = new UsuarioController($usuarioService, $logger);
-            $local = $_POST['local'];
-            $documento = $_POST['documento'];
-            $calle = $_POST['calle'];
-            $esquina = $_POST['esquina'];
-            $nroPuerta = $_POST['nroPuerta'];
-            $capXTurno = $_POST['capXTurno'];
-            $nombreLocal = $_POST['nombreLocal'];
-            $resultado = [];
-
-            $tipoDocumento = $usuario->obtenerIipoDocumento($documento);
-            $agendas = isset($_POST['agendas']) ? $_POST['agendas'] : [];
-
-            foreach ($agendas as $agendaJson) {
-                $agenda = json_decode($agendaJson, true);
-                if (is_array($agenda)) {
-                    $dia = $agenda['dia'];
-                    $horaInicio = $agenda['horaInicio'];
-                    $horaFin = $agenda['horaFin'];
-                    $agendados = $agenda['agendados'];
-
-                    $seAgenda->agendar($documento,$tipoDocumento, $dia, $horaInicio, $horaFin);
-                }
-            }
-            $data = [
-                'mensaje' => 'Agenda creada con éxito',
-                'ruta' => 'agendar?documento=' . $documento
-            ];
-            $template->renderTemplate('alerta', $data);
-            exit();
-        });
-
-        SimpleRouter::get('/dashAgenda', function () {
-            $local = new LocalGymController();
-            $conforma = new App\Controllers\ConformaController();
-            $template = new TemplateController();
-            $agendas = $conforma->obtenerAgendas();
-            $nombres = $local->obtenerNombres();
-
-            $data = [
-                'agenda' => $agendas,
-                'nombres' => $nombres
-            ];
-
-            $template->renderTemplate('dashAgenda', $data);
-            exit();
-
-        });
-
-
-        SimpleRouter::get('/ingresarGym', function () {
-            $template = new TemplateController();
-            $template->renderTemplate('ingresarGym');
-        });
-
-        SimpleRouter::post('/ingresarGym', function () {
-
-            $controller = new App\Controllers\GymController();
-            $controller->ingresarGym();
-            exit();
-        });
-
-        SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
-            $clienteRepository = new ClienteRepository();
-            $clienteService = new ClienteService($clienteRepository);
-            $clienteController = new ClienteController($clienteService, $logger);
-            $clienteController->obtenerListaClientesAdmin();
-            exit();
-        });
-
-
-
-        SimpleRouter::post('/logo', function () use ($logger) {
-            $template = new TemplateController();
-            if (isset($_FILES['logo'])) {
-                $file = $_FILES['logo'];
-
-                if ($file['error'] !== 0) {
-                    $logger->error('Error al subir el archivo.');
-                    echo "Error al subir el archivo.";
-                    return;
+                    foreach ($nombresCombos as $nombreCombo) {
+                        $ejercicioId = $contiene->obtenerEjerciciosNombre($nombreCombo);
+                        $combos [] = [
+                            'nombreCombo' => $nombreCombo,
+                            'ejercicios' => $ejercicioId
+                        ];
+                    }
+                    $id = $rutina->crearRutina();
+                    $compone->crearRutina($combos, $id);
                 }
 
-                $validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-                if (!in_array($file['type'], $validImageTypes)) {
-                    $logger->error('Formato de archivo no soportado. Suba un PNG o JPEG.');
-                    echo "Formato de archivo no soportado. Suba un PNG o JPEG.";
-                    return;
+                $datos = [
+                    'mensaje' => 'Rutina creada con éxito',
+                    'ruta' => 'obtenerComboEjercicios'
+                ];
+
+                $template = new TemplateController();
+                $template->renderTemplate('alerta', $datos);
+                exit();
+
+            });
+
+            global $loggerU;
+            Simplerouter::get('/entrenador/obtenerCalificacionesAjax', function () use ($logger) {
+
+                $calificacionRepository = new CalificacionRepository();
+                $calificacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calificacionService, $logger);
+                $calificacionController->obtenerPuntuacionesAjax();
+                exit();
+            });
+
+            SimpleRouter::get('obtenerDatosGrafico', function () use ($loggerU) {
+
+                $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+                $calificacionRepository = new CalificacionRepository();
+                $calficacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calficacionService, $loggerU);
+                $calificacionController->puntuacionesAjax($documento);
+
+            });
+
+            SimpleRouter::post('/dashboard', function () use ($loggerU) {
+
+                $grafico = [];
+                $compone = new App\Controllers\ComponeController();
+                $rutina = new \App\Controllers\RutinaController();
+                $practica = new \App\Controllers\PracticaController();
+                $graficos = new App\Controllers\GraficosController();
+                $template = new TemplateController();
+                $calificacionRepository = new CalificacionRepository();
+                $calificacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calificacionService, $loggerU);
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $loggerU);
+                $usuario = $clienteController->obtenerInfoCliente($_POST['documento']);
+                $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_POST['documento']);
+                try {
+                    $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
+
+                } catch (Exception $e) {
+                    $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
+                }
+                $practicar = $practica->obtenerPracticas($_POST['documento']);
+                $resultado = []; // Inicializar el resultado
+
+                foreach ($practicar as $practica) {
+
+                    $rutinaInfo = $rutina->obtenerRutina($practica['idRutina']);
+
+                    if (!empty($rutinaInfo) && isset($rutinaInfo[0])) {
+                        $rutinaData = $rutinaInfo[0];
+                        $combos = $compone->obtenerCombos($practica['idRutina']);
+
+                        $resultado[] = [
+                            'idRutina' => $rutinaData['idRutina'],
+                            'series' => $rutinaData['series'],
+                            'repeticiones' => $rutinaData['repeticiones'],
+                            'dia' => $rutinaData['dia'],
+                            'combo' => $combos
+                        ];
+                    }
                 }
 
-                $tempFile = $file['tmp_name'];
+                $template->renderTemplate(
+                    'dashboardEntrenador',
+                    array_merge(
+                        ['usuario' => $usuario],
+                        ['calificaciones' => $calificaciones],
+                        ['grafico' => $grafico],
+                        ['practicas' => $resultado]
+                    )
+                );
+                exit();
+            });
 
-                $image = null;
-                switch ($file['type']) {
-                    case 'image/png':
-                        $image = imagecreatefrompng($tempFile);
-                        break;
-                    case 'image/jpeg':
-                    case 'image/jpg':
-                        $image = imagecreatefromjpeg($tempFile);
-                        break;
+            SimpleRouter::post('/eliminarCalificacion', function () use ($loggerU) {
+                $calificacionRepository = new CalificacionRepository();
+                $calificacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calificacionService, $loggerU);
+                try {
+                    $calificacionController->eliminarCalificacion();
+                    http_response_code(200);
+                    echo json_encode([
+                        'status' => 'ok',
+                        'success' => 'Calificación eliminada con éxito'
+                    ]);
+                } catch (Exception $e) {
+                    echo $e;
+                    http_response_code(500);
+                    echo json_encode([
+                        'success' => false,
+                        'error' => 'Error al eliminar la calificación: '
+                    ]);
+                }
+                exit();
+            });
+            SimpleRouter::post('editarCalificacion', function () use ($loggerU) {
+                $calificacionRepository = new CalificacionRepository();
+                $calificacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calificacionService, $loggerU);
+                try {
+                    $calificacionController->editarCalificacion();
+                    echo json_encode([
+                        'status' => 'ok',
+                    ]);
+                } catch (Exception $e) {
+                    echo json_encode([
+                        'success' => false,
+                        'error' => 'Error al editar la calificación: '
+                    ]);
                 }
 
-                if ($image === null) {
-                    $logger->error('Error al procesar la imagen.');
-                    echo "Error al procesar la imagen.";
-                    return;
+                exit();
+            });
+
+            SimpleRouter::get('editarCalificacion', function () use ($logger) {
+                $template = new TemplateController();
+                $template->renderTemplate('editarCalificacion', ['id' => $_GET['id']]);
+            });
+
+            SimpleRouter::get('/dashboard', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('dashboardEntrenador');
+            });
+
+
+            SimpleRouter::post('/crearEjercicio', function () {
+                $template = new TemplateController();
+                $ejercicio = new EjercicioController();
+                $ejercicio->crearEjercicio();
+                $datos = [
+                    'mensaje' => 'Ejercicio creado con éxito',
+                    'ruta' => 'crearEjercicio'
+                ];
+                $template->renderTemplate('alerta', $datos);
+                exit();
+            });
+
+            SimpleRouter::get('/crearEjercicio', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('crearEjercicio');
+            });
+
+            SimpleRouter::get('/crearComboEjercicio', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('crearComboEjercicio');
+            });
+            SimpleRouter::post('/crearComboEjercicio', function () {
+                $template = new TemplateController();
+                $combo = new ComboEjercicioController();
+                $combo->crearCombo();
+                $datos = [
+                    'mensaje' => 'Combo creado con éxito',
+                    'ruta' => 'crearComboEjercicio'
+                ];
+                $template->renderTemplate('alerta', $datos);
+                exit();
+            });
+
+            SimpleRouter::get('/calificacion', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('calificacion');
+                exit();
+            });
+
+            SimpleRouter::get('/listaclientes', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('listaclientes');
+            });
+
+            SimpleRouter::get('/listaejercicios', function () {
+                $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+                $ejercicios = new EjercicioController();
+                $lista = $ejercicios->obtenerListaEjercicios($page);
+
+                $template = new TemplateController();
+                $data = [
+                    'ejercicios' => $lista['ejercicios'],
+                    'totalPages' => $lista['totalPages'],
+                    'currentPage' => $lista['currentPage']
+                ];
+                $template->renderTemplate('listaejercicios', $data);
+            });
+
+            SimpleRouter::get('/usuario/obtenerListaClientesAjax', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->obtenerListaClientesAjax();
+                exit();
+            });
+
+            SimpleRouter::post('/calificacion', function () use ($loggerU) {
+                $calificacionRepository = new CalificacionRepository();
+                $calificacionService = new CalificacionService($calificacionRepository);
+                $calificacionController = new CalificacionController($calificacionService, $loggerU);
+                try {
+                    $calificacionController->asignarPuntuacion();
+                    echo json_encode([
+                        'success' => true,
+                        'message' => 'Calificación creada con éxito'
+                    ]);
+                } catch (Exception $e) {
+                    echo json_encode([
+                        'success' => false,
+                        'error' => 'Error al crear la calificación: ' . $e->getMessage()
+                    ]);
                 }
+                exit();
+            });
 
-                $faviconSize = 64;
-                $faviconImage = imagecreatetruecolor($faviconSize, $faviconSize);
-                imagecopyresampled($faviconImage, $image, 0, 0, 0, 0, $faviconSize, $faviconSize, imagesx($image), imagesy($image));
-
-                $targetFile = $_SERVER['DOCUMENT_ROOT'] . '/favicon.ico';
-
-                if (file_exists($targetFile)) {
-                    unlink($targetFile);
-                }
-
-                if (imagepng($faviconImage, $targetFile)) {
-                    $logger->info('Favicon generado correctamente.');
-                    $template->renderTemplate('inicio');
-                } else {
-                    $logger->error('Error al guardar el favicon.');
-                    echo "Error al guardar el favicon.";
-                }
-
-                imagedestroy($image);
-                imagedestroy($faviconImage);
-            } else {
-                echo "No se recibió ningún archivo.";
-            }
         });
+        SimpleRouter::group(['middleware' => AdministrativoMiddleware::class], function () use ($logger, $loggerU) {
 
-        SimpleRouter::post('/cargarImagen', function () use ($logger) {
-            $repository = new UsuarioRepository();
-            $service = new UsuarioService($repository);
-            $controller = new App\Controllers\UsuarioController($service, $logger);
-            $controller->cargarImagen();
-            exit();
-        });
-
-        SimpleRouter::post('/actualizarPago', function () use ($logger) {
-            $pago = new \App\Controllers\EligeController();
-            $pago->actualizarPago();
-            exit();
-        });
-
-        SimpleRouter::get('/pago', function () use ($logger) {
-            $template = new TemplateController();
-            $template->renderTemplate('pago');
-        });
+            SimpleRouter::post('/usuario/eliminarAgenda', function () use ($logger) {
 
 
-        SimpleRouter::post('/crearPlan', function () use ($logger) {
-            $planes = new App\Controllers\PlanPagoController();
-            $planes->crearPlan();
-            exit();
-        });
-        SimpleRouter::get('/tiposDePlan', function () use ($logger) {
-            $planes = new App\Controllers\PlanPagoController();
-            $planes->obtenerPlanes();
-            exit();
-        });
+                $template = new TemplateController();
+                $seAgenda = new App\Services\SeAgendaService();
 
-        SimpleRouter::get('/nuevaAgenda', function () {
-            $local = new LocalGymController();
-            $agenda = new \App\Controllers\AgendaController();
-            $template = new TemplateController();
-            $nombres = $local->obtenerNombres();
-            $agendas = $agenda->obtenerAgendas();
-            $data = [
-                'nombres' => $nombres,
-                'agendas' => $agendas
-            ];
-            $template->renderTemplate('nuevaAgenda', $data);
-            exit();
-        });
+                $documento = filter_input(INPUT_POST, 'nroDocumento', FILTER_SANITIZE_SPECIAL_CHARS);
+                $horaInicio = filter_input(INPUT_POST, 'horaInicio', FILTER_SANITIZE_SPECIAL_CHARS);
+                $horaFin = filter_input(INPUT_POST, 'horaFin', FILTER_SANITIZE_SPECIAL_CHARS);
+                $dia = filter_input(INPUT_POST, 'dia', FILTER_SANITIZE_SPECIAL_CHARS);
+                echo $dia;
+                echo $horaInicio;
+                echo $horaFin;
+                $seAgenda->eliminarAgenda($dia, $horaInicio, $horaFin, $documento);
+                $datos = [
+                    'mensaje' => 'Agenda eliminada con éxito',
+                    'ruta' => 'agendar?documento=' . $documento
+                ];
+                $template->renderTemplate('alerta', $datos);
+                exit();
+            });
 
-        SimpleRouter::get('/cargarImagen', function () {
-            $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
-            $template = new TemplateController();
-            $template->renderTemplate('cargarImagen', ['documento' => $documento]);
-            die();
-        });
+            SimpleRouter::get('/agendar', function () {
+                $resultado = [];
+                $nombre = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+                $template = new TemplateController();
+                $localGym = new App\Controllers\GymController();
+                $agenda = new App\Controllers\AgendaController();
+                $locales = $localGym->obtenerGym();
+                $agendas = $agenda->obtenerAgendas();
+                $agendasYaAsignadas = $agenda->obtenerAgendasYaAsignadas($nombre);
 
-
-
-        SimpleRouter::delete('/eliminarAgenda', function (){
-            $conforma = new App\Controllers\ConformaController();
-            $conforma->eliminarAgenda();
-            exit();
-        });
-
-        SimpleRouter::get('/guardarAgenda', function () {
-            $nombre = filter_input(INPUT_GET, 'local', FILTER_SANITIZE_SPECIAL_CHARS);
-            $template = new TemplateController();
-            $agenda = new \App\Controllers\AgendaController();
-            $conforma = new \App\Controllers\ConformaController();
-            $locales = $agenda->obtenerAgendas();
-            $asignados = $conforma->obtenerAsignados($nombre);
-            $localesFiltrados = [];
-            if (empty($asignados)) {
-                $localesFiltrados = $locales;
-            } else {
-                // Filtrar los locales que coinciden con los elementos en $asignados
-                $localesFiltrados = array_filter($locales, function ($local) use ($asignados) {
-                    foreach ($asignados as $asignado) {
-                        if ($local['horaInicio'] === $asignado['horaInicio'] && $local['horaFin'] === $asignado['horaFin']) {
-                            return true;
+                foreach ($agendas as $comparacion1) {
+                    $coincide = false;
+                    foreach ($agendasYaAsignadas as $comparacion2) {
+                        if ($comparacion1['horaInicio'] === $comparacion2['horaInicio'] && $comparacion1['horaFin'] === $comparacion2['horaFin'] && $comparacion1['dia'] === $comparacion2['dia']) {
+                            $coincide = true;
+                            break;
                         }
+
                     }
-                    return false;
-                });
-            }
-            $data = [
-                'agendas' => $localesFiltrados,
-                'nombre' => $nombre
-            ];
-            $template->renderTemplate('guardarAgenda', $data);
+                    if (!$coincide) {
+                        $coincide = true;
+                        $resultado[] = $comparacion1;
+                    }
+                }
+                $data = [
+                    'locales' => $locales,
+                    'agendas' => $resultado,
+                    'nombre' => $nombre,
+                    'agendasYaAsignadas' => $agendasYaAsignadas
+                ];
+                $template->renderTemplate('agendar', $data);
+                exit();
+            });
+            SimpleRouter::post('/agendar', function () use ($logger) {
+                $template = new TemplateController();
+                $seAgenda = new App\Controllers\SeAgendaController();
+                $usuarioRepository = new UsuarioRepository();
+                $usuarioService = new UsuarioService($usuarioRepository);
+                $usuario = new UsuarioController($usuarioService, $logger);
+                $local = $_POST['local'];
+                $documento = $_POST['documento'];
+                $calle = $_POST['calle'];
+                $esquina = $_POST['esquina'];
+                $nroPuerta = $_POST['nroPuerta'];
+                $capXTurno = $_POST['capXTurno'];
+                $nombreLocal = $_POST['nombreLocal'];
+                $resultado = [];
+
+                $tipoDocumento = $usuario->obtenerIipoDocumento($documento);
+                $agendas = isset($_POST['agendas']) ? $_POST['agendas'] : [];
+
+                foreach ($agendas as $agendaJson) {
+                    $agenda = json_decode($agendaJson, true);
+                    if (is_array($agenda)) {
+                        $dia = $agenda['dia'];
+                        $horaInicio = $agenda['horaInicio'];
+                        $horaFin = $agenda['horaFin'];
+                        $agendados = $agenda['agendados'];
+
+                        $seAgenda->agendar($documento, $tipoDocumento, $dia, $horaInicio, $horaFin);
+                    }
+                }
+                $data = [
+                    'mensaje' => 'Agenda creada con éxito',
+                    'ruta' => 'agendar?documento=' . $documento
+                ];
+                $template->renderTemplate('alerta', $data);
+                exit();
+            });
+
+            SimpleRouter::get('/dashAgenda', function () {
+                $local = new LocalGymController();
+                $conforma = new App\Controllers\ConformaController();
+                $template = new TemplateController();
+                $agendas = $conforma->obtenerAgendas();
+                $nombres = $local->obtenerNombres();
+
+                $data = [
+                    'agenda' => $agendas,
+                    'nombres' => $nombres
+                ];
+
+                $template->renderTemplate('dashAgenda', $data);
+                exit();
+
+            });
+
+
+            SimpleRouter::get('/ingresarGym', function () {
+                $template = new TemplateController();
+                $template->renderTemplate('ingresarGym');
+            });
+
+            SimpleRouter::post('/ingresarGym', function () {
+
+                $controller = new App\Controllers\GymController();
+                $controller->ingresarGym();
+                exit();
+            });
+
+            SimpleRouter::get('/usuario/obtenerListaClientesAdmin', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->obtenerListaClientesAdmin();
+                exit();
+            });
+
+
+            SimpleRouter::post('/logo', function () use ($logger) {
+                $template = new TemplateController();
+                if (isset($_FILES['logo'])) {
+                    $file = $_FILES['logo'];
+
+                    if ($file['error'] !== 0) {
+                        $logger->error('Error al subir el archivo.');
+                        echo "Error al subir el archivo.";
+                        return;
+                    }
+
+                    $validImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+                    if (!in_array($file['type'], $validImageTypes)) {
+                        $logger->error('Formato de archivo no soportado. Suba un PNG o JPEG.');
+                        echo "Formato de archivo no soportado. Suba un PNG o JPEG.";
+                        return;
+                    }
+
+                    $tempFile = $file['tmp_name'];
+
+                    $image = null;
+                    switch ($file['type']) {
+                        case 'image/png':
+                            $image = imagecreatefrompng($tempFile);
+                            break;
+                        case 'image/jpeg':
+                        case 'image/jpg':
+                            $image = imagecreatefromjpeg($tempFile);
+                            break;
+                    }
+
+                    if ($image === null) {
+                        $logger->error('Error al procesar la imagen.');
+                        echo "Error al procesar la imagen.";
+                        return;
+                    }
+
+                    $faviconSize = 64;
+                    $faviconImage = imagecreatetruecolor($faviconSize, $faviconSize);
+                    imagecopyresampled($faviconImage, $image, 0, 0, 0, 0, $faviconSize, $faviconSize, imagesx($image), imagesy($image));
+
+                    $targetFile = $_SERVER['DOCUMENT_ROOT'] . '/favicon.ico';
+
+                    if (file_exists($targetFile)) {
+                        unlink($targetFile);
+                    }
+
+                    if (imagepng($faviconImage, $targetFile)) {
+                        $logger->info('Favicon generado correctamente.');
+                        $template->renderTemplate('inicio');
+                    } else {
+                        $logger->error('Error al guardar el favicon.');
+                        echo "Error al guardar el favicon.";
+                    }
+
+                    imagedestroy($image);
+                    imagedestroy($faviconImage);
+                } else {
+                    echo "No se recibió ningún archivo.";
+                }
+            });
+
+            SimpleRouter::post('/cargarImagen', function () use ($logger) {
+                $repository = new UsuarioRepository();
+                $service = new UsuarioService($repository);
+                $controller = new App\Controllers\UsuarioController($service, $logger);
+                $controller->cargarImagen();
+                exit();
+            });
+
+            SimpleRouter::post('/actualizarPago', function () use ($logger) {
+                $pago = new \App\Controllers\EligeController();
+                $pago->actualizarPago();
+                exit();
+            });
+
+            SimpleRouter::get('/pago', function () use ($logger) {
+                $template = new TemplateController();
+                $template->renderTemplate('pago');
+            });
+
+
+            SimpleRouter::post('/crearPlan', function () use ($logger) {
+                $planes = new App\Controllers\PlanPagoController();
+                $planes->crearPlan();
+                exit();
+            });
+            SimpleRouter::get('/tiposDePlan', function () use ($logger) {
+                $planes = new App\Controllers\PlanPagoController();
+                $planes->obtenerPlanes();
+                exit();
+            });
+
+            SimpleRouter::get('/nuevaAgenda', function () {
+                $local = new LocalGymController();
+                $agenda = new \App\Controllers\AgendaController();
+                $template = new TemplateController();
+                $nombres = $local->obtenerNombres();
+                $agendas = $agenda->obtenerAgendas();
+                $data = [
+                    'nombres' => $nombres,
+                    'agendas' => $agendas
+                ];
+                $template->renderTemplate('nuevaAgenda', $data);
+                exit();
+            });
+
+            SimpleRouter::get('/cargarImagen', function () {
+                $documento = filter_input(INPUT_GET, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
+                $template = new TemplateController();
+                $template->renderTemplate('cargarImagen', ['documento' => $documento]);
+                die();
+            });
+
+
+            SimpleRouter::delete('/eliminarAgenda', function () {
+                $conforma = new App\Controllers\ConformaController();
+                $conforma->eliminarAgenda();
+                exit();
+            });
+
+            SimpleRouter::get('/guardarAgenda', function () {
+                $nombre = filter_input(INPUT_GET, 'local', FILTER_SANITIZE_SPECIAL_CHARS);
+                $template = new TemplateController();
+                $agenda = new \App\Controllers\AgendaController();
+                $conforma = new \App\Controllers\ConformaController();
+                $locales = $agenda->obtenerAgendas();
+                $asignados = $conforma->obtenerAsignados($nombre);
+                $localesFiltrados = [];
+                if (empty($asignados)) {
+                    $localesFiltrados = $locales;
+                } else {
+                    // Filtrar los locales que coinciden con los elementos en $asignados
+                    $localesFiltrados = array_filter($locales, function ($local) use ($asignados) {
+                        foreach ($asignados as $asignado) {
+                            if ($local['horaInicio'] === $asignado['horaInicio'] && $local['horaFin'] === $asignado['horaFin']) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                }
+                $data = [
+                    'agendas' => $localesFiltrados,
+                    'nombre' => $nombre
+                ];
+                $template->renderTemplate('guardarAgenda', $data);
+                exit();
+            });
+
+            SimpleRouter::post('/guardarAgenda', function () {
+                $conforma = new App\Controllers\ConformaController();
+                $conforma->guardarAgenda();
+                exit();
+            });
+            SimpleRouter::post('/crearAgenda', function () {
+                $agenda = new App\Controllers\AgendaController();
+                $agenda->crearAgenda();
+                exit();
+            });
+
+            SimpleRouter::post('/eliminar', function () use ($logger) {
+                $planes = new App\Controllers\EligeController();
+                $planes->eliminarPorDocumento();
+                exit();
+            });
+        });
+
+        SimpleRouter::get('/verificarsesion', function () use ($logger) {
+            echo json_encode([
+                'authenticated' => $_SESSION['sesion']
+            ]);
             exit();
         });
 
-        SimpleRouter::post('/guardarAgenda', function () {
-            $conforma = new App\Controllers\ConformaController();
-            $conforma->guardarAgenda();
-            exit();
-        });
-        SimpleRouter::post('/crearAgenda', function () {
-            $agenda = new App\Controllers\AgendaController();
-            $agenda->crearAgenda();
-            exit();
-        });
 
-        SimpleRouter::post('/eliminar', function () use ($logger) {
-            $planes = new App\Controllers\EligeController();
-            $planes->eliminarPorDocumento();
-            exit();
-        });
     });
 
-    SimpleRouter::get('/verificarsesion', function () use ($logger) {
-        echo json_encode([
-            'authenticated' => $_SESSION['sesion']
-        ]);
-        exit();
+    SimpleRouter::get('/login', function () {
+        $template = new TemplateController();
+        $template->renderTemplate('loginUsuario');
+    });
+
+    SimpleRouter::get('/calificaciones', function () {
+        $template = new TemplateController();
+        $template->renderTemplate(calificaciones);
     });
 
 
-});
-
-SimpleRouter::get('/login', function () {
-    $template = new TemplateController();
-    $template->renderTemplate('loginUsuario');
-});
-
-SimpleRouter::get('/calificaciones', function () {
-    $template = new TemplateController();
-    $template->renderTemplate(calificaciones);
-});
+    SimpleRouter::get('/registrarcliente', function () {
+        $template = new TemplateController();
+        $template->renderTemplate('crearUsuario');
+    });
 
 
-SimpleRouter::get('/registrarcliente', function () {
-    $template = new TemplateController();
-    $template->renderTemplate('crearUsuario');
-});
+    SimpleRouter::get('/horarios', function () {
+        $template = new TemplateController();
+        $template->renderTemplate('agenda');
 
-
-SimpleRouter::get('/horarios', function () {
-    $template = new TemplateController();
-    $template->renderTemplate('agenda');
-
-});
+    });
 
     SimpleRouter::post('/set-language', function () {
         $data = json_decode(file_get_contents('php://input'), true);
@@ -1245,170 +1284,170 @@ SimpleRouter::get('/horarios', function () {
         }
     });
 
-SimpleRouter::get('/planes', function () {
-    $template = new TemplateController();
-    $template->renderTemplate('planes');
-});
+    SimpleRouter::get('/planes', function () {
+        $template = new TemplateController();
+        $template->renderTemplate('planes');
+    });
 
-SimpleRouter::get('/imprimirNota', function () use ($logger) {
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $clienteController->imprimirNota();
-});
-SimpleRouter::get('/listaUsuarios', function () {
-    $template = new TemplateController();
-    $template->renderTemplate('listaclientes');
-});
-
-SimpleRouter::post('/guardarDeportista', function () use ($logger) {
-    $deportistaRepository = new DeportistaRepository();
-    $deportistaService = new DeportistaService($deportistaRepository);
-    $deportistaController = new DeportistaController($deportistaService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    if ($clienteController->comprobarCliente() == "false") {
-        echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '/'; 
-              </script>";
-    } else {
-        if ($deportistaController->comprobarDeportista() == "false") {
-            $usuarioController->guardarDeportista();
-            $deportistaController->guardarDeportista();
-            exit();
-        } else {
-            echo "<script>
-                    alert('El Deportista ya esta registrado');
-                    window.location.href = '/'; 
-                  </script>";
-        }
-    }
-});
-
-
-SimpleRouter::post('/guardarPaciente', function () use ($logger) {
-    $pacienteRepository = new PacienteRepository();
-    $pacienteService = new PacienteService($pacienteRepository);
-    $pacienteController = new PacienteController($pacienteService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    if ($clienteController->comprobarCliente() == "false") {
-        echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../Public/inicio.html.twig'; 
-              </script>";
-    } else {
-        if ($pacienteController->comprobarPaciente() == "false") {
-            $usuarioController->guardarPaciente();
-            $pacienteController->guardarPaciente();
-            exit();
-        } else {
-            echo "<script>
-                    alert('El Paciente ya esta registrado');
-                    window.location.href = '../Public/inicio.html.twig'; 
-                  </script>";
-        }
-    }
-});
-
-SimpleRouter::post('/twig/guardarDeportista', function () use ($logger) {
-    $deportistaRepository = new DeportistaRepository();
-    $deportistaService = new DeportistaService($deportistaRepository);
-    $deportistaController = new DeportistaController($deportistaService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    if ($clienteController->comprobarCliente() == "false") {
-        echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '/'; 
-              </script>";
-    } else {
-        if ($deportistaController->comprobarDeportista() == "false") {
-            $usuarioController->guardarDeportista();
-            $deportistaController->guardarDeportista();
-            $_SESSION['rol'] = 'deportista';
-            $home = new HomeController();
-            $home->index();
-            exit();
-        } else {
-            echo "<script>
-                    alert('El Deportista ya esta registrado');
-                    window.location.href = '/'; 
-                  </script>";
-        }
-    }
-});
-
-
-SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
-    $pacienteRepository = new PacienteRepository();
-    $pacienteService = new PacienteService($pacienteRepository);
-    $pacienteController = new PacienteController($pacienteService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    if ($clienteController->comprobarCliente() == "false") {
-        echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../Public/inicio.html.twig'; 
-              </script>";
-    } else {
-        if ($pacienteController->comprobarPaciente() == "false") {
-            $usuarioController->guardarPaciente();
-            $pacienteController->guardarPaciente();
-            $_SESSION['rol'] = 'paciente';
-            $home = new HomeController();
-            $home->index();
-            exit();
-        } else {
-            echo "<script>
-                    alert('El Paciente ya esta registrado');
-                    window.location.href = '../Public/inicio.html.twig'; 
-                  </script>";
-        }
-    }
-});
-
-SimpleRouter::post('/guardarTelefono', function () use ($logger) {
-    $clientetelefonoRepository = new ClientetelefonoRepository();
-    $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
-    $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
-    $clientetelefonoController->guardarTelefono();
-    exit();
-});
-
-// Ruta para registrar clientes (POST)
-SimpleRouter::post('/registrarcliente', function () use ($logger) {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    if (!$usuarioController->comprobarUsuario()) {
+    SimpleRouter::get('/imprimirNota', function () use ($logger) {
         $clienteRepository = new ClienteRepository();
         $clienteService = new ClienteService($clienteRepository);
         $clienteController = new ClienteController($clienteService, $logger);
-        $clienteController->crearCliente();
-        $usuarioController->crearUsuario();
-        $clienteController->emailBienvenida($_POST['email']);
-        $telefono = $_POST['telefono'];
-        $nroDocumento = $_POST['nroDocumento'];
-        $tipoDocumento = $_POST['tipoDocumento'];
-        echo "
+        $clienteController->imprimirNota();
+    });
+    SimpleRouter::get('/listaUsuarios', function () {
+        $template = new TemplateController();
+        $template->renderTemplate('listaclientes');
+    });
+
+    SimpleRouter::post('/guardarDeportista', function () use ($logger) {
+        $deportistaRepository = new DeportistaRepository();
+        $deportistaService = new DeportistaService($deportistaRepository);
+        $deportistaController = new DeportistaController($deportistaService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        if ($clienteController->comprobarCliente() == "false") {
+            echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '/'; 
+              </script>";
+        } else {
+            if ($deportistaController->comprobarDeportista() == "false") {
+                $usuarioController->guardarDeportista();
+                $deportistaController->guardarDeportista();
+                exit();
+            } else {
+                echo "<script>
+                    alert('El Deportista ya esta registrado');
+                    window.location.href = '/'; 
+                  </script>";
+            }
+        }
+    });
+
+
+    SimpleRouter::post('/guardarPaciente', function () use ($logger) {
+        $pacienteRepository = new PacienteRepository();
+        $pacienteService = new PacienteService($pacienteRepository);
+        $pacienteController = new PacienteController($pacienteService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        if ($clienteController->comprobarCliente() == "false") {
+            echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../Public/inicio.html.twig'; 
+              </script>";
+        } else {
+            if ($pacienteController->comprobarPaciente() == "false") {
+                $usuarioController->guardarPaciente();
+                $pacienteController->guardarPaciente();
+                exit();
+            } else {
+                echo "<script>
+                    alert('El Paciente ya esta registrado');
+                    window.location.href = '../Public/inicio.html.twig'; 
+                  </script>";
+            }
+        }
+    });
+
+    SimpleRouter::post('/twig/guardarDeportista', function () use ($logger) {
+        $deportistaRepository = new DeportistaRepository();
+        $deportistaService = new DeportistaService($deportistaRepository);
+        $deportistaController = new DeportistaController($deportistaService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        if ($clienteController->comprobarCliente() == "false") {
+            echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '/'; 
+              </script>";
+        } else {
+            if ($deportistaController->comprobarDeportista() == "false") {
+                $usuarioController->guardarDeportista();
+                $deportistaController->guardarDeportista();
+                $_SESSION['rol'] = 'deportista';
+                $home = new HomeController();
+                $home->index();
+                exit();
+            } else {
+                echo "<script>
+                    alert('El Deportista ya esta registrado');
+                    window.location.href = '/'; 
+                  </script>";
+            }
+        }
+    });
+
+
+    SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
+        $pacienteRepository = new PacienteRepository();
+        $pacienteService = new PacienteService($pacienteRepository);
+        $pacienteController = new PacienteController($pacienteService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        if ($clienteController->comprobarCliente() == "false") {
+            echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../Public/inicio.html.twig'; 
+              </script>";
+        } else {
+            if ($pacienteController->comprobarPaciente() == "false") {
+                $usuarioController->guardarPaciente();
+                $pacienteController->guardarPaciente();
+                $_SESSION['rol'] = 'paciente';
+                $home = new HomeController();
+                $home->index();
+                exit();
+            } else {
+                echo "<script>
+                    alert('El Paciente ya esta registrado');
+                    window.location.href = '../Public/inicio.html.twig'; 
+                  </script>";
+            }
+        }
+    });
+
+    SimpleRouter::post('/guardarTelefono', function () use ($logger) {
+        $clientetelefonoRepository = new ClientetelefonoRepository();
+        $clientetelefonoService = new ClientetelefonoService($clientetelefonoRepository);
+        $clientetelefonoController = new ClientelefonoController($clientetelefonoService, $logger);
+        $clientetelefonoController->guardarTelefono();
+        exit();
+    });
+
+// Ruta para registrar clientes (POST)
+    SimpleRouter::post('/registrarcliente', function () use ($logger) {
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        if (!$usuarioController->comprobarUsuario()) {
+            $clienteRepository = new ClienteRepository();
+            $clienteService = new ClienteService($clienteRepository);
+            $clienteController = new ClienteController($clienteService, $logger);
+            $clienteController->crearCliente();
+            $usuarioController->crearUsuario();
+            $clienteController->emailBienvenida($_POST['email']);
+            $telefono = $_POST['telefono'];
+            $nroDocumento = $_POST['nroDocumento'];
+            $tipoDocumento = $_POST['tipoDocumento'];
+            echo "
     <script>
         const telefono = '$telefono';
         const nroDocumento = '$nroDocumento';
@@ -1436,70 +1475,70 @@ SimpleRouter::post('/registrarcliente', function () use ($logger) {
 ";
 
 
-        echo "<script>
+            echo "<script>
                 alert('Usuario creado con éxito');
                 window.location.href = '../Public/inicio.html.twig'; 
               </script>";
-        exit();
-    } else {
-        echo "<script>
+            exit();
+        } else {
+            echo "<script>
                 alert('El usuario ya existe');
                 window.location.href = '../../App/Views/crearUsuario.html.twig'; 
               </script>";
-        exit();
-    }
-});
+            exit();
+        }
+    });
 
 // Ruta para el login de clientes (POST)
-SimpleRouter::post('/login', function () use ($logger) {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    $usuarioController->autenticar();
-});
+    SimpleRouter::post('/login', function () use ($logger) {
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        $usuarioController->autenticar();
+    });
 
 // Ruta para el logout
-SimpleRouter::get('/logout', function () use ($logger) {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    $usuarioController->logout();
-});
+    SimpleRouter::get('/logout', function () use ($logger) {
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        $usuarioController->logout();
+    });
 
-SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
+    SimpleRouter::post('/registrarEntrenador', function () use ($logger) {
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
 
-    if ($clienteController->comprobarCliente() == "false") {
-        $clienteController->crearConPrivilegios();
-        $usuarioController->crearEntrenador();
-        exit();
-    } else {
-        $usuarioController->crearEntrenador();
-        exit();
-    }
-});
+        if ($clienteController->comprobarCliente() == "false") {
+            $clienteController->crearConPrivilegios();
+            $usuarioController->crearEntrenador();
+            exit();
+        } else {
+            $usuarioController->crearEntrenador();
+            exit();
+        }
+    });
 
-SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
-    $usuarioRepository = new UsuarioRepository();
-    $usuarioService = new UsuarioService($usuarioRepository);
-    $usuarioController = new UsuarioController($usuarioService, $logger);
-    $clienteRepository = new ClienteRepository();
-    $clienteService = new ClienteService($clienteRepository);
-    $clienteController = new ClienteController($clienteService, $logger);
-    if ($clienteController->comprobarCliente() == "false") {
-        $clienteController->crearConPrivilegios();
-        $usuarioController->crearAdministrativo();
-        exit();
-    } else {
-        $usuarioController->crearAdministrativo();
-        exit();
-    }
-});
+    SimpleRouter::post('/registrarAdministrativo', function () use ($logger) {
+        $usuarioRepository = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepository);
+        $usuarioController = new UsuarioController($usuarioService, $logger);
+        $clienteRepository = new ClienteRepository();
+        $clienteService = new ClienteService($clienteRepository);
+        $clienteController = new ClienteController($clienteService, $logger);
+        if ($clienteController->comprobarCliente() == "false") {
+            $clienteController->crearConPrivilegios();
+            $usuarioController->crearAdministrativo();
+            exit();
+        } else {
+            $usuarioController->crearAdministrativo();
+            exit();
+        }
+    });
 
 });
 

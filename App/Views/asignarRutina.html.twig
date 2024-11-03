@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asignar Rutina</title>
+    <title>{{ translator.trans('asignarRutina') }}</title>
     <link rel="stylesheet" href="../../Public/css/formEjercicio.css">
     <link rel="stylesheet" href="../../Public/css/style.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
@@ -15,9 +15,9 @@
         <form id="asignar-rutina-form" class="califidepo">
             <input type="text" name="documento" readonly value="{{ documento }}">
 
-            <label for="nombre-rutina">Seleccione la rutina:</label>
+            <label for="nombre-rutina">{{ translator.trans('seleccioneRutina') }}:</label>
             <select id="nombre-rutina" name="nombreRutina" required onchange="mostrarDetalleRutina()">
-                <option value="" disabled selected>Seleccione una rutina</option>
+                <option value="" disabled selected>{{ translator.trans('seleccioneRutina') }}</option>
                 {% for rutina in rutinas %}
                     <option value="{{ rutina.idRutina }}">{{ rutina.idRutina }}</option>
                 {% endfor %}
@@ -25,12 +25,12 @@
             <br><br>
             <div id="rutina-seleccionada">
                 <input type="hidden" name="ejercicios" id="ejercicios-input">
-                <input type="button" value="Enviar" onclick="enviarFormulario()">
+                <input type="button" value="{{ translator.trans('enviar') }}" onclick="enviarFormulario()">
             </div>
         </form>
     </div>
     <div id="detalle-rutina" class="content">
-        <h3>Rutina Seleccionada</h3>
+        <h3>{{ translator.trans('rutinaSeleccionada') }}</h3>
         <div id="rutina-detalle"></div>
     </div>
 </div>

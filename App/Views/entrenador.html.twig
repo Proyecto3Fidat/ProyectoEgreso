@@ -9,40 +9,19 @@
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Entrenador</title>
 </head>
-<header>
-    <section class="navhead">
-        <button class="abrirmenu" id="abrir"><i class="fa-solid fa-bars fa-xl" style="color: #ffffff;"></i></button>
-    </section>
-    <nav class="navbar" id="nav">
-        <button class="cerrarmenu" id="cerrar"><i class="fa-solid fa-right-from-bracket fa-xl"
-                                                  style="color: #ffffff;"></i></button>
-        <div class="menu1">
-            <ul class="listmenu1">
-                <li><a href="/" class="inicioa">Inicio</a></li>
-                <li><a href="/horarios" class="inicioa">Horarios</a></li>
-                <li><a href="/planes" class="inicioa">Planes</a></li>
-                <li><a href="/">Nosotros</a></li>
-            </ul>
-        </div>
-        <div class="menu2">
-            <ul class="listmenu2" id="welcome-message">
-            </ul>
-        </div>
-    </nav>
-</header>
+{% include 'header.html.twig' %}
 <body>
-<a class="tituloent" href="#">Bienvenido, Usuario</a>
 
 <div class="btnent">
     <a href="/listaclientes">
-        <button class="clienteslist">Lista de clientes</button>
+        <button class="clienteslist">{{ translator.trans('listaClientes') }}</button>
     </a>
     <a href="/listaejercicios">
-        <button class="ejerciciolist">Lista de ejercicios</button>
+        <button class="ejerciciolist">{{ translator.trans('listaEjercicios') }}</button>
     </a>
-    <button id="btn-crear-ejercicio" class="ejerciciolist">Crear Ejercicio</button>
-    <button id="btn-crear-combo-ejercicio" class="ejerciciolist">Crear Combo Ejercicio</button>
-    <button id="btn-crear-rutina" class="ejerciciolist">Crear Rutina</button>
+    <button id="btn-crear-ejercicio" class="ejerciciolist">{{ translator.trans('crearEjercicio') }}</button>
+    <button id="btn-crear-combo-ejercicio" class="ejerciciolist">{{ translator.trans('crearCombo') }}</button>
+    <button id="btn-crear-rutina" class="ejerciciolist">{{ translator.trans('crearRutina') }}</button>
 </div>
 
 <div id="modal-overlay" class="modal-overlay">
@@ -58,15 +37,15 @@
 
 
 <section class="agenda">
-    <h1>HORARIOS</h1>
+    <h1>{{ translator.trans('horarios') }}</h1>
     <table class="horarios">
         <tr id="diasagenda">
-            <th data-label="Hora">Hora</th>
-            <th data-label="Lunes">Lunes</th>
-            <th data-label="Martes">Martes</th>
-            <th data-label="Miércoles">Miércoles</th>
-            <th data-label="Jueves">Jueves</th>
-            <th data-label="Viernes">Viernes</th>
+            <th data-label="Hora">{{ translator.trans('hora') }}</th>
+            <th data-label="Lunes">{{ translator.trans('lunes') }}</th>
+            <th data-label="Martes">{{ translator.trans('martes') }}</th>
+            <th data-label="Miércoles">{{ translator.trans('miercoles') }}</th>
+            <th data-label="Jueves">{{ translator.trans('jueves') }}</th>
+            <th data-label="Viernes">{{ translator.trans('viernes') }}</th>
         </tr>
         <tr>
             <th data-label="Hora">7:00 a 8:00</th>

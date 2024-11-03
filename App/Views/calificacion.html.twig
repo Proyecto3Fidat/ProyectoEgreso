@@ -15,14 +15,14 @@
     <form action="/calificacion" method="post" class="califidepo">
         <input type="text" id="documento" name="nroDocumento" readonly placeholder="{{ translator.trans('documento') }}" required>
         <input name="puntMaxima" type="text" placeholder="{{ translator.trans('puntuacionMaxima') }}">
-        <input name="puntuacionEsperado" type="text" placeholder="Calificacion Esperada">
-        <input name="fuerzaMusc" type="text" placeholder="Fuerza Muscular">
-        <input name="resAnaerobica" type="text" placeholder="Resistencia anaerobica">
-        <input name="resiliencia" type="text" placeholder="Resiliencia">
-        <input name="flexibilidad" type="text" placeholder="Flexibilidad">
-        <input name="resMusc" type="text" placeholder="Resistencia muscular">
-        <input name="cumplAgenda" type="text" placeholder="Cumplimiento de agenda">
-        <input name="resMonotonia" type="text" placeholder="Resistencia a la monotonia">
+        <input name="puntuacionEsperado" type="text" placeholder="{{ translator.trans('calificacionEsperada') }}">
+        <input name="fuerzaMusc" type="text" placeholder="{{ translator.trans('fuerzaMuscular') }}">
+        <input name="resAnaerobica" type="text" placeholder="{{ translator.trans('resistenciaAnaerobica') }}">
+        <input name="resiliencia" type="text" placeholder="{{ translator.trans('resiliencia') }}">
+        <input name="flexibilidad" type="text" placeholder="{{ translator.trans('flexibilidad') }}">
+        <input name="resMusc" type="text" placeholder="{{ translator.trans('resistenciaMuscular') }}">
+        <input name="cumplAgenda" type="text" placeholder="{{ translator.trans('cumplimientoAgenda') }}">
+        <input name="resMonotonia" type="text" placeholder="{{ translator.trans('resistenciaMonotonia') }}">
         <input type="submit">
     </form>
 </div>

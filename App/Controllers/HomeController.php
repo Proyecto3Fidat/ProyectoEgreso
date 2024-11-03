@@ -26,6 +26,9 @@ class HomeController
         }else if ($_SESSION['rol'] == "administrativo" && $_SESSION['rol'] != null) {
             $template->renderTemplate("listaClientesAdmin");
             exit();
+        }else if ($_SESSION['rol'] == "administrativoTi" && $_SESSION['rol'] != null) {
+            header ("Location: /admin");
+            exit();
         } else {
             $template->renderTemplate('inicio');
             exit();

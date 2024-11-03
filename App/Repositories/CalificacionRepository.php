@@ -71,4 +71,16 @@ Class CalificacionRepository extends Database{
         $stmt->close();
         $database->disconnect();
     }
+
+    public function eliminarCalificacion(mixed $idCalificacion)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM Calificacion WHERE id = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $idCalificacion);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

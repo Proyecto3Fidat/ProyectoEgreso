@@ -23,4 +23,10 @@ Class ObtieneService{
     public function comprobarId($nroDocumento){
         return $this->obtieneRepository->comprobarId($nroDocumento);
     }
+
+    public function eliminarCalificacion(mixed $idCalificacion)
+    {
+        return $this->obtieneRepository->eliminarCalificacion($idCalificacion);
+
+    }
 }

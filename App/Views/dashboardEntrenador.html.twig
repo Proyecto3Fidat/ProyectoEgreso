@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/dashEntrenador.css">
+    <link rel="stylesheet" href="../../Public/css/dashEntrenador.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
     <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -62,7 +62,9 @@
                         <td data-label="{{ translator.trans('cumplimientoAgenda') }}">{{ calificacion.cumplAgenda }}</td>
                         <td data-label="{{ translator.trans('resistenciaMonotonia') }}">{{ calificacion.resMonotonia }}</td>
                         <td>
-                            <button class="btnEditar" onclick="abrirModalCalificacion({{ calificacion.id }})">Editar</button>
+                            <button class="btnEditar" onclick="abrirModalCalificacion({{ calificacion.id }})">{{ translator.trans('editar') }}</button>
+                            <button class="btnEliminar" onclick="eliminarCalificacion({{ calificacion.id }})">{{ translator.trans('eliminar') }}</button>
+
                         </td>
                     </tr>
                 {% else %}
@@ -290,7 +292,7 @@
     async function crearGrafico(usuarioId) {
         try {
             console.log("Enviando solicitud a /obtenerDatosGrafico con ID:", usuarioId);
-            const response = await fetch(`/obtenerDatosGrafico?documento=${usuarioId}`);
+            const response = await fetch(`/usuario/obtenerDatosGrafico?documento=${usuarioId}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -301,14 +303,14 @@
             // Extrae fechas y valores para cada métrica
             const fechas = data.map(item => item.fecha);
             const series = [
-                { name: "Puntuación Total", data: data.map(item => item.puntObtenido) },
-                { name: "Fuerza Muscular", data: data.map(item => item.fuerzaMusc) },
-                { name: "Resistencia Muscular", data: data.map(item => item.resMusc) },
-                { name: "Resistencia Anaeróbica", data: data.map(item => item.resAnaerobica) },
-                { name: "Resiliencia", data: data.map(item => item.resiliencia) },
-                { name: "Flexibilidad", data: data.map(item => item.flexibilidad) },
-                { name: "Cumplimiento Agenda", data: data.map(item => item.cumplAgenda) },
-                { name: "Resistencia a la Monotonía", data: data.map(item => item.resMonotonia) },
+                { name: "{{ translator.trans('puntuacionTotal') }}", data: data.map(item => item.puntObtenido) },
+                { name: "{{ translator.trans('fuerzaMuscular') }}", data: data.map(item => item.fuerzaMusc) },
+                { name: "{{ translator.trans('resistenciaMuscular') }}", data: data.map(item => item.resMusc) },
+                { name: "{{ translator.trans('resistenciaAnaerobica') }}", data: data.map(item => item.resAnaerobica) },
+                { name: "{{ translator.trans('resiliencia') }}", data: data.map(item => item.resiliencia) },
+                { name: "{{ translator.trans('flexibilidad') }}", data: data.map(item => item.flexibilidad) },
+                { name: "{{ translator.trans('cumplimientoAgenda') }}", data: data.map(item => item.cumplAgenda) },
+                { name: "{{ translator.trans('resistenciaMuscular') }}", data: data.map(item => item.resMonotonia) },
             ];
 
             const options = {
@@ -329,23 +331,23 @@
                             pan: true,
                             reset: true
                         },
-                        autoSelected: 'zoom'          
+                        autoSelected: 'zoom'
                     }
                 },
                 series: series,
                 xaxis: {
                     categories: fechas,
                     title: {
-                        text: 'Fechas'
+                        text: '{{ translator.trans('fechas') }}'
                     }
                 },
                 yaxis: {
                     title: {
-                        text: 'Valores'
+                        text: '{{ translator.trans('valores') }}'
                     }
                 },
                 title: {
-                    text: 'Gráfico de Evolución en el Tiempo',
+                    text: '{{ translator.trans('graficoEvolucion') }}',
                     align: 'center'
                 },
                 legend: {
@@ -364,6 +366,33 @@
     document.addEventListener("DOMContentLoaded", function() {
         crearGrafico({{ usuario.documento }});
     });
+</script>
+
+<script>
+    function eliminarCalificacion(idCalificacion) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta calificación?')) {
+            fetch('/eliminarCalificacion', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ idCalificacion: idCalificacion })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok') {
+                        alert('Calificación eliminada con éxito');
+                        window.location.reload();
+                    } else {
+                        alert('Error al eliminar la calificación. Inténtalo de nuevo.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Hubo un error al eliminar la calificación. Inténtalo de nuevo.');
+                });
+        }
+    }
 </script>
 <script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>

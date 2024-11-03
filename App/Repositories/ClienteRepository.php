@@ -301,7 +301,6 @@ class ClienteRepository extends Database
 
     public function comprobarCliente($nroDocumento)
     {
-        echo $nroDocumento;
         $database = Database::getInstance();
         $database->connect();
         $sql = "SELECT nroDocumento FROM Cliente WHERE nroDocumento = ?";
@@ -396,6 +395,31 @@ class ClienteRepository extends Database
         $stmt->close();
         $database->disconnect();
         return $tipoDocumento;
+    }
+
+    public function eliminarUsuarioAdmin(mixed $nroDocumento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM Cliente WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $nroDocumento);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+
+    }
+
+    public function desactivarUsuarioAdmin(mixed $documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "UPDATE Cliente SET activo = 0 WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
     }
 
 }

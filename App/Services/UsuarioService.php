@@ -102,6 +102,18 @@ class UsuarioService
 
     public function autenticar($documento, $passwd)
     {
+        $templateController = new TemplateController();
+        $clienteRepository = new UsuarioRepository();
+        $clienteService = new UsuarioService($clienteRepository);
+
+        if ($clienteService->comprobarActivo($documento) === 0) {
+            $data = array(
+                'mensaje' => 'Usuario inactivo',
+                'ruta' => 'login'
+            );
+            $templateController->renderTemplate('alerta', $data);
+            exit();
+        }
         $resultadoAutenticacion = $this->usuarioRepository->autenticar($documento, $passwd);
         $resultado = $resultadoAutenticacion['resultado'];
         if ($resultado == false) {
@@ -112,6 +124,18 @@ class UsuarioService
             $token = $resultadoAutenticacion['token'];
             $documento = $resultadoAutenticacion['documento'];
             switch ($rol) {
+                case "administrativoTi":
+                    $_SESSION['token'] = $token;
+                    $_SESSION['documento'] = $documento;
+                    $_SESSION['nombre'] = $nombre;
+                    $_SESSION['rol'] = $rol;
+                    $_SESSION['sesion'] = true;
+                    echo "<script>
+                            localStorage.setItem('nombre', '" . $nombre . "');
+                            window.location.href = '/'; 
+                            </script>";
+                    exit();
+                    break;
                 case "entrenador":
                     $_SESSION['token'] = $token;
                     $_SESSION['documento'] = $documento;
@@ -234,6 +258,16 @@ class UsuarioService
     public function comprobarRolAdministrativo(mixed $nroDocumento)
     {
         return $this->usuarioRepository->comprobarRolAdministrativo($nroDocumento);
+    }
+
+    private function comprobarActivo($documento)
+    {
+        return $this->usuarioRepository->comprobarActivo($documento);
+    }
+
+    public function eliminarUsuario(mixed $documento)
+    {
+        $this->usuarioRepository->eliminarUsuario($documento);
     }
 
 }

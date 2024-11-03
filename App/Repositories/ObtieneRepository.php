@@ -88,4 +88,16 @@ class ObtieneRepository extends Database
         $database->disconnect();
         return $calificaciones;
     }
+
+    public function eliminarCalificacion(mixed $idCalificacion)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "DELETE FROM Obtiene WHERE id = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $idCalificacion);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
 }

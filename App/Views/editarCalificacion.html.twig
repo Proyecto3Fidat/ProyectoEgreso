@@ -22,14 +22,14 @@
         <div id="documento" class="documento">
         <input display="none" type="text" id="documento" name="id" readonly placeholder="Documento" required value="{{ id }}">
         </div>
-        <input name="fuerzaMusc" type="text" placeholder="Fuerza Muscular">
-        <input name="resAnaerobica" type="text" placeholder="Resistencia anaerobica">
-        <input name="resiliencia" type="text" placeholder="Resiliencia">
-        <input name="flexibilidad" type="text" placeholder="Flexibilidad">
-        <input name="resMusc" type="text" placeholder="Resistencia muscular">
-        <input name="cumplAgenda" type="text" placeholder="Cumplimiento de agenda">
-        <input name="resMonotonia" type="text" placeholder="Resistencia a la monotonia">
-        <input type="submit">
+        <input name="fuerzaMusc" type="text" placeholder="{{ translator.trans('fuerzaMuscular') }}">
+        <input name="resAnaerobica" type="text" placeholder="{{ translator.trans('resistenciaAnaerobica') }}">
+        <input name="resiliencia" type="text" placeholder="{{ translator.trans('resiliencia') }}">
+        <input name="flexibilidad" type="text" placeholder="{{ translator.trans('flexibilidad') }}">
+        <input name="resMusc" type="text" placeholder="{{ translator.trans('resistenciaMuscular') }}">
+        <input name="cumplAgenda" type="text" placeholder="{{ translator.trans('cumplimientoAgenda') }}">
+        <input name="resMonotonia" type="text" placeholder="{{ translator.trans('resistenciaMonotonia') }}">
+        <input type="submit" value="{{ translator.trans('enviar') }}">
     </form>
 </div>
 

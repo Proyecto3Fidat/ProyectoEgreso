@@ -7,6 +7,17 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+        :root {
+            --primary: #6f41bb;
+            --primary-dark: #5f31ab;
+            --secondary: #a63dd2;
+            --background: #131313;
+            --surface: #1e1c1f;
+            --on-surface: #ffffff;
+            --on-background: #ffffff;
+            --border: #444;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,19 +26,26 @@
         }
 
         body {
-            background-color: #131313;
-            color: white;
+            background-color: var(--background);
+            color: var(--on-background);
+            line-height: 1.6;
         }
 
         header {
-            background-color: #100e0f;
+            background-color: var(--surface);
             padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         nav ul {
@@ -40,13 +58,14 @@
         }
 
         nav a {
-            color: white;
+            color: var(--on-surface);
             text-decoration: none;
             transition: color 0.3s;
+            font-weight: 500;
         }
 
         nav a:hover {
-            color: #6f41bb;
+            color: var(--primary);
         }
 
         main {
@@ -59,6 +78,7 @@
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2.5rem;
+            color: var(--primary);
         }
 
         .btn-crear {
@@ -67,8 +87,8 @@
             margin: 0 auto 2rem;
             padding: 1rem;
             font-size: 1.2rem;
-            background: linear-gradient(135deg, #6f41bb, #a63dd2);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--on-surface);
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -83,25 +103,37 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-content {
-            background-color: #1e1c1f;
+            background-color: var(--surface);
             margin: 10% auto;
             padding: 2rem;
-            border: 1px solid #6f41bb;
+            border: 1px solid var(--primary);
             border-radius: 15px;
             width: 90%;
             max-width: 500px;
             box-shadow: 0 4px 20px rgba(111, 65, 187, 0.2);
             max-height: 80vh;
             overflow-y: auto;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .close {
@@ -110,13 +142,11 @@
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
+            transition: color 0.3s;
         }
 
-        .close:hover,
-        .close:focus {
-            color: #6f41bb;
-            text-decoration: none;
-            cursor: pointer;
+        .close:hover {
+            color: var(--primary);
         }
 
         form {
@@ -127,30 +157,39 @@
         label {
             margin-top: 1rem;
             margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         input, select {
-            padding: 0.5rem;
+            padding: 0.75rem;
             margin-bottom: 1rem;
-            background-color: #2b2b2d;
-            border: 1px solid #6f41bb;
+            background-color: var(--background);
+            border: 1px solid var(--border);
             border-radius: 5px;
-            color: white;
+            color: var(--on-background);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
         }
 
         button[type="submit"] {
             margin-top: 1rem;
             padding: 0.75rem;
-            background: linear-gradient(135deg, #6f41bb, #a63dd2);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--on-surface);
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         button[type="submit"]:hover {
-            background: linear-gradient(135deg, #5f31ab, #962dc2);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
         }
 
         .hidden {
@@ -159,31 +198,30 @@
 
         .tabla-usuarios {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 10px;
             margin-top: 2rem;
-            background-color: #222;
-            border-radius: 10px;
-            overflow: hidden;
         }
 
         .tabla-usuarios th, .tabla-usuarios td {
             padding: 1rem;
             text-align: left;
-            border-bottom: 1px solid #444;
         }
 
         .tabla-usuarios th {
-            background: linear-gradient(135deg, #6f41bb, #a63dd2);
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--on-surface);
             font-weight: 600;
         }
 
-        .tabla-usuarios tr:nth-child(even) {
-            background-color: #2b2b2d;
+        .tabla-usuarios tr {
+            background-color: var(--surface);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .tabla-usuarios tr:hover {
-            background-color: #333;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(111, 65, 187, 0.2);
         }
 
         .acciones {
@@ -191,27 +229,60 @@
             gap: 0.5rem;
         }
 
-        .btn-editar, .btn-eliminar {
+        .btn-desactivar, .btn-eliminar {
             padding: 0.5rem 1rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .btn-editar {
-            background-color: #4CAF50;
-            color: white;
+        .btn-desactivar {
+            background-color: #ca8a04;
+            color: var(--on-surface);
+        }
+
+        .btn-desactivar:hover {
+            background-color: #a16207;
+            transform: translateY(-2px);
         }
 
         .btn-eliminar {
-            background-color: #f44336;
-            color: white;
+            background-color: #dc2626;
+            color: var(--on-surface);
         }
 
-        .btn-editar:hover, .btn-eliminar:hover {
-            opacity: 0.8;
+        .btn-eliminar:hover {
+            background-color: #b91c1c;
+            transform: translateY(-2px);
         }
+
+        .btn-desactivar svg, .btn-eliminar svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            color: var(--on-background);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
+        }
+
         .paginacion {
             display: flex;
             justify-content: center;
@@ -221,20 +292,55 @@
         .paginacion button {
             margin: 0 0.5rem;
             padding: 0.75rem 1rem;
-            background-color: #303030;
-            color: white;
+            background-color: var(--surface);
+            color: var(--on-surface);
             border: none;
-            border-radius: 0.5rem;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .paginacion button:hover {
-            background-color: #4a2d7d;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .paginacion button.active {
-            background-color: #6f41bb;
+            background-color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-right: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .tabla-usuarios {
+                font-size: 0.9rem;
+            }
+
+            .tabla-usuarios th, .tabla-usuarios td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .acciones {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .btn-desactivar, .btn-eliminar {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -257,7 +363,7 @@
                     <option value="deportista">Deportista</option>
                     <option value="entrenador">Entrenador</option>
                     <option value="administrativo">Administrativo</option>
-                    <option value="administrativo">Administrativo TI</option>
+                    <option value="administrativoTi">Administrativo TI</option>
                 </select>
 
                 <label for="nombre">Nombre:</label>
@@ -321,16 +427,6 @@
     </div>
 
     <style>
-        .modal-content label, .modal-content input, .modal-content select, .modal-content button {
-            margin-bottom: 1rem;
-            display: block;
-            width: 100%;
-        }
-
-        .modal-content input, .modal-content select {
-            padding: 0.5rem;
-        }
-
         .modal-content button {
             padding: 0.75rem;
             background: linear-gradient(135deg, #6f41bb, #a63dd2);
@@ -339,6 +435,7 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
     </style>
 
 
@@ -352,6 +449,7 @@
             <th>Documento</th>
             <th>Correo Electrónico</th>
             <th>Rol</th>
+            <th>Acciones</th>
         </tr>
         </thead>
         <tbody id="tablaUsuariosBody">
@@ -362,10 +460,31 @@
                 <td>{{ usuario.nroDocumento }}</td>
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.rol }}</td>
+                <td class="acciones">
+                    <button class="btn-desactivar" onclick="confirmarDesactivacion('{{ usuario.nroDocumento }}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path><path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path><path d="M12 2v4"></path><path d="m2 2 20 20"></path></svg>
+                        Desactivar
+                    </button>
+
+                    <button class="btn-eliminar" onclick="confirmarEliminacion('{{ usuario.nroDocumento }}')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                        Eliminar
+                    </button>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+
+    <div id="modalEliminarUsuario" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal('modalEliminarUsuario')">&times;</span>
+            <h2>Eliminar Usuario</h2>
+            <p>Ingrese el documento del usuario para confirmar la eliminación:</p>
+            <input type="text" id="inputDocumentoConfirmacion" placeholder="Documento">
+            <button onclick="eliminarUsuario()">Confirmar Eliminación</button>
+        </div>
+    </div>
     <div class="paginacion" id="pagination"></div>
 
 </main>
@@ -406,6 +525,85 @@
         }
     }
 </script>
+<script>
+    let documentoAEliminar = null;
+
+    function confirmarDesactivacion(documento) {
+        if (confirm("¿Está seguro de que desea desactivar este usuario?")) {
+            desactivarUsuario(documento);
+        }
+    }
+
+    function confirmarEliminacion(documento) {
+        documentoAEliminar = documento;
+        document.getElementById("modalEliminarUsuario").style.display = "block";
+    }
+
+    async function desactivarUsuario(documento) {
+        try {
+            const response = await fetch('/desactivarTi', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ documento })
+            });
+            const result = await response.json();
+            if (result.success) {
+                console.log(`Usuario con documento ${documento} ha sido desactivado.`);
+                alert('Usuario desactivado correctamente.');
+            } else {
+                alert('No se pudo desactivar el usuario.');
+            }
+        } catch (error) {
+            console.error('Error al desactivar el usuario:', error);
+            alert('Error en la solicitud. Intente nuevamente.');
+        }
+    }
+
+    async function eliminarUsuario() {
+        const inputDocumento = document.getElementById("inputDocumentoConfirmacion").value;
+        if (inputDocumento === documentoAEliminar) {
+            try {
+                const response = await fetch('/eliminarTi', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ documento: documentoAEliminar })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    console.log(`Usuario con documento ${documentoAEliminar} ha sido eliminado.`);
+                    alert('Usuario eliminado correctamente.');
+                    cerrarModal('modalEliminarUsuario');
+                } else {
+                    alert('No se pudo eliminar el usuario.');
+                }
+            } catch (error) {
+                console.error('Error al eliminar el usuario:', error);
+                alert('Error en la solicitud. Intente nuevamente.');
+            }
+        } else {
+            alert("El documento ingresado no coincide. Verifique y vuelva a intentar.");
+        }
+    }
+
+    // Cerrar modal
+    function cerrarModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalEliminarUsuario");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
 <script>
     const rowsPerPage = 12;
     let currentPage = 1;
@@ -462,6 +660,43 @@
     document.addEventListener("DOMContentLoaded", () => {
         filteredRows = Array.from(document.querySelectorAll("#tablaUsuariosBody tr"));
         setupPagination();
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Selecciona el formulario de creación de usuario
+        const formCrearUsuario = document.getElementById("formCrearUsuario");
+
+        // Intercepta el envío del formulario
+        formCrearUsuario.addEventListener("submit", async function(event) {
+            event.preventDefault(); // Previene el envío normal del formulario
+
+            // Captura los datos del formulario
+            const formData = new FormData(formCrearUsuario);
+
+            try {
+                // Realiza la solicitud POST de forma asíncrona
+                const response = await fetch('/usuarioTI', {
+                    method: 'POST',
+                    body: new URLSearchParams(formData) // Convierte FormData a URLSearchParams para simular un envío de formulario
+                });
+
+                // Procesa la respuesta del servidor
+                const result = await response.json();
+
+                // Muestra el mensaje de éxito o error
+                if (result.success) {
+                    alert('Usuario creado correctamente.');
+                    formCrearUsuario.reset(); // Opcional: Limpia el formulario
+                    modal.style.display = "none"; // Cierra el modal si está abierto
+                } else {
+                    alert('No se pudo crear el usuario. ' + (result.message || ''));
+                }
+            } catch (error) {
+                console.error('Error al enviar el formulario:', error);
+                alert('Hubo un problema al enviar el formulario. Intente nuevamente.');
+            }
+        });
     });
 </script>
 </body>

@@ -43,3 +43,12 @@ class AdministrativoMiddleware implements IMiddleware
     }
 
 }
+class AdministativoTiMiddleware implements IMiddleware
+{
+    public function handle(Request $request): void
+    {
+        $authService = new AuthService();
+        $authService->comprobarAdministrativoTi();
+    }
+
+}

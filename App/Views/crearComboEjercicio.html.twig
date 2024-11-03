@@ -11,11 +11,11 @@
 <div class="crearEjercicio-Container">
     <div id="formulario-crear-ejercicio" class="content oculto">
         <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo" onsubmit="return validateStrings()">
-            <label for="nombre-combo">Nombre del Combo:</label>
+            <label for="nombre-combo">{{ translator.trans('nombredelcombo') }}:</label>
             <input type="text" id="nombre-combo" name="nombreCombo" pattern="[a-zA-Z\s]+" title="Solo se permiten letras y espacios" required><br><br>
             <div id="ejercicios-seleccionados">
             </div>
-            <button type="button" id="agregar-ejercicio">Añadir otro ejercicio</button><br><br>
+            <button type="button" id="agregar-ejercicio">{{ translator.trans('aniadirEjercicio') }}</button><br><br>
             <input type="hidden" name="ejercicios" id="ejercicios-input">
             <input type="submit" value="Enviar">
         </form>
@@ -76,7 +76,7 @@
                 // Crear un nuevo select
                 const nuevoSelect = document.createElement('select');
                 nuevoSelect.required = true;
-                nuevoSelect.innerHTML = '<option value="" disabled selected>Seleccione un ejercicio</option>';
+                nuevoSelect.innerHTML = '<option value="" disabled selected>{{ translator.trans('seleccionarEjercicio') }}</option>';
 
                 // Llenar el select con las opciones de ejercicios
                 data.forEach(ejercicio => {
@@ -120,7 +120,7 @@
                 // Crear botón para eliminar la selección
                 const eliminarBtn = document.createElement('button');
                 eliminarBtn.type = 'button';
-                eliminarBtn.textContent = 'Eliminar ejercicio';
+                eliminarBtn.textContent = '{{ translator.trans('eliminarEjercicio') }}';
                 eliminarBtn.addEventListener('click', function () {
                     // Eliminar el contenedor del ejercicio
                     ejerciciosSeleccionadosDiv.removeChild(contenedorEjercicio);

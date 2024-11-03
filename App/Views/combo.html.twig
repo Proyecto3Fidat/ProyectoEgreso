@@ -3,9 +3,9 @@
     <h1>Crear Rutina</h1>
     <form id="formCrearRutina" method="post" action="/crearRutina">
         <div class="combosContainer" id="combosContainer">
-            <label for="comboSelect">Selecciona un Combo:</label>
+            <label for="comboSelect">{{ translator.trans('seleccionarCombo') }}:</label>
             <select id="comboSelect" name="combos[]" class="combo-select">
-                <option value="">-- Selecciona un combo --</option>
+                <option value="">-- {{ translator.trans('seleccionarCombo') }} --</option>
                 {% set agregados = [] %} {# Array para almacenar los nombres ya agregados #}
                 {% for combo in combos %}
                     {% if combo.nombreCombo not in agregados %}
@@ -15,28 +15,28 @@
                     {% endif %}
                 {% endfor %}
             </select>
-            <button type="button" id="agregarCombo">Agregar Combo</button>
+            <button type="button" id="agregarCombo">{{ translator.trans('agregarCombo') }}</button>
         </div>
-        <input type="text" name="series" placeholder="Series" pattern="\d+" title="Solo se permiten números" required><br><br>
-        <input type="text" name="repeticiones" placeholder="Repeticiones" pattern="\d+" title="Solo se permiten números" required><br><br>
-        <input type="text" name="dia" placeholder="Día" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)$"
+        <input type="text" name="series" placeholder="{{ translator.trans('series') }}" pattern="\d+" title="Solo se permiten números" required><br><br>
+        <input type="text" name="repeticiones" placeholder="{{ translator.trans('repeticiones') }}" pattern="\d+" title="Solo se permiten números" required><br><br>
+        <input type="text" name="dia" placeholder="{{ translator.trans('dia') }}" pattern="^(lunes|martes|miércoles|jueves|viernes|sábado|domingo)$"
                title="Solo se permiten los días de la semana: lunes, martes, miércoles, jueves, viernes, sábado, domingo" required><br><br>
 
         <div id="comboInfo">
-            <h3>Información del Combo</h3>
-            <p id="comboNombre">Nombre: <span></span></p>
-            <p id="comboDescripcion">Descripción: <span></span></p>
-            <p id="comboTipo">Tipo: <span></span></p>
-            <p id="comboGrupo">Grupo Muscular: <span></span></p>
+            <h3>{{ translator.trans('infoCombo') }}</h3>
+            <p id="comboNombre">{{ translator.trans('nombre') }}: <span></span></p>
+            <p id="comboDescripcion">{{ translator.trans('descripcion') }}: <span></span></p>
+            <p id="comboTipo">{{ translator.trans('tipo') }}: <span></span></p>
+            <p id="comboGrupo">{{ translator.trans('grupoMuscular') }}: <span></span></p>
         </div>
 
         <div id="ejerciciosContainer">
-            <h3>Ejercicios Seleccionados</h3>
+            <h3>{{ translator.trans('ejerciciosSeleccionados') }}</h3>
         </div>
 
         <input type="hidden" id="combosSeleccionados" name="combosSeleccionados">
 
-        <button type="submit">Crear Rutina</button>
+        <button type="submit">{{ translator.trans('crearRutina') }}</button>
     </form>
 </div>
 

@@ -309,7 +309,7 @@ class ClienteController
 
         $depotistaRepo = new DeportistaRepository();
         $deportistaService = new DeportistaService($depotistaRepo);
-        var_dump($_POST);
+
         $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);
         $apellido = filter_input(INPUT_POST, 'apellido', FILTER_SANITIZE_SPECIAL_CHARS);
         $nroDocumento = filter_input(INPUT_POST, 'documento', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -349,6 +349,8 @@ class ClienteController
                             $usuarioService->generarToken()
                         )
                     );
+
+                    echo json_encode(['success' => 'Paciente creado correctamente']);
                     exit();
                 }
                 $this->clienteService->crearSinInfo(
@@ -376,6 +378,8 @@ class ClienteController
                         $usuarioService->generarToken()
                     )
                 );
+
+                echo json_encode(['success' => 'Paciente creado correctamente']);
                 exit();
             case 'administrativo':
                 if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
@@ -418,9 +422,12 @@ class ClienteController
                         $usuarioService->generarToken()
                     )
                 );
+
+                echo json_encode(['success' => 'Paciente creado correctamente']);
                 exit();
                 break;
             case('deportista'):
+
                 if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'deportista') {
                     echo json_encode(['error' => 'El deportista ya existe']);
                     exit();
@@ -438,6 +445,8 @@ class ClienteController
                     $usuarioService->guardarDeportista( $nroDocumento);
                     $deportistaService->guardarDeportista($nroDocumento);
                     exit();
+
+                    echo json_encode(['success' => 'Paciente creado correctamente']);
                 }
 
                 $this->clienteService->crearCliente(
@@ -459,6 +468,8 @@ class ClienteController
                 );
                 $usuarioService->guardarDeportista($nroDocumento);
                 $deportistaService->guardarDeportista($nroDocumento);
+
+                echo json_encode(['success' => 'Deportista creado correctamente']);
                 exit();
                 break;
             case 'paciente':
@@ -477,6 +488,8 @@ class ClienteController
                         )
                     );
                     $usuarioService->guardarPaciente($nroDocumento);
+
+                    echo json_encode(['success' => 'Paciente creado correctamente']);
                     exit();
                 }
 
@@ -491,18 +504,111 @@ class ClienteController
                         $esquina,
                         $correo,
                         $patologias,
+                        $fechaNacimientoP,
+                        $nombre,
+                        $apellido,
+                        $rol
+                    )
+                );
+                $usuarioService->crearUsuario(
+                    new UsuarioModel(
+                        $nroDocumento . "@" . "paciente",
+                        'paciente',
+                        $passwd,
+                        $usuarioService->generarToken()
+                    )
+                );
+                $usuarioService->guardarPaciente($nroDocumento);
+                echo json_encode(['success' => 'Paciente creado correctamente']);
+                exit();
+                break;
+            case 'administrativoTi':
+
+                if ($usuarioService->comprobarRolAdministrativo($nroDocumento . "@administrativoTi") === 'administrativoTi') {
+                    echo json_encode(['error' => 'El administrativo de TI ya existe']);
+                    exit();
+                }
+
+                if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
+                    $usuarioService->crearUsuario(
+                        new UsuarioModel(
+                            $nroDocumento . "@" . "administrativoTi",
+                            'administrativoTi',
+                            $passwd,
+                            $usuarioService->generarToken()
+                        )
+                    );
+
+                    echo json_encode(['success' => 'Administrativo TI creado correctamente']);
+                    exit();
+                }
+                $this->clienteService->crearSinInfo(
+                    new ClienteModel(
+                        $nroDocumento,
+                        $tipoDocumento,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        $correo,
+                        null,
                         $fechaNacimiento,
                         $nombre,
                         $apellido,
                         $rol
                     )
                 );
-                $usuarioService->guardarPaciente($nroDocumento);
+                $usuarioService->crearUsuario(
+                    new UsuarioModel(
+                        $nroDocumento . "@" . "administrativoTi",
+                        'administrativoTi',
+                        $passwd,
+                        $usuarioService->generarToken()
+                    )
+                );
+
+                echo json_encode(['success' => 'Administrativo TI creado correctamente']);
                 exit();
+                break;
+
             default:
                 echo json_encode(['error' => 'Rol incorrecto']);
                 exit();
         }
+    }
+
+    public function eliminarUsuarioAdmin()
+    {
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+
+        try {
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+            $this->logger->info('Se intento eliminar el usuario: ' . $data['documento']);
+            $this->clienteService->eliminarUsuarioAdmin($data['documento']);
+            $usuarioService->eliminarUsuario($data['documento']);
+            echo json_encode(['success' => true, 'message' => 'Usuario eliminado correctamente.']);
+        }
+        catch (\Exception $e) {
+            echo json_encode(['success'=>false, 'message' => 'Error al eliminar el usuario.']);
+        }
+        exit();
+    }
+
+    public function desactivarUsuarioAdmin()
+    {
+        try {
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+            $this->clienteService->desactivarUsuarioAdmin($data['documento']);
+            echo json_encode(['success' => true, 'message' => 'Usuario desactivado correctamente.']);
+        }
+        catch (\Exception $e) {
+            echo json_encode(['success'=>false, 'message' => 'Error al desactivar el usuario.']);
+        }
+        exit();
     }
 
 

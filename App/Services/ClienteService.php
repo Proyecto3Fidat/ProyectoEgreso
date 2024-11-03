@@ -163,4 +163,14 @@ class ClienteService
     {
         return $this->clienteRepository->obtenerTipoDocumento($documento);
     }
+
+    public function eliminarUsuarioAdmin(mixed $nroDocumento)
+    {
+        $this->clienteRepository->eliminarUsuarioAdmin($nroDocumento);
+    }
+
+    public function desactivarUsuarioAdmin(mixed $documento)
+    {
+        $this->clienteRepository->desactivarUsuarioAdmin($documento);
+    }
 }

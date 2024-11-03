@@ -39,4 +39,9 @@ Class CalificacionService{
     {
         return $this->calificacionRepository->editarCalificacion($calificacionModel, $id);
     }
+
+    public function eliminarCalificacion(mixed $idCalificacion)
+    {
+        return $this->calificacionRepository->eliminarCalificacion($idCalificacion);
+    }
 }

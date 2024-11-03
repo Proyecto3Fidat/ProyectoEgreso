@@ -16,7 +16,7 @@ martes: "Tuesday"
 miercoles: "Wednesday"
 jueves: "Thursday"
 viernes: "Friday"
-
+hora: "Time"
 
 #Header
 inicio: "Home"
@@ -71,6 +71,7 @@ bienvenido : "Welcome to your dashboard, "
 informacion: "User Information"
 edad: "Age"
 calificaciones: "Ratings"
+
 #antes del "'s" va el nombre del usuario. Ej: Juan's Technical file
 fichatecnica : "'s Technical file"
 gestionar: "Manage"
@@ -123,6 +124,7 @@ nombreEjercicio: "Exercise name"
 descripcionEjercicio: "Description"
 
 #Seleccione una opción
+seleccione: "Select an option"
 pectoralHombroTricep: "Chest, Shoulder and Triceps"
 espaldaHombroBicep: "Back, Shoulder and Biceps"
 pierna: "Leg"
@@ -137,6 +139,8 @@ enviar: "Send"
 crearCombo: "Add Exercise Combo"
 nombredelcombo: "Combo Name"
 aniadirEjercicio: "Add another exercise"
+eliminarEjercicio: "Delete exercise"
+seleccionarEjercicio: "Select exercise"
 
 #Crear Rutina
 crearRutina: "Add Routine"
@@ -148,8 +152,20 @@ botoncrearRutina: "Create Routine"
 
 
 #adminDash
-
 detalles: "Details"
 ingresarLocal: "Add new facility"
 subirLogo: "Upload website logo"
 buscar: "Search by name or document..."
+
+
+
+#main Entrenador
+listaClientes: "Client List"
+listaEjercicios: "Exercise List"
+
+eliminar: "Delete"
+editar: "Edit"
+
+
+seleccioneRutina: "Select Routine"
+rutinaSeleccionada: "Selected Routine"
