@@ -111,11 +111,11 @@ pierna: "Pierna"
 tipoDeEjercicio: "Tipo de Ejercicio"
 aerobico: "Aeróbico"
 fuerzaResistencia: "Fuerza y Resiste"
-nombredelcombo: "Nncia"
+nombredelcombo: "Nombre del Combo"
 enviar: "Enviar"
 
 seleccionarEjercicio: "Seleccionar Ejercicio"
-eliminarEjericio: "Eliminar Ejercicio"
+eliminarEjercicio: "Eliminar Ejercicio"
 aniadirEjercicio: "Añadir Ejercicio"
 
 

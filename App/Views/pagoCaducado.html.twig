@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error - Sesión No Iniciada</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
         body {
             background-color: #100e0f;
@@ -47,6 +46,8 @@
             font-weight: bold;
             font-size: 1.2rem;
             transition: background-color 0.3s, transform 0.3s;
+            display: inline-block;
+            margin-top: 1rem;
         }
 
         .button:hover {
@@ -54,20 +55,14 @@
             transform: translateY(-5px);
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mostrar la alerta al cargar la página
-            alert('No has iniciado sesión. Por favor, inicia sesión para acceder a esta página.');
-        });
-    </script>
 </head>
 <body>
 <div class="container">
     <h1>Alerta de Pago</h1>
-    <p>Se pago a caducado</p>
-    <p>Para poder acceder nuevamente a nuestros servicios realize el pago.</p>
-    <p>Y envie coprobante del mismo a un administrativo</p>
-
+    <p>Su pago ha caducado.</p>
+    <p>Para poder acceder nuevamente a nuestros servicios, realice el pago.</p>
+    <p>Y envíe el comprobante del mismo a un administrativo.</p>
+    <a href="/" class="button">Salir</a>
 </div>
 </body>
 </html>

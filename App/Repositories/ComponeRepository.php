@@ -52,4 +52,19 @@ class ComponeRepository extends Database
         $database->disconnect();
     }
 
+    public function guardar(\App\Models\ComponeModel $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Compone (idRutina, nombreCombo, idEjercicio) VALUES (?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $idRutina = $param->getIdRutina();
+        $nombreCombo = $param->getNombreCombo();
+        $idEjercicio = $param->getIdEjercicio();
+        $stmt->bind_param('isi', $idRutina, $nombreCombo, $idEjercicio);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 }

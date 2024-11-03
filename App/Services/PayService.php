@@ -49,6 +49,8 @@ class PayService
         $pago = $eligeService->obtenerPagosPorDocumento($_SESSION['documento']);
 
         if (!isset($pago['fechaVencimiento'])){
+            session_destroy();
+            echo "<script>localStorage.clear();</script>";
             echo $twig->render('pagoCaducado.html.twig');
             die();
         }
@@ -75,6 +77,8 @@ class PayService
                 return;
             }
         }else {
+            session_destroy();
+            echo "<script>localStorage.clear();</script>";
            echo $twig->render('pagoCaducado.html.twig');
            exit();
         }

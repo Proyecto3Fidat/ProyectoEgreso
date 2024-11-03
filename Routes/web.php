@@ -413,9 +413,9 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedPlanPago(new \App\Models\PlanPagoModel('anual', 'Pago de un año', '12 meses'));
 
 
-    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('2455963147', 'ci', '2024/06/13', 'trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('97121013', 'ci', '2024/06/13', 'trimestral'));
-    $seeder->seedPago(new \App\Models\PagoModel('2024/11/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('12326789', 'ci', '2024/06/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2025/1/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('2455963147', 'ci', '2024/11/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2025/1/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('97121013', 'ci', '2024/11/13', 'trimestral'));
+    $seeder->seedPago(new \App\Models\PagoModel('2025/1/13'), new \App\Models\RealizaModel('2024/11/13', 'trimestral'), new \App\Models\EligeModel('12326789', 'ci', '2024/11/13', 'trimestral'));
 
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca plano', 'El press de banca activa los músculos del pecho, sobre todo el músculo pectoral mayor (los pectorales)', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Press banca inclinado', ' Los principales músculos que participan son el pectoral mayor (con énfasis en la porción superior), el deltoides (porción anterior) y el tríceps. ', 'pectoral, hombro y tríceps', 'Fuerza o Resistencia'));
@@ -437,6 +437,72 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Extensiones.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Curl de femoral en banco.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
     $seeder->seedEjercicios(new \App\Models\EjercicioModel('Elevaciones de pie.', 'el press de banca plano con mancuernas trabaja predominantemente el hombro mediante la aducción horizontal, fortaleciendo las fibras centrales del pectoral mayor', 'Pierna', 'Fuerza o Resistencia'));
+
+
+    /* ComboEjercicio */
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('fuerza'));
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('resistencia'));
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('potencia'));
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('flexibilidad'));
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('equilibrio'));
+    $seeder->seedComboEjercicio(new \App\Models\ComboEjercicio('velocidad'));
+
+
+    /* Contiene */
+    $seeder->seedContiene(new \App\Models\ContieneModel('fuerza', '1'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('fuerza', '2'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('fuerza', '3'));
+
+    $seeder->seedContiene(new \App\Models\ContieneModel('resistencia', '4'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('resistencia', '5'));
+
+    $seeder->seedContiene(new \App\Models\ContieneModel('potencia', '6'));
+
+    $seeder->seedContiene(new \App\Models\ContieneModel('flexibilidad', '7'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('flexibilidad', '8'));
+
+    $seeder->seedContiene(new \App\Models\ContieneModel('equilibrio', '9'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('equilibrio', '10'));
+
+    $seeder->seedContiene(new \App\Models\ContieneModel('velocidad', '11'));
+    $seeder->seedContiene(new \App\Models\ContieneModel('velocidad', '12'));
+
+
+    /* Rutina */
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '12', '5', 'martes'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '12', '6', 'miercoles'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '12', '7', 'jueves'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '12', '8', 'viernes'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '12', '9', 'sabado'));
+
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '13', '1', 'lunes'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '13', '2', 'martes'));
+    $seeder->seedRutina(new \App\Models\RutinaModel(null, '13', '3', 'miercoles'));
+
+    /* Compone */
+    $seeder->seedCompone(new \App\Models\ComponeModel('1', 'fuerza', '1'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('2', 'fuerza', '1'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('3', 'fuerza', '1'));
+
+    $seeder->seedCompone(new \App\Models\ComponeModel('4', 'resistencia', '2'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('5', 'resistencia', '2'));
+
+    $seeder->seedCompone(new \App\Models\ComponeModel('6', 'potencia', '3'));
+
+    $seeder->seedCompone(new \App\Models\ComponeModel('7', 'flexibilidad', '4'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('8', 'flexibilidad', '4'));
+
+    $seeder->seedCompone(new \App\Models\ComponeModel('9', 'equilibrio', '5'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('10', 'equilibrio', '5'));
+
+    $seeder->seedCompone(new \App\Models\ComponeModel('11', 'velocidad', '6'));
+    $seeder->seedCompone(new \App\Models\ComponeModel('12', 'velocidad', '6'));
+
+    /* Practica */
+    $seeder->seedPractica(new \App\Models\PracticaModel('1', '85463701', 'ci'));
+    $seeder->seedPractica(new \App\Models\PracticaModel('2', '2455963147', 'ci'));
+    $seeder->seedPractica(new \App\Models\PracticaModel('3', '2455963147', 'ci'));
+    $seeder->seedPractica(new \App\Models\PracticaModel('4', '97121013', 'ci'));
 
     exit();
 });
@@ -667,7 +733,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                         $resultado [] = $r;
                     }
                     if (empty($resultado)) {
-                        echo "no hay rutinas";
+                        $template->renderTemplate('noRutinas');
                         exit();
                     }
                     $data = [

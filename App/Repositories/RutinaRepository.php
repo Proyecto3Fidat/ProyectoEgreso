@@ -60,4 +60,19 @@ class RutinaRepository extends Database
         return $rutina;
     }
 
+    public function guardar(\App\Models\RutinaModel $param)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO Rutina (series, repeticiones, dia) VALUES (?, ?, ?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $series = $param->getSeries();
+        $repeticiones = $param->getRepeticiones();
+        $dia = $param->getDia();
+        $stmt->bind_param('iis', $series, $repeticiones, $dia);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 }
