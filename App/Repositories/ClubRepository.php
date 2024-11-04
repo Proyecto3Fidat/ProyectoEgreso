@@ -9,7 +9,7 @@ class ClubRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO club (nombreClub) VALUES (?)";
+        $sql = "INSERT INTO Club (nombreClub) VALUES (?)";
         $stmt = $database->getConnection()->prepare($sql);
         $nombreClub = $param->getNombreClub();
         $stmt->bind_param('s', $nombreClub);
@@ -22,7 +22,7 @@ class ClubRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT * FROM club";
+        $sql = "SELECT * FROM Club";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -37,7 +37,7 @@ class ClubRepository extends Database
         $database = Database::getInstance();
         $database->connect();
 
-        $sql_check = "SELECT COUNT(*) FROM relacionado WHERE nroDocumento = ?";
+        $sql_check = "SELECT COUNT(*) FROM Relacionado WHERE nroDocumento = ?";
         $stmt_check = $database->getConnection()->prepare($sql_check);
         $stmt_check->bind_param('s', $documento);
         $stmt_check->execute();
@@ -66,7 +66,7 @@ class ClubRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT * FROM club WHERE idClub = ?";
+        $sql = "SELECT * FROM Club WHERE idClub = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param('i', $idClub);
         $stmt->execute();
@@ -81,7 +81,7 @@ class ClubRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO club (nombreClub) VALUES (?)";
+        $sql = "INSERT INTO Club (nombreClub) VALUES (?)";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param('s', $nombreClub);
         $stmt->execute();

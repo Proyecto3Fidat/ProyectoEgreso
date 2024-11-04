@@ -55,8 +55,13 @@
     </select><br><br>
 
     <div id="campoDeporte" style="display: none;">
+
         <label for="deporte">Deporte Practicado:</label>
-        <input type="text" id="deporte" name="deporte"><br><br>
+        <select>
+            {% for deporte in deportes %}
+                <option value="{{ deporte['nombre'] }}">{{ deporte['nombre'] }}</option>
+            {% endfor %}
+        </select>
         <label for="deporte">Posicion:</label>
         <input type="text" id="posicion" name="posicion"><br><br>
     </div>

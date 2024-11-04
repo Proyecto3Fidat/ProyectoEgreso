@@ -17,4 +17,18 @@ class DeporteRepository extends Database
         $stmt->close();
         $database->disconnect();
     }
+
+    public function obtenerDeportes()
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "SELECT * FROM deporte";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $deportes = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        $database->disconnect();
+        return $deportes;
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+use App\Services\DeporteService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use Twig\Environment;
@@ -28,8 +29,12 @@ class PayService
         if ($fechaVencimiento > $fechaActual && $rol == 'cliente') {
             $intervalo = $fechaActual->diff($fechaVencimiento);
             $diasRestantes = $intervalo->days;
+            $deportes = new DeporteService();
+            $deportesCargados= $deportes->obtenerDeportesCargados();
+
             $datos = [
                 'documento' => $_SESSION['documento'],
+                'deportes' => $deportesCargados,
             ];
             echo $twig->render('carga.html.twig', $datos);
             exit();

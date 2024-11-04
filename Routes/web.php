@@ -342,7 +342,7 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedUsuario('753951186', '1234', 'entrenador');
     $seeder->seedUsuario('163852741', '1234', 'entrenador');
     $seeder->seedUsuario('258121961', '1234', 'entrenador');
-    $seeder->seedUsuario('855243147', '1234', 'administrativo');
+    $seeder->seedUsuario('855243147', '1234', 'administrativoTi');
     $seeder->seedUsuario('65497123', '1234', 'administrativo');
     $seeder->seedUsuario('96384741', '1234', 'administrativo');
     $seeder->seedUsuario('3265387', '1234', 'administrativo');
@@ -609,6 +609,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
             });
 
             SimpleRouter::post('/usuarioTI', function () use ($logger) {
+                echo "aa";
                 $clienteRepository = new ClienteRepository();
                 $clienteService = new ClienteService($clienteRepository);
                 $clienteController = new ClienteController($clienteService, $logger);
@@ -620,9 +621,11 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                 $clienteService = new ClienteService($clienteRepository);
                 $clienteController = new ClienteController($clienteService, $logger);
                 $clientes = $clienteController->obtenerListaClientesAdmintrativo();
+                $deporte = new \App\Services\DeporteService();
+                $deportes = $deporte->obtenerDeportesCargados();
                 $template = new TemplateController();
-
-                $template->renderTemplate('admin', ['usuarios' => $clientes]);
+                $data = ['usuarios' => $clientes, 'deportes' => $deportes];
+                $template->renderTemplate('admin', $data );
             });
 
 

@@ -412,8 +412,11 @@
                     <input type="text" id="peso" name="peso">
 
                     <label for="deporte">Deporte:</label>
-                    <input type="text" id="deporte" name="deporte">
-
+                    <select id="deporte" name="deporte">
+                    {% for deporte in deportes %}
+                        <option value="{{ deporte['nombre'] }}">{{ deporte['nombre'] }}</option>
+                    {% endfor %}
+                    </select>
                     <label for="posicion">Posición:</label>
                     <input type="text" id="posicion" name="posicion">
                 </div>
