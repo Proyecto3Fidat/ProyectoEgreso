@@ -323,14 +323,15 @@ class ClienteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT nombre, nroDocumento, tipoDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
+        $sql = "SELECT activo,  nombre, nroDocumento, tipoDocumento, apellido , altura , peso , patologias , email , fechaNacimiento , calle , numero , esquina FROM Cliente";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($nombre, $nroDocumento, $tipoDocumento, $apellido, $altura, $peso, $patologia, $email, $fechaNacimiento, $calle, $numero, $esquina);
+        $stmt->bind_result($activo ,$nombre, $nroDocumento, $tipoDocumento, $apellido, $altura, $peso, $patologia, $email, $fechaNacimiento, $calle, $numero, $esquina);
         $clientes = array();
         while ($stmt->fetch()) {
             $clientes[] = array(
+                'activo' => $activo,
                 'nombre' => $nombre,
                 'nroDocumento' => $nroDocumento,
                 'tipoDocumento' => $tipoDocumento,
@@ -415,6 +416,18 @@ class ClienteRepository extends Database
         $database = Database::getInstance();
         $database->connect();
         $sql = "UPDATE Cliente SET activo = 0 WHERE nroDocumento = ?";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $documento);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
+    public function activarUsuario(mixed $documento)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "UPDATE Cliente SET activo = 1 WHERE nroDocumento = ?";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("s", $documento);
         $stmt->execute();

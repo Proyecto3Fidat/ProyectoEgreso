@@ -346,7 +346,7 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedUsuario('65497123', '1234', 'administrativo');
     $seeder->seedUsuario('96384741', '1234', 'administrativo');
     $seeder->seedUsuario('3265387', '1234', 'administrativo');
-    $seeder->seedUsuario('751152486', '1234', 'administrativo');
+    $seeder->seedUsuario('751152486', '1234', 'seleccionador');
     $seeder->seedUsuario('12326789', '1234', 'deportista');
     $seeder->seedUsuario('97121013', '1234', 'deportista');
     $seeder->seedUsuario('2455963147', '1234', 'deportista');
@@ -606,6 +606,13 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                 $clienteController = new ClienteController($clienteService, $logger);
                 $clienteController->desactivarUsuarioAdmin();
                 exit();
+            });
+
+            SimpleRouter::post('/activar-usuario', function () use ($logger) {
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clienteController->activarUsuario();
             });
 
             SimpleRouter::post('/usuarioTI', function () use ($logger) {

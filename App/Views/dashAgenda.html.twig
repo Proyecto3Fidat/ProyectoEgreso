@@ -216,7 +216,7 @@
 </head>
 <body>
 <main>
-    <button class="new-agenda-button" onclick="abrirModal('nuevaAgendaModal', '', '', '', '', '')">Nueva Agenda</button>
+    <button class="new-agenda-button" onclick="abrirModal('nuevaAgendaModal', '', '', '', '', '')">{{ translator.trans('nuevaAgenda') }}</button>
     {% if agenda is not null %}
         {% set grouped_agenda = {} %}
         {% for item in agenda %}
@@ -234,30 +234,30 @@
                 <table class="agenda-table">
                     <thead>
                     <tr>
-                        <th>Día</th>
-                        <th>Hora Inicio</th>
-                        <th>Hora Fin</th>
-                        <th>Acciones</th>
+                        <th>{{ translator.trans('dia') }}</th>
+                        <th>{{ translator.trans('horaInicio') }}</th>
+                        <th>{{ translator.trans('horaFin') }}</th>
+                        <th>{{ translator.trans('acciones') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in agendas %}
                         <tr>
-                            <td data-label="Día">{{ item.dia }}</td>
-                            <td data-label="Hora Inicio">{{ item.horaInicio }}</td>
-                            <td data-label="Hora Fin">{{ item.horaFin }}</td>
-                            <td data-label="Acciones">
-                                <button class="delete-button" onclick="eliminarAgenda('{{ item.id }}', '{{ item.dia }}', '{{ item.horaInicio }}', '{{ item.horaFin }}', '{{ item.nombre }}')">Eliminar</button>
+                            <td data-label="{{ translator.trans('dia') }}">{{ item.dia }}</td>
+                            <td data-label="{{ translator.trans('horaInicio') }}">{{ item.horaInicio }}</td>
+                            <td data-label="{{ translator.trans('horaFin') }}">{{ item.horaFin }}</td>
+                            <td data-label="{{ translator.trans('acciones') }}">
+                                <button class="delete-button" onclick="eliminarAgenda('{{ item.id }}', '{{ item.dia }}', '{{ item.horaInicio }}', '{{ item.horaFin }}', '{{ item.nombre }}')">{{ translator.trans('eliminar') }}</button>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                <button class="add-agenda-button" onclick="abrirModal('agregarModal', '{{ local }}', '', '', '', '{{ local }}')">Agregar Agenda</button>
+                <button class="add-agenda-button" onclick="abrirModal('agregarModal', '{{ local }}', '', '', '', '{{ local }}')">{{ translator.trans('agregarAgenda') }}</button>
             </div>
         {% endfor %}
     {% else %}
-        <p>No hay agendas disponibles.</p>
+        <p>{{ translator.trans('noAgendas') }}.</p>
     {% endif %}
 </main>
 
@@ -298,6 +298,7 @@
         modal.style.display = 'none';
     }
 
+    function eliminarAgenda(id, dia, horaInicio, horaFin, nombre) {
     function eliminarAgenda(id, dia, horaInicio, horaFin, nombre) {
         if (confirm('Estás seguro de que deseas eliminar esta agenda?')) {
             fetch('/eliminarAgenda?id=' + id + '&dia=' + dia + '&horaInicio=' + horaInicio + '&horaFin=' + horaFin + '&nombre=' + nombre, {

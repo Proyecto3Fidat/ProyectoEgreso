@@ -266,6 +266,41 @@
             margin-right: 8px;
         }
 
+
+
+
+
+        .btn-activar {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-activar {
+            background-color: #4e8d05;
+            color: var(--on-surface);
+        }
+
+        .btn-activar:hover {
+            background-color: #1cca11;
+            transform: translateY(-2px);
+        }
+
+
+
+        .btn-activar svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+
+
         #searchInput {
             width: 100%;
             padding: 0.75rem;
@@ -349,82 +384,82 @@
 
 
 <main>
-    <h1>Panel Administrativo</h1>
-    <button class="btn-crear" id="btnCrearUsuario">Crear Usuario</button>
+    <h1>{{ translator.trans('panelAdmins') }}</h1>
+    <button class="btn-crear" id="btnCrearUsuario">{{ translator.trans('crearUsuario') }}</button>
     <div id="modalCrearUsuario" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Crear Nuevo Usuario</h2>
             <form id="formCrearUsuario" method="post" action="/usuarioTI">
-                <label for="rol">Rol de Usuario:</label>
+                <label for="rol">{{ translator.trans('rolUsuario') }}:</label>
                 <select id="rol" name="rol" required>
-                    <option value="">Seleccione un rol</option>
-                    <option value="paciente">Paciente</option>
-                    <option value="deportista">Deportista</option>
-                    <option value="entrenador">Entrenador</option>
-                    <option value="administrativo">Administrativo</option>
-                    <option value="administrativoTi">Administrativo TI</option>
+                    <option value="">{{ translator.trans('seleccioneRol') }}</option>
+                    <option value="paciente">{{ translator.trans('paciente') }}</option>
+                    <option value="deportista">{{ translator.trans('deportista') }}</option>
+                    <option value="entrenador">{{ translator.trans('entrenador') }}</option>
+                    <option value="administrativo">{{ translator.trans('administrativo') }}</option>
+                    <option value="administrativoTi">{{ translator.trans('administrativoTi') }}</option>
                 </select>
 
-                <label for="nombre">Nombre:</label>
+                <label for="nombre">{{ translator.trans('nombre') }}:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
-                <label for="apellido">Apellido:</label>
+                <label for="apellido">{{ translator.trans('apellido') }}:</label>
                 <input type="text" id="apellido" name="apellido" required>
 
-                <label for="tipoDocumento">Tipo de Documento:</label>
+                <label for="tipoDocumento">{{ translator.trans('tipoDocumento') }}:</label>
                 <select id="tipoDocumento" name="tipoDocumento">
-                    <option value="cedula">Cédula</option>
-                    <option value="pasaporte">Pasaporte</option>
+                    <option value="cedula">{{ translator.trans('cedula') }}</option>
+                    <option value="pasaporte">{{ translator.trans('pasaporte') }}</option>
                 </select>
 
-                <label for="documento">Documento:</label>
+                <label for="documento">{{ translator.trans('documento') }}:</label>
                 <input type="text" id="documento" name="documento" required>
 
-                <label for="nroTelefono">N° de Teléfono:</label>
+                <label for="nroTelefono">{{ translator.trans('telefono') }}:</label>
                 <input type="text" id="nroTelefono" name="nroTelefono" required>
 
-                <label for="email">Correo Electrónico:</label>
+                <label for="email">{{ translator.trans('email') }}:</label>
                 <input type="email" id="email" name="email" required>
 
                 <div id="pacienteFields" class="hidden">
-                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <label for="fechaNacimiento">{{ translator.trans('fechaNacimiento') }}:</label>
                     <input type="date" id="fechaNacimiento" name="fechaNacimientoP" >
 
-                    <label for="altura">Altura:</label>
+                    <label for="altura">{{ translator.trans('altura') }}:</label>
                     <input type="text" id="altura" name="altura">
 
-                    <label for="peso">Peso:</label>
+                    <label for="peso">{{ translator.trans('peso') }}:</label>
                     <input type="text" id="peso" name="peso">
 
-                    <label for="patologias">Patologías:</label>
+                    <label for="patologias">{{ translator.trans('patologias') }}:</label>
                     <input type="text" id="patologias" name="patologias">
                 </div>
 
                 <div id="deportistaFields" class="hidden">
-                    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                    <label for="fechaNacimiento">{{ translator.trans('fechaNacimiento') }}:</label>
                     <input type="date" id="fechaNacimiento" name="fechaNacimiento" >
 
-                    <label for="altura">Altura:</label>
+                    <label for="altura">{{ translator.trans('altura') }}:</label>
                     <input type="text" id="altura" name="altura">
 
-                    <label for="peso">Peso:</label>
+                    <label for="peso">{{ translator.trans('peso') }}:</label>
                     <input type="text" id="peso" name="peso">
 
-                    <label for="deporte">Deporte:</label>
+                    <label for="deporte">{{ translator.trans('deporte') }}:</label>
                     <select id="deporte" name="deporte">
                     {% for deporte in deportes %}
                         <option value="{{ deporte['nombre'] }}">{{ deporte['nombre'] }}</option>
                     {% endfor %}
                     </select>
-                    <label for="posicion">Posición:</label>
+                    <label for="posicion">{{ translator.trans('posicion') }}:</label>
                     <input type="text" id="posicion" name="posicion">
                 </div>
 
-                <label for="password">Contraseña:</label>
+                <label for="password">{{ translator.trans('contrasena') }}:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button type="submit">Crear Usuario</button>
+                <button type="submit">{{ translator.trans('crearUsuario') }}</button>
             </form>
         </div>
     </div>
@@ -442,17 +477,17 @@
     </style>
 
 
-    <input type="text" id="searchInput" placeholder="Buscar usuario..." onkeyup="buscarUsuario()" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
+    <input type="text" id="searchInput" placeholder="{{ translator.trans('buscar') }}" onkeyup="buscarUsuario()" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem;">
 
     <table class="tabla-usuarios">
         <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Documento</th>
-            <th>Correo Electrónico</th>
-            <th>Rol</th>
-            <th>Acciones</th>
+            <th>{{ translator.trans('nombre') }}</th>
+            <th>{{ translator.trans('apellido') }}</th>
+            <th>{{ translator.trans('documento') }}</th>
+            <th>{{ translator.trans('email') }}</th>
+            <th>{{ translator.trans('rol') }}</th>
+            <th>{{ translator.trans('acciones') }}</th>
         </tr>
         </thead>
         <tbody id="tablaUsuariosBody">
@@ -464,18 +499,32 @@
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.rol }}</td>
                 <td class="acciones">
+            {% if usuario.activo is same as 0 %}
+                <button class="btn-activar" onclick="confirmarActivacion('{{ usuario.nroDocumento }}')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path><path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path><path d="M12 2v4"></path><path d="m2 2 20 20"></path></svg>
+                    {{ translator.trans('activar') }}
+                </button>
+                <button class="btn-eliminar" onclick="confirmarEliminacion('{{ usuario.nroDocumento }}')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    {{ translator.trans('eliminar') }}
+                </button>
+
+            {% else %}
+
                     <button class="btn-desactivar" onclick="confirmarDesactivacion('{{ usuario.nroDocumento }}')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path><path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path><path d="M12 2v4"></path><path d="m2 2 20 20"></path></svg>
-                        Desactivar
+                        {{ translator.trans('desactivar') }}
                     </button>
 
                     <button class="btn-eliminar" onclick="confirmarEliminacion('{{ usuario.nroDocumento }}')">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                        Eliminar
+                        {{ translator.trans('eliminar') }}
                     </button>
+            {% endif %}
                 </td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
 
@@ -532,7 +581,7 @@
     let documentoAEliminar = null;
 
     function confirmarDesactivacion(documento) {
-        if (confirm("¿Está seguro de que desea desactivar este usuario?")) {
+        if (confirm("{{ translator.trans('confirmarDesactivar') }}")) {
             desactivarUsuario(documento);
         }
     }
@@ -592,16 +641,42 @@
         }
     }
 
-    // Cerrar modal
     function cerrarModal(modalId) {
         document.getElementById(modalId).style.display = "none";
     }
 
-    // Cerrar el modal si se hace clic fuera de él
     window.onclick = function(event) {
         const modal = document.getElementById("modalEliminarUsuario");
         if (event.target == modal) {
             modal.style.display = "none";
+        }
+    }
+
+    function confirmarActivacion(documento) {
+        if (confirm("{{ translator.trans('confirmarActivar') }}")) {
+            activarUsuario(documento);
+        }
+    }
+
+    async function activarUsuario(documento) {
+        try {
+            const response = await fetch('/activar-usuario', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ documento })
+            });
+            const result = await response.json();
+            if (result.success) {
+                console.log(`Usuario con documento ${documento} ha sido activado.`);
+                alert('Usuario activado correctamente.');
+            } else {
+                alert('No se pudo activar el usuario.');
+            }
+        } catch (error) {
+            console.error('Error al activar el usuario:', error);
+            alert('Error en la solicitud. Intente nuevamente.');
         }
     }
 </script>

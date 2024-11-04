@@ -56,7 +56,7 @@
 </ul>
 
 <section class="buscador-clientes"  >
-    <input type="text" id="searchInput" placeholder="Buscar por nombre o documento...">
+    <input type="text" id="searchInput" placeholder="{{ translator.trans('buscar') }}">
     <svg id="buscadorIcono" class="buscador-icono" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -301,7 +301,6 @@
                 alert('Hubo un problema al cargar la lista de clientes.');
             });
 
-        // Función para renderizar la tabla
         function renderTable() {
             const tbody = document.querySelector('#tablaClientes tbody');
             tbody.innerHTML = '';
@@ -410,7 +409,6 @@
             }
         }
 
-        // Agregar evento para cerrar la ficha técnica
         document.getElementById('cerrarficha').addEventListener('click', function () {
             const ficha = document.getElementById('fichagnl');
             const pagination = document.getElementById('pagination');

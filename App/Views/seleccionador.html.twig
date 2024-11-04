@@ -11,16 +11,16 @@
 {% include 'header.html.twig' %}
 
 <main>
-    <button class="btn-crear" id="btnCrearClub">Crear Club</button>
+    <button class="btn-crear" id="btnCrearClub">{{ translator.trans('crearClub') }}</button>
 
     <div id="modalCrearClub" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Crear Nuevo Club</h2>
+            <h2>{{ translator.trans('crearClub') }}</h2>
             <form id="formCrearClub">
-                <label for="nombreClub">Nombre del Club:</label>
+                <label for="nombreClub">{{ translator.trans('nombreDelClub') }}:</label>
                 <input type="text" id="nombreClub" name="nombreClub" required>
-                <button type="submit">Crear Club</button>
+                <button type="submit">{{ translator.trans('crearClub') }}</button>
             </form>
         </div>
     </div>
@@ -28,9 +28,9 @@
     <div id="modalAsignarClub" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Asignar Club</h2>
+            <h2>{{ translator.trans('asignarClub') }}</h2>
             <form id="formAsignarClub">
-                <label for="selectClub">Seleccione un Club:</label>
+                <label for="selectClub">{{ translator.trans('asignarUnClub') }}:</label>
                 <select id="selectClub" name="clubId" required>
                     {% for club in clubs %}
                         <option value="{{ club.idClub }}">{{ club.nombreClub }}</option>
@@ -40,12 +40,12 @@
                 <input type="hidden" id="deportistaDocumento" name="deportistaDocumento">
                 <input type="hidden" id="deporte" name="deporte">
 
-                <button type="submit">Asignar Club</button>
+                <button type="submit">{{ translator.trans('asignarClub') }}</button>
             </form>
         </div>
     </div>
 
-    <h2 class="section-title">Clubes</h2>
+    <h2 class="section-title">{{ translator.trans('clubes') }}</h2>
     <table class="tabla" id="tablaClubs">
         <thead>
         <tr>
@@ -64,17 +64,17 @@
         </tbody>
     </table>
 
-    <h2 class="section-title">Deportistas</h2>
+    <h2 class="section-title">{{ translator.trans('deportistas') }}</h2>
     <table class="tabla" id="tablaDeportistas">
         <thead>
         <tr>
-            <th data-label="Documento">Documento</th>
-            <th data-label="Nombre">Nombre</th>
-            <th data-label="Apellido">Apellido</th>
-            <th data-label="Edad">Edad</th>
-            <th data-label="Deporte">Deporte</th>
-            <th data-label="Club">Club</th>
-            <th data-label="Acciones">Acciones</th>
+            <th data-label="Documento">{{ translator.trans('documento') }}</th>
+            <th data-label="Nombre">{{ translator.trans('nombre') }}</th>
+            <th data-label="Apellido">{{ translator.trans('apellido') }}</th>
+            <th data-label="Edad">{{ translator.trans('edad') }}</th>
+            <th data-label="Deporte">{{ translator.trans('deporte') }}</th>
+            <th data-label="Club">{{ translator.trans('club') }}</th>
+            <th data-label="Acciones">{{ translator.trans('acciones') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -87,7 +87,7 @@
                 <td data-label="Deporte">{{ usuario.deporte }}</td>
                 <td data-label="Club">{{ usuario.club }}</td>
                 <td data-label="Acciones" class="acciones">
-                    <button class="btn-accion" data-documento="{{ usuario.nroDocumento }}" data-deporte="{{ usuario.deporte }}" onclick="mostrarModalAsignarClubDesdeData(this)">Asignar Club</button>
+                    <button class="btn-accion" data-documento="{{ usuario.nroDocumento }}" data-deporte="{{ usuario.deporte }}" onclick="mostrarModalAsignarClubDesdeData(this)">{{ translator.trans('asignarClub') }}</button>
                 </td>
             </tr>
         {% endfor %}

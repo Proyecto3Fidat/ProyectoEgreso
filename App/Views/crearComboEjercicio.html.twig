@@ -105,18 +105,18 @@
 <body>
 <div class="crearEjercicio-Container">
     <div id="formulario-crear-ejercicio" class="content">
-        <h2>Crear Combo de Ejercicios</h2>
+        <h2>{{ translator.trans('crearCombo') }}</h2>
         <form id="crear-ejercicio-form" action="/crearComboEjercicio" method="post" class="califidepo" onsubmit="return validateStrings()">
             <label for="nombre-combo">{{ translator.trans('nombredelcombo') }}:</label>
             <input type="text" id="nombre-combo" name="nombreCombo" pattern="[a-zA-Z\s]+" title="Solo se permiten letras y espacios" required>
             <div id="ejercicios-seleccionados"></div>
             <button type="button" id="agregar-ejercicio">{{ translator.trans('aniadirEjercicio') }}</button>
             <input type="hidden" name="ejercicios" id="ejercicios-input">
-            <input type="submit" value="Enviar">
+            <input type="submit" value="{{ translator.trans('enviar') }}">
         </form>
     </div>
 
-    <div id="ejercicios-lista" class="ejercicios-lista">
+    <div id="ejercicios-lista" class="ejercicios-lista" style="display: none">
         <h2>Lista de Ejercicios</h2>
         <ul id="lista-ejercicios"></ul>
     </div>

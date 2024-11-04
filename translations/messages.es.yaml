@@ -169,3 +169,43 @@ gym: "Gimnasio"
 gymDescripcion: 'En (GYM) te vamos a ayudar a completar todos tus objetivos fitness, ya sea en gimnasio convencional o en fisioterapia. Tenemos los mejores equipos de ejercicio del mercado, todo lo que necesites está al alcance de tu mano con (GYM). Así que si querés comenzar tu vida "culturista" o simplemente recuperarte de una lesión o incluso fortalecer tus músculos o articulaciones, (GYM) es el lugar que estás buscando, simplemente elegí un plan y comenzá a entrenar. '
 oficinas: "Nuestras Oficinas"
 contactanos: "Contactanos"
+
+horaInicio: "Hora de Inicio"
+horaFin: "Hora de Fin"
+
+fechaVencimiento: "Fecha de Vencimiento"
+buscar: "Buscar por nombre o documento..."
+
+ingresarGym: "Ingresar Gimnasio"
+registrarGym: "Registrar Gimnasio"
+agregarAgenda: "Agregar Agenda"
+nuevaAgenda: "Nueva Agenda"
+acciones: "Acciones"
+
+panelAdmins: "Panel de Administradores"
+crearUsuario: "Crear Usuario"
+desactivar: "Desactivar"
+confirmarDesactivar: "¿Estás seguro de que deseas desactivar este usuario?"
+
+
+crearNuevoUsuario: "Crear Nuevo Usuario"
+rolUsuario: "Rol de Usuario"
+seleccioneRol: "Seleccione un Rol"
+
+paciente: "Paciente"
+entrenador: "Entrenador"
+administrativo: "Administrativo"
+administrativoTi: "Administrativo TI"
+deportista: "Deportista"
+
+crearClub: "Crear Club"
+clubes: "Clubes"
+id: "ID"
+deportistas: "Deportistas"
+asignarClub: "Asignar Club"
+deporte: "Deporte"
+nombreDelClub: "Nombre del Club"
+asignarUnClub: "Asignar un Club"
+
+activar: "Activar"
+confirmarActivar: "¿Estás seguro de que deseas activar este usuario?"

@@ -289,6 +289,7 @@ class ClienteController
             $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
             $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
             $resultado[] = [
+                'activo' => $cliente['activo'],
                 'nombre' => $cliente['nombre'],
                 'apellido' => $cliente['apellido'],
                 'nroDocumento' => $cliente['nroDocumento'],
@@ -682,6 +683,19 @@ class ClienteController
         return $resultado;
     }
 
+    public function activarUsuario()
+    {
+        try {
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+            $this->clienteService->activarUsuario($data['documento']);
+            echo json_encode(['success' => true, 'message' => 'Usuario activado correctamente.']);
+        }
+        catch (\Exception $e) {
+            echo json_encode(['success'=>false, 'message' => 'Error al activar el usuario.']);
+        }
+        exit();
+    }
 
 
 }

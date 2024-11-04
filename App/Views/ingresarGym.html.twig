@@ -157,29 +157,29 @@
     </style>
 </head>
 <body><div class="container">
-    <h1>Ingresar Gym</h1>
+    <h1>{{ translator.trans('ingresarGym') }}</h1>
     <form id="gymForm" action="/ingresarGym" method="post" onsubmit="return validateForm()">
         <div>
-            <label for="nombre">Nombre</label>
+            <label for="nombre">{{ translator.trans('nombre') }}</label>
             <input type="text" id="nombre" name="nombre" required>
         </div>
         <div>
-            <label for="calle">Calle</label>
+            <label for="calle">{{ translator.trans('calle') }}</label>
             <input type="text" id="calle" name="calle" required>
         </div>
         <div>
-            <label for="esquina">Esquina</label>
+            <label for="esquina">{{ translator.trans('esquina') }}</label>
             <input type="text" id="esquina" name="esquina" required>
         </div>
         <div>
-            <label for="nroPuerta">Número de Puerta</label>
+            <label for="nroPuerta">{{ translator.trans('numero') }}</label>
             <input type="text" id="nroPuerta" name="nroPuerta" required>
         </div>
         <div>
-            <label for="capXTurno">Capacidad por Turno</label>
+            <label for="capXTurno">{{ translator.trans('capacidad') }}</label>
             <input type="text" id="capXTurno" name="capXTurno" required>
         </div>
-        <input type="submit" value="Registrar Gym">
+        <input type="submit" value="{{ translator.trans('registrarGym') }}">
     </form>
 </div>
 

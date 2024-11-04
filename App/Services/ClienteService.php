@@ -173,4 +173,9 @@ class ClienteService
     {
         $this->clienteRepository->desactivarUsuarioAdmin($documento);
     }
+
+    public function activarUsuario(mixed $documento)
+    {
+        $this->clienteRepository->activarUsuario($documento);
+    }
 }
