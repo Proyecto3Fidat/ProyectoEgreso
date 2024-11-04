@@ -38,6 +38,8 @@
 </head>
 <body>
 
+{% include 'header.html.twig' %}
+
 <h1>Formulario Adicional</h1>
 <form id="formulario" action="#" method="post">
     <label for="deporte">Numero de Documento</label>
@@ -73,18 +75,6 @@
 
     <input type="submit" value="Enviar">
 </form>
-<footer class="footer">
-    <h1>Gracias por elegirnos!</h1>
-    <h2>Nuestras Redes</h2>
-    <div class="redes">
-        <a href="https://www.instagram.com/fidatdevs/" class="ig-logo">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/Proyecto3Fidat/ProyectoEgreso" class="github-logo">
-            <i class="fab fa-github"></i>
-        </a>
-    </div>
-    <h4>Copyright <span>&copy;</span> GYM 2024</h4>
-</footer>
+{% include 'footer.html.twig' %}
 </body>
 </html>

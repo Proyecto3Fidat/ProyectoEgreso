@@ -2,31 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.1">
     <link rel="stylesheet" href="../../Public/css/loginusuario.css">
     <link rel="stylesheet" href="../../Public/css/responsive.css">
-    <script src="https://kit.fontawesome.com/58f9dcf30d.js" crossorigin="anonymous"></script>
     <title>Ingresar Cliente</title>
 </head>
-    <body>
+<body>
 <div class="loginContainer">
 
     {% include 'header.html.twig' %}
-    </header>
 
     <form id="loginUsuario" action="/login" method="post" onsubmit="return errorContraseña()">
         <h2>{{ translator.trans('usuario') }}</h2>
-        <input type="text" required name="documento" placeholder="{{ translator.trans('documento') }}" > <br> <br>
+        <input type="text" required name="documento" placeholder="{{ translator.trans('documento') }}">
         <h2>{{ translator.trans('contrasena') }}</h2>
-        <input type="password" required name="passwd" placeholder="{{ translator.trans('contrasena') }}"> <br> <br>
+        <input type="password" required name="passwd" placeholder="{{ translator.trans('contrasena') }}">
         <input type="submit" name="Ingresar" value="{{ translator.trans('iniciar') }}" class="button">
         <p id="error-message" style="color: red;"></p>
     </form>
 
-    <script src="../../Public/js/script.js"></script>
-
     {% include 'footer.html.twig' %}
+
 </div>
-    </body>
+
+<script src="../../Public/js/script.js"></script>
 <script src="../../Public/js/responsive.js"></script>
+</body>
 </html>
