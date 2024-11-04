@@ -42,6 +42,8 @@ class ClienteService
             if ($obtenerService->comprobarId($_SESSION['documento'])) {
                 $calificacion = $obtenerService->obtenerCalificacionesXID($id);
                 $puntuacion = $calificacionService->obtenerPuntuaciones($id);
+
+                // Configuración del PDF
                 $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
                 $pdf->SetCreator(PDF_CREATOR);
                 $pdf->SetAuthor('SIGEN');
@@ -49,61 +51,69 @@ class ClienteService
                 $pdf->SetSubject('Calificación');
                 $pdf->SetKeywords('TCPDF, PDF, calificación');
                 $pdf->SetMargins(15, 15, 15);
-                $pdf->AddPage(); 
+                $pdf->SetAutoPageBreak(TRUE, 15);
+                $pdf->AddPage();
 
-         
-                $pdf->SetFont('helvetica', 'B', 16);
-                $pdf->Cell(0, 10, 'Calificación', 0, 1, 'C');
-                $pdf->Ln(10); 
+                // Encabezado de Documento
+                $pdf->SetFont('helvetica', 'B', 18);
+                $pdf->SetTextColor(0, 51, 102); // Azul oscuro
+                $pdf->Cell(0, 10, 'Reporte de Calificación de Desempeño', 0, 1, 'C');
+                $pdf->SetFont('helvetica', '', 10);
+                $pdf->SetTextColor(0, 0, 0);
+                $pdf->Cell(0, 10, 'Generado el: ' . date('d/m/Y H:i:s'), 0, 1, 'C');
+                $pdf->Ln(5);
 
-                $html = '<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">';
-                $html .= '<thead>
-                <tr style="background-color: #007BFF; color: #ffffff;">
-                    <th style="text-align: center;">Fecha</th>
-                    <th style="text-align: center;">Puntuacion Total</th>
-                    <th style="text-align: center;">Fuerza Muscular</th>
-                    <th style="text-align: center;">Resistencia Muscular</th>
-                    <th style="text-align: center;">Resistencia Anaerobica</th>
-                    <th style="text-align: center;">Resiliencia</th>
-                    <th style="text-align: center;">Flexibilidad</th>
-                    <th style="text-align: center;">Cumplimiento de Agenda</th>
-                    <th style="text-align: center;">Resistencia a la Monotonia</th>
-                </tr>
-              </thead>
-              <tbody>';
+                // Encabezado de la Tabla
+                $pdf->SetFont('helvetica', 'B', 11);
+                $pdf->SetFillColor(230, 230, 230); // Gris claro
+                $pdf->SetTextColor(0, 0, 0); // Negro
+                $pdf->Cell(30, 10, 'Fecha', 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, 'Total', 1, 0, 'C', 1);
+                $pdf->Cell(35, 10, 'Fuerza Muscular', 1, 0, 'C', 1);
+                $pdf->Cell(35, 10, 'Resistencia Muscular', 1, 0, 'C', 1);
+                $pdf->Cell(35, 10, 'Resist. Anaeróbica', 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, 'Resiliencia', 1, 0, 'C', 1);
+                $pdf->Cell(30, 10, 'Flexibilidad', 1, 0, 'C', 1);
+                $pdf->Cell(35, 10, 'Agenda', 1, 0, 'C', 1);
+                $pdf->Cell(35, 10, 'Resist. Monotonía', 1, 1, 'C', 1);
+
+                // Datos de la Tabla
+                $pdf->SetFont('helvetica', '', 10);
+                $pdf->SetFillColor(245, 245, 245); // Fondo gris muy claro
+                $pdf->SetTextColor(0, 0, 0); // Negro para texto
+
                 if (!empty($calificacion) && !empty($puntuacion)) {
-                    $html .= '<tr style="background-color: #f2f2f2;">
-                        <td style="text-align: center;">' . htmlspecialchars($calificacion[0]['fecha']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($calificacion[0]['puntObtenido']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['fuerzaMusc']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resMusc']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resAnaerobica']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resiliencia']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['flexibilidad']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['cumplAgenda']) . '</td>
-                        <td style="text-align: center;">' . htmlspecialchars($puntuacion[0]['resMonotonia']) . '</td>
-                      </tr>';
+                    $pdf->Cell(30, 10, htmlspecialchars($calificacion[0]['fecha']), 1, 0, 'C', 1);
+                    $pdf->Cell(30, 10, htmlspecialchars($calificacion[0]['puntObtenido']), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 10, htmlspecialchars($puntuacion[0]['fuerzaMusc']), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 10, htmlspecialchars($puntuacion[0]['resMusc']), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 10, htmlspecialchars($puntuacion[0]['resAnaerobica']), 1, 0, 'C', 1);
+                    $pdf->Cell(30, 10, htmlspecialchars($puntuacion[0]['resiliencia']), 1, 0, 'C', 1);
+                    $pdf->Cell(30, 10, htmlspecialchars($puntuacion[0]['flexibilidad']), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 10, htmlspecialchars($puntuacion[0]['cumplAgenda']), 1, 0, 'C', 1);
+                    $pdf->Cell(35, 10, htmlspecialchars($puntuacion[0]['resMonotonia']), 1, 1, 'C', 1);
                 } else {
-                    $html .= '<tr>
-                        <td colspan="9" style="text-align: center;">No hay datos disponibles</td>
-                      </tr>';
+                    $pdf->Cell(0, 10, 'No hay datos disponibles', 1, 1, 'C', 1);
                 }
 
-                $html .= '</tbody></table>';
+                // Pie de página
+                $pdf->SetY(-15);
+                $pdf->SetFont('helvetica', 'I', 8);
+                $pdf->Cell(0, 10, 'Página ' . $pdf->getAliasNumPage() . '/' . $pdf->getAliasNbPages(), 0, 0, 'C');
 
-                $pdf->writeHTML($html, true, false, true, false, '');
                 $nombreArchivo = 'calificacion_' . $calificacion[0]['fecha'] . '.pdf';
-                $pdf->Output($nombreArchivo, 'I'); 
+                $pdf->Output($nombreArchivo, 'I');
             } else {
                 echo "<script>
-            alert('Acceso Denegado');
-            window.location.href = '../../Public/inicio.html.twig'; 
-        </script>";
+                    alert('Acceso Denegado');
+                    window.location.href = '../../Public/inicio.html.twig'; 
+                  </script>";
             }
         } else {
             $usuarioService->tokenInvalido();
         }
     }
+
 
 
 
