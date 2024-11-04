@@ -138,7 +138,7 @@ CREATE TABLE ComboEjercicio
 CREATE TABLE Ejercicio
 (
     idEjercicio   INT AUTO_INCREMENT NOT NULL,
-    nombre        VARCHAR(20)        NOT NULL,
+    nombre        VARCHAR(100)        NOT NULL,
     descripcion   text      NOT NULL,
     tipoEjercicio VARCHAR(20)        NOT NULL,
     grupoMuscular VARCHAR(100)        NOT NULL,
