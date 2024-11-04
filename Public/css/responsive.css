@@ -331,9 +331,12 @@
         }
 
     /*Form loginUsuario*/
+    .loginContainer {
+        gap: 3rem;
+    }
+
     form #loginUsuario {
         width: 70%;
-        margin: 10rem auto 40px;
         display: flex;
         flex-direction: column;
     }
@@ -344,7 +347,7 @@
             font-size: 1.5rem;
         }
     form input, select {
-        width: 70%;
+        width: 100%;
         margin: .5rem auto;
         border-radius: 10px;
         border: none;
