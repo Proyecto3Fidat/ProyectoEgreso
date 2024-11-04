@@ -609,7 +609,6 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
             });
 
             SimpleRouter::post('/usuarioTI', function () use ($logger) {
-                echo "aa";
                 $clienteRepository = new ClienteRepository();
                 $clienteService = new ClienteService($clienteRepository);
                 $clienteController = new ClienteController($clienteService, $logger);

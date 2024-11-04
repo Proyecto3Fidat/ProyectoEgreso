@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\DeportistaModel;
 use App\Models\UsuarioModel;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ClientetelefonoRepository;
@@ -16,6 +17,7 @@ use App\Services\SeAgendaService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
 use App\Models\ClienteModel;
+use Couchbase\ValueRecorder;
 use Monolog\Logger;
 use TCPDF;
 
@@ -330,12 +332,12 @@ class ClienteController
         $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_SPECIAL_CHARS);
         $esquina = filter_input(INPUT_POST, 'esquina', FILTER_SANITIZE_SPECIAL_CHARS);
         $patologias = filter_input(INPUT_POST, 'patologias', FILTER_SANITIZE_SPECIAL_CHARS);
+        $posicion = filter_input(INPUT_POST, 'posicion', FILTER_SANITIZE_SPECIAL_CHARS);
 
         if ($nombre === null || $apellido === null || $nroDocumento === null || $tipoDocumento === null || $fechaNacimiento === null || $correo === null || $passwd === null || $rol === null) {
             echo json_encode(['error' => 'Faltan datos']);
             exit();
         }
-
         switch ($rol) {
             case 'entrenador':
                 if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
@@ -429,23 +431,29 @@ class ClienteController
                 exit();
                 break;
             case('deportista'):
-
                 if ($usuarioService->comprobarRolAdministrativo($nroDocumento) === 'deportista') {
+
                     echo json_encode(['error' => 'El deportista ya existe']);
                     exit();
                 }
 
-                if ($this->clienteService->comprobarCliente($nroDocumento) !== null) {
+                if ($this->clienteService->comprobarCliente($nroDocumento) === "true") {
                     $usuarioService->crearUsuario(
                         new UsuarioModel(
-                            $nroDocumento . "@" . "paciente",
-                            'paciente',
+                            $nroDocumento . "@" . "deportista",
+                            'deportista',
                             $passwd,
                             $usuarioService->generarToken()
                         )
                     );
                     $usuarioService->guardarDeportista( $nroDocumento);
-                    $deportistaService->guardarDeportista($nroDocumento);
+                    $deportistaService->guardarDeportista(
+                        new DeportistaModel(
+                            $nroDocumento,
+                            $tipoDocumento,
+                            $posicion
+                        )
+                        );
                     exit();
 
                     echo json_encode(['success' => 'Paciente creado correctamente']);
@@ -468,8 +476,22 @@ class ClienteController
                         $rol
                     )
                 );
+                $usuarioService->crearUsuario(
+                    new UsuarioModel(
+                        $nroDocumento . "@" . "deportista",
+                        'deportista',
+                        $passwd,
+                        $usuarioService->generarToken()
+                    )
+                );
                 $usuarioService->guardarDeportista($nroDocumento);
-                $deportistaService->guardarDeportista($nroDocumento);
+                $deportistaService->guardarDeportista(
+                    new DeportistaModel(
+                        $nroDocumento,
+                        $tipoDocumento,
+                        $posicion
+                    )
+                );
 
                 echo json_encode(['success' => 'Deportista creado correctamente']);
                 exit();

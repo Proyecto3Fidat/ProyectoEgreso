@@ -33,7 +33,6 @@ class DeportistaRepository extends Database{
         $nroDocumento = $deportistaModel->getNroDocumento();
         $tipoDocumento = $deportistaModel->getTipoDocumento();
         $posicion = $deportistaModel->getPosicion();
-        
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->bind_param("sss", $nroDocumento, $tipoDocumento, $posicion);
         $stmt->execute();
