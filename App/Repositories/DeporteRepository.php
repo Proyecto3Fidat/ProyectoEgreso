@@ -9,7 +9,7 @@ class DeporteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "INSERT INTO deporte (nombre) VALUES (?)";
+        $sql = "INSERT INTO Deporte (nombre) VALUES (?)";
         $stmt = $database->getConnection()->prepare($sql);
         $nombre = $param->getNombre();
         $stmt->bind_param('s', $nombre);
@@ -22,7 +22,7 @@ class DeporteRepository extends Database
     {
         $database = Database::getInstance();
         $database->connect();
-        $sql = "SELECT * FROM deporte";
+        $sql = "SELECT * FROM Deporte";
         $stmt = $database->getConnection()->prepare($sql);
         $stmt->execute();
         $result = $stmt->get_result();
