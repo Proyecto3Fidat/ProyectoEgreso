@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\DeportistaModel;
 use App\Services\DeportistaService;
 use App\Repositories\UsuarioRepository;
+use App\Services\EntrenaService;
 use App\Services\UsuarioService;
 use Monolog\Logger;
 
@@ -21,6 +22,10 @@ class DeportistaController
     }
     public function guardarDeportista()
     {
+        $entrena = new EntrenaService();
+
+        $deportePost = filter_input(INPUT_POST, 'deporte', FILTER_SANITIZE_SPECIAL_CHARS);
+        $entrena->guardarEntrena($deportePost, $_POST['nroDocumento'], $_POST['tipoDocumento']);
         $deportista = new DeportistaModel(
             $_POST['nroDocumento'],
             $_POST['tipoDocumento'],

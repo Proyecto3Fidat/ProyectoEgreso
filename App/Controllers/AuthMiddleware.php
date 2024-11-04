@@ -52,3 +52,12 @@ class AdministativoTiMiddleware implements IMiddleware
     }
 
 }
+class SeleccionadorMiddleware implements IMiddleware
+{
+    public function handle(Request $request): void
+    {
+        $authService = new AuthService();
+        $authService->comprobarSeleccionador();
+    }
+
+}

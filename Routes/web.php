@@ -3,43 +3,38 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-use App\Controllers\LocalGymController;
+use App\Controllers\AdministrativoMiddleware;
+use App\Controllers\AuthMiddleware;
+use App\Controllers\CalificacionController;
+use App\Controllers\ClienteController;
+use App\Controllers\ClientelefonoController;
 use App\Controllers\ComboEjercicioController;
 use App\Controllers\ContieneController;
-use Pecee\SimpleRouter\SimpleRouter;
-use App\Controllers\HomeController;
-use App\Controllers\ClienteController;
-use App\Controllers\UsuarioController;
 use App\Controllers\DeportistaController;
+use App\Controllers\EjercicioController;
+use App\Controllers\EntrenadorMiddleware;
+use App\Controllers\HomeController;
+use App\Controllers\LocalGymController;
 use App\Controllers\PacienteController;
-use App\Controllers\ObtieneController;
-use App\Controllers\CalificacionController;
-use App\Services\ClienteService;
-use App\Services\UsuarioService;
-use App\Services\DeportistaService;
-use App\Services\PacienteService;
-use App\Services\ObtieneService;
-use App\Services\CalificacionService;
+use App\Controllers\PagoMiddleware;
+use App\Controllers\TemplateController;
+use App\Controllers\UsuarioController;
+use App\Repositories\CalificacionRepository;
 use App\Repositories\ClienteRepository;
-use App\Repositories\UsuarioRepository;
+use App\Repositories\ClientetelefonoRepository;
 use App\Repositories\DeportistaRepository;
 use App\Repositories\PacienteRepository;
-use App\Repositories\ObtieneRepository;
-use App\Repositories\CalificacionRepository;
-use App\Controllers\ClientelefonoController;
-use App\Models\ClientelefonoModel;
+use App\Repositories\UsuarioRepository;
+use App\Services\CalificacionService;
+use App\Services\ClienteService;
 use App\Services\ClientetelefonoService;
+use App\Services\ClubesService;
+use App\Services\ClubService;
+use App\Services\DeportistaService;
+use App\Services\PacienteService;
+use App\Services\UsuarioService;
 use App\Utilities\DataSeeder;
-use App\Repositories\ClientetelefonoRepository;
-use App\Utilities\DatabaseLoader;
-use App\Controllers\AuthMiddleware;
-use App\Controllers\EntrenadorMiddleware;
-use App\Controllers\AdministrativoMiddleware;
-use \App\Controllers\PagoMiddleware;
-use App\Controllers\TemplateController;
-use App\Controllers\EjercicioController;
-use Symfony\Component\Translation\Translator;
-use Symfony\Component\Translation\Loader\YamlFileLoader;
+use Pecee\SimpleRouter\SimpleRouter;
 
 $config = require __DIR__ . '/../Config/monolog.php';
 $logger = $config['logger']();
@@ -504,6 +499,30 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedPractica(new \App\Models\PracticaModel('3', '2455963147', 'ci'));
     $seeder->seedPractica(new \App\Models\PracticaModel('4', '97121013', 'ci'));
 
+    /*deporte */
+    $seeder->seedDeporte(new \App\Models\DeporteModel('futbol'));
+    $seeder->seedDeporte(new \App\Models\DeporteModel('basket'));
+    $seeder->seedDeporte(new \App\Models\DeporteModel('tenis'));
+    $seeder->seedDeporte(new \App\Models\DeporteModel('natacion'));
+    $seeder->seedDeporte(new \App\Models\DeporteModel('golf'));
+
+    /* Entrena*/
+    $seeder->seedEntrena(new \App\Models\EntrenaModel('85463701', 'ci', 'futbol'));
+    $seeder->seedEntrena(new \App\Models\EntrenaModel('2455963147', 'ci', 'basket'));
+    $seeder->seedEntrena(new \App\Models\EntrenaModel('97121013', 'ci', 'tenis'));
+    $seeder->seedEntrena(new \App\Models\EntrenaModel('12326789', 'ci', 'natacion'));
+
+    /*Clubes */
+    $seeder->seedClub(new \App\Models\ClubModel('peñarol'));
+    $seeder->seedClub(new \App\Models\ClubModel('defensor'));
+    $seeder->seedClub(new \App\Models\ClubModel('boca'));
+    $seeder->seedClub(new \App\Models\ClubModel('river'));
+
+    /* Relacionado */
+    $seeder->seedRelacionado(new \App\Models\RelacionadoModel('1', 'futbol', '85463701', 'ci'));
+    $seeder->seedRelacionado(new \App\Models\RelacionadoModel('2', 'basket', '2455963147', 'ci'));
+    $seeder->seedRelacionado(new \App\Models\RelacionadoModel('3', 'tenis', '97121013', 'ci'));
+
     exit();
 });
 SimpleRouter::post('/pagos', function () use ($logger) {
@@ -537,8 +556,33 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 
     SimpleRouter::group(['middleware' => AuthMiddleware::class], function () use ($logger, $loggerU) {
 
-        SimpleRouter::group(['middleware' => \App\Controllers\AdministativoTiMiddleware::class], function () use ($logger) {
+        SimpleRouter::group(['middleware' => \App\Controllers\SeleccionadorMiddleware::class], function () use ($logger) {
 
+            SimpleRouter::post('asignar-club', function (){
+                $body = file_get_contents('php://input');
+                $data = json_decode($body, true);
+                $clubesService = new ClubService();
+                $clubesService->asignarClub($data['deporte'], $data['clubId'], $data['deportistaDocumento']);
+                exit();
+
+            });
+            SimpleRouter::get('/seleccionador', function () use ($logger) {
+                $clubesService = new ClubService();
+                $clienteRepository = new ClienteRepository();
+                $clienteService = new ClienteService($clienteRepository);
+                $clienteController = new ClienteController($clienteService, $logger);
+                $clientes = $clienteController->obtenerListaClientesSeleccionador();
+
+                $template = new TemplateController();
+                $clubes = $clubesService->obtenerClubes();
+
+                $data = ['usuarios' => $clientes, 'clubs' => $clubes];
+
+                $template->renderTemplate('seleccionador', $data);
+            });
+        });
+
+        SimpleRouter::group(['middleware' => \App\Controllers\AdministativoTiMiddleware::class], function () use ($logger) {
             SimpleRouter::delete('/eliminarTi', function () use ($logger) {
                 $clienteRepository = new ClienteRepository();
                 $clienteService = new ClienteService($clienteRepository);
@@ -1376,6 +1420,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
     });
 
     SimpleRouter::post('/guardarDeportista', function () use ($logger) {
+
         $deportistaRepository = new DeportistaRepository();
         $deportistaService = new DeportistaService($deportistaRepository);
         $deportistaController = new DeportistaController($deportistaService, $logger);
@@ -1434,70 +1479,6 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
         }
     });
 
-    SimpleRouter::post('/twig/guardarDeportista', function () use ($logger) {
-        $deportistaRepository = new DeportistaRepository();
-        $deportistaService = new DeportistaService($deportistaRepository);
-        $deportistaController = new DeportistaController($deportistaService, $logger);
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $usuarioRepository = new UsuarioRepository();
-        $usuarioService = new UsuarioService($usuarioRepository);
-        $usuarioController = new UsuarioController($usuarioService, $logger);
-        if ($clienteController->comprobarCliente() == "false") {
-            echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '/'; 
-              </script>";
-        } else {
-            if ($deportistaController->comprobarDeportista() == "false") {
-                $usuarioController->guardarDeportista();
-                $deportistaController->guardarDeportista();
-                $_SESSION['rol'] = 'deportista';
-                $home = new HomeController();
-                $home->index();
-                exit();
-            } else {
-                echo "<script>
-                    alert('El Deportista ya esta registrado');
-                    window.location.href = '/'; 
-                  </script>";
-            }
-        }
-    });
-
-
-    SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
-        $pacienteRepository = new PacienteRepository();
-        $pacienteService = new PacienteService($pacienteRepository);
-        $pacienteController = new PacienteController($pacienteService, $logger);
-        $clienteRepository = new ClienteRepository();
-        $clienteService = new ClienteService($clienteRepository);
-        $clienteController = new ClienteController($clienteService, $logger);
-        $usuarioRepository = new UsuarioRepository();
-        $usuarioService = new UsuarioService($usuarioRepository);
-        $usuarioController = new UsuarioController($usuarioService, $logger);
-        if ($clienteController->comprobarCliente() == "false") {
-            echo "<script>
-                alert('El Usuario No Esta registrado en la Pagina');
-                window.location.href = '../Public/inicio.html.twig'; 
-              </script>";
-        } else {
-            if ($pacienteController->comprobarPaciente() == "false") {
-                $usuarioController->guardarPaciente();
-                $pacienteController->guardarPaciente();
-                $_SESSION['rol'] = 'paciente';
-                $home = new HomeController();
-                $home->index();
-                exit();
-            } else {
-                echo "<script>
-                    alert('El Paciente ya esta registrado');
-                    window.location.href = '../Public/inicio.html.twig'; 
-                  </script>";
-            }
-        }
-    });
 
     SimpleRouter::post('/guardarTelefono', function () use ($logger) {
         $clientetelefonoRepository = new ClientetelefonoRepository();
@@ -1615,6 +1596,77 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
         }
     });
 
+});
+SimpleRouter::get('/carga', function(){
+    $template = new TemplateController();
+    $template->renderTemplate('carga');
+});
+
+SimpleRouter::post('/twig/guardarDeportista', function () use ($logger) {
+    $logger->info('Guardando deportista');
+    $deportistaRepository = new DeportistaRepository();
+    $deportistaService = new DeportistaService($deportistaRepository);
+    $deportistaController = new DeportistaController($deportistaService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '/'; 
+              </script>";
+    } else {
+        if ($deportistaController->comprobarDeportista() == "false") {
+            $logger->info('Deportista no registrado');
+            $usuarioController->guardarDeportista();
+            $deportistaController->guardarDeportista();
+            $_SESSION['rol'] = 'deportista';
+            $home = new HomeController();
+            $home->index();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Deportista ya esta registrado');
+                    window.location.href = '/'; 
+                  </script>";
+        }
+    }
+});
+
+
+SimpleRouter::post('/twig/guardarPaciente', function () use ($logger) {
+    $pacienteRepository = new PacienteRepository();
+    $pacienteService = new PacienteService($pacienteRepository);
+    $pacienteController = new PacienteController($pacienteService, $logger);
+    $clienteRepository = new ClienteRepository();
+    $clienteService = new ClienteService($clienteRepository);
+    $clienteController = new ClienteController($clienteService, $logger);
+    $usuarioRepository = new UsuarioRepository();
+    $usuarioService = new UsuarioService($usuarioRepository);
+    $usuarioController = new UsuarioController($usuarioService, $logger);
+    if ($clienteController->comprobarCliente() == "false") {
+        echo "<script>
+                alert('El Usuario No Esta registrado en la Pagina');
+                window.location.href = '../Public/inicio.html.twig'; 
+              </script>";
+    } else {
+        if ($pacienteController->comprobarPaciente() == "false") {
+            $usuarioController->guardarPaciente();
+            $pacienteController->guardarPaciente();
+            $_SESSION['rol'] = 'paciente';
+            $home = new HomeController();
+            $home->index();
+            exit();
+        } else {
+            echo "<script>
+                    alert('El Paciente ya esta registrado');
+                    window.location.href = '../Public/inicio.html.twig'; 
+                  </script>";
+        }
+    }
 });
 
 // Iniciar el enrutador

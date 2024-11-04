@@ -22,13 +22,7 @@
         "twig/twig": "^3.14",
         "guzzlehttp/guzzle": "^7.9",
         "symfony/translation": "^7.1",
-        "symfony/yaml": "^7.1",
-        "doctrine/annotations": "^2.0",
-        "doctrine/dbal": "^4.2",
+        "symfony/yaml": "^7.1"
 
-        "doctrine/orm": "^3.3",
-        "symfony/console": "^7.1",
-        "symfony/orm-pack": "^2.4",
-        "doctrine/doctrine-bundle": "^2.13"
     }
 }

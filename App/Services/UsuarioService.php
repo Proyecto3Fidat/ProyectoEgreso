@@ -191,6 +191,17 @@ class UsuarioService
                         window.location.href = '/'; 
                         </script>";
                     exit();
+                    case "seleccionador":
+                        $_SESSION['token'] = $token;
+                        $_SESSION['documento'] = $documento;
+                        $_SESSION['nombre'] = $nombre;
+                        $_SESSION['rol'] = $rol;
+                        $_SESSION['sesion'] = true;
+                        echo "<script>
+                            localStorage.setItem('nombre', '" . $nombre . "');
+                            window.location.href = '/'; 
+                            </script>";
+                        exit();
             }
         }
     }

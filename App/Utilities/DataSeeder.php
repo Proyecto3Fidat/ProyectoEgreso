@@ -175,4 +175,30 @@ class DataSeeder
         $practicaRepository->guardar($param);
     }
 
+    public function seedEntrena(\App\Models\EntrenaModel $param)
+    {
+        $entrenaRepository = new \App\Repositories\EntrenaRepository();
+        $entrenaRepository->guardar($param);
+    }
+
+    public function seedClub(\App\Models\ClubModel $param)
+    {
+        $clubRepository = new \App\Repositories\ClubRepository();
+        $clubRepository->guardar($param);
+    }
+
+    public function seedDeporte(\App\Models\DeporteModel $param)
+    {
+        $deporteRepository = new \App\Repositories\DeporteRepository();
+        $deporteRepository->guardar($param);
+
+    }
+
+    public function seedRelacionado(\App\Models\RelacionadoModel $param)
+    {
+        $relacionadoRepository = new \App\Repositories\RelacionadoRepository();
+        $relacionadoRepository->guardar($param);
+
+    }
+
 }

@@ -8,8 +8,10 @@ use App\Repositories\ClientetelefonoRepository;
 use App\Repositories\DeportistaRepository;
 use App\Services\ClienteService;
 use App\Services\ClientetelefonoService;
+use App\Services\ClubService;
 use App\Services\DeportistaService;
 use App\Services\EligeService;
+use App\Services\EntrenaService;
 use App\Services\SeAgendaService;
 use App\Services\UsuarioService;
 use App\Repositories\UsuarioRepository;
@@ -610,6 +612,54 @@ class ClienteController
         }
         exit();
     }
+
+    public function obtenerListaClientesSeleccionador()
+    {
+        $deporte = new RelacionadoService();
+        $clubService = new ClubService();
+        $entrena = new EntrenaService();
+
+        $clienteTelefonoRepository = new ClientetelefonoRepository();
+        $clienteTelefonoService = new ClientetelefonoService($clienteTelefonoRepository);
+        $usuarioRepo = new UsuarioRepository();
+        $usuarioService = new UsuarioService($usuarioRepo);
+        $lista = $this->clienteService->listarClientes();
+        $clientes = $usuarioService->comprobarDeportistaOPaciente($lista);
+        $resultado = [];
+
+        foreach ($clientes as $cliente) {
+            $edad = $this->clienteService->calcularEdad($cliente['fechaNacimiento']);
+            $deportePracticado = $deporte->obtenerDeporte($cliente['nroDocumento']);
+            $deporteEntrena = $entrena->obtenerDeporte($cliente['nroDocumento']);
+            // Reinicia la variable de club para cada cliente
+            $clubNombre = 'No pertenece a un club';
+
+            if (isset($deportePracticado['idClub'])) {
+                $id = $deportePracticado['idClub'];
+                $club = $clubService->obtenerClub($id);
+                $clubNombre = $club['nombreClub'] ?? 'No pertenece a un club';
+            }
+
+            $direccion = "{$cliente['calle']} {$cliente['numero']} {$cliente['esquina']}";
+            $resultado[] = [
+                'nombre' => $cliente['nombre'],
+                'apellido' => $cliente['apellido'],
+                'nroDocumento' => $cliente['nroDocumento'],
+                'rol' => $cliente['rol'],
+                'altura' => $cliente['altura'],
+                'peso' => $cliente['peso'],
+                'patologias' => $cliente['patologia'],
+                'email' => $cliente['email'],
+                'edad' => $edad,
+                'direccion' => $direccion,
+                'telefono' => $clienteTelefonoService->traerClienteTelefono($cliente['nroDocumento']),
+                'deporte' => $deporteEntrena['nombre'] ?? 'No practica deporte',
+                'club' => $clubNombre
+            ];
+        }
+        return $resultado;
+    }
+
 
 
 }

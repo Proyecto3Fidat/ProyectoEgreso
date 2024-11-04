@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-class AgendaRepository
+class AgendaRepository extends Database
 {
 
     public function crearAgenda($dia, $horaInicio, $horaFin, $agendados)

@@ -29,6 +29,9 @@ class HomeController
         }else if ($_SESSION['rol'] == "administrativoTi" && $_SESSION['rol'] != null) {
             header ("Location: /admin");
             exit();
+        }else if ($_SESSION['rol'] == "seleccionador" && $_SESSION['rol'] != null) {
+            header("Location: /seleccionador");
+            exit();
         } else {
             $template->renderTemplate('inicio');
             exit();

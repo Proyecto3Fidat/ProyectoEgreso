@@ -67,4 +67,14 @@ class AuthService
         return true;
     }
 
+    public function comprobarSeleccionador()
+    {
+        if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'seleccionador') {
+            $templateController = new TemplateController();
+            $templateController->renderTemplate('rol', ['rol' => 'seleccionador']);
+            $this->handleForbiddenError('Debes ser un Seleccionador para realizar esta accion');
+        }
+        return true;
+    }
+
 }
