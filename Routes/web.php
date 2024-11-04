@@ -122,35 +122,7 @@ SimpleRouter::get('cargarDatos', function () {
     $seeder->seedAgenda(new \App\Models\AgendaModel('Viernes', '18:00', '19:00', '0'));
     $seeder->seedAgenda(new \App\Models\AgendaModel('Viernes', '19:00', '20:00', '0'));
     $seeder->seedAgenda(new \App\Models\AgendaModel('Viernes', '20:00', '21:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '08:00', '09:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '09:00', '10:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '10:00', '11:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '11:00', '12:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '12:00', '13:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '13:00', '14:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '14:00', '15:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '15:00', '16:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '16:00', '17:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '17:00', '18:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '18:00', '19:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '19:00', '20:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Sabado', '20:00', '21:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '08:00', '09:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '09:00', '10:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '10:00', '11:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '11:00', '12:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '12:00', '13:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '13:00', '14:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '14:00', '15:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '15:00', '16:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '16:00', '17:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '17:00', '18:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '18:00', '19:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '19:00', '20:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '20:00', '21:00', '0'));
-    $seeder->seedAgenda(new \App\Models\AgendaModel('Domingo', '21:00', '22:00', '0'));
 
-    /* Conformas  */
     $seeder->seedConforma(new \App\Models\ConformaModel('Gym1', 'Lunes', '09:00', '10:00'));
     $seeder->seedConforma(new \App\Models\ConformaModel('Gym1', 'Lunes', '10:00', '11:00'));
     $seeder->seedConforma(new \App\Models\ConformaModel('Gym1', 'Lunes', '11:00', '12:00'));
