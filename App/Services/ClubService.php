@@ -31,4 +31,10 @@ class ClubService
         $club = $repository->obtenerClub($idClub);
         return $club;
     }
+
+    public function crearClub(mixed $nombreClub)
+    {
+        $repository = new ClubRepository();
+        $repository->crearClub($nombreClub);
+    }
 }

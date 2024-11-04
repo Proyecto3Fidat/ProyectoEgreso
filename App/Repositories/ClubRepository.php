@@ -77,4 +77,16 @@ class ClubRepository extends Database
         return $club;
     }
 
+    public function crearClub(mixed $nombreClub)
+    {
+        $database = Database::getInstance();
+        $database->connect();
+        $sql = "INSERT INTO club (nombreClub) VALUES (?)";
+        $stmt = $database->getConnection()->prepare($sql);
+        $stmt->bind_param('s', $nombreClub);
+        $stmt->execute();
+        $stmt->close();
+        $database->disconnect();
+    }
+
 }

@@ -558,11 +558,20 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 
         SimpleRouter::group(['middleware' => \App\Controllers\SeleccionadorMiddleware::class], function () use ($logger) {
 
-            SimpleRouter::post('asignar-club', function (){
+            SimpleRouter::post('/crear-club', function (){
+                $body = file_get_contents('php://input');
+                $data = json_decode($body, true);
+                $clubesService = new ClubService();
+                $clubesService->crearClub($data['nombreClub']);
+                echo json_encode(['success' => true]);
+                exit();
+            });
+            SimpleRouter::post('/asignar-club', function (){
                 $body = file_get_contents('php://input');
                 $data = json_decode($body, true);
                 $clubesService = new ClubService();
                 $clubesService->asignarClub($data['deporte'], $data['clubId'], $data['deportistaDocumento']);
+                echo json_encode(['success' => true]);
                 exit();
 
             });

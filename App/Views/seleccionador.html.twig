@@ -200,10 +200,6 @@
             box-shadow: 0 4px 15px rgba(111, 65, 187, 0.2);
         }
 
-        .acciones {
-            display: flex;
-            gap: 0.5rem;
-        }
 
         .btn-accion {
             padding: 0.5rem 1rem;
@@ -262,10 +258,6 @@
             <form id="formCrearClub">
                 <label for="nombreClub">Nombre del Club:</label>
                 <input type="text" id="nombreClub" name="nombreClub" required>
-
-                <label for="ubicacionClub">Ubicación:</label>
-                <input type="text" id="ubicacionClub" name="ubicacionClub" required>
-
                 <button type="submit">Crear Club</button>
             </form>
         </div>
@@ -297,7 +289,6 @@
         <tr>
             <th>Nombre</th>
             <th>Id</th>
-            <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -305,9 +296,6 @@
             <tr>
                 <td>{{ club.nombreClub }}</td>
                 <td>{{ club.idClub }}</td>
-                <td class="acciones">
-                    <button class="btn-accion" onclick="editarClub({{ club.id }})">Editar</button>
-                    <button class="btn-accion" onclick="eliminarClub({{ club.id }})">Eliminar</button>
                 </td>
             </tr>
         {% endfor %}
@@ -344,7 +332,6 @@
         </tbody>
     </table>
 </main>
-
 <script>
     const modalCrearClub = document.getElementById("modalCrearClub");
     const modalAsignarClub = document.getElementById("modalAsignarClub");
@@ -359,6 +346,35 @@
 
     document.getElementById("btnCrearClub").onclick = function() {
         modalCrearClub.style.display = "block";
+    };
+
+    document.getElementById("formCrearClub").onsubmit = async function(event) {
+        event.preventDefault();
+
+        const nombreClub = document.getElementById("nombreClub").value;
+
+        try {
+            const response = await fetch('/crear-club', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ nombreClub })
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Club creado correctamente.");
+                modalCrearClub.style.display = "none";
+                location.reload();
+            } else {
+                alert("Error al crear el club: " + data.message);
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un problema al crear el club.");
+        }
     };
 
     function mostrarModalAsignarClubDesdeData(button) {
@@ -410,5 +426,6 @@
             });
     };
 </script>
+
 </body>
 </html>
