@@ -3,250 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../Public/css/seleccionador.css">
+    <link rel="stylesheet" href="../../Public/css/responsive.css">
     <title>Gestión de Clubes y Deportistas</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-        :root {
-            --primary: #6f41bb;
-            --primary-dark: #5f31ab;
-            --secondary: #a63dd2;
-            --background: #131313;
-            --surface: #1e1c1f;
-            --on-surface: #ffffff;
-            --on-background: #ffffff;
-            --border: #444;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--on-background);
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: var(--surface);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        main {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-            color: var(--primary);
-        }
-
-        .btn-crear {
-            display: block;
-            width: 200px;
-            margin: 0 auto 2rem;
-            padding: 1rem;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--on-surface);
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-crear:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(111, 65, 187, 0.4);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background-color: var(--surface);
-            margin: 10% auto;
-            padding: 2rem;
-            border: 1px solid var(--primary);
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 20px rgba(111, 65, 187, 0.2);
-            max-height: 80vh;
-            overflow-y: auto;
-            animation: slideIn 0.3s;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close:hover {
-            color: var(--primary);
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        label {
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        input, select {
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            background-color: var(--background);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            color: var(--on-background);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
-        }
-
-        button[type="submit"] {
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--on-surface);
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        button[type="submit"]:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            transform: translateY(-2px);
-        }
-
-        .tabla {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-            margin-top: 2rem;
-        }
-
-        .tabla th, .tabla td {
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .tabla th {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--on-surface);
-            font-weight: 600;
-        }
-
-        .tabla tr {
-            background-color: var(--surface);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .tabla tr:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(111, 65, 187, 0.2);
-        }
-
-
-        .btn-accion {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-accion:hover {
-            transform: translateY(-2px);
-        }
-
-        #searchInput {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            background-color: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            color: var(--on-background);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        #searchInput:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(111, 65, 187, 0.2);
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-    </style>
 </head>
 <body>
-<header>
-    <nav>
-        <h1>Gestión de Clubes y Deportistas</h1>
-    </nav>
-</header>
+{% include 'header.html.twig' %}
 
 <main>
     <button class="btn-crear" id="btnCrearClub">Crear Club</button>
@@ -287,15 +49,15 @@
     <table class="tabla" id="tablaClubs">
         <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Id</th>
+            <th data-label="Nombre">Nombre</th>
+            <th data-label="Id">Id</th>
         </tr>
         </thead>
         <tbody>
         {% for club in clubs %}
             <tr>
-                <td>{{ club.nombreClub }}</td>
-                <td>{{ club.idClub }}</td>
+                <td data-label="Nombre">{{ club.nombreClub }}</td>
+                <td data-label="Id">{{ club.idClub }}</td>
                 </td>
             </tr>
         {% endfor %}
@@ -306,25 +68,25 @@
     <table class="tabla" id="tablaDeportistas">
         <thead>
         <tr>
-            <th>Documento</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Edad</th>
-            <th>Deporte</th>
-            <th>Club</th>
-            <th>Acciones</th>
+            <th data-label="Documento">Documento</th>
+            <th data-label="Nombre">Nombre</th>
+            <th data-label="Apellido">Apellido</th>
+            <th data-label="Edad">Edad</th>
+            <th data-label="Deporte">Deporte</th>
+            <th data-label="Club">Club</th>
+            <th data-label="Acciones">Acciones</th>
         </tr>
         </thead>
         <tbody>
         {% for usuario in usuarios %}
             <tr>
-                <td>{{ usuario.nroDocumento }}</td>
-                <td>{{ usuario.nombre }}</td>
-                <td>{{ usuario.apellido }}</td>
-                <td>{{ usuario.edad }}</td>
-                <td>{{ usuario.deporte }}</td>
-                <td>{{ usuario.club }}</td>
-                <td class="acciones">
+                <td data-label="Documento">{{ usuario.nroDocumento }}</td>
+                <td data-label="Nombre">{{ usuario.nombre }}</td>
+                <td data-label="Apellido">{{ usuario.apellido }}</td>
+                <td data-label="Edad">{{ usuario.edad }}</td>
+                <td data-label="Deporte">{{ usuario.deporte }}</td>
+                <td data-label="Club">{{ usuario.club }}</td>
+                <td data-label="Acciones" class="acciones">
                     <button class="btn-accion" data-documento="{{ usuario.nroDocumento }}" data-deporte="{{ usuario.deporte }}" onclick="mostrarModalAsignarClubDesdeData(this)">Asignar Club</button>
                 </td>
             </tr>
@@ -426,6 +188,6 @@
             });
     };
 </script>
-
+{% include 'footer.html.twig' %}
 </body>
 </html>

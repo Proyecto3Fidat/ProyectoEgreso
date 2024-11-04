@@ -1,20 +1,32 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+}
+
 header{
     background-color: #100e0f;
 }
 
 .navbar {
     display: flex;
+    text-decoration: none;
+    list-style: none;
 }
 
 .navbar li a {
     color: white;
     font-size: 1.2rem;
     transition: color 0.3s, background-color 0.3s;
+    text-decoration: none;
+    list-style: none;
 }
 
 nav {
     background-color: #100e0f;
     padding: 20px;
+    text-decoration: none;
+    list-style: none;
 }
 
 nav a:hover {
