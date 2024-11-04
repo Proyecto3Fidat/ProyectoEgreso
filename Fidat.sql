@@ -112,7 +112,7 @@ CREATE TABLE Rutina(
     idRutina INT AUTO_INCREMENT,
     series INT NOT NULL,
     repeticiones INT NOT NULL,
-    dia VARCHAR(8) NOT NULL,
+    dia VARCHAR(15) NOT NULL,
     PRIMARY KEY (idRutina)
 );
 
