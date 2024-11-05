@@ -657,12 +657,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
 
             $usuario = $clienteController->obtenerInfoCliente($_SESSION['documento']);
             $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_SESSION['documento']);
-            try {
-                $grafico = $graficos->crearGrafico($_SESSION['documento'], $calificaciones, $loggerU);
 
-            } catch (Exception $e) {
-                $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
-            }
             $practicar = $practica->obtenerPracticas($_SESSION['documento']);
             $resultado = []; // Inicializar el resultado
             foreach ($practicar as $practica) {
@@ -688,7 +683,6 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                 array_merge(
                     ['usuario' => $usuario],
                     ['calificaciones' => $calificaciones],
-                    ['grafico' => $grafico],
                     ['practicas' => $resultado],
                     ['agenda' => $agenda]
                 )
@@ -870,12 +864,7 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                 $clienteController = new ClienteController($clienteService, $loggerU);
                 $usuario = $clienteController->obtenerInfoCliente($_POST['documento']);
                 $calificaciones = $calificacionController->obtenerPuntuacionesCliente($_POST['documento']);
-                try {
-                    $grafico = $graficos->crearGrafico($_POST['documento'], $calificaciones, $loggerU);
 
-                } catch (Exception $e) {
-                    $loggerU->error('Error al crear el gráfico: ' . $e->getMessage());
-                }
                 $practicar = $practica->obtenerPracticas($_POST['documento']);
                 $resultado = []; // Inicializar el resultado
 
@@ -902,7 +891,6 @@ SimpleRouter::group(['middleware' => PagoMiddleware::class], function () use ($l
                     array_merge(
                         ['usuario' => $usuario],
                         ['calificaciones' => $calificaciones],
-                        ['grafico' => $grafico],
                         ['practicas' => $resultado]
                     )
                 );
