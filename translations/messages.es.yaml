@@ -209,3 +209,5 @@ asignarUnClub: "Asignar un Club"
 
 activar: "Activar"
 confirmarActivar: "¿Estás seguro de que deseas activar este usuario?"
+seleccioneRutina: "Seleccione una Rutina"
+rutinaSeleccionada: "Rutina Seleccionada"
