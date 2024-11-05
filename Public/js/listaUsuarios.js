@@ -98,6 +98,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (inputDocumento) {
                 inputDocumento.value = cliente.nroDocumento;
             }
+            const imgCliente = document.querySelector('.divficha-container .imgCliente img');
+            imgCliente.src = cliente.imagenUrl ? cliente.imagenUrl : `http://proyecto.localhost/Resources/Images/ProfilePhoto/${cliente.nroDocumento}.jpg`;
+            imgCliente.onerror = function () {
+                this.src = '../../images/clienteEjm.png';
+            };
+
         } else {
             console.error('Cliente no encontrado.');
             alert('No se encontraron los datos del cliente.');
