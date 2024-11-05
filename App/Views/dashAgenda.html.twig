@@ -299,7 +299,6 @@
     }
 
     function eliminarAgenda(id, dia, horaInicio, horaFin, nombre) {
-    function eliminarAgenda(id, dia, horaInicio, horaFin, nombre) {
         if (confirm('Estás seguro de que deseas eliminar esta agenda?')) {
             fetch('/eliminarAgenda?id=' + id + '&dia=' + dia + '&horaInicio=' + horaInicio + '&horaFin=' + horaFin + '&nombre=' + nombre, {
                 method: 'DELETE'
